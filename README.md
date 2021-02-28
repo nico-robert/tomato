@@ -17,7 +17,7 @@ This [Tcl](https://www.tcl.tk) package is inspired , copied (as best I could) fr
 
 License :
 -------------------------
-**tomato math::geometry** is covered under the terms of the [MIT](LICENSE.md) license.
+**tomato math::geometry** is covered under the terms of the [MIT](LICENSE) license.
 
 Examples :
 -------------------------

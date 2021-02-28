@@ -1,5 +1,5 @@
 # Copyright (c) 2021 Nicolas ROBERT.
-# Distributed under MIT license. Please see LICENSE.md for details.
+# Distributed under MIT license. Please see LICENSE for details.
 
 lappend auto_path [file dirname [file dirname [file dirname [info script]]]]
 

@@ -1,5 +1,5 @@
 # Copyright (c) 2021 Nicolas ROBERT.
-# Distributed under MIT license. Please see LICENSE.md for details.
+# Distributed under MIT license. Please see LICENSE for details.
 
 namespace eval tomato::mathcsys {
     # Ruff documentation
@@ -96,47 +96,47 @@ oo::class create tomato::mathcsys::Csys {
 oo::define tomato::mathcsys::Csys {
 
     method XAxis {} {
-        # Getss the X Axis
+        # Gets the X Axis
         #
         # Returns A vector [mathvec3d::Vector3d]
         return $_xaxis
     }
 
     method YAxis {} {
-        # Getss the Y Axis
+        # Gets the Y Axis
         #
         # Returns A vector [mathvec3d::Vector3d]
         return $_yaxis
     }
 
     method ZAxis {} {
-        # Getss the Z Axis
+        # Gets the Z Axis
         #
         # Returns A vector [mathvec3d::Vector3d]
         return $_zaxis
     }
 
     method Origin {} {
-        # Getss the Origin
+        # Gets the Origin
         #
         # Returns A point [mathpt3d::Point3d]
         return $_origine
     }
 
     method BaseClass {} {
-        # Getss the base class (Matrix obj)
+        # Gets the base class (Matrix obj)
         return $_baseclass
     }
 
     method OffsetToBase {} {
-        # Getss the offset to origin
+        # Gets the offset to origin
         #
         # Returns A vector [mathvec3d::Vector3d]
         return [$_origine ToVector3D]
     }
 
     method BaseChangeMatrix {} {
-        # Getss the base change matrix
+        # Gets the base change matrix
         #
         # Returns A matrix [mathmatrix::Matrix]
         set matrix [tomato::mathcsys::GetRotationSubMatrix [self]]
@@ -334,7 +334,7 @@ oo::define tomato::mathcsys::Csys {
     }
 
     method SetTranslation {v} {
-        # Getss a translation coordinate system
+        # Gets a translation coordinate system
         #
         # v - [mathvec3d::Vector3d]
         #
@@ -508,7 +508,7 @@ proc tomato::mathcsys::Roll {av} {
 }
 
 proc tomato::mathcsys::GetRotationSubMatrix {coordinateSystem} {
-    # Getss a rotation submatrix from a coordinate system
+    # Gets a rotation submatrix from a coordinate system
     #
     # coordinateSystem - [Csys]
     #

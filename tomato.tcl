@@ -1,5 +1,5 @@
 # Copyright (c) 2021 Nicolas ROBERT.
-# Distributed under MIT license. Please see LICENSE.md for details.
+# Distributed under MIT license. Please see LICENSE for details.
 # tomato - math::geometry 3D library
 
 package require Tcl 8.6

@@ -1,5 +1,5 @@
 # Copyright (c) 2021 Nicolas ROBERT.
-# Distributed under MIT license. Please see LICENSE.md for details.
+# Distributed under MIT license. Please see LICENSE for details.
 
 namespace eval tomato::mathplane {
     # Ruff documentation
@@ -81,17 +81,17 @@ oo::class create tomato::mathplane::Plane {
 oo::define tomato::mathplane::Plane {
 
     method A {} {
-        # Getss the Normal x component.
+        # Gets the Normal x component.
         return [$_normal X]
     }
 
     method B {} {
-        # Getss the Normal y component.
+        # Gets the Normal y component.
         return [$_normal Y]
     }
 
     method C {} {
-        # Getss the Normal z component.
+        # Gets the Normal z component.
         return [$_normal Z]
     }
 

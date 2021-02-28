@@ -1,5 +1,5 @@
 # Copyright (c) 2021 Nicolas ROBERT.
-# Distributed under MIT license. Please see LICENSE.md for details.
+# Distributed under MIT license. Please see LICENSE for details.
 
 namespace eval tomato::mathpt3d {
     # Ruff documentation
@@ -105,7 +105,7 @@ oo::define tomato::mathpt3d::Point3d {
     }
 
     method Origin {} {
-        # Getss a point at the origin
+        # Gets a point at the origin
         return [tomato::mathpt3d::Point3d new 0.0 0.0 0.0]
     }
 
@@ -162,7 +162,7 @@ oo::define tomato::mathpt3d::Point3d {
     }
 
     method VectorTo {p} {
-        # Getss a vector from this point to another point
+        # Gets a vector from this point to another point
         #
         # p - The point [Point3d] to which the vector should go.
         #
