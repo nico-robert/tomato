@@ -216,7 +216,7 @@ oo::define tomato::mathline3d::Line3d {
         # tolerance - A tolerance (epsilon) to compensate for floating point error.
         #
         # Returns A point [mathpt3d::Point3d] where the line and plane intersect, *** nothing *** if no such point exists
-        if {[llength [info level 0]] < 3} {
+        if {[llength [info level 0]] < 4} {
             set tolerance $::tomato::helper::Epsilon
         }
 
