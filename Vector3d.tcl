@@ -221,7 +221,7 @@ oo::define tomato::mathvec3d::Vector3d {
         set vaN    [$va Normalized]
         set otherN [$other Normalized]
 
-        set cross [expr {[tomato::mathvec3d::Cross $vaN $otherN]}]
+        set cross [tomato::mathvec3d::Cross $vaN $otherN]
         set det   [$cross LengthSquared]
 
         return [expr {abs($det) <= $tolerance}]
