@@ -436,12 +436,13 @@ proc tomato::mathplane::IntersectionWithRay {plane1 ray} {
     return [[$ray ThroughPoint] + [[$ray Direction] * $t]]
 }
 
-proc tomato::mathplane::IntersectionWithLine {plane1 line} {
+proc tomato::mathplane::IntersectionWithLine {plane1 line tolerance} {
     # Find intersection between Line3D and Plane
     # <http://geomalgorithms.com/a05-_intersect-1.html>
     # 
     # plane1   - [Plane]
     # line     - [mathline3d::Line3d]
+    # tolerance - A tolerance (epsilon) to adjust for floating point error
     #
     # Returns Intersection Point [mathpt3d::Point3d] or nothing
     set dir [$line Direction]
@@ -461,7 +462,7 @@ proc tomato::mathplane::IntersectionWithLine {plane1 line} {
     set u [[$line StartPoint] VectorTo [$line EndPoint]]
     set dot [$u DotProduct [$plane1 Normal]]
 
-    set t [expr {(-1 * $d) / $dot}]
+    set t [expr {(-1 * $d) / double($dot)}]
 
     if {($t > 1) || ($t < 0)} {
         # They are not intersected
