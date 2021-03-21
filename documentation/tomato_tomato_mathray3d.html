@@ -317,8 +317,8 @@ pre {
 <tr><td class='ruff_defitem'><code>point</code></td><td class='ruff_defitem'><a href="tomato_tomato_mathpt3d.html#::tomato::mathpt3d::Point3d" title="mathpt3d::Point3d" class='ruff_cmd'>mathpt3d::Point3d</a></td></tr>
 <tr><td class='ruff_defitem'><code>direction</code></td><td class='ruff_defitem'><a href="tomato_tomato_mathvec3d.html#::tomato::mathvec3d::Vector3d" title="mathvec3d::Vector3d" class='ruff_cmd'>mathvec3d::Vector3d</a>.</td></tr>
 </table>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_60' href="javascript:toggleSource('60')">Show source</a></p>
-<div id='60' class='ruff_dyn_src'><pre>method constructor {point direction} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_105' href="javascript:toggleSource('105')">Show source</a></p>
+<div id='105' class='ruff_dyn_src'><pre>method constructor {point direction} {
 
     # Initializes a new Ray3d Class.
     #
@@ -347,8 +347,8 @@ pre {
 <tr><td class='ruff_defitem'><code>tolerance</code></td><td class='ruff_defitem'>A tolerance (epsilon) to adjust for floating point error. Optional, default <code>1e-4</code>.</td></tr>
 </table>
 <p class='ruff'>Returns true if the rays are different. Otherwise false.</p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_61' href="javascript:toggleSource('61')">Show source</a></p>
-<div id='61' class='ruff_dyn_src'><pre>method != {other {tolerance 1e-4}} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_106' href="javascript:toggleSource('106')">Show source</a></p>
+<div id='106' class='ruff_dyn_src'><pre>method != {other {tolerance 1e-4}} {
 
     # Gets value that indicates whether any pair of elements in two specified rays is not equal.
     #
@@ -367,8 +367,8 @@ pre {
 <tr><td class='ruff_defitem'><code>tolerance</code></td><td class='ruff_defitem'>A tolerance (epsilon) to adjust for floating point error. Optional, default <code>1e-4</code>.</td></tr>
 </table>
 <p class='ruff'>Returns true if the rays are the same. Otherwise false.</p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_62' href="javascript:toggleSource('62')">Show source</a></p>
-<div id='62' class='ruff_dyn_src'><pre>method == {other {tolerance 1e-4}} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_107' href="javascript:toggleSource('107')">Show source</a></p>
+<div id='107' class='ruff_dyn_src'><pre>method == {other {tolerance 1e-4}} {
 
     # Gets value that indicates whether each pair of elements in two specified rays is equal.
     #
@@ -382,8 +382,8 @@ pre {
 <div style='clear:both;'></div>
 <p class='ruff'>Gets the direction <a href="tomato_tomato_mathvec3d.html#::tomato::mathvec3d::Vector3d" title="mathvec3d::Vector3d" class='ruff_cmd'>mathvec3d::Vector3d</a> of the ray</p>
 <div class='ruff_synopsis'><span class='ruff_cmd'>OBJECT Direction</span> </div>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_63' href="javascript:toggleSource('63')">Show source</a></p>
-<div id='63' class='ruff_dyn_src'><pre>method Direction {} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_108' href="javascript:toggleSource('108')">Show source</a></p>
+<div id='108' class='ruff_dyn_src'><pre>method Direction {} {
 
     # Gets the direction [mathvec3d::Vector3d] of the ray
     return $_direction
@@ -392,8 +392,8 @@ pre {
 <div style='clear:both;'></div>
 <p class='ruff'>Gets the start point and direction of the ray in the form of a TCL list</p>
 <div class='ruff_synopsis'><span class='ruff_cmd'>OBJECT Get</span> </div>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_64' href="javascript:toggleSource('64')">Show source</a></p>
-<div id='64' class='ruff_dyn_src'><pre>method Get {} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_109' href="javascript:toggleSource('109')">Show source</a></p>
+<div id='109' class='ruff_dyn_src'><pre>method Get {} {
 
     # Gets the start point and direction of the ray in the form of a TCL list
     return [list $_throughpoint $_direction]
@@ -402,8 +402,8 @@ pre {
 <div style='clear:both;'></div>
 <p class='ruff'>Gets the name of class.</p>
 <div class='ruff_synopsis'><span class='ruff_cmd'>OBJECT GetType</span> </div>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_65' href="javascript:toggleSource('65')">Show source</a></p>
-<div id='65' class='ruff_dyn_src'><pre>method GetType {} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_110' href="javascript:toggleSource('110')">Show source</a></p>
+<div id='110' class='ruff_dyn_src'><pre>method GetType {} {
 
     # Gets the name of class.
     return [tomato::helper::TypeClass [self]]
@@ -416,8 +416,8 @@ pre {
 <tr><td class='ruff_defitem'><code>point3d</code></td><td class='ruff_defitem'>A point <a href="tomato_tomato_mathpt3d.html#::tomato::mathpt3d::Point3d" title="mathpt3d::Point3d" class='ruff_cmd'>mathpt3d::Point3d</a></td></tr>
 </table>
 <p class='ruff'>Returns a new line <a href="tomato_tomato_mathline3d.html#::tomato::mathline3d::Line3d" title="mathline3d::Line3d" class='ruff_cmd'>mathline3d::Line3d</a> from the point to the closest point on the ray</p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_66' href="javascript:toggleSource('66')">Show source</a></p>
-<div id='66' class='ruff_dyn_src'><pre>method ShortestLineTo {point3d} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_111' href="javascript:toggleSource('111')">Show source</a></p>
+<div id='111' class='ruff_dyn_src'><pre>method ShortestLineTo {point3d} {
 
     # the shortest line from a point to the ray
     #
@@ -433,8 +433,8 @@ pre {
 <div style='clear:both;'></div>
 <p class='ruff'>Gets the start point <a href="tomato_tomato_mathpt3d.html#::tomato::mathpt3d::Point3d" title="mathpt3d::Point3d" class='ruff_cmd'>mathpt3d::Point3d</a> of the ray</p>
 <div class='ruff_synopsis'><span class='ruff_cmd'>OBJECT ThroughPoint</span> </div>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_67' href="javascript:toggleSource('67')">Show source</a></p>
-<div id='67' class='ruff_dyn_src'><pre>method ThroughPoint {} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_112' href="javascript:toggleSource('112')">Show source</a></p>
+<div id='112' class='ruff_dyn_src'><pre>method ThroughPoint {} {
 
     # Gets the start point [mathpt3d::Point3d] of the ray
     return $_throughpoint
@@ -444,8 +444,8 @@ pre {
 <p class='ruff'>Returns a string representation of this object.</p>
 <div class='ruff_synopsis'><span class='ruff_cmd'>OBJECT ToString</span> </div>
 <p class='ruff'>Returns a string representation of this object.</p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_68' href="javascript:toggleSource('68')">Show source</a></p>
-<div id='68' class='ruff_dyn_src'><pre>method ToString {} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_113' href="javascript:toggleSource('113')">Show source</a></p>
+<div id='113' class='ruff_dyn_src'><pre>method ToString {} {
 
     # Returns a string representation of this object.
     lappend value &quot;ThroughPoint = [$_throughpoint ToString]&quot;
@@ -467,8 +467,8 @@ pre {
 <p class='ruff'>See : methods == !=</p>
 <p class='ruff'>An error exception is raised if tolerance (epsilon) &lt; 0.</p>
 <p class='ruff'>Returns true if the rays are equal, otherwise false.</p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_69' href="javascript:toggleSource('69')">Show source</a></p>
-<div id='69' class='ruff_dyn_src'><pre>proc ::tomato::mathray3d::Equals {ray other tolerance} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_114' href="javascript:toggleSource('114')">Show source</a></p>
+<div id='114' class='ruff_dyn_src'><pre>proc ::tomato::mathray3d::Equals {ray other tolerance} {
 
     # Indicate if this ray is equivalent to a given ray
     #
@@ -500,8 +500,8 @@ pre {
 <tr><td class='ruff_defitem'><code>tolerance</code></td><td class='ruff_defitem'>A tolerance (epsilon) for plane parallel verification. Optional, default <code>1e-9</code>.</td></tr>
 </table>
 <p class='ruff'>Returns a ray <a href="tomato_tomato_mathray3d.html#::tomato::mathray3d::Ray3d" title="Ray3d" class='ruff_cmd'>Ray3d</a> at the intersection of two planes.</p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_70' href="javascript:toggleSource('70')">Show source</a></p>
-<div id='70' class='ruff_dyn_src'><pre>proc ::tomato::mathray3d::IntersectionRayWithPlane {plane1 plane2 {tolerance 1e-9}} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_115' href="javascript:toggleSource('115')">Show source</a></p>
+<div id='115' class='ruff_dyn_src'><pre>proc ::tomato::mathray3d::IntersectionRayWithPlane {plane1 plane2 {tolerance 1e-9}} {
 
     # Gets the intersection of the two planes.
     #
@@ -516,6 +516,7 @@ pre {
 <hr>
 <h1><a href='tomato_tomato_helper.html'>tomato::helper</a></h1>
 <h1><a href='tomato_tomato_mathcsys.html'>tomato::mathcsys</a></h1>
+<h1><a href='tomato_tomato_mathquat.html'>tomato::mathquat</a></h1>
 <h1><a href='tomato_tomato_mathline3d.html'>tomato::mathline3d</a></h1>
 <h1><a style='color: #006666;background-color: white; margin-left:-4px; padding-left:3px;padding-right:2px;' href='tomato_tomato_mathray3d.html'>tomato::mathray3d</a></h1>
 <h1><a href='tomato_tomato_mathpt3d.html'>tomato::mathpt3d</a></h1>

@@ -330,8 +330,8 @@ pre {
 </table>
 <p class='ruff'>An error exception is raised if [llength <code>$args</code>] == 2 and two values are not as described above.</p>
 <p class='ruff'>An error exception is raised if [length {*}<code>$args</code>] != 4.</p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_96' href="javascript:toggleSource('96')">Show source</a></p>
-<div id='96' class='ruff_dyn_src'><pre>method constructor {args} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_141' href="javascript:toggleSource('141')">Show source</a></p>
+<div id='141' class='ruff_dyn_src'><pre>method constructor {args} {
 
     # Initializes a new Plane Class.
     # Constructs a Plane from the given normal and distance along the normal from the origin.
@@ -407,8 +407,8 @@ pre {
 <tr><td class='ruff_defitem'><code>tolerance</code></td><td class='ruff_defitem'>A tolerance (epsilon) to adjust for floating point error. Optional, default <code>1e-4</code>.</td></tr>
 </table>
 <p class='ruff'>Returns true if the planes are different. Otherwise false.</p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_97' href="javascript:toggleSource('97')">Show source</a></p>
-<div id='97' class='ruff_dyn_src'><pre>method != {other {tolerance 1e-4}} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_142' href="javascript:toggleSource('142')">Show source</a></p>
+<div id='142' class='ruff_dyn_src'><pre>method != {other {tolerance 1e-4}} {
 
     # Gets value that indicates whether any pair of elements in two specified planes is not equal.
     #
@@ -427,8 +427,8 @@ pre {
 <tr><td class='ruff_defitem'><code>tolerance</code></td><td class='ruff_defitem'>A tolerance (epsilon) to adjust for floating point error. Optional, default <code>1e-4</code>.</td></tr>
 </table>
 <p class='ruff'>Returns true if the planes are the same. Otherwise false.</p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_98' href="javascript:toggleSource('98')">Show source</a></p>
-<div id='98' class='ruff_dyn_src'><pre>method == {other {tolerance 1e-4}} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_143' href="javascript:toggleSource('143')">Show source</a></p>
+<div id='143' class='ruff_dyn_src'><pre>method == {other {tolerance 1e-4}} {
 
     # Gets value that indicates whether each pair of elements in two specified planes is equal.
     #
@@ -442,8 +442,8 @@ pre {
 <div style='clear:both;'></div>
 <p class='ruff'>Gets the Normal x component.</p>
 <div class='ruff_synopsis'><span class='ruff_cmd'>OBJECT A</span> </div>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_99' href="javascript:toggleSource('99')">Show source</a></p>
-<div id='99' class='ruff_dyn_src'><pre>method A {} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_144' href="javascript:toggleSource('144')">Show source</a></p>
+<div id='144' class='ruff_dyn_src'><pre>method A {} {
 
     # Gets the Normal x component.
     return [$_normal X]
@@ -456,8 +456,8 @@ pre {
 <tr><td class='ruff_defitem'><code>point</code></td><td class='ruff_defitem'>A point <a href="tomato_tomato_mathpt3d.html#::tomato::mathpt3d::Point3d" title="mathpt3d::Point3d" class='ruff_cmd'>mathpt3d::Point3d</a></td></tr>
 </table>
 <p class='ruff'>Returns the distance</p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_100' href="javascript:toggleSource('100')">Show source</a></p>
-<div id='100' class='ruff_dyn_src'><pre>method AbsoluteDistanceTo {point} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_145' href="javascript:toggleSource('145')">Show source</a></p>
+<div id='145' class='ruff_dyn_src'><pre>method AbsoluteDistanceTo {point} {
 
     # Gets the distance to the point.
     #
@@ -470,8 +470,8 @@ pre {
 <div style='clear:both;'></div>
 <p class='ruff'>Gets the Normal y component.</p>
 <div class='ruff_synopsis'><span class='ruff_cmd'>OBJECT B</span> </div>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_101' href="javascript:toggleSource('101')">Show source</a></p>
-<div id='101' class='ruff_dyn_src'><pre>method B {} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_146' href="javascript:toggleSource('146')">Show source</a></p>
+<div id='146' class='ruff_dyn_src'><pre>method B {} {
 
     # Gets the Normal y component.
     return [$_normal Y]
@@ -480,8 +480,8 @@ pre {
 <div style='clear:both;'></div>
 <p class='ruff'>Gets the Normal z component.</p>
 <div class='ruff_synopsis'><span class='ruff_cmd'>OBJECT C</span> </div>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_102' href="javascript:toggleSource('102')">Show source</a></p>
-<div id='102' class='ruff_dyn_src'><pre>method C {} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_147' href="javascript:toggleSource('147')">Show source</a></p>
+<div id='147' class='ruff_dyn_src'><pre>method C {} {
 
     # Gets the Normal z component.
     return [$_normal Z]
@@ -490,8 +490,8 @@ pre {
 <div style='clear:both;'></div>
 <p class='ruff'>Gets the distance to the Plane along its normal from the origin</p>
 <div class='ruff_synopsis'><span class='ruff_cmd'>OBJECT D</span> </div>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_103' href="javascript:toggleSource('103')">Show source</a></p>
-<div id='103' class='ruff_dyn_src'><pre>method D {} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_148' href="javascript:toggleSource('148')">Show source</a></p>
+<div id='148' class='ruff_dyn_src'><pre>method D {} {
 
     # Gets the distance to the Plane along its normal from the origin
     return $_d
@@ -500,8 +500,8 @@ pre {
 <div style='clear:both;'></div>
 <p class='ruff'>Gets the name of class.</p>
 <div class='ruff_synopsis'><span class='ruff_cmd'>OBJECT GetType</span> </div>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_104' href="javascript:toggleSource('104')">Show source</a></p>
-<div id='104' class='ruff_dyn_src'><pre>method GetType {} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_149' href="javascript:toggleSource('149')">Show source</a></p>
+<div id='149' class='ruff_dyn_src'><pre>method GetType {} {
 
     # Gets the name of class.
     return [tomato::helper::TypeClass [self]]
@@ -519,8 +519,8 @@ pre {
 </table>
 <p class='ruff'>An error exception is raised if entity is not as described above.</p>
 <p class='ruff'>See also: <a href="tomato_tomato_mathplane.html#::tomato::mathplane::IntersectionWithPlane" title="IntersectionWithPlane" class='ruff_cmd'>IntersectionWithPlane</a>, <a href="tomato_tomato_mathplane.html#::tomato::mathplane::IntersectionWithRay" title="IntersectionWithRay" class='ruff_cmd'>IntersectionWithRay</a>, <a href="tomato_tomato_mathplane.html#::tomato::mathplane::IntersectionWithLine" title="IntersectionWithLine" class='ruff_cmd'>IntersectionWithLine</a></p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_105' href="javascript:toggleSource('105')">Show source</a></p>
-<div id='105' class='ruff_dyn_src'><pre>method IntersectionWith {entity {tolerance 1e-4}} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_150' href="javascript:toggleSource('150')">Show source</a></p>
+<div id='150' class='ruff_dyn_src'><pre>method IntersectionWith {entity {tolerance 1e-4}} {
 
     # Finds the intersection...
     #
@@ -558,8 +558,8 @@ pre {
 <tr><td class='ruff_defitem'><code>point</code></td><td class='ruff_defitem'>A point <a href="tomato_tomato_mathpt3d.html#::tomato::mathpt3d::Point3d" title="mathpt3d::Point3d" class='ruff_cmd'>mathpt3d::Point3d</a></td></tr>
 </table>
 <p class='ruff'>Returns The mirrored point <a href="tomato_tomato_mathpt3d.html#::tomato::mathpt3d::Point3d" title="mathpt3d::Point3d" class='ruff_cmd'>mathpt3d::Point3d</a>.</p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_106' href="javascript:toggleSource('106')">Show source</a></p>
-<div id='106' class='ruff_dyn_src'><pre>method MirrorAbout {point} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_151' href="javascript:toggleSource('151')">Show source</a></p>
+<div id='151' class='ruff_dyn_src'><pre>method MirrorAbout {point} {
 
     # Gets point mirrored about the plane.
     #
@@ -575,8 +575,8 @@ pre {
 <div style='clear:both;'></div>
 <p class='ruff'>Gets the normal vector of the Plane</p>
 <div class='ruff_synopsis'><span class='ruff_cmd'>OBJECT Normal</span> </div>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_107' href="javascript:toggleSource('107')">Show source</a></p>
-<div id='107' class='ruff_dyn_src'><pre>method Normal {} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_152' href="javascript:toggleSource('152')">Show source</a></p>
+<div id='152' class='ruff_dyn_src'><pre>method Normal {} {
 
     # Gets the normal vector of the Plane
     return $_normal
@@ -594,8 +594,8 @@ pre {
 </table>
 <p class='ruff'>An error exception is raised if entity is not as described above.</p>
 <p class='ruff'>See also: <a href="tomato_tomato_mathplane.html#::tomato::mathplane::ProjectPointOnplane" title="ProjectPointOnplane" class='ruff_cmd'>ProjectPointOnplane</a>, <a href="tomato_tomato_mathplane.html#::tomato::mathplane::ProjectVectorOnplane" title="ProjectVectorOnplane" class='ruff_cmd'>ProjectVectorOnplane</a>, <a href="tomato_tomato_mathplane.html#::tomato::mathplane::ProjectLine3dOnplane" title="ProjectLine3dOnplane" class='ruff_cmd'>ProjectLine3dOnplane</a></p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_108' href="javascript:toggleSource('108')">Show source</a></p>
-<div id='108' class='ruff_dyn_src'><pre>method Project {entity {direction null}} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_153' href="javascript:toggleSource('153')">Show source</a></p>
+<div id='153' class='ruff_dyn_src'><pre>method Project {entity {direction null}} {
 
     # Projection...
     #
@@ -629,8 +629,8 @@ pre {
 <div style='clear:both;'></div>
 <p class='ruff'>Gets the point on the plane closest to origin.</p>
 <div class='ruff_synopsis'><span class='ruff_cmd'>OBJECT RootPoint</span> </div>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_109' href="javascript:toggleSource('109')">Show source</a></p>
-<div id='109' class='ruff_dyn_src'><pre>method RootPoint {} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_154' href="javascript:toggleSource('154')">Show source</a></p>
+<div id='154' class='ruff_dyn_src'><pre>method RootPoint {} {
 
     # Gets the point on the plane closest to origin.
     return [[[my Normal] * [expr {[my D] * -1}]] ToPoint3D]
@@ -644,8 +644,8 @@ pre {
 <tr><td class='ruff_defitem'><code>angle</code></td><td class='ruff_defitem'>The angle to rotate in degrees</td></tr>
 </table>
 <p class='ruff'>Returns A rotated plane <a href="tomato_tomato_mathplane.html#::tomato::mathplane::Plane" title="Plane" class='ruff_cmd'>Plane</a></p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_110' href="javascript:toggleSource('110')">Show source</a></p>
-<div id='110' class='ruff_dyn_src'><pre>method Rotate {aboutVector angle} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_155' href="javascript:toggleSource('155')">Show source</a></p>
+<div id='155' class='ruff_dyn_src'><pre>method Rotate {aboutVector angle} {
 
     # Rotates a plane
     #
@@ -672,8 +672,8 @@ pre {
 </table>
 <p class='ruff'>An error exception is raised if entity is not as described above.</p>
 <p class='ruff'>Returns The distance to the point along the &quot;Normal&quot; if entity is Point The distance to the plane along the &quot;Normal&quot; if entity is Plane The distance to the ThroughPoint of &quot;ray&quot; along the &quot;Normal&quot; if entity is Ray</p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_111' href="javascript:toggleSource('111')">Show source</a></p>
-<div id='111' class='ruff_dyn_src'><pre>method SignedDistanceTo {entity} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_156' href="javascript:toggleSource('156')">Show source</a></p>
+<div id='156' class='ruff_dyn_src'><pre>method SignedDistanceTo {entity} {
 
     # Gets the signed distance
     #
@@ -721,8 +721,8 @@ pre {
 <p class='ruff'>Returns a string representation of this object.</p>
 <div class='ruff_synopsis'><span class='ruff_cmd'>OBJECT ToString</span> </div>
 <p class='ruff'>Returns a string representation of this object.</p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_112' href="javascript:toggleSource('112')">Show source</a></p>
-<div id='112' class='ruff_dyn_src'><pre>method ToString {} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_157' href="javascript:toggleSource('157')">Show source</a></p>
+<div id='157' class='ruff_dyn_src'><pre>method ToString {} {
 
     # Returns a string representation of this object.
     return [format {%s, %s, %s, %s} [my A] [my B] [my C] [my D]]
@@ -741,8 +741,8 @@ pre {
 <p class='ruff'>See : methods == !=</p>
 <p class='ruff'>An error exception is raised if tolerance (epsilon) &lt; 0.</p>
 <p class='ruff'>Returns true if the planes are equal, otherwise false.</p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_113' href="javascript:toggleSource('113')">Show source</a></p>
-<div id='113' class='ruff_dyn_src'><pre>proc ::tomato::mathplane::Equals {plane other tolerance} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_158' href="javascript:toggleSource('158')">Show source</a></p>
+<div id='158' class='ruff_dyn_src'><pre>proc ::tomato::mathplane::Equals {plane other tolerance} {
 
     # Indicate if a pair of geometric planes are equal
     #
@@ -774,8 +774,8 @@ pre {
 <tr><td class='ruff_defitem'><code>tolerance</code></td><td class='ruff_defitem'>To ensure than the 3 points are not on the same line. Optional, default <code>1e-4</code>.</td></tr>
 </table>
 <p class='ruff'>Returns The plane containing the three points.</p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_114' href="javascript:toggleSource('114')">Show source</a></p>
-<div id='114' class='ruff_dyn_src'><pre>proc ::tomato::mathplane::FromPoints {p1 p2 p3 {tolerance 1e-4}} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_159' href="javascript:toggleSource('159')">Show source</a></p>
+<div id='159' class='ruff_dyn_src'><pre>proc ::tomato::mathplane::FromPoints {p1 p2 p3 {tolerance 1e-4}} {
 
     # Initializes a new instance of the Plane class.
     # Creates a plane that contains the three given points.
@@ -814,8 +814,8 @@ pre {
 <tr><td class='ruff_defitem'><code>tolerance</code></td><td class='ruff_defitem'>A tolerance (epsilon) to adjust for floating point error</td></tr>
 </table>
 <p class='ruff'>Returns Intersection Point <a href="tomato_tomato_mathpt3d.html#::tomato::mathpt3d::Point3d" title="mathpt3d::Point3d" class='ruff_cmd'>mathpt3d::Point3d</a> or nothing</p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_115' href="javascript:toggleSource('115')">Show source</a></p>
-<div id='115' class='ruff_dyn_src'><pre>proc ::tomato::mathplane::IntersectionWithLine {plane1 line tolerance} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_160' href="javascript:toggleSource('160')">Show source</a></p>
+<div id='160' class='ruff_dyn_src'><pre>proc ::tomato::mathplane::IntersectionWithLine {plane1 line tolerance} {
 
     # Find intersection between Line3D and Plane
     # &lt;http://geomalgorithms.com/a05-_intersect-1.html&gt;
@@ -861,8 +861,8 @@ pre {
 <tr><td class='ruff_defitem'><code>tolerance</code></td><td class='ruff_defitem'>A tolerance (epsilon) to account for floating point error.</td></tr>
 </table>
 <p class='ruff'>Returns A ray at the intersection. <a href="tomato_tomato_mathray3d.html#::tomato::mathray3d::Ray3d" title="mathray3d::Ray3d" class='ruff_cmd'>mathray3d::Ray3d</a></p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_116' href="javascript:toggleSource('116')">Show source</a></p>
-<div id='116' class='ruff_dyn_src'><pre>proc ::tomato::mathplane::IntersectionWithPlane {plane1 plane2 tolerance} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_161' href="javascript:toggleSource('161')">Show source</a></p>
+<div id='161' class='ruff_dyn_src'><pre>proc ::tomato::mathplane::IntersectionWithPlane {plane1 plane2 tolerance} {
 
     # Finds the intersection of the two planes, throws if they are parallel
     #
@@ -900,8 +900,8 @@ pre {
 <tr><td class='ruff_defitem'><code>ray</code></td><td class='ruff_defitem'><a href="tomato_tomato_mathray3d.html#::tomato::mathray3d::Ray3d" title="mathray3d::Ray3d" class='ruff_cmd'>mathray3d::Ray3d</a></td></tr>
 </table>
 <p class='ruff'>Returns The point of intersection. <a href="tomato_tomato_mathpt3d.html#::tomato::mathpt3d::Point3d" title="mathpt3d::Point3d" class='ruff_cmd'>mathpt3d::Point3d</a></p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_117' href="javascript:toggleSource('117')">Show source</a></p>
-<div id='117' class='ruff_dyn_src'><pre>proc ::tomato::mathplane::IntersectionWithRay {plane1 ray} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_162' href="javascript:toggleSource('162')">Show source</a></p>
+<div id='162' class='ruff_dyn_src'><pre>proc ::tomato::mathplane::IntersectionWithRay {plane1 ray} {
 
     # Finds the intersection between a ray and plane, throws if ray is parallel to the plane
     # &lt;http://www.cs.princeton.edu/courses/archive/fall00/cs426/lectures/raycast/sld017.htm&gt;
@@ -929,8 +929,8 @@ pre {
 <tr><td class='ruff_defitem'><code>plane3</code></td><td class='ruff_defitem'>The third plane. <a href="tomato_tomato_mathplane.html#::tomato::mathplane::Plane" title="Plane" class='ruff_cmd'>Plane</a></td></tr>
 </table>
 <p class='ruff'>Returns The intersection point. <a href="tomato_tomato_mathpt3d.html#::tomato::mathpt3d::Point3d" title="mathpt3d::Point3d" class='ruff_cmd'>mathpt3d::Point3d</a></p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_118' href="javascript:toggleSource('118')">Show source</a></p>
-<div id='118' class='ruff_dyn_src'><pre>proc ::tomato::mathplane::PointFromPlanes {plane1 plane2 plane3} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_163' href="javascript:toggleSource('163')">Show source</a></p>
+<div id='163' class='ruff_dyn_src'><pre>proc ::tomato::mathplane::PointFromPlanes {plane1 plane2 plane3} {
 
     # Gets a point of intersection between three planes
     #
@@ -952,8 +952,8 @@ pre {
 <tr><td class='ruff_defitem'><code>direction</code></td><td class='ruff_defitem'>The direction of projection <a href="tomato_tomato_mathvec3d.html#::tomato::mathvec3d::Vector3d" title="mathvec3d::Vector3d" class='ruff_cmd'>mathvec3d::Vector3d</a> (can be equal to &quot;null&quot;)</td></tr>
 </table>
 <p class='ruff'>Returns A projected line <a href="tomato_tomato_mathline3d.html#::tomato::mathline3d::Line3d" title="mathline3d::Line3d" class='ruff_cmd'>mathline3d::Line3d</a></p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_119' href="javascript:toggleSource('119')">Show source</a></p>
-<div id='119' class='ruff_dyn_src'><pre>proc ::tomato::mathplane::ProjectLine3dOnplane {plane line direction} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_164' href="javascript:toggleSource('164')">Show source</a></p>
+<div id='164' class='ruff_dyn_src'><pre>proc ::tomato::mathplane::ProjectLine3dOnplane {plane line direction} {
 
     # Projects a point onto the plane
     #
@@ -978,8 +978,8 @@ pre {
 <tr><td class='ruff_defitem'><code>direction</code></td><td class='ruff_defitem'>The direction of projection <a href="tomato_tomato_mathvec3d.html#::tomato::mathvec3d::Vector3d" title="mathvec3d::Vector3d" class='ruff_cmd'>mathvec3d::Vector3d</a> (can be equal to &quot;null&quot;)</td></tr>
 </table>
 <p class='ruff'>Returns A projected point <a href="tomato_tomato_mathpt3d.html#::tomato::mathpt3d::Point3d" title="mathpt3d::Point3d" class='ruff_cmd'>mathpt3d::Point3d</a></p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_120' href="javascript:toggleSource('120')">Show source</a></p>
-<div id='120' class='ruff_dyn_src'><pre>proc ::tomato::mathplane::ProjectPointOnplane {plane point direction} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_165' href="javascript:toggleSource('165')">Show source</a></p>
+<div id='165' class='ruff_dyn_src'><pre>proc ::tomato::mathplane::ProjectPointOnplane {plane point direction} {
 
     # Projects a point onto the plane
     #
@@ -1005,8 +1005,8 @@ pre {
 <tr><td class='ruff_defitem'><code>direction</code></td><td class='ruff_defitem'>The direction of projection <a href="tomato_tomato_mathvec3d.html#::tomato::mathvec3d::Vector3d" title="mathvec3d::Vector3d" class='ruff_cmd'>mathvec3d::Vector3d</a> (can be equal to &quot;null&quot;)</td></tr>
 </table>
 <p class='ruff'>Returns A projected ray <a href="tomato_tomato_mathray3d.html#::tomato::mathray3d::Ray3d" title="mathray3d::Ray3d" class='ruff_cmd'>mathray3d::Ray3d</a></p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_121' href="javascript:toggleSource('121')">Show source</a></p>
-<div id='121' class='ruff_dyn_src'><pre>proc ::tomato::mathplane::ProjectVectorOnplane {plane vector direction} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_166' href="javascript:toggleSource('166')">Show source</a></p>
+<div id='166' class='ruff_dyn_src'><pre>proc ::tomato::mathplane::ProjectVectorOnplane {plane vector direction} {
 
     # Projects a point onto the plane
     #
@@ -1025,6 +1025,7 @@ pre {
 <hr>
 <h1><a href='tomato_tomato_helper.html'>tomato::helper</a></h1>
 <h1><a href='tomato_tomato_mathcsys.html'>tomato::mathcsys</a></h1>
+<h1><a href='tomato_tomato_mathquat.html'>tomato::mathquat</a></h1>
 <h1><a href='tomato_tomato_mathline3d.html'>tomato::mathline3d</a></h1>
 <h1><a href='tomato_tomato_mathray3d.html'>tomato::mathray3d</a></h1>
 <h1><a href='tomato_tomato_mathpt3d.html'>tomato::mathpt3d</a></h1>

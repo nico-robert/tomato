@@ -304,6 +304,7 @@ pre {
 <tr><td class='ruff_defitem'>Basic Matrix</td><td class='ruff_defitem'><em> Defines the base class for Matrix classes </em> (basic matrixes for <code>CoordinateSystem</code>, <code>Matrix3d</code> and <code>Vector</code>)</td></tr>
 <tr><td class='ruff_defitem'>Line</td><td class='ruff_defitem'><em> A Class representing a Line in 3D space </em></td></tr>
 <tr><td class='ruff_defitem'>Coordinate System</td><td class='ruff_defitem'><em> A Class representing a Coordinate System </em></td></tr>
+<tr><td class='ruff_defitem'>Quaternion</td><td class='ruff_defitem'><em> A Class representing a Quaternion </em></td></tr>
 </table>
 <h4 class='ruff'><a name='Examples'></a>Examples<span class='tinylink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a></span></h4>
 <div style='clear:both;'></div>
@@ -394,6 +395,32 @@ puts [[$line3DTo StartPoint] ToString]
 puts [[$line3DTo EndPoint] ToString]
 # 1 0 0
 </pre>
+<ul class='ruff'>
+<li>Create a sequence of 9 intermediate quaternion rotation objects:</li>
+</ul>
+<pre class='ruff'>
+set vector          [mathvec3d::Vector3d new 0 1 0]
+set null_quaternion [mathquat::Quaternion new -axis $vector -angle 0]
+set my_quaternion   [mathquat::Quaternion new -axis $vector -angle 90]
+
+set mypoint [mathpt3d::Point3d new 0 0 4]
+
+foreach q [tomato::mathquat::_intermediates $null_quaternion $my_quaternion 9 True] {
+    set my_interpolated_point [$q Rotate $mypoint]
+    puts &quot;[$my_interpolated_point ToString] &gt; Angle = [helper::RadiansToDegrees [$q Angle]] about Axis vector : \[[$vector ToString]\]&quot;
+}
+# 0.0, 0.0, 4.0                               &gt; Angle = 0.0  about Axis vector : [0, 1, 0]
+# 0.6257378601609235, 0.0, 3.950753362380551  &gt; Angle = 9.0  about Axis vector : [0, 1, 0]
+# 1.2360679774997898, 0.0, 3.8042260651806146 &gt; Angle = 18.0 about Axis vector : [0, 1, 0]
+# 1.8159619989581872, 0.0, 3.564026096753471  &gt; Angle = 27.0 about Axis vector : [0, 1, 0]
+# 2.351141009169892, 0.0, 3.2360679774997894  &gt; Angle = 36.0 about Axis vector : [0, 1, 0]
+# 2.8284271247461903, 0.0, 2.82842712474619   &gt; Angle = 45.0 about Axis vector : [0, 1, 0]
+# 3.2360679774997894, 0.0, 2.351141009169892  &gt; Angle = 54.0 about Axis vector : [0, 1, 0]
+# 3.564026096753471, 0.0, 1.8159619989581879  &gt; Angle = 63.0 about Axis vector : [0, 1, 0]
+# 3.8042260651806146, 0.0, 1.2360679774997898 &gt; Angle = 72.0 about Axis vector : [0, 1, 0]
+# 3.9507533623805515, 0.0, 0.625737860160924  &gt; Angle = 81.0 about Axis vector : [0, 1, 0]
+# 4.0, 0.0, 8.881784197001252e-16             &gt; Angle = 90.0 about Axis vector : [0, 1, 0]
+</pre>
 <h4 class='ruff'><a name='License'></a>License<span class='tinylink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a></span></h4>
 <div style='clear:both;'></div>
 <p class='ruff'><br> <strong>tomato math::geometry</strong> is covered under the terms of the <a href="LICENSE.md" >MIT</a> license.</p>
@@ -401,6 +428,7 @@ puts [[$line3DTo EndPoint] ToString]
 <hr>
 <h1><a href='tomato_tomato_helper.html'>tomato::helper</a></h1>
 <h1><a href='tomato_tomato_mathcsys.html'>tomato::mathcsys</a></h1>
+<h1><a href='tomato_tomato_mathquat.html'>tomato::mathquat</a></h1>
 <h1><a href='tomato_tomato_mathline3d.html'>tomato::mathline3d</a></h1>
 <h1><a href='tomato_tomato_mathray3d.html'>tomato::mathray3d</a></h1>
 <h1><a href='tomato_tomato_mathpt3d.html'>tomato::mathpt3d</a></h1>
