@@ -20,6 +20,18 @@ proc tomato::helper::Pi {} {
     return [expr {acos(-1)}]
 }
 
+proc tomato::helper::Clamp {n min max} {
+    # Clamps a number between a minimum and a maximum.
+    #
+    # n   - The number to clamp.
+    # min - The minimum allowed value.
+    # max - The maximum allowed value.
+    #
+    # Returns min, if n is lower than min; max, if n is higher than max; n otherwise.
+
+    return [expr {max(min($n, $max), $min)}]
+}
+
 proc tomato::helper::DegreesToRadians {degrees} {
     # Convert degrees to radians.
     #
