@@ -14,6 +14,7 @@ This [Tcl](https://www.tcl.tk) package is inspired , copied (as best I could) fr
 | Basic Matrix | Defines the base class for Matrix classes (basic matrixes for `CoordinateSystem`, `Matrix3d` and `Vector`)|
 | Line | A Class representing a Line in 3D space|
 | Coordinate System | A Class representing a Coordinate System |
+| Quaternion | A Class representing a Quaternion" |
 
 License :
 -------------------------
@@ -22,3 +23,8 @@ License :
 Examples :
 -------------------------
 See **[Start page Documentation](/documentation/tomato.html)**
+
+Release :
+-------------------------
+*  **26-02-2021** : v1.0 Initial release
+*  **21-03-2021** : v1.1 Add Quaternion Class
