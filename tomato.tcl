@@ -28,7 +28,8 @@ namespace eval tomato {
         ` tomato math::geometry ` is an opensource geometry 3D library with basics functions for working
         in 3D space...
         This [Tcl](https://www.tcl.tk) package is inspired , copied (as best I could) from this great library written in .Net [Math.NET Spatial](https://spatial.mathdotnet.com/#Math-NET-Spatial).
-
+        Some features for this class `Quaternion` are inspired by this python library [pyquaternion](http://kieranwynn.github.io/pyquaternion/).
+        
         ** Currently geometries supported are : **
         Vector            - * A Class representing a Vector in 3D space *
         Ray               - * A Class representing a Ray in 3D space *
