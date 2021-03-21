@@ -1,1 +1,1 @@
-package ifneeded tomato 1.0 [list source [file join $dir tomato.tcl]]
+package ifneeded tomato 1.1 [list source [file join $dir tomato.tcl]]
