@@ -50,9 +50,9 @@ oo::class create tomato::mathpt3d::Point3d {
             set _z $z
         } else {
             # default values
-            set _x 0
-            set _y 0
-            set _z 0
+            set _x 0.0
+            set _y 0.0
+            set _z 0.0
         }
     }
 }
@@ -219,6 +219,16 @@ oo::define tomato::mathpt3d::Point3d {
         return [$cs Transform [self]]
     }
 
+    method TranslatePoint {v d} {
+        # Translates a Point along vector and distance
+        #
+        # v - A Vector [mathvec3d::Vector3d]
+        # d - Distance
+        #
+        # Returns A new 3d point [Point3d]
+        return [my + [[$v Normalized] * $d]]
+    }
+
     method ToVector3D {} {
         # Converts this point into a vector from the origin
         #
@@ -237,10 +247,10 @@ oo::define tomato::mathpt3d::Point3d {
     }
 
 
-    export Get Origine ToString GetType DistanceTo TransformBy
+    export Get Origin ToString GetType DistanceTo TransformBy
     export X Y Z
     export ToVector3D VectorTo MirrorAbout ProjectOn Rotate
-    export + - == != Configure
+    export + - == != Configure TranslatePoint
 
 }
 
@@ -300,6 +310,26 @@ proc tomato::mathpt3d::IntersectionOf3Planes {plane1 plane2 plane3} {
     # Returns The point of intersection [Point3d]
     set ray [$plane1 IntersectionWith $plane2]
     return  [$plane3 IntersectionWith $ray]
+
+}
+
+proc tomato::mathpt3d::IsCollinearPoints {p1 p2 p3 {tolerance $::tomato::helper::Epsilon}} {
+    # Check if three points are collinear
+    #
+    # p1 - [Point3d]
+    # p2 - [Point3d]
+    # p3 - [Point3d]
+    #
+    # Returns true if the points are collinear, otherwise false.
+
+    set v1 [[tomato::mathline3d::Line3d new $p1 $p2] Direction]
+    set v2 [[tomato::mathline3d::Line3d new $p1 $p3] Direction]
+
+    if {[llength [info level 0]] < 5} {
+        set tolerance $::tomato::helper::Epsilon
+    }
+
+    return [expr {[[tomato::mathvec3d::Cross $v1 $v2] Length] < $tolerance}]
 
 }
 
