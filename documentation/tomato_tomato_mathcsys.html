@@ -318,6 +318,7 @@ pre {
 <tr><td class='ruff_defitem'><a href="tomato_tomato_mathcsys.html#::tomato::mathcsys::Csys::TransformBy" title="TransformBy" class='ruff_cmd'>TransformBy</a></td><td class='ruff_defitem'>Transforms...</td></tr>
 <tr><td class='ruff_defitem'><a href="tomato_tomato_mathcsys.html#::tomato::mathcsys::Csys::TransformFromCoordSys" title="TransformFromCoordSys" class='ruff_cmd'>TransformFromCoordSys</a></td><td class='ruff_defitem'>Transforms entity according to the inverse of this change matrix</td></tr>
 <tr><td class='ruff_defitem'><a href="tomato_tomato_mathcsys.html#::tomato::mathcsys::Csys::TransformToCoordSys" title="TransformToCoordSys" class='ruff_cmd'>TransformToCoordSys</a></td><td class='ruff_defitem'>Transforms entity according to this change matrix</td></tr>
+<tr><td class='ruff_defitem'><a href="tomato_tomato_mathcsys.html#::tomato::mathcsys::Csys::TranslateCsys" title="TranslateCsys" class='ruff_cmd'>TranslateCsys</a></td><td class='ruff_defitem'>Translates a coordinate system follow vector and distance</td></tr>
 <tr><td class='ruff_defitem'><a href="tomato_tomato_mathcsys.html#::tomato::mathcsys::Csys::XAxis" title="XAxis" class='ruff_cmd'>XAxis</a></td><td class='ruff_defitem'>Gets the X Axis</td></tr>
 <tr><td class='ruff_defitem'><a href="tomato_tomato_mathcsys.html#::tomato::mathcsys::Csys::YAxis" title="YAxis" class='ruff_cmd'>YAxis</a></td><td class='ruff_defitem'>Gets the Y Axis</td></tr>
 <tr><td class='ruff_defitem'><a href="tomato_tomato_mathcsys.html#::tomato::mathcsys::Csys::ZAxis" title="ZAxis" class='ruff_cmd'>ZAxis</a></td><td class='ruff_defitem'>Gets the Z Axis</td></tr>
@@ -331,8 +332,8 @@ pre {
 <tr><td class='ruff_defitem'><code>4 values</code></td><td class='ruff_defitem'>4 distinct values :<br> The first value represents the origin <a href="tomato_tomato_mathpt3d.html#::tomato::mathpt3d::Point3d" title="mathpt3d::Point3d" class='ruff_cmd'>mathpt3d::Point3d</a><br> The second value represents the Xaxis <a href="tomato_tomato_mathvec3d.html#::tomato::mathvec3d::Vector3d" title="mathvec3d::Vector3d" class='ruff_cmd'>mathvec3d::Vector3d</a><br> The third value represents the Yaxis <a href="tomato_tomato_mathvec3d.html#::tomato::mathvec3d::Vector3d" title="mathvec3d::Vector3d" class='ruff_cmd'>mathvec3d::Vector3d</a><br> The fourth value represents the Zaxis <a href="tomato_tomato_mathvec3d.html#::tomato::mathvec3d::Vector3d" title="mathvec3d::Vector3d" class='ruff_cmd'>mathvec3d::Vector3d</a><br></td></tr>
 <tr><td class='ruff_defitem'><code>Matrix</code></td><td class='ruff_defitem'>A Matrix. <a href="tomato_tomato_mathmatrix.html#::tomato::mathmatrix::Matrix" title="mathmatrix::Matrix" class='ruff_cmd'>mathmatrix::Matrix</a><br> Xaxis  == Column 0<br> Yaxis  == Column 1<br> Zaxis  == Column 2<br> Origin == Column 3</td></tr>
 </table>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_10' href="javascript:toggleSource('10')">Show source</a></p>
-<div id='10' class='ruff_dyn_src'><pre>method constructor {args} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_32' href="javascript:toggleSource('32')">Show source</a></p>
+<div id='32' class='ruff_dyn_src'><pre>method constructor {args} {
 
     # Initializes a new Coordinate System Class.
     #
@@ -357,26 +358,26 @@ pre {
             set _xaxis   [tomato::mathvec3d::Vector3d new [lrange [$_baseclass GetColumn 0] 0 2]]
             set _yaxis   [tomato::mathvec3d::Vector3d new [lrange [$_baseclass GetColumn 1] 0 2]]
             set _zaxis   [tomato::mathvec3d::Vector3d new [lrange [$_baseclass GetColumn 2] 0 2]]
-            set _origine [tomato::mathpt3d::Point3d   new [lrange [$_baseclass GetColumn 3] 0 2]]
+            set _origin  [tomato::mathpt3d::Point3d   new [lrange [$_baseclass GetColumn 3] 0 2]]
         }
 
     } elseif {[llength $args] == 4} {
 
         foreach entity $args {
             if {![tomato::helper::IsaObject $entity]} {
-                error &quot;$entity must be a object...&quot;
+                error &quot;\$entity must be a object...&quot;
             }
         }
 
         lassign $args _or v1 v2 v3
 
         if {![TypeOf $_or Isa &quot;Point3d&quot;]} {
-            error &quot;[lindex $args 0] must be a Point3d...&quot;
+            error &quot;\[lindex $args 0\] must be a Point3d...&quot;
         }
 
         foreach entity [list $v1 $v2 $v3] {
             if {![TypeOf $entity Isa &quot;Vector3d&quot;]} {
-                error &quot;$entity must be a Vector3d...&quot;
+                error &quot;\$entity must be a Vector3d...&quot;
             }
         }
 
@@ -386,12 +387,12 @@ pre {
         set _xaxis   $v1
         set _yaxis   $v2
         set _zaxis   $v3
-        set _origine $_or
+        set _origin $_or
 
         $mat SetColumn 0 [list {*}[$_xaxis Get] 0]
         $mat SetColumn 1 [list {*}[$_yaxis Get] 0]
         $mat SetColumn 2 [list {*}[$_zaxis Get] 0]
-        $mat SetColumn 3 [list {*}[$_origine Get] 1]
+        $mat SetColumn 3 [list {*}[$_origin Get] 1]
 
     } else {
         # default values
@@ -401,12 +402,12 @@ pre {
         set _xaxis   [tomato::mathvec3d::UnitX]
         set _yaxis   [tomato::mathvec3d::UnitY]
         set _zaxis   [tomato::mathvec3d::UnitZ]
-        set _origine [tomato::mathpt3d::Point3d new 0 0 0]
+        set _origin [tomato::mathpt3d::Point3d new 0 0 0]
 
         $mat SetColumn 0 [list {*}[$_xaxis Get] 0]
         $mat SetColumn 1 [list {*}[$_yaxis Get] 0]
         $mat SetColumn 2 [list {*}[$_zaxis Get] 0]
-        $mat SetColumn 3 [list {*}[$_origine Get] 1]
+        $mat SetColumn 3 [list {*}[$_origin Get] 1]
 
     }
 }</pre></div>
@@ -419,8 +420,8 @@ pre {
 <tr><td class='ruff_defitem'><code>tolerance</code></td><td class='ruff_defitem'>A tolerance (epsilon) to adjust for floating point error. Optional, default <code>1e-4</code>.</td></tr>
 </table>
 <p class='ruff'>Returns true if the coordinate system are different. Otherwise false.</p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_11' href="javascript:toggleSource('11')">Show source</a></p>
-<div id='11' class='ruff_dyn_src'><pre>method != {other {tolerance 1e-4}} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_33' href="javascript:toggleSource('33')">Show source</a></p>
+<div id='33' class='ruff_dyn_src'><pre>method != {other {tolerance 1e-4}} {
 
     # Gets value that indicates whether any pair of elements in two specified coordinate system is not equal.
     #
@@ -439,8 +440,8 @@ pre {
 <tr><td class='ruff_defitem'><code>tolerance</code></td><td class='ruff_defitem'>A tolerance (epsilon) to adjust for floating point error. Optional, default <code>1e-4</code>.</td></tr>
 </table>
 <p class='ruff'>Returns true if the coordinate system are the same. Otherwise false.</p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_12' href="javascript:toggleSource('12')">Show source</a></p>
-<div id='12' class='ruff_dyn_src'><pre>method == {other {tolerance 1e-4}} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_34' href="javascript:toggleSource('34')">Show source</a></p>
+<div id='34' class='ruff_dyn_src'><pre>method == {other {tolerance 1e-4}} {
 
     # Gets value that indicates whether each pair of elements in two specified coordinate system is equal.
     #
@@ -455,22 +456,22 @@ pre {
 <p class='ruff'>Gets the base change matrix</p>
 <div class='ruff_synopsis'><span class='ruff_cmd'>OBJECT BaseChangeMatrix</span> </div>
 <p class='ruff'>Returns A matrix <a href="tomato_tomato_mathmatrix.html#::tomato::mathmatrix::Matrix" title="mathmatrix::Matrix" class='ruff_cmd'>mathmatrix::Matrix</a></p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_13' href="javascript:toggleSource('13')">Show source</a></p>
-<div id='13' class='ruff_dyn_src'><pre>method BaseChangeMatrix {} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_35' href="javascript:toggleSource('35')">Show source</a></p>
+<div id='35' class='ruff_dyn_src'><pre>method BaseChangeMatrix {} {
 
     # Gets the base change matrix
     #
     # Returns A matrix [mathmatrix::Matrix]
     set matrix [tomato::mathcsys::GetRotationSubMatrix [self]]
     set cs [tomato::mathcsys::SetRotationSubMatrix [$matrix Transpose] [self]]
-    return $cs
+    return [$cs BaseClass]
 }</pre></div>
 </div><h4 class='ruffmethod'><a name='::tomato::mathcsys::Csys::BaseClass'>BaseClass</a><span class='ns_scope'> [<a href="tomato_tomato_mathcsys.html#::tomato::mathcsys::Csys" title="::tomato::mathcsys::Csys" class='ruff_cmd'>::tomato::mathcsys::Csys</a>]</span><span class='tinylink'><a href='tomato_tomato_mathcsys.html#::tomato::mathcsys::Csys'>Csys</a>, <a href='#top'>Top</a>, <a href='tomato.html'>Main</a></span></h4>
 <div style='clear:both;'></div>
 <p class='ruff'>Gets the base class (Matrix obj)</p>
 <div class='ruff_synopsis'><span class='ruff_cmd'>OBJECT BaseClass</span> </div>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_14' href="javascript:toggleSource('14')">Show source</a></p>
-<div id='14' class='ruff_dyn_src'><pre>method BaseClass {} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_36' href="javascript:toggleSource('36')">Show source</a></p>
+<div id='36' class='ruff_dyn_src'><pre>method BaseClass {} {
 
     # Gets the base class (Matrix obj)
     return $_baseclass
@@ -479,8 +480,8 @@ pre {
 <div style='clear:both;'></div>
 <p class='ruff'>Gets the name of class.</p>
 <div class='ruff_synopsis'><span class='ruff_cmd'>OBJECT GetType</span> </div>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_15' href="javascript:toggleSource('15')">Show source</a></p>
-<div id='15' class='ruff_dyn_src'><pre>method GetType {} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_37' href="javascript:toggleSource('37')">Show source</a></p>
+<div id='37' class='ruff_dyn_src'><pre>method GetType {} {
 
     # Gets the name of class.
     return [tomato::helper::TypeClass [self]]
@@ -490,8 +491,8 @@ pre {
 <p class='ruff'>Inverts this coordinate system</p>
 <div class='ruff_synopsis'><span class='ruff_cmd'>OBJECT Invert</span> </div>
 <p class='ruff'>Returns An inverted coordinate system <a href="tomato_tomato_mathcsys.html#::tomato::mathcsys::Csys" title="Csys" class='ruff_cmd'>Csys</a></p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_16' href="javascript:toggleSource('16')">Show source</a></p>
-<div id='16' class='ruff_dyn_src'><pre>method Invert {} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_38' href="javascript:toggleSource('38')">Show source</a></p>
+<div id='38' class='ruff_dyn_src'><pre>method Invert {} {
 
     # Inverts this coordinate system
     #
@@ -506,8 +507,8 @@ pre {
 <tr><td class='ruff_defitem'><code>v</code></td><td class='ruff_defitem'>a translation vector <a href="tomato_tomato_mathvec3d.html#::tomato::mathvec3d::Vector3d" title="mathvec3d::Vector3d" class='ruff_cmd'>mathvec3d::Vector3d</a></td></tr>
 </table>
 <p class='ruff'>Returns A new translated coordinate system <a href="tomato_tomato_mathcsys.html#::tomato::mathcsys::Csys" title="Csys" class='ruff_cmd'>Csys</a></p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_17' href="javascript:toggleSource('17')">Show source</a></p>
-<div id='17' class='ruff_dyn_src'><pre>method OffsetBy {v} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_39' href="javascript:toggleSource('39')">Show source</a></p>
+<div id='39' class='ruff_dyn_src'><pre>method OffsetBy {v} {
 
     # Translates a coordinate system
     #
@@ -523,34 +524,34 @@ pre {
 <p class='ruff'>Gets the offset to origin</p>
 <div class='ruff_synopsis'><span class='ruff_cmd'>OBJECT OffsetToBase</span> </div>
 <p class='ruff'>Returns A vector <a href="tomato_tomato_mathvec3d.html#::tomato::mathvec3d::Vector3d" title="mathvec3d::Vector3d" class='ruff_cmd'>mathvec3d::Vector3d</a></p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_18' href="javascript:toggleSource('18')">Show source</a></p>
-<div id='18' class='ruff_dyn_src'><pre>method OffsetToBase {} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_40' href="javascript:toggleSource('40')">Show source</a></p>
+<div id='40' class='ruff_dyn_src'><pre>method OffsetToBase {} {
 
     # Gets the offset to origin
     #
     # Returns A vector [mathvec3d::Vector3d]
-    return [$_origine ToVector3D]
+    return [$_origin ToVector3D]
 }</pre></div>
 </div><h4 class='ruffmethod'><a name='::tomato::mathcsys::Csys::Origin'>Origin</a><span class='ns_scope'> [<a href="tomato_tomato_mathcsys.html#::tomato::mathcsys::Csys" title="::tomato::mathcsys::Csys" class='ruff_cmd'>::tomato::mathcsys::Csys</a>]</span><span class='tinylink'><a href='tomato_tomato_mathcsys.html#::tomato::mathcsys::Csys'>Csys</a>, <a href='#top'>Top</a>, <a href='tomato.html'>Main</a></span></h4>
 <div style='clear:both;'></div>
 <p class='ruff'>Gets the Origin</p>
 <div class='ruff_synopsis'><span class='ruff_cmd'>OBJECT Origin</span> </div>
 <p class='ruff'>Returns A point <a href="tomato_tomato_mathpt3d.html#::tomato::mathpt3d::Point3d" title="mathpt3d::Point3d" class='ruff_cmd'>mathpt3d::Point3d</a></p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_19' href="javascript:toggleSource('19')">Show source</a></p>
-<div id='19' class='ruff_dyn_src'><pre>method Origin {} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_41' href="javascript:toggleSource('41')">Show source</a></p>
+<div id='41' class='ruff_dyn_src'><pre>method Origin {} {
 
     # Gets the Origin
     #
     # Returns A point [mathpt3d::Point3d]
-    return $_origine
+    return $_origin
 }</pre></div>
 </div><h4 class='ruffmethod'><a name='::tomato::mathcsys::Csys::ResetRotations'>ResetRotations</a><span class='ns_scope'> [<a href="tomato_tomato_mathcsys.html#::tomato::mathcsys::Csys" title="::tomato::mathcsys::Csys" class='ruff_cmd'>::tomato::mathcsys::Csys</a>]</span><span class='tinylink'><a href='tomato_tomato_mathcsys.html#::tomato::mathcsys::Csys'>Csys</a>, <a href='#top'>Top</a>, <a href='tomato.html'>Main</a></span></h4>
 <div style='clear:both;'></div>
 <p class='ruff'>Resets rotations preserves scales</p>
 <div class='ruff_synopsis'><span class='ruff_cmd'>OBJECT ResetRotations</span> </div>
 <p class='ruff'>Returns A new coordinate system with reset rotation <a href="tomato_tomato_mathcsys.html#::tomato::mathcsys::Csys" title="Csys" class='ruff_cmd'>Csys</a></p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_20' href="javascript:toggleSource('20')">Show source</a></p>
-<div id='20' class='ruff_dyn_src'><pre>method ResetRotations {} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_42' href="javascript:toggleSource('42')">Show source</a></p>
+<div id='42' class='ruff_dyn_src'><pre>method ResetRotations {} {
 
     # Resets rotations preserves scales
     #
@@ -571,8 +572,8 @@ pre {
 <tr><td class='ruff_defitem'><code>angle</code></td><td class='ruff_defitem'>An angle in degrees</td></tr>
 </table>
 <p class='ruff'>Returns A rotated coordinate system <a href="tomato_tomato_mathcsys.html#::tomato::mathcsys::Csys" title="Csys" class='ruff_cmd'>Csys</a></p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_21' href="javascript:toggleSource('21')">Show source</a></p>
-<div id='21' class='ruff_dyn_src'><pre>method RotateCoordSysAroundVector {about angle} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_43' href="javascript:toggleSource('43')">Show source</a></p>
+<div id='43' class='ruff_dyn_src'><pre>method RotateCoordSysAroundVector {about angle} {
 
     # Rotates a coordinate system around a vector
     #
@@ -594,8 +595,8 @@ pre {
 <tr><td class='ruff_defitem'><code>roll</code></td><td class='ruff_defitem'>The roll</td></tr>
 </table>
 <p class='ruff'>Returns A rotated coordinate system <a href="tomato_tomato_mathcsys.html#::tomato::mathcsys::Csys" title="Csys" class='ruff_cmd'>Csys</a></p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_22' href="javascript:toggleSource('22')">Show source</a></p>
-<div id='22' class='ruff_dyn_src'><pre>method RotateNoReset {yaw pitch roll} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_44' href="javascript:toggleSource('44')">Show source</a></p>
+<div id='44' class='ruff_dyn_src'><pre>method RotateNoReset {yaw pitch roll} {
 
     # Rotate without Reset
     #
@@ -616,8 +617,8 @@ pre {
 <tr><td class='ruff_defitem'><code>v</code></td><td class='ruff_defitem'><a href="tomato_tomato_mathvec3d.html#::tomato::mathvec3d::Vector3d" title="mathvec3d::Vector3d" class='ruff_cmd'>mathvec3d::Vector3d</a></td></tr>
 </table>
 <p class='ruff'>Returns A new coordinate system <a href="tomato_tomato_mathcsys.html#::tomato::mathcsys::Csys" title="Csys" class='ruff_cmd'>Csys</a></p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_23' href="javascript:toggleSource('23')">Show source</a></p>
-<div id='23' class='ruff_dyn_src'><pre>method SetTranslation {v} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_45' href="javascript:toggleSource('45')">Show source</a></p>
+<div id='45' class='ruff_dyn_src'><pre>method SetTranslation {v} {
 
     # Gets a translation coordinate system
     #
@@ -631,8 +632,8 @@ pre {
 <p class='ruff'>Returns a string representation of this object.</p>
 <div class='ruff_synopsis'><span class='ruff_cmd'>OBJECT ToString</span> </div>
 <p class='ruff'>Returns a string representation of this object.</p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_24' href="javascript:toggleSource('24')">Show source</a></p>
-<div id='24' class='ruff_dyn_src'><pre>method ToString {} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_46' href="javascript:toggleSource('46')">Show source</a></p>
+<div id='46' class='ruff_dyn_src'><pre>method ToString {} {
 
     # Returns a string representation of this object.
     lappend infocsys [list Origin: [[my Origin] ToString]]
@@ -654,8 +655,8 @@ pre {
 <tr><td class='ruff_defitem'><code>Vector3d</code></td><td class='ruff_defitem'><a href="tomato_tomato_mathvec3d.html#::tomato::mathvec3d::Vector3d" title="mathvec3d::Vector3d" class='ruff_cmd'>mathvec3d::Vector3d</a></td></tr>
 </table>
 <p class='ruff'>Returns a new entity transformed</p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_25' href="javascript:toggleSource('25')">Show source</a></p>
-<div id='25' class='ruff_dyn_src'><pre>method Transform {entity} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_47' href="javascript:toggleSource('47')">Show source</a></p>
+<div id='47' class='ruff_dyn_src'><pre>method Transform {entity} {
 
     # Transforms...
     #
@@ -704,8 +705,8 @@ pre {
 <tr><td class='ruff_defitem'><code>Matrix</code></td><td class='ruff_defitem'><a href="tomato_tomato_mathmatrix.html#::tomato::mathmatrix::Matrix" title="mathmatrix::Matrix" class='ruff_cmd'>mathmatrix::Matrix</a></td></tr>
 </table>
 <p class='ruff'>Returns this by the coordinate system and returns the transformed if csys or a transformed coordinate system if matrix.</p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_26' href="javascript:toggleSource('26')">Show source</a></p>
-<div id='26' class='ruff_dyn_src'><pre>method TransformBy {entity} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_48' href="javascript:toggleSource('48')">Show source</a></p>
+<div id='48' class='ruff_dyn_src'><pre>method TransformBy {entity} {
 
     # Transforms...
     #
@@ -738,8 +739,8 @@ pre {
 <tr><td class='ruff_defitem'><code>Ray3d</code></td><td class='ruff_defitem'><a href="tomato_tomato_mathray3d.html#::tomato::mathray3d::Ray3d" title="mathray3d::Ray3d" class='ruff_cmd'>mathray3d::Ray3d</a></td></tr>
 </table>
 <p class='ruff'>Returns a transformed point <a href="tomato_tomato_mathpt3d.html#::tomato::mathpt3d::Point3d" title="mathpt3d::Point3d" class='ruff_cmd'>mathpt3d::Point3d</a> if Point3d or a transformed ray if Ray3d.</p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_27' href="javascript:toggleSource('27')">Show source</a></p>
-<div id='27' class='ruff_dyn_src'><pre>method TransformFromCoordSys {entity} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_49' href="javascript:toggleSource('49')">Show source</a></p>
+<div id='49' class='ruff_dyn_src'><pre>method TransformFromCoordSys {entity} {
 
     # Transforms entity according to the inverse of this change matrix
     #
@@ -756,16 +757,17 @@ pre {
             set uv [$entity Direction]
 
             set baseChangeMatrix [my BaseChangeMatrix]
-            set matinv [$baseChangeMatrix Inverse]
+            set matinv    [$baseChangeMatrix Inverse]
+            set mattocsys [$matinv ToCsys]
 
-            set point [[$matinv Transform $p] + [my OffsetToBase]]
-            set direction [$matinv Transform $uv]
+            set point [[$mattocsys Transform $p] + [my OffsetToBase]]
+            set direction [$mattocsys Transform $uv]
 
             return [tomato::mathray3d::Ray3d new $point $direction]
         }
         *Point3d {
             set baseChangeMatrix [my BaseChangeMatrix]
-            set point [[[$baseChangeMatrix Inverse] Transform $p] + [my OffsetToBase]]
+            set point [[[[$baseChangeMatrix Inverse] ToCsys] Transform $entity] + [my OffsetToBase]]
 
             return $point
         }
@@ -784,8 +786,8 @@ pre {
 <tr><td class='ruff_defitem'><code>Ray3d</code></td><td class='ruff_defitem'><a href="tomato_tomato_mathray3d.html#::tomato::mathray3d::Ray3d" title="mathray3d::Ray3d" class='ruff_cmd'>mathray3d::Ray3d</a></td></tr>
 </table>
 <p class='ruff'>Returns a transformed point if Point3d or a transformed ray <a href="tomato_tomato_mathray3d.html#::tomato::mathray3d::Ray3d" title="mathray3d::Ray3d" class='ruff_cmd'>mathray3d::Ray3d</a> if Ray3d.</p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_28' href="javascript:toggleSource('28')">Show source</a></p>
-<div id='28' class='ruff_dyn_src'><pre>method TransformToCoordSys {entity} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_50' href="javascript:toggleSource('50')">Show source</a></p>
+<div id='50' class='ruff_dyn_src'><pre>method TransformToCoordSys {entity} {
 
     # Transforms entity according to this change matrix
     #
@@ -804,14 +806,14 @@ pre {
             set baseChangeMatrix [my BaseChangeMatrix]
 
             # The position and the vector are transformed
-            set point [[$baseChangeMatrix Transform $p] + [my OffsetToBase]]
+            set point [[[$baseChangeMatrix ToCsys] Transform $p] + [my OffsetToBase]]
             set direction [$uv TransformBy $baseChangeMatrix]
 
             return [tomato::mathray3d::Ray3d new $point $direction]
         }
         *Point3d {
             set baseChangeMatrix [my BaseChangeMatrix]
-            set point [[$baseChangeMatrix Transform $p] + [my OffsetToBase]]
+            set point [[[$baseChangeMatrix ToCsys] Transform $entity] + [my OffsetToBase]]
 
             return $point
         }
@@ -820,13 +822,33 @@ pre {
         }
     }
 }</pre></div>
+</div><h4 class='ruffmethod'><a name='::tomato::mathcsys::Csys::TranslateCsys'>TranslateCsys</a><span class='ns_scope'> [<a href="tomato_tomato_mathcsys.html#::tomato::mathcsys::Csys" title="::tomato::mathcsys::Csys" class='ruff_cmd'>::tomato::mathcsys::Csys</a>]</span><span class='tinylink'><a href='tomato_tomato_mathcsys.html#::tomato::mathcsys::Csys'>Csys</a>, <a href='#top'>Top</a>, <a href='tomato.html'>Main</a></span></h4>
+<div style='clear:both;'></div>
+<p class='ruff'>Translates a coordinate system follow vector and distance</p>
+<div class='ruff_synopsis'><span class='ruff_cmd'>OBJECT TranslateCsys</span> <span class='ruff_arg'>v d</span></div>
+<table class='ruff_deflist'>
+<tr><td class='ruff_defitem'><code>v</code></td><td class='ruff_defitem'>a translation vector <a href="tomato_tomato_mathvec3d.html#::tomato::mathvec3d::Vector3d" title="mathvec3d::Vector3d" class='ruff_cmd'>mathvec3d::Vector3d</a></td></tr>
+<tr><td class='ruff_defitem'><code>d</code></td><td class='ruff_defitem'>Distance translation</td></tr>
+</table>
+<p class='ruff'>Returns A new translated coordinate system <a href="tomato_tomato_mathcsys.html#::tomato::mathcsys::Csys" title="Csys" class='ruff_cmd'>Csys</a></p>
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_51' href="javascript:toggleSource('51')">Show source</a></p>
+<div id='51' class='ruff_dyn_src'><pre>method TranslateCsys {v d} {
+
+    # Translates a coordinate system follow vector and distance
+    #
+    # v - a translation vector [mathvec3d::Vector3d]
+    # d - Distance translation
+    #
+    # Returns A new translated coordinate system [Csys]
+    return [tomato::mathcsys::Csys new [[my Origin] TranslatePoint $v $d] [my XAxis] [my YAxis] [my ZAxis]]
+}</pre></div>
 </div><h4 class='ruffmethod'><a name='::tomato::mathcsys::Csys::XAxis'>XAxis</a><span class='ns_scope'> [<a href="tomato_tomato_mathcsys.html#::tomato::mathcsys::Csys" title="::tomato::mathcsys::Csys" class='ruff_cmd'>::tomato::mathcsys::Csys</a>]</span><span class='tinylink'><a href='tomato_tomato_mathcsys.html#::tomato::mathcsys::Csys'>Csys</a>, <a href='#top'>Top</a>, <a href='tomato.html'>Main</a></span></h4>
 <div style='clear:both;'></div>
 <p class='ruff'>Gets the X Axis</p>
 <div class='ruff_synopsis'><span class='ruff_cmd'>OBJECT XAxis</span> </div>
 <p class='ruff'>Returns A vector <a href="tomato_tomato_mathvec3d.html#::tomato::mathvec3d::Vector3d" title="mathvec3d::Vector3d" class='ruff_cmd'>mathvec3d::Vector3d</a></p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_29' href="javascript:toggleSource('29')">Show source</a></p>
-<div id='29' class='ruff_dyn_src'><pre>method XAxis {} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_52' href="javascript:toggleSource('52')">Show source</a></p>
+<div id='52' class='ruff_dyn_src'><pre>method XAxis {} {
 
     # Gets the X Axis
     #
@@ -838,8 +860,8 @@ pre {
 <p class='ruff'>Gets the Y Axis</p>
 <div class='ruff_synopsis'><span class='ruff_cmd'>OBJECT YAxis</span> </div>
 <p class='ruff'>Returns A vector <a href="tomato_tomato_mathvec3d.html#::tomato::mathvec3d::Vector3d" title="mathvec3d::Vector3d" class='ruff_cmd'>mathvec3d::Vector3d</a></p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_30' href="javascript:toggleSource('30')">Show source</a></p>
-<div id='30' class='ruff_dyn_src'><pre>method YAxis {} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_53' href="javascript:toggleSource('53')">Show source</a></p>
+<div id='53' class='ruff_dyn_src'><pre>method YAxis {} {
 
     # Gets the Y Axis
     #
@@ -851,8 +873,8 @@ pre {
 <p class='ruff'>Gets the Z Axis</p>
 <div class='ruff_synopsis'><span class='ruff_cmd'>OBJECT ZAxis</span> </div>
 <p class='ruff'>Returns A vector <a href="tomato_tomato_mathvec3d.html#::tomato::mathvec3d::Vector3d" title="mathvec3d::Vector3d" class='ruff_cmd'>mathvec3d::Vector3d</a></p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_31' href="javascript:toggleSource('31')">Show source</a></p>
-<div id='31' class='ruff_dyn_src'><pre>method ZAxis {} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_54' href="javascript:toggleSource('54')">Show source</a></p>
+<div id='54' class='ruff_dyn_src'><pre>method ZAxis {} {
 
     # Gets the Z Axis
     #
@@ -870,8 +892,8 @@ pre {
 <tr><td class='ruff_defitem'><code>toCs</code></td><td class='ruff_defitem'>The to coordinate system <a href="tomato_tomato_mathcsys.html#::tomato::mathcsys::Csys" title="Csys" class='ruff_cmd'>Csys</a></td></tr>
 </table>
 <p class='ruff'>Returns A mapping coordinate system <a href="tomato_tomato_mathcsys.html#::tomato::mathcsys::Csys" title="Csys" class='ruff_cmd'>Csys</a></p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_32' href="javascript:toggleSource('32')">Show source</a></p>
-<div id='32' class='ruff_dyn_src'><pre>proc ::tomato::mathcsys::CreateMappingCoordinateSystem {fromCs toCs} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_55' href="javascript:toggleSource('55')">Show source</a></p>
+<div id='55' class='ruff_dyn_src'><pre>proc ::tomato::mathcsys::CreateMappingCoordinateSystem {fromCs toCs} {
 
     # Creates a coordinate system that maps from the 'from' coordinate system to the 'to' coordinate system.
     #
@@ -903,8 +925,8 @@ pre {
 <p class='ruff'>See : methods == !=</p>
 <p class='ruff'>An error exception is raised if tolerance (epsilon) &lt; 0.</p>
 <p class='ruff'>Returns true if the coordinate system are equal, otherwise false.</p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_33' href="javascript:toggleSource('33')">Show source</a></p>
-<div id='33' class='ruff_dyn_src'><pre>proc ::tomato::mathcsys::Equals {cs other tolerance} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_56' href="javascript:toggleSource('56')">Show source</a></p>
+<div id='56' class='ruff_dyn_src'><pre>proc ::tomato::mathcsys::Equals {cs other tolerance} {
 
     # Indicate if this coordinate system is equivalent to a another coordinate system
     #
@@ -935,8 +957,8 @@ pre {
 <tr><td class='ruff_defitem'><code>coordinateSystem</code></td><td class='ruff_defitem'><a href="tomato_tomato_mathcsys.html#::tomato::mathcsys::Csys" title="Csys" class='ruff_cmd'>Csys</a></td></tr>
 </table>
 <p class='ruff'>Returns A rotation matrix <a href="tomato_tomato_mathcsys.html#::tomato::mathcsys::Csys" title="Csys" class='ruff_cmd'>Csys</a></p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_34' href="javascript:toggleSource('34')">Show source</a></p>
-<div id='34' class='ruff_dyn_src'><pre>proc ::tomato::mathcsys::GetRotationSubMatrix {coordinateSystem} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_57' href="javascript:toggleSource('57')">Show source</a></p>
+<div id='57' class='ruff_dyn_src'><pre>proc ::tomato::mathcsys::GetRotationSubMatrix {coordinateSystem} {
 
     # Gets a rotation submatrix from a coordinate system
     #
@@ -946,6 +968,59 @@ pre {
     set csbase [$coordinateSystem BaseClass]
     return [$csbase SubMatrix 0 3 0 3]
 }</pre></div>
+</div><h4 class='ruffproc'><a name='::tomato::mathcsys::Parse'>Parse</a><span class='ns_scope'> [<a href="tomato_tomato_mathcsys.html#::tomato::mathcsys" title="::tomato::mathcsys" class='ruff_cmd'>::tomato::mathcsys</a>]</span><span class='tinylink'><a href='tomato_tomato_mathcsys.html#::tomato::mathcsys'>mathcsys</a>, <a href='#top'>Top</a>, <a href='tomato.html'>Main</a></span></h4>
+<div style='clear:both;'></div>
+<p class='ruff'>Transform a list to coordinate system</p>
+<div class='ruff_synopsis'><span class='ruff_cmd'>Parse</span> <span class='ruff_arg'>?args?</span></div>
+<table class='ruff_deflist'>
+<tr><td class='ruff_defitem'><code>args</code></td><td class='ruff_defitem'>Options described below.</td></tr>
+</table>
+<p class='ruff'>The first  value represents the origin [Tcl list]<br> The second value represents the Xaxis [Tcl list]<br> The third  value represents the Yaxis [Tcl list]<br> The fourth value represents the Zaxis [Tcl list]<br></p>
+<p class='ruff'>Returns A new coordinate system <a href="tomato_tomato_mathcsys.html#::tomato::mathcsys::Csys" title="Csys" class='ruff_cmd'>Csys</a></p>
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_58' href="javascript:toggleSource('58')">Show source</a></p>
+<div id='58' class='ruff_dyn_src'><pre>proc ::tomato::mathcsys::Parse {args} {
+
+    # Transform a list to coordinate system
+    #
+    # args - Options described below.
+    #
+    # The first  value represents the origin \[Tcl list]&lt;br&gt;
+    # The second value represents the Xaxis \[Tcl list]&lt;br&gt;
+    # The third  value represents the Yaxis \[Tcl list]&lt;br&gt;
+    # The fourth value represents the Zaxis \[Tcl list]&lt;br&gt;
+    #
+    # Returns A new coordinate system [Csys]
+
+    if {[llength $args] == 1} {
+
+        if {[llength {*}$args] != 4} {
+            error &quot;must be a list 4 elements...&quot;
+        }
+
+        lassign {*}$args or vx vy vz
+
+        set p  [tomato::mathpt3d::Point3d new $or]
+        set v1 [tomato::mathvec3d::Vector3d new $vx]
+        set v2 [tomato::mathvec3d::Vector3d new $vy]
+        set v3 [tomato::mathvec3d::Vector3d new $vz]
+
+        return [tomato::mathcsys::Csys new $p $v1 $v2 $v3]
+
+    } elseif {[llength $args] == 4} {
+
+        lassign $args or vx vy vz
+
+        set p  [tomato::mathpt3d::Point3d new $or]
+        set v1 [tomato::mathvec3d::Vector3d new $vx]
+        set v2 [tomato::mathvec3d::Vector3d new $vy]
+        set v3 [tomato::mathvec3d::Vector3d new $vz]
+
+        return [tomato::mathcsys::Csys new $p $v1 $v2 $v3]
+
+    } else {
+        error &quot;must be a list of 1 with 4 sub lists or 4 elements...&quot;
+    }
+}</pre></div>
 </div><h4 class='ruffproc'><a name='::tomato::mathcsys::Pitch'>Pitch</a><span class='ns_scope'> [<a href="tomato_tomato_mathcsys.html#::tomato::mathcsys" title="::tomato::mathcsys" class='ruff_cmd'>::tomato::mathcsys</a>]</span><span class='tinylink'><a href='tomato_tomato_mathcsys.html#::tomato::mathcsys'>mathcsys</a>, <a href='#top'>Top</a>, <a href='tomato.html'>Main</a></span></h4>
 <div style='clear:both;'></div>
 <p class='ruff'>Rotates around Y</p>
@@ -954,8 +1029,8 @@ pre {
 <tr><td class='ruff_defitem'><code>av</code></td><td class='ruff_defitem'>Angle  in degrees</td></tr>
 </table>
 <p class='ruff'>Returns A rotated coordinate system <a href="tomato_tomato_mathcsys.html#::tomato::mathcsys::Csys" title="Csys" class='ruff_cmd'>Csys</a></p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_35' href="javascript:toggleSource('35')">Show source</a></p>
-<div id='35' class='ruff_dyn_src'><pre>proc ::tomato::mathcsys::Pitch {av} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_59' href="javascript:toggleSource('59')">Show source</a></p>
+<div id='59' class='ruff_dyn_src'><pre>proc ::tomato::mathcsys::Pitch {av} {
 
     # Rotates around Y
     #
@@ -972,8 +1047,8 @@ pre {
 <tr><td class='ruff_defitem'><code>av</code></td><td class='ruff_defitem'>Angle  in degrees</td></tr>
 </table>
 <p class='ruff'>Returns A rotated coordinate system <a href="tomato_tomato_mathcsys.html#::tomato::mathcsys::Csys" title="Csys" class='ruff_cmd'>Csys</a></p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_36' href="javascript:toggleSource('36')">Show source</a></p>
-<div id='36' class='ruff_dyn_src'><pre>proc ::tomato::mathcsys::Roll {av} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_60' href="javascript:toggleSource('60')">Show source</a></p>
+<div id='60' class='ruff_dyn_src'><pre>proc ::tomato::mathcsys::Roll {av} {
 
     # Rotates around X
     #
@@ -992,8 +1067,8 @@ pre {
 <tr><td class='ruff_defitem'><code>axis</code></td><td class='ruff_defitem'>Input Vector object. Optional, default <code>null</code>.</td></tr>
 </table>
 <p class='ruff'>Returns A rotated coordinate system <a href="tomato_tomato_mathcsys.html#::tomato::mathcsys::Csys" title="Csys" class='ruff_cmd'>Csys</a></p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_37' href="javascript:toggleSource('37')">Show source</a></p>
-<div id='37' class='ruff_dyn_src'><pre>proc ::tomato::mathcsys::RotateTo {fromVector3D toVector3D {axis null}} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_61' href="javascript:toggleSource('61')">Show source</a></p>
+<div id='61' class='ruff_dyn_src'><pre>proc ::tomato::mathcsys::RotateTo {fromVector3D toVector3D {axis null}} {
 
     # Sets to the matrix of rotation that aligns the 'from' vector with the 'to' vector.&lt;br&gt;
     # The optional Axis argument may be used when the two vectors are perpendicular and in opposite directions&lt;br&gt;
@@ -1020,8 +1095,8 @@ pre {
 <tr><td class='ruff_defitem'><code>v</code></td><td class='ruff_defitem'>Vector to rotate about <a href="tomato_tomato_mathvec3d.html#::tomato::mathvec3d::Vector3d" title="mathvec3d::Vector3d" class='ruff_cmd'>mathvec3d::Vector3d</a></td></tr>
 </table>
 <p class='ruff'>Returns A rotating coordinate system <a href="tomato_tomato_mathcsys.html#::tomato::mathcsys::Csys" title="Csys" class='ruff_cmd'>Csys</a></p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_38' href="javascript:toggleSource('38')">Show source</a></p>
-<div id='38' class='ruff_dyn_src'><pre>proc ::tomato::mathcsys::RotationAngleVector {angle v} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_62' href="javascript:toggleSource('62')">Show source</a></p>
+<div id='62' class='ruff_dyn_src'><pre>proc ::tomato::mathcsys::RotationAngleVector {angle v} {
 
     # Creates a rotating coordinate system
     #
@@ -1047,8 +1122,8 @@ pre {
 <tr><td class='ruff_defitem'><code>roll</code></td><td class='ruff_defitem'>Rotates around X (angle in degrees)</td></tr>
 </table>
 <p class='ruff'>Returns A rotated coordinate system <a href="tomato_tomato_mathcsys.html#::tomato::mathcsys::Csys" title="Csys" class='ruff_cmd'>Csys</a></p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_39' href="javascript:toggleSource('39')">Show source</a></p>
-<div id='39' class='ruff_dyn_src'><pre>proc ::tomato::mathcsys::RotationByAngles {yaw pitch roll} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_63' href="javascript:toggleSource('63')">Show source</a></p>
+<div id='63' class='ruff_dyn_src'><pre>proc ::tomato::mathcsys::RotationByAngles {yaw pitch roll} {
 
     # Rotation around Z (yaw) then around Y (pitch) and then around X (roll)
     # http://en.wikipedia.org/wiki/Aircraft_principal_axes
@@ -1076,8 +1151,8 @@ pre {
 <tr><td class='ruff_defitem'><code>coordinateSystem</code></td><td class='ruff_defitem'>A rotated coordinate system <a href="tomato_tomato_mathcsys.html#::tomato::mathcsys::Csys" title="Csys" class='ruff_cmd'>Csys</a></td></tr>
 </table>
 <p class='ruff'>Returns A rotating coordinate system <a href="tomato_tomato_mathcsys.html#::tomato::mathcsys::Csys" title="Csys" class='ruff_cmd'>Csys</a></p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_40' href="javascript:toggleSource('40')">Show source</a></p>
-<div id='40' class='ruff_dyn_src'><pre>proc ::tomato::mathcsys::SetRotationSubMatrix {r coordinateSystem} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_64' href="javascript:toggleSource('64')">Show source</a></p>
+<div id='64' class='ruff_dyn_src'><pre>proc ::tomato::mathcsys::SetRotationSubMatrix {r coordinateSystem} {
 
     # Creates a rotating coordinate system
     #
@@ -1111,8 +1186,8 @@ pre {
 <tr><td class='ruff_defitem'><code>toZAxis</code></td><td class='ruff_defitem'>Input <a href="tomato_tomato_mathvec3d.html#::tomato::mathvec3d::Vector3d" title="mathvec3d::Vector3d" class='ruff_cmd'>mathvec3d::Vector3d</a> object that defines the Z-axis to map the coordinate system to.</td></tr>
 </table>
 <p class='ruff'>Returns A mapping coordinate system <a href="tomato_tomato_mathcsys.html#::tomato::mathcsys::Csys" title="Csys" class='ruff_cmd'>Csys</a></p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_41' href="javascript:toggleSource('41')">Show source</a></p>
-<div id='41' class='ruff_dyn_src'><pre>proc ::tomato::mathcsys::SetToAlignCoordinateSystems {fromOrigin fromXAxis fromYAxis fromZAxis toOrigin toXAxis toYAxis toZAxis} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_65' href="javascript:toggleSource('65')">Show source</a></p>
+<div id='65' class='ruff_dyn_src'><pre>proc ::tomato::mathcsys::SetToAlignCoordinateSystems {fromOrigin fromXAxis fromYAxis fromZAxis toOrigin toXAxis toYAxis toZAxis} {
 
     # Sets this matrix to be the matrix that maps from the 'from' coordinate system to the 'to' coordinate system.
     #
@@ -1141,8 +1216,8 @@ pre {
 <tr><td class='ruff_defitem'><code>translation</code></td><td class='ruff_defitem'>A translation vector <a href="tomato_tomato_mathvec3d.html#::tomato::mathvec3d::Vector3d" title="mathvec3d::Vector3d" class='ruff_cmd'>mathvec3d::Vector3d</a></td></tr>
 </table>
 <p class='ruff'>Returns A translated coordinate system <a href="tomato_tomato_mathcsys.html#::tomato::mathcsys::Csys" title="Csys" class='ruff_cmd'>Csys</a></p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_42' href="javascript:toggleSource('42')">Show source</a></p>
-<div id='42' class='ruff_dyn_src'><pre>proc ::tomato::mathcsys::Translation {translation} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_66' href="javascript:toggleSource('66')">Show source</a></p>
+<div id='66' class='ruff_dyn_src'><pre>proc ::tomato::mathcsys::Translation {translation} {
 
     # Creates a translation.
     #
@@ -1159,8 +1234,8 @@ pre {
 <tr><td class='ruff_defitem'><code>av</code></td><td class='ruff_defitem'>Angle  in degrees</td></tr>
 </table>
 <p class='ruff'>Returns A rotated coordinate system <a href="tomato_tomato_mathcsys.html#::tomato::mathcsys::Csys" title="Csys" class='ruff_cmd'>Csys</a></p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_43' href="javascript:toggleSource('43')">Show source</a></p>
-<div id='43' class='ruff_dyn_src'><pre>proc ::tomato::mathcsys::Yaw {av} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_67' href="javascript:toggleSource('67')">Show source</a></p>
+<div id='67' class='ruff_dyn_src'><pre>proc ::tomato::mathcsys::Yaw {av} {
 
     # Rotates around Z
     #
@@ -1172,6 +1247,7 @@ pre {
 </div></div></div><div class='yui-b navbox' ><h1><a style='padding-top:2px;' href='tomato.html'>Start page</a></h1>
 <hr>
 <h1><a href='tomato_tomato_helper.html'>tomato::helper</a></h1>
+<h1><a href='tomato_tomato_mathtriangle.html'>tomato::mathtriangle</a></h1>
 <h1><a style='color: #006666;background-color: white; margin-left:-4px; padding-left:3px;padding-right:2px;' href='tomato_tomato_mathcsys.html'>tomato::mathcsys</a></h1>
 <h1><a href='tomato_tomato_mathquat.html'>tomato::mathquat</a></h1>
 <h1><a href='tomato_tomato_mathline3d.html'>tomato::mathline3d</a></h1>
@@ -1200,12 +1276,14 @@ pre {
 </span></h4><h4 class='tooltip'><a href='tomato_tomato_mathcsys.html#::tomato::mathcsys::Csys::TransformBy'>TransformBy</a><span class='tooltiptext'>Transforms...
 </span></h4><h4 class='tooltip'><a href='tomato_tomato_mathcsys.html#::tomato::mathcsys::Csys::TransformFromCoordSys'>TransformFromCoordSys</a><span class='tooltiptext'>Transforms entity according to the inverse of this change matrix
 </span></h4><h4 class='tooltip'><a href='tomato_tomato_mathcsys.html#::tomato::mathcsys::Csys::TransformToCoordSys'>TransformToCoordSys</a><span class='tooltiptext'>Transforms entity according to this change matrix
+</span></h4><h4 class='tooltip'><a href='tomato_tomato_mathcsys.html#::tomato::mathcsys::Csys::TranslateCsys'>TranslateCsys</a><span class='tooltiptext'>Translates a coordinate system follow vector and distance
 </span></h4><h4 class='tooltip'><a href='tomato_tomato_mathcsys.html#::tomato::mathcsys::Csys::XAxis'>XAxis</a><span class='tooltiptext'>Gets the X Axis
 </span></h4><h4 class='tooltip'><a href='tomato_tomato_mathcsys.html#::tomato::mathcsys::Csys::YAxis'>YAxis</a><span class='tooltiptext'>Gets the Y Axis
 </span></h4><h4 class='tooltip'><a href='tomato_tomato_mathcsys.html#::tomato::mathcsys::Csys::ZAxis'>ZAxis</a><span class='tooltiptext'>Gets the Z Axis
 </span></h4><h2><a href='#::tomato::mathcsys-Commands'>Commands</a></h2><h4 class='tooltip'><a href='tomato_tomato_mathcsys.html#::tomato::mathcsys::CreateMappingCoordinateSystem'>CreateMappingCoordinateSystem</a><span class='tooltiptext'>Creates a coordinate system that maps from the 'from' coordinate system to the 'to' coordinate system.
 </span></h4><h4 class='tooltip'><a href='tomato_tomato_mathcsys.html#::tomato::mathcsys::Equals'>Equals</a><span class='tooltiptext'>Indicate if this coordinate system is equivalent to a another coordinate system
 </span></h4><h4 class='tooltip'><a href='tomato_tomato_mathcsys.html#::tomato::mathcsys::GetRotationSubMatrix'>GetRotationSubMatrix</a><span class='tooltiptext'>Gets a rotation submatrix from a coordinate system
+</span></h4><h4 class='tooltip'><a href='tomato_tomato_mathcsys.html#::tomato::mathcsys::Parse'>Parse</a><span class='tooltiptext'>Transform a list to coordinate system
 </span></h4><h4 class='tooltip'><a href='tomato_tomato_mathcsys.html#::tomato::mathcsys::Pitch'>Pitch</a><span class='tooltiptext'>Rotates around Y
 </span></h4><h4 class='tooltip'><a href='tomato_tomato_mathcsys.html#::tomato::mathcsys::Roll'>Roll</a><span class='tooltiptext'>Rotates around X
 </span></h4><h4 class='tooltip'><a href='tomato_tomato_mathcsys.html#::tomato::mathcsys::RotateTo'>RotateTo</a><span class='tooltiptext'>Sets to the matrix of rotation that aligns the 'from' vector with the 'to' vector.<br> The optional Axis argument may be used when the two vectors are perpendicular and in opposite directions<br> to specify a specific solution, but is otherwise ignored.<br>
