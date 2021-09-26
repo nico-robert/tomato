@@ -414,8 +414,8 @@ tomato::mathquat::Quaternion new -axis {0 1 0} -angle 90
 tomato::mathquat::Quaternion new
 &gt; (1 +0i +0j +0k)
 </pre>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_44' href="javascript:toggleSource('44')">Show source</a></p>
-<div id='44' class='ruff_dyn_src'><pre>method constructor {args} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_68' href="javascript:toggleSource('68')">Show source</a></p>
+<div id='68' class='ruff_dyn_src'><pre>method constructor {args} {
 
     # Initializes a new Quaternion Class.
     #
@@ -594,8 +594,8 @@ tomato::mathquat::Quaternion new
 <tr><td class='ruff_defitem'><code>scalar</code></td><td class='ruff_defitem'>A double value.</td></tr>
 </table>
 <p class='ruff'>Returns true if the quaternions are not the same if <code>$entity</code> is a quaternion or True if the real part of the quaternion is not equal to the double and the rest of the quaternion is almost 0. Otherwise false.</p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_45' href="javascript:toggleSource('45')">Show source</a></p>
-<div id='45' class='ruff_dyn_src'><pre>method != {entity {tolerance {$::tomato::helper::Epsilon}}} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_69' href="javascript:toggleSource('69')">Show source</a></p>
+<div id='69' class='ruff_dyn_src'><pre>method != {entity {tolerance {$::tomato::helper::Epsilon}}} {
 
     # Inequality operator for two quaternions if $entity is quaternion component.
     # Inequality operator for quaternion and double if $entity is double.
@@ -624,8 +624,8 @@ tomato::mathquat::Quaternion new
 <tr><td class='ruff_defitem'><code>scalar</code></td><td class='ruff_defitem'>A double value.</td></tr>
 </table>
 <p class='ruff'>Returns A new quaternion <a href="tomato_tomato_mathquat.html#::tomato::mathquat::Quaternion" title="Quaternion" class='ruff_cmd'>Quaternion</a>.</p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_46' href="javascript:toggleSource('46')">Show source</a></p>
-<div id='46' class='ruff_dyn_src'><pre>method * {entity} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_70' href="javascript:toggleSource('70')">Show source</a></p>
+<div id='70' class='ruff_dyn_src'><pre>method * {entity} {
 
     # Multiply a floating point number with a quaternion, if $entity is double
     # or Multiply a quaternion with a quaternion, if $entity is an Quaternion object.
@@ -660,8 +660,8 @@ tomato::mathquat::Quaternion new
 <tr><td class='ruff_defitem'><code>scalar</code></td><td class='ruff_defitem'>A double value.</td></tr>
 </table>
 <p class='ruff'>Returns A quaternion whose real value is increased by a scalar if <code>$entity</code> is double value or <br> the sum of two quaternions <a href="tomato_tomato_mathquat.html#::tomato::mathquat::Quaternion" title="Quaternion" class='ruff_cmd'>Quaternion</a> if <code>$entity</code> is a quaternion object.</p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_47' href="javascript:toggleSource('47')">Show source</a></p>
-<div id='47' class='ruff_dyn_src'><pre>method + {entity} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_71' href="javascript:toggleSource('71')">Show source</a></p>
+<div id='71' class='ruff_dyn_src'><pre>method + {entity} {
 
     # Add a floating point number to a quaternion, if $entity is double
     # or Add a quaternion to a quaternion, if $entity is an Quaternion object.
@@ -691,8 +691,8 @@ tomato::mathquat::Quaternion new
 <tr><td class='ruff_defitem'><code>scalar</code></td><td class='ruff_defitem'>A double value.</td></tr>
 </table>
 <p class='ruff'>Returns A quaternion whose real value is discreased by a scalar if <code>$entity</code> is double value or <br> the quaternion <a href="tomato_tomato_mathquat.html#::tomato::mathquat::Quaternion" title="Quaternion" class='ruff_cmd'>Quaternion</a> difference if <code>$entity</code> is a quaternion object.</p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_48' href="javascript:toggleSource('48')">Show source</a></p>
-<div id='48' class='ruff_dyn_src'><pre>method - {entity} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_72' href="javascript:toggleSource('72')">Show source</a></p>
+<div id='72' class='ruff_dyn_src'><pre>method - {entity} {
 
     # Subtract a floating point number from a quaternion, if $entity is double
     # or Subtract a quaternion from a quaternion, if $entity is an Quaternion object.
@@ -722,8 +722,8 @@ tomato::mathquat::Quaternion new
 <tr><td class='ruff_defitem'><code>scalar</code></td><td class='ruff_defitem'>A double value.</td></tr>
 </table>
 <p class='ruff'>Returns A new divided quaternion <a href="tomato_tomato_mathquat.html#::tomato::mathquat::Quaternion" title="Quaternion" class='ruff_cmd'>Quaternion</a>.</p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_49' href="javascript:toggleSource('49')">Show source</a></p>
-<div id='49' class='ruff_dyn_src'><pre>method / {entity} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_73' href="javascript:toggleSource('73')">Show source</a></p>
+<div id='73' class='ruff_dyn_src'><pre>method / {entity} {
 
     # Divide a quaternion by a floating point number, if $entity is double
     # or Divide a quaternion by a quaternion, if $entity is an Quaternion object.
@@ -769,8 +769,8 @@ tomato::mathquat::Quaternion new
 <tr><td class='ruff_defitem'><code>scalar</code></td><td class='ruff_defitem'>A double value.</td></tr>
 </table>
 <p class='ruff'>Returns true if the quaternions are the same if <code>$entity</code> is a quaternion or True if the real part of the quaternion is almost equal to the double and the rest of the quaternion is almost 0. Otherwise false.</p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_50' href="javascript:toggleSource('50')">Show source</a></p>
-<div id='50' class='ruff_dyn_src'><pre>method == {entity {tolerance {$::tomato::helper::Epsilon}}} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_74' href="javascript:toggleSource('74')">Show source</a></p>
+<div id='74' class='ruff_dyn_src'><pre>method == {entity {tolerance {$::tomato::helper::Epsilon}}} {
 
     # Equality operator for two quaternions if $entity is quaternion component.
     # Equality operator for quaternion and double if $entity is double.
@@ -808,8 +808,8 @@ tomato::mathquat::Quaternion new
 <tr><td class='ruff_defitem'><code>entity</code></td><td class='ruff_defitem'>A double value.</td></tr>
 </table>
 <p class='ruff'>Returns A new quaternion <a href="tomato_tomato_mathquat.html#::tomato::mathquat::Quaternion" title="Quaternion" class='ruff_cmd'>Quaternion</a>.</p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_51' href="javascript:toggleSource('51')">Show source</a></p>
-<div id='51' class='ruff_dyn_src'><pre>method ^ {entity} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_75' href="javascript:toggleSource('75')">Show source</a></p>
+<div id='75' class='ruff_dyn_src'><pre>method ^ {entity} {
 
     # Raise a quaternion to a floating point number.
     #
@@ -823,8 +823,8 @@ tomato::mathquat::Quaternion new
 <p class='ruff'>Gets the angle (in radians) describing the magnitude of the quaternion rotation about it's rotation axis.</p>
 <div class='ruff_synopsis'><span class='ruff_cmd'>OBJECT Angle</span> </div>
 <p class='ruff'>Returns A real number in the range (-pi:pi) describing the angle of rotation in radians about a Quaternion object's axis of rotation</p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_52' href="javascript:toggleSource('52')">Show source</a></p>
-<div id='52' class='ruff_dyn_src'><pre>method Angle {} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_76' href="javascript:toggleSource('76')">Show source</a></p>
+<div id='76' class='ruff_dyn_src'><pre>method Angle {} {
 
     # Gets the angle (in radians) describing the magnitude of the quaternion rotation about it's rotation axis.
     #
@@ -844,8 +844,8 @@ tomato::mathquat::Quaternion new
 <div style='clear:both;'></div>
 <p class='ruff'>Gets the argument phi = arg(q) of the quaternion q, such that q = r<em>(cos(phi) + <br> u</em>sin(phi)) = r<em>exp(phi</em>u) where r is the absolute and u the unit vector of <br> q.</p>
 <div class='ruff_synopsis'><span class='ruff_cmd'>OBJECT Arg</span> </div>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_53' href="javascript:toggleSource('53')">Show source</a></p>
-<div id='53' class='ruff_dyn_src'><pre>method Arg {} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_77' href="javascript:toggleSource('77')">Show source</a></p>
+<div id='77' class='ruff_dyn_src'><pre>method Arg {} {
 
     # Gets the argument phi = arg(q) of the quaternion q, such that q = r*(cos(phi) + &lt;br&gt;
     # u*sin(phi)) = r*exp(phi*u) where r is the absolute and u the unit vector of &lt;br&gt;
@@ -857,8 +857,8 @@ tomato::mathquat::Quaternion new
 <p class='ruff'>Conjugate this quaternion.</p>
 <div class='ruff_synopsis'><span class='ruff_cmd'>OBJECT Conjugate</span> </div>
 <p class='ruff'>Returns A new conjugated quaternion <a href="tomato_tomato_mathquat.html#::tomato::mathquat::Quaternion" title="Quaternion" class='ruff_cmd'>Quaternion</a></p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_54' href="javascript:toggleSource('54')">Show source</a></p>
-<div id='54' class='ruff_dyn_src'><pre>method Conjugate {} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_78' href="javascript:toggleSource('78')">Show source</a></p>
+<div id='78' class='ruff_dyn_src'><pre>method Conjugate {} {
 
     # Conjugate this quaternion.
     #
@@ -873,8 +873,8 @@ tomato::mathquat::Quaternion new
 <tr><td class='ruff_defitem'><code>q</code></td><td class='ruff_defitem'>A Quaternion component.</td></tr>
 </table>
 <p class='ruff'>Returns The distance between two quaternions.</p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_55' href="javascript:toggleSource('55')">Show source</a></p>
-<div id='55' class='ruff_dyn_src'><pre>method Distance {q} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_79' href="javascript:toggleSource('79')">Show source</a></p>
+<div id='79' class='ruff_dyn_src'><pre>method Distance {q} {
 
     # Gets the distance |a-b| of two quaternions, forming a metric space.
     #
@@ -888,8 +888,8 @@ tomato::mathquat::Quaternion new
 <p class='ruff'>Exponential Function.</p>
 <div class='ruff_synopsis'><span class='ruff_cmd'>OBJECT Exp</span> </div>
 <p class='ruff'>Returns A new quaternion <a href="tomato_tomato_mathquat.html#::tomato::mathquat::Quaternion" title="Quaternion" class='ruff_cmd'>Quaternion</a></p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_56' href="javascript:toggleSource('56')">Show source</a></p>
-<div id='56' class='ruff_dyn_src'><pre>method Exp {} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_80' href="javascript:toggleSource('80')">Show source</a></p>
+<div id='80' class='ruff_dyn_src'><pre>method Exp {} {
 
     # Exponential Function.
     #
@@ -909,8 +909,8 @@ tomato::mathquat::Quaternion new
 <div style='clear:both;'></div>
 <p class='ruff'>Gets values from the Quaternion Class under TCL list form.</p>
 <div class='ruff_synopsis'><span class='ruff_cmd'>OBJECT Get</span> </div>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_57' href="javascript:toggleSource('57')">Show source</a></p>
-<div id='57' class='ruff_dyn_src'><pre>method Get {} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_81' href="javascript:toggleSource('81')">Show source</a></p>
+<div id='81' class='ruff_dyn_src'><pre>method Get {} {
 
     # Gets values from the Quaternion Class under TCL list form.
     return [list $_x $_y $_z $_w]
@@ -919,8 +919,8 @@ tomato::mathquat::Quaternion new
 <div style='clear:both;'></div>
 <p class='ruff'>Gets the name of class.</p>
 <div class='ruff_synopsis'><span class='ruff_cmd'>OBJECT GetType</span> </div>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_58' href="javascript:toggleSource('58')">Show source</a></p>
-<div id='58' class='ruff_dyn_src'><pre>method GetType {} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_82' href="javascript:toggleSource('82')">Show source</a></p>
+<div id='82' class='ruff_dyn_src'><pre>method GetType {} {
 
     # Gets the name of class.
     return [tomato::helper::TypeClass [self]]
@@ -929,8 +929,8 @@ tomato::mathquat::Quaternion new
 <div style='clear:both;'></div>
 <p class='ruff'>Gets the imaginary X part (coefficient of complex I) of the quaternion.</p>
 <div class='ruff_synopsis'><span class='ruff_cmd'>OBJECT ImagX</span> </div>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_59' href="javascript:toggleSource('59')">Show source</a></p>
-<div id='59' class='ruff_dyn_src'><pre>method ImagX {} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_83' href="javascript:toggleSource('83')">Show source</a></p>
+<div id='83' class='ruff_dyn_src'><pre>method ImagX {} {
 
     # Gets the imaginary X part (coefficient of complex I) of the quaternion.
     return $_x
@@ -939,8 +939,8 @@ tomato::mathquat::Quaternion new
 <div style='clear:both;'></div>
 <p class='ruff'>Gets the imaginary Y part (coefficient of complex J) of the quaternion.</p>
 <div class='ruff_synopsis'><span class='ruff_cmd'>OBJECT ImagY</span> </div>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_60' href="javascript:toggleSource('60')">Show source</a></p>
-<div id='60' class='ruff_dyn_src'><pre>method ImagY {} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_84' href="javascript:toggleSource('84')">Show source</a></p>
+<div id='84' class='ruff_dyn_src'><pre>method ImagY {} {
 
     # Gets the imaginary Y part (coefficient of complex J) of the quaternion.
     return $_y
@@ -949,8 +949,8 @@ tomato::mathquat::Quaternion new
 <div style='clear:both;'></div>
 <p class='ruff'>Gets the imaginary Z part (coefficient of complex K) of the quaternion.</p>
 <div class='ruff_synopsis'><span class='ruff_cmd'>OBJECT ImagZ</span> </div>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_61' href="javascript:toggleSource('61')">Show source</a></p>
-<div id='61' class='ruff_dyn_src'><pre>method ImagZ {} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_85' href="javascript:toggleSource('85')">Show source</a></p>
+<div id='85' class='ruff_dyn_src'><pre>method ImagZ {} {
 
     # Gets the imaginary Z part (coefficient of complex K) of the quaternion.
     return $_z
@@ -959,8 +959,8 @@ tomato::mathquat::Quaternion new
 <div style='clear:both;'></div>
 <p class='ruff'>Gets an inverted quaternion. Inversing Zero returns Zero</p>
 <div class='ruff_synopsis'><span class='ruff_cmd'>OBJECT Inversed</span> </div>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_62' href="javascript:toggleSource('62')">Show source</a></p>
-<div id='62' class='ruff_dyn_src'><pre>method Inversed {} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_86' href="javascript:toggleSource('86')">Show source</a></p>
+<div id='86' class='ruff_dyn_src'><pre>method Inversed {} {
 
     # Gets an inverted quaternion. Inversing Zero returns Zero
     if {[[self] == $::tomato::mathquat::Zero]} {
@@ -974,8 +974,8 @@ tomato::mathquat::Quaternion new
 <div style='clear:both;'></div>
 <p class='ruff'>Gets a value indicating whether the quaternion is not a number</p>
 <div class='ruff_synopsis'><span class='ruff_cmd'>OBJECT IsInfinity</span> </div>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_63' href="javascript:toggleSource('63')">Show source</a></p>
-<div id='63' class='ruff_dyn_src'><pre>method IsInfinity {} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_87' href="javascript:toggleSource('87')">Show source</a></p>
+<div id='87' class='ruff_dyn_src'><pre>method IsInfinity {} {
 
     # Gets a value indicating whether the quaternion is not a number
     foreach value [my Get] {
@@ -989,8 +989,8 @@ tomato::mathquat::Quaternion new
 <div style='clear:both;'></div>
 <p class='ruff'>Gets a value indicating whether the quaternion is not a number</p>
 <div class='ruff_synopsis'><span class='ruff_cmd'>OBJECT IsNan</span> </div>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_64' href="javascript:toggleSource('64')">Show source</a></p>
-<div id='64' class='ruff_dyn_src'><pre>method IsNan {} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_88' href="javascript:toggleSource('88')">Show source</a></p>
+<div id='88' class='ruff_dyn_src'><pre>method IsNan {} {
 
     # Gets a value indicating whether the quaternion is not a number
     foreach value [my Get] {
@@ -1004,8 +1004,8 @@ tomato::mathquat::Quaternion new
 <div style='clear:both;'></div>
 <p class='ruff'>Gets a value indicating whether the quaternion q has length |q| = 1. To normalize a quaternion to a length of 1, use the <a href="tomato_tomato_mathquat.html#::tomato::mathquat::Quaternion::Normalized" title="Normalized" class='ruff_cmd'>Normalized</a> method. All unit quaternions form a 3-sphere.</p>
 <div class='ruff_synopsis'><span class='ruff_cmd'>OBJECT IsUnitQuaternion</span> </div>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_65' href="javascript:toggleSource('65')">Show source</a></p>
-<div id='65' class='ruff_dyn_src'><pre>method IsUnitQuaternion {} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_89' href="javascript:toggleSource('89')">Show source</a></p>
+<div id='89' class='ruff_dyn_src'><pre>method IsUnitQuaternion {} {
 
     # Gets a value indicating whether the quaternion q has length |q| = 1.
     # To normalize a quaternion to a length of 1, use the [Normalized] method.
@@ -1020,8 +1020,8 @@ tomato::mathquat::Quaternion new
 <tr><td class='ruff_defitem'><code>lbase</code></td><td class='ruff_defitem'>A base Optional, default <code>&quot;&quot;</code>.</td></tr>
 </table>
 <p class='ruff'>Returns A new quaternion <a href="tomato_tomato_mathquat.html#::tomato::mathquat::Quaternion" title="Quaternion" class='ruff_cmd'>Quaternion</a></p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_66' href="javascript:toggleSource('66')">Show source</a></p>
-<div id='66' class='ruff_dyn_src'><pre>method Log {{lbase {}}} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_90' href="javascript:toggleSource('90')">Show source</a></p>
+<div id='90' class='ruff_dyn_src'><pre>method Log {{lbase {}}} {
 
     # Logarithm to a given base.
     #
@@ -1044,8 +1044,8 @@ tomato::mathquat::Quaternion new
 <p class='ruff'>Common Logarithm to base 10.</p>
 <div class='ruff_synopsis'><span class='ruff_cmd'>OBJECT Log10</span> </div>
 <p class='ruff'>Returns A new quaternion</p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_67' href="javascript:toggleSource('67')">Show source</a></p>
-<div id='67' class='ruff_dyn_src'><pre>method Log10 {} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_91' href="javascript:toggleSource('91')">Show source</a></p>
+<div id='91' class='ruff_dyn_src'><pre>method Log10 {} {
 
     # Common Logarithm to base 10.
     #
@@ -1057,8 +1057,8 @@ tomato::mathquat::Quaternion new
 <p class='ruff'>Negate a quaternion.</p>
 <div class='ruff_synopsis'><span class='ruff_cmd'>OBJECT Negate</span> </div>
 <p class='ruff'>Returns A negated quaternion <a href="tomato_tomato_mathquat.html#::tomato::mathquat::Quaternion" title="Quaternion" class='ruff_cmd'>Quaternion</a>.</p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_68' href="javascript:toggleSource('68')">Show source</a></p>
-<div id='68' class='ruff_dyn_src'><pre>method Negate {} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_92' href="javascript:toggleSource('92')">Show source</a></p>
+<div id='92' class='ruff_dyn_src'><pre>method Negate {} {
 
     # Negate a quaternion.
     #
@@ -1069,8 +1069,8 @@ tomato::mathquat::Quaternion new
 <div style='clear:both;'></div>
 <p class='ruff'>Gets the norm of the quaternion q: square root of the sum of the squares of the four components.</p>
 <div class='ruff_synopsis'><span class='ruff_cmd'>OBJECT Norm</span> </div>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_69' href="javascript:toggleSource('69')">Show source</a></p>
-<div id='69' class='ruff_dyn_src'><pre>method Norm {} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_93' href="javascript:toggleSource('93')">Show source</a></p>
+<div id='93' class='ruff_dyn_src'><pre>method Norm {} {
 
     # Gets the norm of the quaternion q: square root of the sum of the squares of the four components.
     return [expr {sqrt([my NormSquared])}]
@@ -1079,8 +1079,8 @@ tomato::mathquat::Quaternion new
 <div style='clear:both;'></div>
 <p class='ruff'>Gets a new normalized Quaternion q with the direction of this quaternion.</p>
 <div class='ruff_synopsis'><span class='ruff_cmd'>OBJECT Normalized</span> </div>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_70' href="javascript:toggleSource('70')">Show source</a></p>
-<div id='70' class='ruff_dyn_src'><pre>method Normalized {} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_94' href="javascript:toggleSource('94')">Show source</a></p>
+<div id='94' class='ruff_dyn_src'><pre>method Normalized {} {
 
     # Gets a new normalized Quaternion q with the direction of this quaternion.
     return [expr {[[self] == $::tomato::mathquat::Zero] ? [self] : [tomato::mathquat::ToUnitQuaternion $_w $_x $_y $_z]}]
@@ -1089,8 +1089,8 @@ tomato::mathquat::Quaternion new
 <div style='clear:both;'></div>
 <p class='ruff'>Gets a new normalized Quaternion u with the Vector part only, such that ||u|| = 1.</p>
 <div class='ruff_synopsis'><span class='ruff_cmd'>OBJECT NormalizedVector</span> </div>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_71' href="javascript:toggleSource('71')">Show source</a></p>
-<div id='71' class='ruff_dyn_src'><pre>method NormalizedVector {} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_95' href="javascript:toggleSource('95')">Show source</a></p>
+<div id='95' class='ruff_dyn_src'><pre>method NormalizedVector {} {
 
     # Gets a new normalized Quaternion u with the Vector part only, such that ||u|| = 1.
     return [tomato::mathquat::ToUnitQuaternion 0 $_x $_y $_z]
@@ -1099,8 +1099,8 @@ tomato::mathquat::Quaternion new
 <div style='clear:both;'></div>
 <p class='ruff'>Gets the sum of the squares of the four components.</p>
 <div class='ruff_synopsis'><span class='ruff_cmd'>OBJECT NormSquared</span> </div>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_72' href="javascript:toggleSource('72')">Show source</a></p>
-<div id='72' class='ruff_dyn_src'><pre>method NormSquared {} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_96' href="javascript:toggleSource('96')">Show source</a></p>
+<div id='96' class='ruff_dyn_src'><pre>method NormSquared {} {
 
     # Gets the sum of the squares of the four components.
     return [tomato::mathquat::ToNormSquared $_w $_x $_y $_z]
@@ -1109,8 +1109,8 @@ tomato::mathquat::Quaternion new
 <div style='clear:both;'></div>
 <p class='ruff'>Gets the real part of the quaternion.</p>
 <div class='ruff_synopsis'><span class='ruff_cmd'>OBJECT Real</span> </div>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_73' href="javascript:toggleSource('73')">Show source</a></p>
-<div id='73' class='ruff_dyn_src'><pre>method Real {} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_97' href="javascript:toggleSource('97')">Show source</a></p>
+<div id='97' class='ruff_dyn_src'><pre>method Real {} {
 
     # Gets the real part of the quaternion.
     return $_w
@@ -1125,8 +1125,8 @@ tomato::mathquat::Quaternion new
 <tr><td class='ruff_defitem'><code>vector</code></td><td class='ruff_defitem'>A vector object.</td></tr>
 </table>
 <p class='ruff'>Returns The rotated vector or point returned as the same type it was specified at input</p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_74' href="javascript:toggleSource('74')">Show source</a></p>
-<div id='74' class='ruff_dyn_src'><pre>method Rotate {entity} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_98' href="javascript:toggleSource('98')">Show source</a></p>
+<div id='98' class='ruff_dyn_src'><pre>method Rotate {entity} {
 
     # Rotate a 3D vector or 3D point by the rotation stored in the Quaternion object
     #
@@ -1175,8 +1175,8 @@ tomato::mathquat::Quaternion new
 <tr><td class='ruff_defitem'><code>rotation</code></td><td class='ruff_defitem'>The rotation quaternion to rotate.</td></tr>
 </table>
 <p class='ruff'>Returns A rotated quaternion <a href="tomato_tomato_mathquat.html#::tomato::mathquat::Quaternion" title="Quaternion" class='ruff_cmd'>Quaternion</a>.</p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_75' href="javascript:toggleSource('75')">Show source</a></p>
-<div id='75' class='ruff_dyn_src'><pre>method RotateRotationQuaternion {rotation} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_99' href="javascript:toggleSource('99')">Show source</a></p>
+<div id='99' class='ruff_dyn_src'><pre>method RotateRotationQuaternion {rotation} {
 
     # Rotates the provided rotation quaternion with this quaternion.
     #
@@ -1197,8 +1197,8 @@ tomato::mathquat::Quaternion new
 <tr><td class='ruff_defitem'><code>unitQuaternion</code></td><td class='ruff_defitem'>The rotation quaternion to rotate.</td></tr>
 </table>
 <p class='ruff'>Returns A rotated quaternion <a href="tomato_tomato_mathquat.html#::tomato::mathquat::Quaternion" title="Quaternion" class='ruff_cmd'>Quaternion</a>.</p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_76' href="javascript:toggleSource('76')">Show source</a></p>
-<div id='76' class='ruff_dyn_src'><pre>method RotateUnitQuaternion {unitQuaternion} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_100' href="javascript:toggleSource('100')">Show source</a></p>
+<div id='100' class='ruff_dyn_src'><pre>method RotateUnitQuaternion {unitQuaternion} {
 
     # Rotates the provided unit quaternion with this quaternion.
     #
@@ -1219,8 +1219,8 @@ tomato::mathquat::Quaternion new
 <div style='clear:both;'></div>
 <p class='ruff'>Gets a new Quaternion q with the Scalar part only.</p>
 <div class='ruff_synopsis'><span class='ruff_cmd'>OBJECT Scalar</span> </div>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_77' href="javascript:toggleSource('77')">Show source</a></p>
-<div id='77' class='ruff_dyn_src'><pre>method Scalar {} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_101' href="javascript:toggleSource('101')">Show source</a></p>
+<div id='101' class='ruff_dyn_src'><pre>method Scalar {} {
 
     # Gets a new Quaternion q with the Scalar part only.
     return [tomato::mathquat::Quaternion new $_w 0 0 0]
@@ -1230,8 +1230,8 @@ tomato::mathquat::Quaternion new
 <p class='ruff'>Square root of the Quaternion: q^(1/2).</p>
 <div class='ruff_synopsis'><span class='ruff_cmd'>OBJECT Sqrt</span> </div>
 <p class='ruff'>Returns A new quaternion <a href="tomato_tomato_mathquat.html#::tomato::mathquat::Quaternion" title="Quaternion" class='ruff_cmd'>Quaternion</a></p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_78' href="javascript:toggleSource('78')">Show source</a></p>
-<div id='78' class='ruff_dyn_src'><pre>method Sqrt {} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_102' href="javascript:toggleSource('102')">Show source</a></p>
+<div id='102' class='ruff_dyn_src'><pre>method Sqrt {} {
 
     # Square root of the Quaternion: q^(1/2).
     #
@@ -1245,8 +1245,8 @@ tomato::mathquat::Quaternion new
 <p class='ruff'>Returns a string representation of this object.</p>
 <div class='ruff_synopsis'><span class='ruff_cmd'>OBJECT ToString</span> </div>
 <p class='ruff'>Returns a string representation of this object.</p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_79' href="javascript:toggleSource('79')">Show source</a></p>
-<div id='79' class='ruff_dyn_src'><pre>method ToString {} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_103' href="javascript:toggleSource('103')">Show source</a></p>
+<div id='103' class='ruff_dyn_src'><pre>method ToString {} {
 
     # Returns a string representation of this object.
 
@@ -1262,8 +1262,8 @@ tomato::mathquat::Quaternion new
 <p class='ruff'>Gets the Vector part only.</p>
 <div class='ruff_synopsis'><span class='ruff_cmd'>OBJECT ToVector3D</span> </div>
 <p class='ruff'>Returns A new vector3d <a href="tomato_tomato_mathvec3d.html#::tomato::mathvec3d::Vector3d" title="mathvec3d::Vector3d" class='ruff_cmd'>mathvec3d::Vector3d</a></p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_80' href="javascript:toggleSource('80')">Show source</a></p>
-<div id='80' class='ruff_dyn_src'><pre>method ToVector3D {} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_104' href="javascript:toggleSource('104')">Show source</a></p>
+<div id='104' class='ruff_dyn_src'><pre>method ToVector3D {} {
 
     # Gets the Vector part only.
     #
@@ -1274,8 +1274,8 @@ tomato::mathquat::Quaternion new
 <div style='clear:both;'></div>
 <p class='ruff'>Gets a new Quaternion q with the Vector part only.</p>
 <div class='ruff_synopsis'><span class='ruff_cmd'>OBJECT Vector</span> </div>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_81' href="javascript:toggleSource('81')">Show source</a></p>
-<div id='81' class='ruff_dyn_src'><pre>method Vector {} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_105' href="javascript:toggleSource('105')">Show source</a></p>
+<div id='105' class='ruff_dyn_src'><pre>method Vector {} {
 
     # Gets a new Quaternion q with the Vector part only.
     return [tomato::mathquat::Quaternion new 0 $_x $_y $_z]
@@ -1291,8 +1291,8 @@ tomato::mathquat::Quaternion new
 <tr><td class='ruff_defitem'><code>q1</code></td><td class='ruff_defitem'>Second quaternion component</td></tr>
 </table>
 <p class='ruff'>Returns the dot product.</p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_82' href="javascript:toggleSource('82')">Show source</a></p>
-<div id='82' class='ruff_dyn_src'><pre>proc ::tomato::mathquat::Dot {q0 q1} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_106' href="javascript:toggleSource('106')">Show source</a></p>
+<div id='106' class='ruff_dyn_src'><pre>proc ::tomato::mathquat::Dot {q0 q1} {
 
     # Dot Product between 2 quaternions
     #
@@ -1319,8 +1319,8 @@ tomato::mathquat::Quaternion new
 <p class='ruff'>See : methods == !=</p>
 <p class='ruff'>An error exception is raised if tolerance (epsilon) &lt; 0.</p>
 <p class='ruff'>Returns true if the quaternions are equal, otherwise false.</p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_83' href="javascript:toggleSource('83')">Show source</a></p>
-<div id='83' class='ruff_dyn_src'><pre>proc ::tomato::mathquat::Equals {quaternion other tolerance} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_107' href="javascript:toggleSource('107')">Show source</a></p>
+<div id='107' class='ruff_dyn_src'><pre>proc ::tomato::mathquat::Equals {quaternion other tolerance} {
 
     # Indicate if this quaternion is equivalent to a given quaternion
     #
@@ -1358,8 +1358,8 @@ tomato::mathquat::Quaternion new
 <tr><td class='ruff_defitem'><code>power</code></td><td class='ruff_defitem'>A double, integer or quaternion value.</td></tr>
 </table>
 <p class='ruff'>Returns The quaternion <a href="tomato_tomato_mathquat.html#::tomato::mathquat::Quaternion" title="Quaternion" class='ruff_cmd'>Quaternion</a> raised to a power of another quaternion</p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_84' href="javascript:toggleSource('84')">Show source</a></p>
-<div id='84' class='ruff_dyn_src'><pre>proc ::tomato::mathquat::Pow {q power} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_108' href="javascript:toggleSource('108')">Show source</a></p>
+<div id='108' class='ruff_dyn_src'><pre>proc ::tomato::mathquat::Pow {q power} {
 
     # Raise the quaternion to a given power.
     #
@@ -1406,8 +1406,8 @@ tomato::mathquat::Quaternion new
 <tr><td class='ruff_defitem'><code>arcposition</code></td><td class='ruff_defitem'>interpolation parameter between 0 and 1. This describes the linear placement position of <br> the result along the arc between endpoints; 0 being at <code>q0</code> and 1 being at <code>q1</code>. Optional, default <code>0.5</code>.</td></tr>
 </table>
 <p class='ruff'>Returns A new Quaternion object representing the interpolated rotation</p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_85' href="javascript:toggleSource('85')">Show source</a></p>
-<div id='85' class='ruff_dyn_src'><pre>proc ::tomato::mathquat::Slerp {q0 q1 {arcposition 0.5}} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_109' href="javascript:toggleSource('109')">Show source</a></p>
+<div id='109' class='ruff_dyn_src'><pre>proc ::tomato::mathquat::Slerp {q0 q1 {arcposition 0.5}} {
 
     # Spherical Linear Interpolation between quaternions.
     # Implemented as described in [wiki/Slerp](https://en.wikipedia.org/wiki/Slerp)
@@ -1477,8 +1477,8 @@ tomato::mathquat::Quaternion new
 <tr><td class='ruff_defitem'><code>imagZ</code></td><td class='ruff_defitem'>The Z-value of the vector component of the Quaternion.</td></tr>
 </table>
 <p class='ruff'>Returns A norm squared quaternion</p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_86' href="javascript:toggleSource('86')">Show source</a></p>
-<div id='86' class='ruff_dyn_src'><pre>proc ::tomato::mathquat::ToNormSquared {real imagX imagY imagZ} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_110' href="javascript:toggleSource('110')">Show source</a></p>
+<div id='110' class='ruff_dyn_src'><pre>proc ::tomato::mathquat::ToNormSquared {real imagX imagY imagZ} {
 
     # Calculates norm of quaternion from it's algebraical notation
     #
@@ -1501,8 +1501,8 @@ tomato::mathquat::Quaternion new
 <tr><td class='ruff_defitem'><code>imagZ</code></td><td class='ruff_defitem'>The Z-value of the vector component of the Quaternion.</td></tr>
 </table>
 <p class='ruff'>Returns A unit quaternion <a href="tomato_tomato_mathquat.html#::tomato::mathquat::Quaternion" title="Quaternion" class='ruff_cmd'>Quaternion</a></p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_87' href="javascript:toggleSource('87')">Show source</a></p>
-<div id='87' class='ruff_dyn_src'><pre>proc ::tomato::mathquat::ToUnitQuaternion {real imagX imagY imagZ} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_111' href="javascript:toggleSource('111')">Show source</a></p>
+<div id='111' class='ruff_dyn_src'><pre>proc ::tomato::mathquat::ToUnitQuaternion {real imagX imagY imagZ} {
 
     # Creates unit quaternion (it's norm == 1) from it's algebraical notation
     #
@@ -1519,6 +1519,7 @@ tomato::mathquat::Quaternion new
 </div></div></div><div class='yui-b navbox' ><h1><a style='padding-top:2px;' href='tomato.html'>Start page</a></h1>
 <hr>
 <h1><a href='tomato_tomato_helper.html'>tomato::helper</a></h1>
+<h1><a href='tomato_tomato_mathtriangle.html'>tomato::mathtriangle</a></h1>
 <h1><a href='tomato_tomato_mathcsys.html'>tomato::mathcsys</a></h1>
 <h1><a style='color: #006666;background-color: white; margin-left:-4px; padding-left:3px;padding-right:2px;' href='tomato_tomato_mathquat.html'>tomato::mathquat</a></h1>
 <h1><a href='tomato_tomato_mathline3d.html'>tomato::mathline3d</a></h1>

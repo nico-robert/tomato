@@ -325,8 +325,8 @@ pre {
 <tr><td class='ruff_defitem'><code>other</code></td><td class='ruff_defitem'><a href="tomato_tomato_mathpt3d.html#::tomato::mathpt3d::Point3d" title="mathpt3d::Point3d" class='ruff_cmd'>mathpt3d::Point3d</a></td></tr>
 </table>
 <p class='ruff'>Throws an ArgumentException if the <strong>startPoint</strong> is equal to the <strong>endPoint</strong></p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_88' href="javascript:toggleSource('88')">Show source</a></p>
-<div id='88' class='ruff_dyn_src'><pre>method constructor {pt other} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_112' href="javascript:toggleSource('112')">Show source</a></p>
+<div id='112' class='ruff_dyn_src'><pre>method constructor {pt other} {
 
     # Initializes a new Line3d Class.
     #
@@ -354,8 +354,8 @@ pre {
 <tr><td class='ruff_defitem'><code>tolerance</code></td><td class='ruff_defitem'>A tolerance (epsilon) to adjust for floating point error. Optional, default <code>1e-4</code>.</td></tr>
 </table>
 <p class='ruff'>Returns true if the lines are different. Otherwise false</p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_89' href="javascript:toggleSource('89')">Show source</a></p>
-<div id='89' class='ruff_dyn_src'><pre>method != {other {tolerance 1e-4}} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_113' href="javascript:toggleSource('113')">Show source</a></p>
+<div id='113' class='ruff_dyn_src'><pre>method != {other {tolerance 1e-4}} {
 
     # Gets value that indicates whether any pair of elements in two specified lines is not equal.
     #
@@ -374,8 +374,8 @@ pre {
 <tr><td class='ruff_defitem'><code>tolerance</code></td><td class='ruff_defitem'>A tolerance (epsilon) to adjust for floating point error. Optional, default <code>1e-4</code>.</td></tr>
 </table>
 <p class='ruff'>Returns true if the lines are the same. Otherwise false.</p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_90' href="javascript:toggleSource('90')">Show source</a></p>
-<div id='90' class='ruff_dyn_src'><pre>method == {other {tolerance 1e-4}} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_114' href="javascript:toggleSource('114')">Show source</a></p>
+<div id='114' class='ruff_dyn_src'><pre>method == {other {tolerance 1e-4}} {
 
     # Gets value that indicates whether each pair of elements in two specified lines is equal.
     #
@@ -394,8 +394,8 @@ pre {
 <tr><td class='ruff_defitem'><code>mustBeOnSegments</code></td><td class='ruff_defitem'>if true, the lines are treated as segments bounded by the start and end point Optional, default <code>&quot;&quot;</code>.</td></tr>
 </table>
 <p class='ruff'>Returns A List of two points representing the endpoints of the shortest distance between the two lines</p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_91' href="javascript:toggleSource('91')">Show source</a></p>
-<div id='91' class='ruff_dyn_src'><pre>method ClosestPointsBetween {other {mustBeOnSegments {}}} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_115' href="javascript:toggleSource('115')">Show source</a></p>
+<div id='115' class='ruff_dyn_src'><pre>method ClosestPointsBetween {other {mustBeOnSegments {}}} {
 
     # Computes the pair of points which represent the closest distance between this Line3D and another Line3D, with the first
     # point being the point on this Line3D, and the second point being the corresponding point on the other Line3D.  If the lines
@@ -495,8 +495,8 @@ pre {
 <tr><td class='ruff_defitem'><code>mustBeOnSegment</code></td><td class='ruff_defitem'>If true the returned point is contained by the segment ends,<br> otherwise it can be anywhere on the projected line</td></tr>
 </table>
 <p class='ruff'>Returns The closest point <a href="tomato_tomato_mathpt3d.html#::tomato::mathpt3d::Point3d" title="mathpt3d::Point3d" class='ruff_cmd'>mathpt3d::Point3d</a> on the line to the provided point.</p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_92' href="javascript:toggleSource('92')">Show source</a></p>
-<div id='92' class='ruff_dyn_src'><pre>method ClosestPointTo {p mustBeOnSegment} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_116' href="javascript:toggleSource('116')">Show source</a></p>
+<div id='116' class='ruff_dyn_src'><pre>method ClosestPointTo {p mustBeOnSegment} {
 
     # Gets the closest point on the line to the given point.
     #
@@ -528,8 +528,8 @@ pre {
 <p class='ruff'>Gets distance from <a href="tomato_tomato_mathline3d.html#::tomato::mathline3d::Line3d::StartPoint" title="StartPoint" class='ruff_cmd'>StartPoint</a> to <a href="tomato_tomato_mathline3d.html#::tomato::mathline3d::Line3d::EndPoint" title="EndPoint" class='ruff_cmd'>EndPoint</a></p>
 <div class='ruff_synopsis'><span class='ruff_cmd'>OBJECT Direction</span> </div>
 <p class='ruff'>Returns <a href="tomato_tomato_mathvec3d.html#::tomato::mathvec3d::Vector3d" title="mathvec3d::Vector3d" class='ruff_cmd'>mathvec3d::Vector3d</a>.</p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_93' href="javascript:toggleSource('93')">Show source</a></p>
-<div id='93' class='ruff_dyn_src'><pre>method Direction {} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_117' href="javascript:toggleSource('117')">Show source</a></p>
+<div id='117' class='ruff_dyn_src'><pre>method Direction {} {
 
     # Gets distance from [StartPoint] to [EndPoint]
     #
@@ -541,8 +541,8 @@ pre {
 <p class='ruff'>Returns The end point of the line <a href="tomato_tomato_mathpt3d.html#::tomato::mathpt3d::Point3d" title="mathpt3d::Point3d" class='ruff_cmd'>mathpt3d::Point3d</a>.</p>
 <div class='ruff_synopsis'><span class='ruff_cmd'>OBJECT EndPoint</span> </div>
 <p class='ruff'>Returns The end point of the line <a href="tomato_tomato_mathpt3d.html#::tomato::mathpt3d::Point3d" title="mathpt3d::Point3d" class='ruff_cmd'>mathpt3d::Point3d</a>.</p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_94' href="javascript:toggleSource('94')">Show source</a></p>
-<div id='94' class='ruff_dyn_src'><pre>method EndPoint {} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_118' href="javascript:toggleSource('118')">Show source</a></p>
+<div id='118' class='ruff_dyn_src'><pre>method EndPoint {} {
 
     # Returns The end point of the line [mathpt3d::Point3d].
     return $_endpoint
@@ -552,8 +552,8 @@ pre {
 <p class='ruff'>Returns List of 2 elements : <a href="tomato_tomato_mathline3d.html#::tomato::mathline3d::Line3d::StartPoint" title="StartPoint" class='ruff_cmd'>StartPoint</a> + <a href="tomato_tomato_mathline3d.html#::tomato::mathline3d::Line3d::EndPoint" title="EndPoint" class='ruff_cmd'>EndPoint</a></p>
 <div class='ruff_synopsis'><span class='ruff_cmd'>OBJECT Get</span> </div>
 <p class='ruff'>Returns List of 2 elements : <a href="tomato_tomato_mathline3d.html#::tomato::mathline3d::Line3d::StartPoint" title="StartPoint" class='ruff_cmd'>StartPoint</a> + <a href="tomato_tomato_mathline3d.html#::tomato::mathline3d::Line3d::EndPoint" title="EndPoint" class='ruff_cmd'>EndPoint</a></p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_95' href="javascript:toggleSource('95')">Show source</a></p>
-<div id='95' class='ruff_dyn_src'><pre>method Get {} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_119' href="javascript:toggleSource('119')">Show source</a></p>
+<div id='119' class='ruff_dyn_src'><pre>method Get {} {
 
     # Returns List of 2 elements : [StartPoint] + [EndPoint]
     return [list $_startpoint $_endpoint]
@@ -562,8 +562,8 @@ pre {
 <div style='clear:both;'></div>
 <p class='ruff'>Gets the name of class.</p>
 <div class='ruff_synopsis'><span class='ruff_cmd'>OBJECT GetType</span> </div>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_96' href="javascript:toggleSource('96')">Show source</a></p>
-<div id='96' class='ruff_dyn_src'><pre>method GetType {} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_120' href="javascript:toggleSource('120')">Show source</a></p>
+<div id='120' class='ruff_dyn_src'><pre>method GetType {} {
 
     # Gets the name of class.
     return [tomato::helper::TypeClass [self]]
@@ -577,8 +577,8 @@ pre {
 <tr><td class='ruff_defitem'><code>tolerance</code></td><td class='ruff_defitem'>A tolerance (epsilon) to compensate for floating point error. Optional, default <code>$::tomato::helper::Epsilon</code>.</td></tr>
 </table>
 <p class='ruff'>Returns A point <a href="tomato_tomato_mathpt3d.html#::tomato::mathpt3d::Point3d" title="mathpt3d::Point3d" class='ruff_cmd'>mathpt3d::Point3d</a> where the line and plane intersect, <strong><em> nothing </em></strong> if no such point exists</p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_97' href="javascript:toggleSource('97')">Show source</a></p>
-<div id='97' class='ruff_dyn_src'><pre>method IntersectionWith {intersectingPlane {tolerance {$::tomato::helper::Epsilon}}} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_121' href="javascript:toggleSource('121')">Show source</a></p>
+<div id='121' class='ruff_dyn_src'><pre>method IntersectionWith {intersectingPlane {tolerance {$::tomato::helper::Epsilon}}} {
 
     # Find the intersection between the line and a plane.
     #
@@ -600,8 +600,8 @@ pre {
 <tr><td class='ruff_defitem'><code>other</code></td><td class='ruff_defitem'><a href="tomato_tomato_mathline3d.html#::tomato::mathline3d::Line3d" title="Line3d" class='ruff_cmd'>Line3d</a></td></tr>
 </table>
 <p class='ruff'>Returns A projected line <a href="tomato_tomato_mathline3d.html#::tomato::mathline3d::Line3d" title="Line3d" class='ruff_cmd'>Line3d</a>.</p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_98' href="javascript:toggleSource('98')">Show source</a></p>
-<div id='98' class='ruff_dyn_src'><pre>method IsParallelTo {other} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_122' href="javascript:toggleSource('122')">Show source</a></p>
+<div id='122' class='ruff_dyn_src'><pre>method IsParallelTo {other} {
 
     # Checks to determine whether or not two lines are parallel to each other, using the Cross product within
     # the double precision specified in the tomato::helper package
@@ -615,8 +615,8 @@ pre {
 <div style='clear:both;'></div>
 <p class='ruff'>Gets distance from <a href="tomato_tomato_mathline3d.html#::tomato::mathline3d::Line3d::StartPoint" title="StartPoint" class='ruff_cmd'>StartPoint</a> and <a href="tomato_tomato_mathline3d.html#::tomato::mathline3d::Line3d::EndPoint" title="EndPoint" class='ruff_cmd'>EndPoint</a>, the length of the line.</p>
 <div class='ruff_synopsis'><span class='ruff_cmd'>OBJECT Length</span> </div>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_99' href="javascript:toggleSource('99')">Show source</a></p>
-<div id='99' class='ruff_dyn_src'><pre>method Length {} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_123' href="javascript:toggleSource('123')">Show source</a></p>
+<div id='123' class='ruff_dyn_src'><pre>method Length {} {
 
     # Gets distance from [StartPoint] and [EndPoint], the length of the line.
     return [$_startpoint DistanceTo $_endpoint]
@@ -630,8 +630,8 @@ pre {
 <tr><td class='ruff_defitem'><code>mustStartBetweenStartAndEnd</code></td><td class='ruff_defitem'>If false the start point can extend beyond the start and endpoint of the line</td></tr>
 </table>
 <p class='ruff'>Returns The shortest line between the line and the point <a href="tomato_tomato_mathline3d.html#::tomato::mathline3d::Line3d" title="Line3d" class='ruff_cmd'>Line3d</a>.</p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_100' href="javascript:toggleSource('100')">Show source</a></p>
-<div id='100' class='ruff_dyn_src'><pre>method LineTo {p mustStartBetweenStartAndEnd} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_124' href="javascript:toggleSource('124')">Show source</a></p>
+<div id='124' class='ruff_dyn_src'><pre>method LineTo {p mustStartBetweenStartAndEnd} {
 
     # Gets the shortest line between this line and a point.
     #
@@ -649,8 +649,8 @@ pre {
 <tr><td class='ruff_defitem'><code>plane</code></td><td class='ruff_defitem'><a href="tomato_tomato_mathplane.html#::tomato::mathplane::Plane" title="mathplane::Plane" class='ruff_cmd'>mathplane::Plane</a></td></tr>
 </table>
 <p class='ruff'>Returns A projected line <a href="tomato_tomato_mathline3d.html#::tomato::mathline3d::Line3d" title="Line3d" class='ruff_cmd'>Line3d</a>.</p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_101' href="javascript:toggleSource('101')">Show source</a></p>
-<div id='101' class='ruff_dyn_src'><pre>method ProjectOn {plane} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_125' href="javascript:toggleSource('125')">Show source</a></p>
+<div id='125' class='ruff_dyn_src'><pre>method ProjectOn {plane} {
 
     # Gets The line projected on a plane.
     #
@@ -664,8 +664,8 @@ pre {
 <p class='ruff'>Returns The start point of the line <a href="tomato_tomato_mathpt3d.html#::tomato::mathpt3d::Point3d" title="mathpt3d::Point3d" class='ruff_cmd'>mathpt3d::Point3d</a>.</p>
 <div class='ruff_synopsis'><span class='ruff_cmd'>OBJECT StartPoint</span> </div>
 <p class='ruff'>Returns The start point of the line <a href="tomato_tomato_mathpt3d.html#::tomato::mathpt3d::Point3d" title="mathpt3d::Point3d" class='ruff_cmd'>mathpt3d::Point3d</a>.</p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_102' href="javascript:toggleSource('102')">Show source</a></p>
-<div id='102' class='ruff_dyn_src'><pre>method StartPoint {} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_126' href="javascript:toggleSource('126')">Show source</a></p>
+<div id='126' class='ruff_dyn_src'><pre>method StartPoint {} {
 
     # Returns The start point of the line [mathpt3d::Point3d].
     return $_startpoint
@@ -675,8 +675,8 @@ pre {
 <p class='ruff'>Returns a string representation of this object.</p>
 <div class='ruff_synopsis'><span class='ruff_cmd'>OBJECT ToString</span> </div>
 <p class='ruff'>Returns a string representation of this object.</p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_103' href="javascript:toggleSource('103')">Show source</a></p>
-<div id='103' class='ruff_dyn_src'><pre>method ToString {} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_127' href="javascript:toggleSource('127')">Show source</a></p>
+<div id='127' class='ruff_dyn_src'><pre>method ToString {} {
 
     # Returns a string representation of this object.
     lappend value &quot;StartPoint = [$_startpoint ToString]&quot;
@@ -698,8 +698,8 @@ pre {
 <p class='ruff'>See : methods == !=</p>
 <p class='ruff'>An error exception is raised if tolerance (epsilon) &lt; 0.</p>
 <p class='ruff'>Returns true if the lines are equal, otherwise false.</p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_104' href="javascript:toggleSource('104')">Show source</a></p>
-<div id='104' class='ruff_dyn_src'><pre>proc ::tomato::mathline3d::Equals {line other tolerance} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_128' href="javascript:toggleSource('128')">Show source</a></p>
+<div id='128' class='ruff_dyn_src'><pre>proc ::tomato::mathline3d::Equals {line other tolerance} {
 
     # Indicate if this line is equivalent to a given line
     #
@@ -723,6 +723,7 @@ pre {
 </div></div></div><div class='yui-b navbox' ><h1><a style='padding-top:2px;' href='tomato.html'>Start page</a></h1>
 <hr>
 <h1><a href='tomato_tomato_helper.html'>tomato::helper</a></h1>
+<h1><a href='tomato_tomato_mathtriangle.html'>tomato::mathtriangle</a></h1>
 <h1><a href='tomato_tomato_mathcsys.html'>tomato::mathcsys</a></h1>
 <h1><a href='tomato_tomato_mathquat.html'>tomato::mathquat</a></h1>
 <h1><a style='color: #006666;background-color: white; margin-left:-4px; padding-left:3px;padding-right:2px;' href='tomato_tomato_mathline3d.html'>tomato::mathline3d</a></h1>

@@ -309,11 +309,13 @@ pre {
 <tr><td class='ruff_defitem'><a href="tomato_tomato_mathpt3d.html#::tomato::mathpt3d::Point3d::Get" title="Get" class='ruff_cmd'>Get</a></td><td class='ruff_defitem'>Gets values from the Point3d Class under TCL list form.</td></tr>
 <tr><td class='ruff_defitem'><a href="tomato_tomato_mathpt3d.html#::tomato::mathpt3d::Point3d::GetType" title="GetType" class='ruff_cmd'>GetType</a></td><td class='ruff_defitem'>Gets the name of class.</td></tr>
 <tr><td class='ruff_defitem'><a href="tomato_tomato_mathpt3d.html#::tomato::mathpt3d::Point3d::MirrorAbout" title="MirrorAbout" class='ruff_cmd'>MirrorAbout</a></td><td class='ruff_defitem'>Gets the mirror point of this point across a plane</td></tr>
+<tr><td class='ruff_defitem'><a href="tomato_tomato_mathpt3d.html#::tomato::mathpt3d::Point3d::Origin" title="Origin" class='ruff_cmd'>Origin</a></td><td class='ruff_defitem'>Gets a point at the origin</td></tr>
 <tr><td class='ruff_defitem'><a href="tomato_tomato_mathpt3d.html#::tomato::mathpt3d::Point3d::ProjectOn" title="ProjectOn" class='ruff_cmd'>ProjectOn</a></td><td class='ruff_defitem'>Projects a point onto a plane</td></tr>
 <tr><td class='ruff_defitem'><a href="tomato_tomato_mathpt3d.html#::tomato::mathpt3d::Point3d::Rotate" title="Rotate" class='ruff_cmd'>Rotate</a></td><td class='ruff_defitem'>Rotates the point about a given vector</td></tr>
 <tr><td class='ruff_defitem'><a href="tomato_tomato_mathpt3d.html#::tomato::mathpt3d::Point3d::ToString" title="ToString" class='ruff_cmd'>ToString</a></td><td class='ruff_defitem'>Returns a string representation of this object.</td></tr>
 <tr><td class='ruff_defitem'><a href="tomato_tomato_mathpt3d.html#::tomato::mathpt3d::Point3d::ToVector3D" title="ToVector3D" class='ruff_cmd'>ToVector3D</a></td><td class='ruff_defitem'>Converts this point into a vector from the origin</td></tr>
 <tr><td class='ruff_defitem'><a href="tomato_tomato_mathpt3d.html#::tomato::mathpt3d::Point3d::TransformBy" title="TransformBy" class='ruff_cmd'>TransformBy</a></td><td class='ruff_defitem'>Applies a transform coordinate system to the point</td></tr>
+<tr><td class='ruff_defitem'><a href="tomato_tomato_mathpt3d.html#::tomato::mathpt3d::Point3d::TranslatePoint" title="TranslatePoint" class='ruff_cmd'>TranslatePoint</a></td><td class='ruff_defitem'>Translates a Point along vector and distance</td></tr>
 <tr><td class='ruff_defitem'><a href="tomato_tomato_mathpt3d.html#::tomato::mathpt3d::Point3d::VectorTo" title="VectorTo" class='ruff_cmd'>VectorTo</a></td><td class='ruff_defitem'>Gets a vector from this point to another point</td></tr>
 <tr><td class='ruff_defitem'><a href="tomato_tomato_mathpt3d.html#::tomato::mathpt3d::Point3d::X" title="X" class='ruff_cmd'>X</a></td><td class='ruff_defitem'>Gets The x component.</td></tr>
 <tr><td class='ruff_defitem'><a href="tomato_tomato_mathpt3d.html#::tomato::mathpt3d::Point3d::Y" title="Y" class='ruff_cmd'>Y</a></td><td class='ruff_defitem'>Gets The y component.</td></tr>
@@ -330,8 +332,8 @@ pre {
 <tr><td class='ruff_defitem'><code>values</code></td><td class='ruff_defitem'>3 components values.</td></tr>
 </table>
 <p class='ruff'>An error exception is raised if length [list] <code>$args</code> != 3.</p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_116' href="javascript:toggleSource('116')">Show source</a></p>
-<div id='116' class='ruff_dyn_src'><pre>method constructor {args} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_140' href="javascript:toggleSource('140')">Show source</a></p>
+<div id='140' class='ruff_dyn_src'><pre>method constructor {args} {
 
     # Initializes a new Point3d Class.
     #
@@ -370,9 +372,9 @@ pre {
         set _z $z
     } else {
         # default values
-        set _x 0
-        set _y 0
-        set _z 0
+        set _x 0.0
+        set _y 0.0
+        set _z 0.0
     }
 }</pre></div>
 </div><h4 class='ruffmethod'><a name='::tomato::mathpt3d::Point3d::!='>!=</a><span class='ns_scope'> [<a href="tomato_tomato_mathpt3d.html#::tomato::mathpt3d::Point3d" title="::tomato::mathpt3d::Point3d" class='ruff_cmd'>::tomato::mathpt3d::Point3d</a>]</span><span class='tinylink'><a href='tomato_tomato_mathpt3d.html#::tomato::mathpt3d::Point3d'>Point3d</a>, <a href='#top'>Top</a>, <a href='tomato.html'>Main</a></span></h4>
@@ -384,8 +386,8 @@ pre {
 <tr><td class='ruff_defitem'><code>tolerance</code></td><td class='ruff_defitem'>A tolerance (epsilon) to adjust for floating point error. Optional, default <code>1e-4</code>.</td></tr>
 </table>
 <p class='ruff'>Returns true if the points are different. Otherwise false.</p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_117' href="javascript:toggleSource('117')">Show source</a></p>
-<div id='117' class='ruff_dyn_src'><pre>method != {other {tolerance 1e-4}} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_141' href="javascript:toggleSource('141')">Show source</a></p>
+<div id='141' class='ruff_dyn_src'><pre>method != {other {tolerance 1e-4}} {
 
     # Gets value that indicates whether any pair of elements in two specified points is not equal.
     #
@@ -403,8 +405,8 @@ pre {
 <tr><td class='ruff_defitem'><code>other</code></td><td class='ruff_defitem'><a href="tomato_tomato_mathvec3d.html#::tomato::mathvec3d::Vector3d" title="mathvec3d::Vector3d" class='ruff_cmd'>mathvec3d::Vector3d</a></td></tr>
 </table>
 <p class='ruff'>Returns a new point at the summed location</p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_118' href="javascript:toggleSource('118')">Show source</a></p>
-<div id='118' class='ruff_dyn_src'><pre>method + {other} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_142' href="javascript:toggleSource('142')">Show source</a></p>
+<div id='142' class='ruff_dyn_src'><pre>method + {other} {
 
     # Adds a point and a vector together
     #
@@ -425,8 +427,8 @@ pre {
 <tr><td class='ruff_defitem'><code>other</code></td><td class='ruff_defitem'>A vector <a href="tomato_tomato_mathvec3d.html#::tomato::mathvec3d::Vector3d" title="mathvec3d::Vector3d" class='ruff_cmd'>mathvec3d::Vector3d</a> or a Point <a href="tomato_tomato_mathpt3d.html#::tomato::mathpt3d::Point3d" title="Point3d" class='ruff_cmd'>Point3d</a></td></tr>
 </table>
 <p class='ruff'>Returns a new point <a href="tomato_tomato_mathpt3d.html#::tomato::mathpt3d::Point3d" title="Point3d" class='ruff_cmd'>Point3d</a> at the difference if Point3d, a vector <a href="tomato_tomato_mathvec3d.html#::tomato::mathvec3d::Vector3d" title="mathvec3d::Vector3d" class='ruff_cmd'>mathvec3d::Vector3d</a> pointing to the difference if Vector3d.</p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_119' href="javascript:toggleSource('119')">Show source</a></p>
-<div id='119' class='ruff_dyn_src'><pre>method - {other} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_143' href="javascript:toggleSource('143')">Show source</a></p>
+<div id='143' class='ruff_dyn_src'><pre>method - {other} {
 
     # Subtracts a vector from a point or Subtracts the first point from the second point
     #
@@ -452,8 +454,8 @@ pre {
 <tr><td class='ruff_defitem'><code>tolerance</code></td><td class='ruff_defitem'>A tolerance (epsilon) to adjust for floating point error. Optional, default <code>1e-4</code>.</td></tr>
 </table>
 <p class='ruff'>Returns true if the points are the same. Otherwise false.</p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_120' href="javascript:toggleSource('120')">Show source</a></p>
-<div id='120' class='ruff_dyn_src'><pre>method == {other {tolerance 1e-4}} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_144' href="javascript:toggleSource('144')">Show source</a></p>
+<div id='144' class='ruff_dyn_src'><pre>method == {other {tolerance 1e-4}} {
 
     # Gets value that indicates whether each pair of elements in two specified points is equal.
     #
@@ -473,8 +475,8 @@ pre {
 <tr><td class='ruff_defitem'><code>-Y</code></td><td class='ruff_defitem'>The y component.</td></tr>
 <tr><td class='ruff_defitem'><code>-Z</code></td><td class='ruff_defitem'>The z component.</td></tr>
 </table>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_121' href="javascript:toggleSource('121')">Show source</a></p>
-<div id='121' class='ruff_dyn_src'><pre>method Configure {args} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_145' href="javascript:toggleSource('145')">Show source</a></p>
+<div id='145' class='ruff_dyn_src'><pre>method Configure {args} {
 
     # Configure component value.
     #
@@ -507,8 +509,8 @@ pre {
 <tr><td class='ruff_defitem'><code>p</code></td><td class='ruff_defitem'><a href="tomato_tomato_mathpt3d.html#::tomato::mathpt3d::Point3d" title="Point3d" class='ruff_cmd'>Point3d</a></td></tr>
 </table>
 <p class='ruff'>Returns a distance measure</p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_122' href="javascript:toggleSource('122')">Show source</a></p>
-<div id='122' class='ruff_dyn_src'><pre>method DistanceTo {p} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_146' href="javascript:toggleSource('146')">Show source</a></p>
+<div id='146' class='ruff_dyn_src'><pre>method DistanceTo {p} {
 
     # Finds the straight line distance to another point
     #
@@ -522,8 +524,8 @@ pre {
 <div style='clear:both;'></div>
 <p class='ruff'>Gets values from the Point3d Class under TCL list form.</p>
 <div class='ruff_synopsis'><span class='ruff_cmd'>OBJECT Get</span> </div>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_123' href="javascript:toggleSource('123')">Show source</a></p>
-<div id='123' class='ruff_dyn_src'><pre>method Get {} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_147' href="javascript:toggleSource('147')">Show source</a></p>
+<div id='147' class='ruff_dyn_src'><pre>method Get {} {
 
     # Gets values from the Point3d Class under TCL list form.
     return [list $_x $_y $_z]
@@ -532,8 +534,8 @@ pre {
 <div style='clear:both;'></div>
 <p class='ruff'>Gets the name of class.</p>
 <div class='ruff_synopsis'><span class='ruff_cmd'>OBJECT GetType</span> </div>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_124' href="javascript:toggleSource('124')">Show source</a></p>
-<div id='124' class='ruff_dyn_src'><pre>method GetType {} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_148' href="javascript:toggleSource('148')">Show source</a></p>
+<div id='148' class='ruff_dyn_src'><pre>method GetType {} {
 
     # Gets the name of class.
     return [tomato::helper::TypeClass [self]]
@@ -546,8 +548,8 @@ pre {
 <tr><td class='ruff_defitem'><code>plane</code></td><td class='ruff_defitem'><a href="tomato_tomato_mathplane.html#::tomato::mathplane::Plane" title="mathplane::Plane" class='ruff_cmd'>mathplane::Plane</a></td></tr>
 </table>
 <p class='ruff'>Returns the mirrored point <a href="tomato_tomato_mathpt3d.html#::tomato::mathpt3d::Point3d" title="Point3d" class='ruff_cmd'>Point3d</a></p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_125' href="javascript:toggleSource('125')">Show source</a></p>
-<div id='125' class='ruff_dyn_src'><pre>method MirrorAbout {plane} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_149' href="javascript:toggleSource('149')">Show source</a></p>
+<div id='149' class='ruff_dyn_src'><pre>method MirrorAbout {plane} {
 
     # Gets the mirror point of this point across a plane
     #
@@ -555,6 +557,16 @@ pre {
     #
     # Returns the mirrored point [Point3d]
     return [$plane MirrorAbout [self]]
+}</pre></div>
+</div><h4 class='ruffmethod'><a name='::tomato::mathpt3d::Point3d::Origin'>Origin</a><span class='ns_scope'> [<a href="tomato_tomato_mathpt3d.html#::tomato::mathpt3d::Point3d" title="::tomato::mathpt3d::Point3d" class='ruff_cmd'>::tomato::mathpt3d::Point3d</a>]</span><span class='tinylink'><a href='tomato_tomato_mathpt3d.html#::tomato::mathpt3d::Point3d'>Point3d</a>, <a href='#top'>Top</a>, <a href='tomato.html'>Main</a></span></h4>
+<div style='clear:both;'></div>
+<p class='ruff'>Gets a point at the origin</p>
+<div class='ruff_synopsis'><span class='ruff_cmd'>OBJECT Origin</span> </div>
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_150' href="javascript:toggleSource('150')">Show source</a></p>
+<div id='150' class='ruff_dyn_src'><pre>method Origin {} {
+
+    # Gets a point at the origin
+    return [tomato::mathpt3d::Point3d new 0.0 0.0 0.0]
 }</pre></div>
 </div><h4 class='ruffmethod'><a name='::tomato::mathpt3d::Point3d::ProjectOn'>ProjectOn</a><span class='ns_scope'> [<a href="tomato_tomato_mathpt3d.html#::tomato::mathpt3d::Point3d" title="::tomato::mathpt3d::Point3d" class='ruff_cmd'>::tomato::mathpt3d::Point3d</a>]</span><span class='tinylink'><a href='tomato_tomato_mathpt3d.html#::tomato::mathpt3d::Point3d'>Point3d</a>, <a href='#top'>Top</a>, <a href='tomato.html'>Main</a></span></h4>
 <div style='clear:both;'></div>
@@ -564,8 +576,8 @@ pre {
 <tr><td class='ruff_defitem'><code>plane</code></td><td class='ruff_defitem'><a href="tomato_tomato_mathplane.html#::tomato::mathplane::Plane" title="mathplane::Plane" class='ruff_cmd'>mathplane::Plane</a></td></tr>
 </table>
 <p class='ruff'>Returns projected point <a href="tomato_tomato_mathpt3d.html#::tomato::mathpt3d::Point3d" title="Point3d" class='ruff_cmd'>Point3d</a></p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_126' href="javascript:toggleSource('126')">Show source</a></p>
-<div id='126' class='ruff_dyn_src'><pre>method ProjectOn {plane} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_151' href="javascript:toggleSource('151')">Show source</a></p>
+<div id='151' class='ruff_dyn_src'><pre>method ProjectOn {plane} {
 
     # Projects a point onto a plane
     #
@@ -583,8 +595,8 @@ pre {
 <tr><td class='ruff_defitem'><code>angle</code></td><td class='ruff_defitem'>The angle to rotate in degrees</td></tr>
 </table>
 <p class='ruff'>Returns The rotated point <a href="tomato_tomato_mathpt3d.html#::tomato::mathpt3d::Point3d" title="Point3d" class='ruff_cmd'>Point3d</a></p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_127' href="javascript:toggleSource('127')">Show source</a></p>
-<div id='127' class='ruff_dyn_src'><pre>method Rotate {aboutVector angle} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_152' href="javascript:toggleSource('152')">Show source</a></p>
+<div id='152' class='ruff_dyn_src'><pre>method Rotate {aboutVector angle} {
 
     # Rotates the point about a given vector
     #
@@ -600,8 +612,8 @@ pre {
 <p class='ruff'>Returns a string representation of this object.</p>
 <div class='ruff_synopsis'><span class='ruff_cmd'>OBJECT ToString</span> </div>
 <p class='ruff'>Returns a string representation of this object.</p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_128' href="javascript:toggleSource('128')">Show source</a></p>
-<div id='128' class='ruff_dyn_src'><pre>method ToString {} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_153' href="javascript:toggleSource('153')">Show source</a></p>
+<div id='153' class='ruff_dyn_src'><pre>method ToString {} {
 
     # Returns a string representation of this object.
     return [format {%s, %s, %s} $_x $_y $_z]
@@ -611,8 +623,8 @@ pre {
 <p class='ruff'>Converts this point into a vector from the origin</p>
 <div class='ruff_synopsis'><span class='ruff_cmd'>OBJECT ToVector3D</span> </div>
 <p class='ruff'>Returns A new vector <a href="tomato_tomato_mathvec3d.html#::tomato::mathvec3d::Vector3d" title="mathvec3d::Vector3d" class='ruff_cmd'>mathvec3d::Vector3d</a> equivalent to this point</p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_129' href="javascript:toggleSource('129')">Show source</a></p>
-<div id='129' class='ruff_dyn_src'><pre>method ToVector3D {} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_154' href="javascript:toggleSource('154')">Show source</a></p>
+<div id='154' class='ruff_dyn_src'><pre>method ToVector3D {} {
 
     # Converts this point into a vector from the origin
     #
@@ -627,8 +639,8 @@ pre {
 <tr><td class='ruff_defitem'><code>cs</code></td><td class='ruff_defitem'>A coordinate system <a href="tomato_tomato_mathcsys.html#::tomato::mathcsys::Csys" title="mathcsys::Csys" class='ruff_cmd'>mathcsys::Csys</a></td></tr>
 </table>
 <p class='ruff'>Returns A new 3d point <a href="tomato_tomato_mathpt3d.html#::tomato::mathpt3d::Point3d" title="Point3d" class='ruff_cmd'>Point3d</a></p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_130' href="javascript:toggleSource('130')">Show source</a></p>
-<div id='130' class='ruff_dyn_src'><pre>method TransformBy {cs} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_155' href="javascript:toggleSource('155')">Show source</a></p>
+<div id='155' class='ruff_dyn_src'><pre>method TransformBy {cs} {
 
     # Applies a transform coordinate system to the point
     #
@@ -636,6 +648,26 @@ pre {
     #
     # Returns A new 3d point [Point3d]
     return [$cs Transform [self]]
+}</pre></div>
+</div><h4 class='ruffmethod'><a name='::tomato::mathpt3d::Point3d::TranslatePoint'>TranslatePoint</a><span class='ns_scope'> [<a href="tomato_tomato_mathpt3d.html#::tomato::mathpt3d::Point3d" title="::tomato::mathpt3d::Point3d" class='ruff_cmd'>::tomato::mathpt3d::Point3d</a>]</span><span class='tinylink'><a href='tomato_tomato_mathpt3d.html#::tomato::mathpt3d::Point3d'>Point3d</a>, <a href='#top'>Top</a>, <a href='tomato.html'>Main</a></span></h4>
+<div style='clear:both;'></div>
+<p class='ruff'>Translates a Point along vector and distance</p>
+<div class='ruff_synopsis'><span class='ruff_cmd'>OBJECT TranslatePoint</span> <span class='ruff_arg'>v d</span></div>
+<table class='ruff_deflist'>
+<tr><td class='ruff_defitem'><code>v</code></td><td class='ruff_defitem'>A Vector <a href="tomato_tomato_mathvec3d.html#::tomato::mathvec3d::Vector3d" title="mathvec3d::Vector3d" class='ruff_cmd'>mathvec3d::Vector3d</a></td></tr>
+<tr><td class='ruff_defitem'><code>d</code></td><td class='ruff_defitem'>Distance</td></tr>
+</table>
+<p class='ruff'>Returns A new 3d point <a href="tomato_tomato_mathpt3d.html#::tomato::mathpt3d::Point3d" title="Point3d" class='ruff_cmd'>Point3d</a></p>
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_156' href="javascript:toggleSource('156')">Show source</a></p>
+<div id='156' class='ruff_dyn_src'><pre>method TranslatePoint {v d} {
+
+    # Translates a Point along vector and distance
+    #
+    # v - A Vector [mathvec3d::Vector3d]
+    # d - Distance
+    #
+    # Returns A new 3d point [Point3d]
+    return [my + [[$v Normalized] * $d]]
 }</pre></div>
 </div><h4 class='ruffmethod'><a name='::tomato::mathpt3d::Point3d::VectorTo'>VectorTo</a><span class='ns_scope'> [<a href="tomato_tomato_mathpt3d.html#::tomato::mathpt3d::Point3d" title="::tomato::mathpt3d::Point3d" class='ruff_cmd'>::tomato::mathpt3d::Point3d</a>]</span><span class='tinylink'><a href='tomato_tomato_mathpt3d.html#::tomato::mathpt3d::Point3d'>Point3d</a>, <a href='#top'>Top</a>, <a href='tomato.html'>Main</a></span></h4>
 <div style='clear:both;'></div>
@@ -645,8 +677,8 @@ pre {
 <tr><td class='ruff_defitem'><code>p</code></td><td class='ruff_defitem'>The point <a href="tomato_tomato_mathpt3d.html#::tomato::mathpt3d::Point3d" title="Point3d" class='ruff_cmd'>Point3d</a> to which the vector should go.</td></tr>
 </table>
 <p class='ruff'>Returns a vector <a href="tomato_tomato_mathvec3d.html#::tomato::mathvec3d::Vector3d" title="mathvec3d::Vector3d" class='ruff_cmd'>mathvec3d::Vector3d</a> pointing to the other point.</p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_131' href="javascript:toggleSource('131')">Show source</a></p>
-<div id='131' class='ruff_dyn_src'><pre>method VectorTo {p} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_157' href="javascript:toggleSource('157')">Show source</a></p>
+<div id='157' class='ruff_dyn_src'><pre>method VectorTo {p} {
 
     # Gets a vector from this point to another point
     #
@@ -659,8 +691,8 @@ pre {
 <div style='clear:both;'></div>
 <p class='ruff'>Gets The x component.</p>
 <div class='ruff_synopsis'><span class='ruff_cmd'>OBJECT X</span> </div>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_132' href="javascript:toggleSource('132')">Show source</a></p>
-<div id='132' class='ruff_dyn_src'><pre>method X {} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_158' href="javascript:toggleSource('158')">Show source</a></p>
+<div id='158' class='ruff_dyn_src'><pre>method X {} {
 
     # Gets The x component.
     return $_x
@@ -669,8 +701,8 @@ pre {
 <div style='clear:both;'></div>
 <p class='ruff'>Gets The y component.</p>
 <div class='ruff_synopsis'><span class='ruff_cmd'>OBJECT Y</span> </div>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_133' href="javascript:toggleSource('133')">Show source</a></p>
-<div id='133' class='ruff_dyn_src'><pre>method Y {} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_159' href="javascript:toggleSource('159')">Show source</a></p>
+<div id='159' class='ruff_dyn_src'><pre>method Y {} {
 
     # Gets The y component.
     return $_y
@@ -679,8 +711,8 @@ pre {
 <div style='clear:both;'></div>
 <p class='ruff'>Gets The z component.</p>
 <div class='ruff_synopsis'><span class='ruff_cmd'>OBJECT Z</span> </div>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_134' href="javascript:toggleSource('134')">Show source</a></p>
-<div id='134' class='ruff_dyn_src'><pre>method Z {} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_160' href="javascript:toggleSource('160')">Show source</a></p>
+<div id='160' class='ruff_dyn_src'><pre>method Z {} {
 
     # Gets The z component.
     return $_z
@@ -695,8 +727,8 @@ pre {
 <tr><td class='ruff_defitem'><code>listaxisPt</code></td><td class='ruff_defitem'>list in the form of a TCL list</td></tr>
 </table>
 <p class='ruff'>Returns The average value</p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_135' href="javascript:toggleSource('135')">Show source</a></p>
-<div id='135' class='ruff_dyn_src'><pre>proc ::tomato::mathpt3d::Average {listaxisPt} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_161' href="javascript:toggleSource('161')">Show source</a></p>
+<div id='161' class='ruff_dyn_src'><pre>proc ::tomato::mathpt3d::Average {listaxisPt} {
 
     # Gets the average value of list
     #
@@ -713,8 +745,8 @@ pre {
 <tr><td class='ruff_defitem'><code>listPts</code></td><td class='ruff_defitem'>The list of points <a href="tomato_tomato_mathpt3d.html#::tomato::mathpt3d::Point3d" title="Point3d" class='ruff_cmd'>Point3d</a></td></tr>
 </table>
 <p class='ruff'>Returns The centroid of the points <a href="tomato_tomato_mathpt3d.html#::tomato::mathpt3d::Point3d" title="Point3d" class='ruff_cmd'>Point3d</a></p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_136' href="javascript:toggleSource('136')">Show source</a></p>
-<div id='136' class='ruff_dyn_src'><pre>proc ::tomato::mathpt3d::Centroid {listPts} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_162' href="javascript:toggleSource('162')">Show source</a></p>
+<div id='162' class='ruff_dyn_src'><pre>proc ::tomato::mathpt3d::Centroid {listPts} {
 
     # Gets the centroid of an arbitrary collection of points
     #
@@ -750,8 +782,8 @@ pre {
 <p class='ruff'>See : methods == !=</p>
 <p class='ruff'>An error exception is raised if tolerance (epsilon) &lt; 0.</p>
 <p class='ruff'>Returns true if the points are equal, otherwise false.</p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_137' href="javascript:toggleSource('137')">Show source</a></p>
-<div id='137' class='ruff_dyn_src'><pre>proc ::tomato::mathpt3d::Equals {pt other tolerance} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_163' href="javascript:toggleSource('163')">Show source</a></p>
+<div id='163' class='ruff_dyn_src'><pre>proc ::tomato::mathpt3d::Equals {pt other tolerance} {
 
     # Gets a value to indicate if a pair of points are equal
     #
@@ -784,8 +816,8 @@ pre {
 <tr><td class='ruff_defitem'><code>plane3</code></td><td class='ruff_defitem'><a href="tomato_tomato_mathplane.html#::tomato::mathplane::Plane" title="mathplane::Plane" class='ruff_cmd'>mathplane::Plane</a></td></tr>
 </table>
 <p class='ruff'>Returns The point of intersection <a href="tomato_tomato_mathpt3d.html#::tomato::mathpt3d::Point3d" title="Point3d" class='ruff_cmd'>Point3d</a></p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_138' href="javascript:toggleSource('138')">Show source</a></p>
-<div id='138' class='ruff_dyn_src'><pre>proc ::tomato::mathpt3d::IntersectionOf3Planes {plane1 plane2 plane3} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_164' href="javascript:toggleSource('164')">Show source</a></p>
+<div id='164' class='ruff_dyn_src'><pre>proc ::tomato::mathpt3d::IntersectionOf3Planes {plane1 plane2 plane3} {
 
     # Gets the point at which three planes intersect
     #
@@ -806,8 +838,8 @@ pre {
 <tr><td class='ruff_defitem'><code>ray</code></td><td class='ruff_defitem'><a href="tomato_tomato_mathray3d.html#::tomato::mathray3d::Ray3d" title="mathray3d::Ray3d" class='ruff_cmd'>mathray3d::Ray3d</a></td></tr>
 </table>
 <p class='ruff'>Returns The point of intersection <a href="tomato_tomato_mathpt3d.html#::tomato::mathpt3d::Point3d" title="Point3d" class='ruff_cmd'>Point3d</a></p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_139' href="javascript:toggleSource('139')">Show source</a></p>
-<div id='139' class='ruff_dyn_src'><pre>proc ::tomato::mathpt3d::IntersectionOfPlaneRay {plane ray} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_165' href="javascript:toggleSource('165')">Show source</a></p>
+<div id='165' class='ruff_dyn_src'><pre>proc ::tomato::mathpt3d::IntersectionOfPlaneRay {plane ray} {
 
     # Gets the point of intersection between a plane and a ray
     #
@@ -816,6 +848,37 @@ pre {
     #
     # Returns The point of intersection [Point3d]
     return [$plane IntersectionWith $ray]
+}</pre></div>
+</div><h4 class='ruffproc'><a name='::tomato::mathpt3d::IsCollinearPoints'>IsCollinearPoints</a><span class='ns_scope'> [<a href="tomato_tomato_mathpt3d.html#::tomato::mathpt3d" title="::tomato::mathpt3d" class='ruff_cmd'>::tomato::mathpt3d</a>]</span><span class='tinylink'><a href='tomato_tomato_mathpt3d.html#::tomato::mathpt3d'>mathpt3d</a>, <a href='#top'>Top</a>, <a href='tomato.html'>Main</a></span></h4>
+<div style='clear:both;'></div>
+<p class='ruff'>Check if three points are collinear</p>
+<div class='ruff_synopsis'><span class='ruff_cmd'>IsCollinearPoints</span> <span class='ruff_arg'>p1 p2 p3 ?tolerance?</span></div>
+<table class='ruff_deflist'>
+<tr><td class='ruff_defitem'><code>p1</code></td><td class='ruff_defitem'><a href="tomato_tomato_mathpt3d.html#::tomato::mathpt3d::Point3d" title="Point3d" class='ruff_cmd'>Point3d</a></td></tr>
+<tr><td class='ruff_defitem'><code>p2</code></td><td class='ruff_defitem'><a href="tomato_tomato_mathpt3d.html#::tomato::mathpt3d::Point3d" title="Point3d" class='ruff_cmd'>Point3d</a></td></tr>
+<tr><td class='ruff_defitem'><code>p3</code></td><td class='ruff_defitem'><a href="tomato_tomato_mathpt3d.html#::tomato::mathpt3d::Point3d" title="Point3d" class='ruff_cmd'>Point3d</a></td></tr>
+<tr><td class='ruff_defitem'><code>tolerance</code></td><td class='ruff_defitem'>Not documented. Optional, default <code>$::tomato::helper::Epsilon</code>.</td></tr>
+</table>
+<p class='ruff'>Returns true if the points are collinear, otherwise false.</p>
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_166' href="javascript:toggleSource('166')">Show source</a></p>
+<div id='166' class='ruff_dyn_src'><pre>proc ::tomato::mathpt3d::IsCollinearPoints {p1 p2 p3 {tolerance {$::tomato::helper::Epsilon}}} {
+
+    # Check if three points are collinear
+    #
+    # p1 - [Point3d]
+    # p2 - [Point3d]
+    # p3 - [Point3d]
+    #
+    # Returns true if the points are collinear, otherwise false.
+
+    set v1 [[tomato::mathline3d::Line3d new $p1 $p2] Direction]
+    set v2 [[tomato::mathline3d::Line3d new $p1 $p3] Direction]
+
+    if {[llength [info level 0]] &lt; 5} {
+        set tolerance $::tomato::helper::Epsilon
+    }
+
+    return [expr {[[tomato::mathvec3d::Cross $v1 $v2] Length] &lt; $tolerance}]
 }</pre></div>
 </div><h4 class='ruffproc'><a name='::tomato::mathpt3d::MidPoint'>MidPoint</a><span class='ns_scope'> [<a href="tomato_tomato_mathpt3d.html#::tomato::mathpt3d" title="::tomato::mathpt3d" class='ruff_cmd'>::tomato::mathpt3d</a>]</span><span class='tinylink'><a href='tomato_tomato_mathpt3d.html#::tomato::mathpt3d'>mathpt3d</a>, <a href='#top'>Top</a>, <a href='tomato.html'>Main</a></span></h4>
 <div style='clear:both;'></div>
@@ -826,8 +889,8 @@ pre {
 <tr><td class='ruff_defitem'><code>pt2</code></td><td class='ruff_defitem'>The second point</td></tr>
 </table>
 <p class='ruff'>Returns The midpoint of the points <a href="tomato_tomato_mathpt3d.html#::tomato::mathpt3d::Point3d" title="Point3d" class='ruff_cmd'>Point3d</a></p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_140' href="javascript:toggleSource('140')">Show source</a></p>
-<div id='140' class='ruff_dyn_src'><pre>proc ::tomato::mathpt3d::MidPoint {pt1 pt2} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_167' href="javascript:toggleSource('167')">Show source</a></p>
+<div id='167' class='ruff_dyn_src'><pre>proc ::tomato::mathpt3d::MidPoint {pt1 pt2} {
 
     # Gets the midpoint of two points
     #
@@ -840,6 +903,7 @@ pre {
 </div></div></div><div class='yui-b navbox' ><h1><a style='padding-top:2px;' href='tomato.html'>Start page</a></h1>
 <hr>
 <h1><a href='tomato_tomato_helper.html'>tomato::helper</a></h1>
+<h1><a href='tomato_tomato_mathtriangle.html'>tomato::mathtriangle</a></h1>
 <h1><a href='tomato_tomato_mathcsys.html'>tomato::mathcsys</a></h1>
 <h1><a href='tomato_tomato_mathquat.html'>tomato::mathquat</a></h1>
 <h1><a href='tomato_tomato_mathline3d.html'>tomato::mathline3d</a></h1>
@@ -859,11 +923,13 @@ pre {
 </span></h4><h4 class='tooltip'><a href='tomato_tomato_mathpt3d.html#::tomato::mathpt3d::Point3d::Get'>Get</a><span class='tooltiptext'>Gets values from the Point3d Class under TCL list form.
 </span></h4><h4 class='tooltip'><a href='tomato_tomato_mathpt3d.html#::tomato::mathpt3d::Point3d::GetType'>GetType</a><span class='tooltiptext'>Gets the name of class.
 </span></h4><h4 class='tooltip'><a href='tomato_tomato_mathpt3d.html#::tomato::mathpt3d::Point3d::MirrorAbout'>MirrorAbout</a><span class='tooltiptext'>Gets the mirror point of this point across a plane
+</span></h4><h4 class='tooltip'><a href='tomato_tomato_mathpt3d.html#::tomato::mathpt3d::Point3d::Origin'>Origin</a><span class='tooltiptext'>Gets a point at the origin
 </span></h4><h4 class='tooltip'><a href='tomato_tomato_mathpt3d.html#::tomato::mathpt3d::Point3d::ProjectOn'>ProjectOn</a><span class='tooltiptext'>Projects a point onto a plane
 </span></h4><h4 class='tooltip'><a href='tomato_tomato_mathpt3d.html#::tomato::mathpt3d::Point3d::Rotate'>Rotate</a><span class='tooltiptext'>Rotates the point about a given vector
 </span></h4><h4 class='tooltip'><a href='tomato_tomato_mathpt3d.html#::tomato::mathpt3d::Point3d::ToString'>ToString</a><span class='tooltiptext'>Returns a string representation of this object.
 </span></h4><h4 class='tooltip'><a href='tomato_tomato_mathpt3d.html#::tomato::mathpt3d::Point3d::ToVector3D'>ToVector3D</a><span class='tooltiptext'>Converts this point into a vector from the origin
 </span></h4><h4 class='tooltip'><a href='tomato_tomato_mathpt3d.html#::tomato::mathpt3d::Point3d::TransformBy'>TransformBy</a><span class='tooltiptext'>Applies a transform coordinate system to the point
+</span></h4><h4 class='tooltip'><a href='tomato_tomato_mathpt3d.html#::tomato::mathpt3d::Point3d::TranslatePoint'>TranslatePoint</a><span class='tooltiptext'>Translates a Point along vector and distance
 </span></h4><h4 class='tooltip'><a href='tomato_tomato_mathpt3d.html#::tomato::mathpt3d::Point3d::VectorTo'>VectorTo</a><span class='tooltiptext'>Gets a vector from this point to another point
 </span></h4><h4 class='tooltip'><a href='tomato_tomato_mathpt3d.html#::tomato::mathpt3d::Point3d::X'>X</a><span class='tooltiptext'>Gets The x component.
 </span></h4><h4 class='tooltip'><a href='tomato_tomato_mathpt3d.html#::tomato::mathpt3d::Point3d::Y'>Y</a><span class='tooltiptext'>Gets The y component.
@@ -873,6 +939,7 @@ pre {
 </span></h4><h4 class='tooltip'><a href='tomato_tomato_mathpt3d.html#::tomato::mathpt3d::Equals'>Equals</a><span class='tooltiptext'>Gets a value to indicate if a pair of points are equal
 </span></h4><h4 class='tooltip'><a href='tomato_tomato_mathpt3d.html#::tomato::mathpt3d::IntersectionOf3Planes'>IntersectionOf3Planes</a><span class='tooltiptext'>Gets the point at which three planes intersect
 </span></h4><h4 class='tooltip'><a href='tomato_tomato_mathpt3d.html#::tomato::mathpt3d::IntersectionOfPlaneRay'>IntersectionOfPlaneRay</a><span class='tooltiptext'>Gets the point of intersection between a plane and a ray
+</span></h4><h4 class='tooltip'><a href='tomato_tomato_mathpt3d.html#::tomato::mathpt3d::IsCollinearPoints'>IsCollinearPoints</a><span class='tooltiptext'>Check if three points are collinear
 </span></h4><h4 class='tooltip'><a href='tomato_tomato_mathpt3d.html#::tomato::mathpt3d::MidPoint'>MidPoint</a><span class='tooltiptext'>Gets the midpoint of two points
 </span></h4></div></div><div id='ft'><div style='float: right;'>Document generated by <a href='https://ruff.magicsplat.com'>Ruff!</a></div></div>
 </div></body></html>
