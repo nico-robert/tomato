@@ -66,11 +66,11 @@ oo::define tomato::mathmatrix::Matrix {
         if {$colIndex > ($_columnCount - 1)} {
             error "Index Column must be between 0 & [expr {$_columnCount - 1}]"
         }
-        if {$rowIndex > $_rowCount - 1} {
+        if {$rowIndex > ($_rowCount - 1)} {
             error "Index Row must be between 0 & [expr {$_rowCount - 1}]"
         }
 
-        set _values [lset _values [list $rowIndex $colIndex] $value]
+        lset _values [list $rowIndex $colIndex] $value
     }
 
     method GetCell {rowIndex colIndex} {
@@ -104,8 +104,10 @@ oo::define tomato::mathmatrix::Matrix {
             error "All vectors must have the same dimensionality."
         }
 
-        for {set row 0} {$row < [my RowCount]} {incr row} {
-            set _values [lset _values [list $row $colIndex] [lindex $columnlistvalues $row]]
+        set len [my RowCount]
+
+        for {set row 0} {$row < $len} {incr row} {
+            lset _values [list $row $colIndex] [lindex $columnlistvalues $row]
         }
     }
 
@@ -119,7 +121,9 @@ oo::define tomato::mathmatrix::Matrix {
             error "Index Column must be between 0 & [expr {$_columnCount - 1}]"
         }
 
-        for {set row 0} {$row < [my RowCount]} {incr row} {
+        set len [my RowCount]
+
+        for {set row 0} {$row < $len} {incr row} {
             lappend valcolumn [lindex $_values $row $colIndex]
         }
 
@@ -141,7 +145,7 @@ oo::define tomato::mathmatrix::Matrix {
             error "All vectors must have the same dimensionality."
         }
 
-        set _values [lset _values $rowIndex $rowlistvalues]
+        lset _values $rowIndex $rowlistvalues
     }
 
     method GetRow {rowIndex} {
@@ -169,8 +173,9 @@ oo::define tomato::mathmatrix::Matrix {
         }
 
         set mat [oo::copy [self]] ; # copy matrix...
+        set len [$mat RowCount]
 
-        for {set row 0} {$row < [$mat RowCount]} {incr row} {
+        for {set row 0} {$row < $len} {incr row} {
 
             set addresult {}
 
@@ -314,7 +319,9 @@ oo::define tomato::mathmatrix::Matrix {
 
         lassign [my Decompose] toggle lum perm
         set result $toggle
-        for {set i 0} {$i < [$lum RowCount]} {incr i} {
+        set len [$lum RowCount]
+
+        for {set i 0} {$i < $len} {incr i} {
             set result [expr {$result * [$lum GetCell $i $i]}]
         }
 
@@ -340,13 +347,26 @@ oo::define tomato::mathmatrix::Matrix {
         return [tomato::helper::TypeClass [self]]
     }
 
+    method GetSize {} {
+        # Returns the size of this object.
+        return [format {%sx%s} [my RowCount] [my ColumnCount]]
+    }
+
+    method ToCsys {} {
+        # Returns a csys from Matrix.
+        if {([my RowCount] != 4) && ([my ColumnCount] != 4)} {
+            error "Must be a Matrix 4x4..."
+        }
+        return [tomato::mathcsys::Csys new [self]]
+    }
+
     method ToMatrixString {} {
         # Returns a string representation of this object.
         return [join [my Values] "\n"]
     }
 
-    export RowCount ColumnCount Values GetRow SetRow GetCell SetCell Multiply ToMatrixString GetType
-    export Add GetColumn SetColumn SetSubMatrix SubMatrix Transpose Determinant Decompose Inverse 
+    export RowCount ColumnCount Values GetRow SetRow GetCell SetCell Multiply ToMatrixString GetType GetSize
+    export Add GetColumn SetColumn SetSubMatrix SubMatrix Transpose Determinant Decompose Inverse ToCsys
 
 }
 
@@ -401,7 +421,7 @@ proc tomato::mathmatrix::CopyTo {target storage} {
     # Returns matrix [Matrix]
 
     if {[$storage RowCount] != [$target RowCount] || [$storage ColumnCount] != [$target ColumnCount]} {
-        error "Matrix dimensions must agree: op1 is [$storage RowCount]x[$storage ColumnCount], op2 is [$target RowCount]x[$target ColumnCount]."
+        error "Matrix dimensions must agree: op1 is [$storage GetSize], op2 is [$target GetSize]."
     }
 
     for {set j 0} {$j < [$storage ColumnCount] } {incr j} {
@@ -440,9 +460,7 @@ proc tomato::mathmatrix::CopySubMatrixTo {target storage sourceRowIndex targetRo
     }
 
     for {set j $sourceColumnIndex ; set jj $targetColumnIndex} {$j < [expr {$sourceColumnIndex + $columnCount}]} {incr j ; incr jj} {
-
         for {set i $sourceRowIndex ; set ii $targetRowIndex} {$i < [expr {$sourceRowIndex + $rowCount}]} {incr i ; incr ii} {
-
             $target SetCell $ii $jj [$storage GetCell $i $j]
         }
     }
