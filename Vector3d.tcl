@@ -171,9 +171,9 @@ oo::define tomato::mathvec3d::Vector3d {
     }
 
     method Normalize {} {
-        # Normalize Vector Object
+        # Transform self Vector to Normalize Vector.
         #
-        # Returns a normalized unit vector [Vector3d].
+        # Returns nothing.
         #
         # See also: Normalized IsNormalized
         set norm [my Length]
@@ -188,6 +188,7 @@ oo::define tomato::mathvec3d::Vector3d {
         set _y [expr {$_y * $scale}]
         set _z [expr {$_z * $scale}]
 
+        return ""
     }
 
     method IsPerpendicularTo {other {tolerance 1e-6}} {
@@ -323,12 +324,12 @@ oo::define tomato::mathvec3d::Vector3d {
         #
         # Returns A new scaled vector [Vector3d].
         if {$scale == 0} {
-            error "Divide [tomato::helper::TypeClass $va] by zero..."
+            error "Divide [tomato::helper::TypeClass [self]] by zero..."
         }
 
-        set vx [expr {[$va X] / $scale}]
-        set vy [expr {[$va Y] / $scale}]
-        set vz [expr {[$va Z] / $scale}]
+        set vx [expr {[my X] / $scale}]
+        set vy [expr {[my Y] / $scale}]
+        set vz [expr {[my Z] / $scale}]
 
         return [tomato::mathvec3d::Vector3d new $vx $vy $vz]
     }
