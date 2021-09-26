@@ -15,6 +15,7 @@ This [Tcl](https://www.tcl.tk) package is inspired , copied (as best I could) fr
 | Line | A Class representing a Line in 3D space|
 | Coordinate System | A Class representing a Coordinate System |
 | Quaternion | A Class representing a Quaternion |
+| Triangle | A Class representing a Triangle in 3D space |
 
 License :
 -------------------------
@@ -28,3 +29,4 @@ Release :
 -------------------------
 *  **26-02-2021** : v1.0 Initial release
 *  **21-03-2021** : v1.1 Add Quaternion Class
+*  **26-09-2021** : v1.2 Add Triangle Class
