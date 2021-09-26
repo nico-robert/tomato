@@ -4,6 +4,7 @@
 
 # 26-02-2021 : v1.0 Initial release
 # 21-03-2021 : v1.1 Add Quaternion Class
+# 26-09-2021 : v1.2 Add Triangle Class
 
 package require Tcl 8.6
 
@@ -18,10 +19,11 @@ source [file join $dir Line3d.tcl]
 source [file join $dir Plane.tcl]
 source [file join $dir CoordinateSystem.tcl]
 source [file join $dir Quaternion.tcl]
+source [file join $dir Triangle3d.tcl]
 source [file join $dir Helper.tcl]
 
 namespace eval tomato {
-    variable version 1.1
+    variable version 1.2
 
     variable _Intro {
         # tomato - math::geometry 3D library
@@ -40,6 +42,7 @@ namespace eval tomato {
         Line              - * A Class representing a Line in 3D space *
         Coordinate System - * A Class representing a Coordinate System *
         Quaternion        - * A Class representing a Quaternion *
+        Triangle          - * A Class representing a Triangle in 3D space *
 
         #### Examples
 
