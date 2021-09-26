@@ -8,7 +8,7 @@ namespace eval tomato::mathcsys {
 
 oo::class create tomato::mathcsys::Csys {
 
-    variable _origine
+    variable _origin
     variable _xaxis
     variable _yaxis
     variable _zaxis
@@ -38,26 +38,26 @@ oo::class create tomato::mathcsys::Csys {
                 set _xaxis   [tomato::mathvec3d::Vector3d new [lrange [$_baseclass GetColumn 0] 0 2]]
                 set _yaxis   [tomato::mathvec3d::Vector3d new [lrange [$_baseclass GetColumn 1] 0 2]]
                 set _zaxis   [tomato::mathvec3d::Vector3d new [lrange [$_baseclass GetColumn 2] 0 2]]
-                set _origine [tomato::mathpt3d::Point3d   new [lrange [$_baseclass GetColumn 3] 0 2]]
+                set _origin  [tomato::mathpt3d::Point3d   new [lrange [$_baseclass GetColumn 3] 0 2]]
             }
 
         } elseif {[llength $args] == 4} {
 
             foreach entity $args {
                 if {![tomato::helper::IsaObject $entity]} {
-                    error "$entity must be a object..."
+                    error "\$entity must be a object..."
                 }
             }
 
             lassign $args _or v1 v2 v3
 
             if {![TypeOf $_or Isa "Point3d"]} {
-                error "[lindex $args 0] must be a Point3d..."
+                error "\[lindex $args 0\] must be a Point3d..."
             }
 
             foreach entity [list $v1 $v2 $v3] {
                 if {![TypeOf $entity Isa "Vector3d"]} {
-                    error "$entity must be a Vector3d..."
+                    error "\$entity must be a Vector3d..."
                 }
             }
 
@@ -67,12 +67,12 @@ oo::class create tomato::mathcsys::Csys {
             set _xaxis   $v1
             set _yaxis   $v2
             set _zaxis   $v3
-            set _origine $_or
+            set _origin $_or
 
             $mat SetColumn 0 [list {*}[$_xaxis Get] 0]
             $mat SetColumn 1 [list {*}[$_yaxis Get] 0]
             $mat SetColumn 2 [list {*}[$_zaxis Get] 0]
-            $mat SetColumn 3 [list {*}[$_origine Get] 1]
+            $mat SetColumn 3 [list {*}[$_origin Get] 1]
 
         } else {
             # default values
@@ -82,12 +82,12 @@ oo::class create tomato::mathcsys::Csys {
             set _xaxis   [tomato::mathvec3d::UnitX]
             set _yaxis   [tomato::mathvec3d::UnitY]
             set _zaxis   [tomato::mathvec3d::UnitZ]
-            set _origine [tomato::mathpt3d::Point3d new 0 0 0]
+            set _origin [tomato::mathpt3d::Point3d new 0 0 0]
             
             $mat SetColumn 0 [list {*}[$_xaxis Get] 0]
             $mat SetColumn 1 [list {*}[$_yaxis Get] 0]
             $mat SetColumn 2 [list {*}[$_zaxis Get] 0]
-            $mat SetColumn 3 [list {*}[$_origine Get] 1]
+            $mat SetColumn 3 [list {*}[$_origin Get] 1]
 
         }
     }
@@ -120,7 +120,7 @@ oo::define tomato::mathcsys::Csys {
         # Gets the Origin
         #
         # Returns A point [mathpt3d::Point3d]
-        return $_origine
+        return $_origin
     }
 
     method BaseClass {} {
@@ -132,7 +132,7 @@ oo::define tomato::mathcsys::Csys {
         # Gets the offset to origin
         #
         # Returns A vector [mathvec3d::Vector3d]
-        return [$_origine ToVector3D]
+        return [$_origin ToVector3D]
     }
 
     method BaseChangeMatrix {} {
@@ -141,7 +141,7 @@ oo::define tomato::mathcsys::Csys {
         # Returns A matrix [mathmatrix::Matrix]
         set matrix [tomato::mathcsys::GetRotationSubMatrix [self]]
         set cs [tomato::mathcsys::SetRotationSubMatrix [$matrix Transpose] [self]]
-        return $cs
+        return [$cs BaseClass]
 
     }
 
@@ -261,6 +261,17 @@ oo::define tomato::mathcsys::Csys {
 
     }
 
+    method TranslateCsys {v d} {
+        # Translates a coordinate system follow vector and distance
+        #
+        # v - a translation vector [mathvec3d::Vector3d]
+        # d - Distance translation
+        #
+        # Returns A new translated coordinate system [Csys]
+        return [tomato::mathcsys::Csys new [[my Origin] TranslatePoint $v $d] [my XAxis] [my YAxis] [my ZAxis]]
+
+    }
+
     method TransformToCoordSys {entity} {
         # Transforms entity according to this change matrix
         # 
@@ -279,14 +290,14 @@ oo::define tomato::mathcsys::Csys {
                 set baseChangeMatrix [my BaseChangeMatrix]
 
                 # The position and the vector are transformed
-                set point [[$baseChangeMatrix Transform $p] + [my OffsetToBase]]
+                set point [[[$baseChangeMatrix ToCsys] Transform $p] + [my OffsetToBase]]
                 set direction [$uv TransformBy $baseChangeMatrix]
 
                 return [tomato::mathray3d::Ray3d new $point $direction]
             }
             *Point3d {
                 set baseChangeMatrix [my BaseChangeMatrix]
-                set point [[$baseChangeMatrix Transform $p] + [my OffsetToBase]]
+                set point [[[$baseChangeMatrix ToCsys] Transform $entity] + [my OffsetToBase]]
 
                 return $point
             }
@@ -313,16 +324,17 @@ oo::define tomato::mathcsys::Csys {
                 set uv [$entity Direction]
 
                 set baseChangeMatrix [my BaseChangeMatrix]
-                set matinv [$baseChangeMatrix Inverse]
+                set matinv    [$baseChangeMatrix Inverse]
+                set mattocsys [$matinv ToCsys]
 
-                set point [[$matinv Transform $p] + [my OffsetToBase]]
-                set direction [$matinv Transform $uv]
+                set point [[$mattocsys Transform $p] + [my OffsetToBase]]
+                set direction [$mattocsys Transform $uv]
 
                 return [tomato::mathray3d::Ray3d new $point $direction]
             }
             *Point3d {
                 set baseChangeMatrix [my BaseChangeMatrix]
-                set point [[[$baseChangeMatrix Inverse] Transform $p] + [my OffsetToBase]]
+                set point [[[[$baseChangeMatrix Inverse] ToCsys] Transform $entity] + [my OffsetToBase]]
 
                 return $point
             }
@@ -390,10 +402,53 @@ oo::define tomato::mathcsys::Csys {
     }
 
     export XAxis YAxis ZAxis Origin BaseClass ToString GetType ResetRotations Invert
-    export RotateCoordSysAroundVector RotateNoReset OffsetBy BaseChangeMatrix
+    export RotateCoordSysAroundVector RotateNoReset OffsetBy BaseChangeMatrix TranslateCsys
     export OffsetToBase TransformBy Transform TransformFromCoordSys TransformToCoordSys SetTranslation
     export == !=
 
+}
+
+proc tomato::mathcsys::Parse {args} {
+    # Transform a list to coordinate system 
+    #
+    # args - Options described below.
+    #
+    # The first  value represents the origin \[Tcl list]<br>
+    # The second value represents the Xaxis \[Tcl list]<br>
+    # The third  value represents the Yaxis \[Tcl list]<br>
+    # The fourth value represents the Zaxis \[Tcl list]<br>
+    #
+    # Returns A new coordinate system [Csys]
+
+    if {[llength $args] == 1} {
+
+        if {[llength {*}$args] != 4} {
+            error "must be a list 4 elements..."
+        }
+
+        lassign {*}$args or vx vy vz
+
+        set p  [tomato::mathpt3d::Point3d new $or]
+        set v1 [tomato::mathvec3d::Vector3d new $vx]
+        set v2 [tomato::mathvec3d::Vector3d new $vy]
+        set v3 [tomato::mathvec3d::Vector3d new $vz]
+
+        return [tomato::mathcsys::Csys new $p $v1 $v2 $v3]
+
+    } elseif {[llength $args] == 4} {
+
+        lassign $args or vx vy vz
+
+        set p  [tomato::mathpt3d::Point3d new $or]
+        set v1 [tomato::mathvec3d::Vector3d new $vx]
+        set v2 [tomato::mathvec3d::Vector3d new $vy]
+        set v3 [tomato::mathvec3d::Vector3d new $vz]
+
+        return [tomato::mathcsys::Csys new $p $v1 $v2 $v3]
+        
+    } else {
+        error "must be a list of 1 with 4 sub lists or 4 elements..."
+    }
 }
 
 proc tomato::mathcsys::RotateTo {fromVector3D toVector3D {axis "null"}} {
