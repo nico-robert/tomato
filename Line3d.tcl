@@ -209,7 +209,7 @@ oo::define tomato::mathline3d::Line3d {
 
     }
 
-    method IntersectionWith {intersectingPlane {tolerance $::tomato::helper::Epsilon}} {
+    method IntersectionWith {intersectingPlane {tolerance $::tomato::helper::TolGeom}} {
         # Find the intersection between the line and a plane.
         #
         # intersectingPlane - [mathplane::Plane]
@@ -217,31 +217,39 @@ oo::define tomato::mathline3d::Line3d {
         #
         # Returns A point [mathpt3d::Point3d] where the line and plane intersect, *** nothing *** if no such point exists
         if {[llength [info level 0]] < 4} {
-            set tolerance $::tomato::helper::Epsilon
+            set tolerance $::tomato::helper::TolGeom
         }
 
         return [$intersectingPlane IntersectionWith [self] $tolerance]
             
     }
 
-    method == {other {tolerance 1e-4}} {
+    method == {other {tolerance $::tomato::helper::TolEquals}} {
         # Gets value that indicates whether each pair of elements in two specified lines is equal.
         #
         # other     - The second line [Line3d] to compare.
         # tolerance - A tolerance (epsilon) to adjust for floating point error.
         #
         # Returns true if the lines are the same. Otherwise false.
+        if {[llength [info level 0]] < 4} {
+            set tolerance $::tomato::helper::TolEquals
+        }
+
         return [expr {[tomato::mathline3d::Equals [self] $other $tolerance]}]
         
     }
 
-    method != {other {tolerance 1e-4}} {
+    method != {other {tolerance $::tomato::helper::TolEquals}} {
         # Gets value that indicates whether any pair of elements in two specified lines is not equal.
         #
         # other - The second line [Line3d] to compare.
         # tolerance - A tolerance (epsilon) to adjust for floating point error.
         #
         # Returns true if the lines are different. Otherwise false
+        if {[llength [info level 0]] < 4} {
+            set tolerance $::tomato::helper::TolEquals
+        }
+
         return [expr {![tomato::mathline3d::Equals [self] $other $tolerance]}]
         
     }
