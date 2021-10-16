@@ -149,7 +149,7 @@ oo::define tomato::mathmatrix::Matrix {
     }
 
     method GetRow {rowIndex} {
-        # Set Row of base matrix.
+        # Get Row of base matrix.
         #
         # rowIndex  - index of row
         #
@@ -179,8 +179,8 @@ oo::define tomato::mathmatrix::Matrix {
 
             set addresult {}
 
-            foreach row1 [$mat GetRow $row] row2 [$other GetRow $row] {
-                lappend addresult [expr {$row1 + $row2}]
+            foreach cell1 [$mat GetRow $row] cell2 [$other GetRow $row] {
+                lappend addresult [expr {$cell1 + $cell2}]
             }
 
             $mat SetRow $row $addresult
@@ -213,7 +213,7 @@ oo::define tomato::mathmatrix::Matrix {
                 }
 
                 if {[$entity RowCount] == 1} {
-                    return [tomato::mathmatrix::MatrixMulColumnVector $mat $entity]
+                    return [tomato::mathmatrix::MatrixMulColumnVector $mat $entity] ; # return tcl list values
                 }
             
                 return [tomato::mathmatrix::MatrixMulMatrix $mat $entity] ; # return tcl list values
@@ -338,8 +338,53 @@ oo::define tomato::mathmatrix::Matrix {
 
     method Inverse {} {
         # Matrix inverse using Crout's LU decomposition
+        if {[my Determinant] == 0.0} {
+            throw {singular} "Matrix is singular..." 
+        }
+
         return [tomato::mathmatrix::MatrixInverse [self]]
 
+    }
+
+    method IsOrthogonal {} {
+        # Gets if matrix is orthogonal
+        if {[my ColumnCount] != [my RowCount]} {
+            # error "Matrix is not square..."
+            return 0
+        }        
+
+        return [[[my Transpose] Multiply [self]] == [tomato::mathmatrix::CreateIdentity [my RowCount]]]
+
+    }    
+
+    method == {other {tolerance $::tomato::helper::TolEquals}} {
+        # Gets value that indicates whether each pair of elements in two specified matrixes is equal.
+        #
+        # other     - The second matrix [Matrix] to compare.
+        # tolerance - A tolerance (epsilon) to adjust for floating point error.
+        #
+        # Returns true if the matrixes are the same. Otherwise false.
+        if {[llength [info level 0]] < 4} {
+            set tolerance $::tomato::helper::TolEquals
+        }
+
+        return [expr {[tomato::mathmatrix::Equals [self] $other $tolerance]}]
+        
+    }
+
+    method != {other {tolerance $::tomato::helper::TolEquals}} {
+        # Gets value that indicates whether any pair of elements in two specified matrixes is not equal.
+        #
+        # other - The second matrix [Matrix] to compare.
+        # tolerance - A tolerance (epsilon) to adjust for floating point error.
+        #
+        # Returns true if the matrixes are different. Otherwise false.
+        if {[llength [info level 0]] < 4} {
+            set tolerance $::tomato::helper::TolEquals
+        }
+
+        return [expr {![tomato::mathmatrix::Equals [self] $other $tolerance]}]
+        
     }
 
     method GetType {} {
@@ -367,6 +412,7 @@ oo::define tomato::mathmatrix::Matrix {
 
     export RowCount ColumnCount Values GetRow SetRow GetCell SetCell Multiply ToMatrixString GetType GetSize
     export Add GetColumn SetColumn SetSubMatrix SubMatrix Transpose Determinant Decompose Inverse ToCsys
+    export == != IsOrthogonal
 
 }
 
@@ -400,7 +446,7 @@ proc tomato::mathmatrix::CreateIdentity {size} {
     #
     # size - dimension of matrix
     #
-    # Returns a new base matrix indentity
+    # Returns a new base matrix indentity [Matrix]
     set mat [tomato::mathmatrix::Matrix new $size $size]
 
     while { $size > 0 } {
@@ -445,7 +491,7 @@ proc tomato::mathmatrix::CopySubMatrixTo {target storage sourceRowIndex targetRo
     # targetColumnIndex  - The column index of source
     # columnCount        - The number of columns to copy
     #
-    # Returns matrix copy
+    # Returns matrix copy [Matrix]
 
     if {$rowCount == 0 || $columnCount == 0} {
         return $target
@@ -509,7 +555,7 @@ proc tomato::mathmatrix::MatrixMulVector {mat other} {
     # mat   - base matrix [Matrix]
     # other - vector [mathvec3d::Vector3d]
     #
-    # Returns TCL list mul matrix [Matrix]
+    # Returns TCL list (mul matrix)
     set newvect {}
     set mat1 [$mat Values]
     set vec1 [$other Get]
@@ -535,7 +581,7 @@ proc tomato::mathmatrix::MatrixMulColumnVector {mat other} {
     # mat   - [Matrix]
     # other - [Matrix]
     #
-    # Returns TCL list mul matrix [Matrix]
+    # Returns TCL list (mul matrix)
     set newvect {}
 
     set mat1 [$mat Values]
@@ -604,7 +650,6 @@ proc tomato::mathmatrix::MatrixDecompose {storage} {
                 set max $xij
                 set piv $i
             }
-            
         }
 
         if {$piv != $j} {
@@ -617,10 +662,9 @@ proc tomato::mathmatrix::MatrixDecompose {storage} {
             $permmat SetCell 0 $piv [$permmat GetCell 0 $j]
             $permmat SetCell 0 $j $t
 
-            set toggle [expr {$toggle * -1}]
+            set toggle [expr {Inv($toggle)}]
 
         }
-
 
         set xjj [$lummat GetCell $j $j]
 
@@ -648,9 +692,9 @@ proc tomato::mathmatrix::MatrixInverse {storage} {
     #
     # Returns A Matrix Inverse
 
-     set n [$storage RowCount]
-     set result [tomato::mathmatrix::Matrix new $n $n]
-     set result [tomato::mathmatrix::CopyTo $result $storage]
+    set n [$storage RowCount]
+    set result [tomato::mathmatrix::Matrix new $n $n]
+    set result [tomato::mathmatrix::CopyTo $result $storage]
 
     lassign [$storage Decompose] toggle lum perm
 
@@ -674,6 +718,39 @@ proc tomato::mathmatrix::MatrixInverse {storage} {
     }
 
     return $result
+}
+
+proc tomato::mathmatrix::Equals {mat other tolerance} {
+    # Indicate if this matrix is equivalent to a another matrix
+    #
+    # mat   - First input matrix  [Matrix]
+    # other - Second input matrix [Matrix]
+    # tolerance - A tolerance (epsilon) to adjust for floating point error
+    #
+    # Returns true if matrixes are equal, otherwise false.
+    #
+    # See : methods == !=
+    if {$tolerance < 0} {
+        #ruff
+        # An error exception is raised if tolerance (epsilon) < 0.
+        error "epsilon < 0"
+    }
+
+    if {([$mat RowCount] != [$other RowCount]) || ([$mat ColumnCount] != [$other ColumnCount])} {
+        return 0
+    }
+
+    set len [$mat RowCount]
+
+    for {set row 0} {$row < $len} {incr row} {
+        foreach cellmat [$mat GetRow $row] cellother [$other GetRow $row] {
+            if {abs($cellmat - $cellother) > $tolerance} {
+                return 0
+            }
+        }
+    }
+
+    return 1
 }
 
 proc tomato::mathmatrix::_MatrixHelper {luMatrix bMatrix} {
