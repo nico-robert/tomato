@@ -39,6 +39,8 @@ oo::class create tomato::mathcsys::Csys {
                 set _yaxis   [tomato::mathvec3d::Vector3d new [lrange [$_baseclass GetColumn 1] 0 2]]
                 set _zaxis   [tomato::mathvec3d::Vector3d new [lrange [$_baseclass GetColumn 2] 0 2]]
                 set _origin  [tomato::mathpt3d::Point3d   new [lrange [$_baseclass GetColumn 3] 0 2]]
+            } else {
+                error "Must be a matrix if args equal to 1..."
             }
 
         } elseif {[llength $args] == 4} {
@@ -79,9 +81,9 @@ oo::class create tomato::mathcsys::Csys {
             set mat [tomato::mathmatrix::Matrix new 4 4]
             set _baseclass $mat
 
-            set _xaxis   [tomato::mathvec3d::UnitX]
-            set _yaxis   [tomato::mathvec3d::UnitY]
-            set _zaxis   [tomato::mathvec3d::UnitZ]
+            set _xaxis  [tomato::mathvec3d::UnitX]
+            set _yaxis  [tomato::mathvec3d::UnitY]
+            set _zaxis  [tomato::mathvec3d::UnitZ]
             set _origin [tomato::mathpt3d::Point3d new 0 0 0]
             
             $mat SetColumn 0 [list {*}[$_xaxis Get] 0]
@@ -363,24 +365,32 @@ oo::define tomato::mathcsys::Csys {
 
     }
 
-    method == {other {tolerance 1e-4}} {
+    method == {other {tolerance $::tomato::helper::TolEquals}} {
         # Gets value that indicates whether each pair of elements in two specified coordinate system is equal.
         #
         # other     - The second coordinate system [Csys] to compare.
         # tolerance - A tolerance (epsilon) to adjust for floating point error.
         #
         # Returns true if the coordinate system are the same. Otherwise false.
+        if {[llength [info level 0]] < 4} {
+            set tolerance $::tomato::helper::TolEquals
+        }
+
         return [expr {[tomato::mathcsys::Equals [self] $other $tolerance]}]
         
     }
 
-    method != {other {tolerance 1e-4}} {
+    method != {other {tolerance $::tomato::helper::TolEquals}} {
         # Gets value that indicates whether any pair of elements in two specified coordinate system is not equal.
         #
         # other - The second coordinate system [Csys] to compare.
         # tolerance - A tolerance (epsilon) to adjust for floating point error.
         #
         # Returns true if the coordinate system are different. Otherwise false.
+        if {[llength [info level 0]] < 4} {
+            set tolerance $::tomato::helper::TolEquals
+        }
+
         return [expr {![tomato::mathcsys::Equals [self] $other $tolerance]}]
         
     }
@@ -392,10 +402,10 @@ oo::define tomato::mathcsys::Csys {
 
     method ToString {} {
         # Returns a string representation of this object.
-        lappend infocsys [list Origin: [[my Origin] ToString]]
-        lappend infocsys [list XAxis: [[my XAxis] ToString]]
-        lappend infocsys [list YAxis: [[my YAxis] ToString]]
-        lappend infocsys [list ZAxis: [[my ZAxis] ToString]]
+        lappend infocsys [list Origin: [$_origin ToString]]
+        lappend infocsys [list XAxis: [$_xaxis ToString]]
+        lappend infocsys [list YAxis: [$_yaxis ToString]]
+        lappend infocsys [list ZAxis: [$_zaxis ToString]]
 
         return [join $infocsys ", "]
 
@@ -567,7 +577,7 @@ proc tomato::mathcsys::GetRotationSubMatrix {coordinateSystem} {
     #
     # coordinateSystem - [Csys]
     #
-    # Returns A rotation matrix [Csys]
+    # Returns A rotation matrix [mathmatrix::Matrix]
     set csbase [$coordinateSystem BaseClass]
     return [$csbase SubMatrix 0 3 0 3]
     
@@ -580,9 +590,18 @@ proc tomato::mathcsys::CreateMappingCoordinateSystem {fromCs toCs} {
     # toCs   - The to coordinate system [Csys]
     #
     # Returns A mapping coordinate system [Csys]
-    set d [[$fromCs BaseClass] Determinant]
+    set singular 0
+    set det -1
 
-    if {abs($d) < 1e-5} {
+    try {
+        set det [[$fromCs BaseClass] Determinant]
+    } trap {singular} {} {
+        set singular 1
+    } on error {msg} {
+        error $msg
+    }
+
+    if {$singular || abs($det) < $::tomato::helper::TolEquals} {
         set mat [[$toCs BaseClass] Multiply [$fromCs BaseClass]]
     } else {
         set mat [[$toCs BaseClass] Multiply [[$fromCs BaseClass] Inverse]]
