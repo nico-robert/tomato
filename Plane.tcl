@@ -19,8 +19,8 @@ oo::class create tomato::mathplane::Plane {
         # Vector3d+double value  - The Plane's normal vector. [mathvec3d::Vector3d]<br>
         #                        + double value (the distance to the Plane along its normal from the origin).
         # Vector3d+Point3d       - The Plane's normal vector. [mathvec3d::Vector3d]<br>
-        #                        + The Plane's distance from the origin along its normal vector. [mathpt3d::Point3d].
-        # Point3d+Vector3d       - The Plane's distance from the origin along its normal vector. [mathpt3d::Point3d]<br>
+        #                        + Point on plane. [mathpt3d::Point3d].
+        # Point3d+Vector3d       - Point on plane. [mathpt3d::Point3d]<br>
         #                        + The Plane's normal vector. [mathvec3d::Vector3d].
         # 4 values               - List of 4 values or 4 distinct values : The first 3 values represent The Plane's normal vector<br>
         #                          and the last the distance to the Plane along its normal from the origin
@@ -32,17 +32,17 @@ oo::class create tomato::mathplane::Plane {
             if {[TypeOf $obj Isa "Vector3d"] && [string is double $value]} {
 
                 set _normal [$obj Normalized]
-                set _d      [expr {$value * -1}]
+                set _d      [expr {Inv($value)}]
 
             } elseif {[TypeOf $obj Isa "Vector3d"] && [TypeOf $value Isa "Point3d"]} {
 
                 set _normal [$obj Normalized]
-                set _d      [expr {[tomato::mathvec3d::Dot $_normal $value] * -1}]
+                set _d      [expr {Inv([tomato::mathvec3d::Dot $_normal $value])}]
 
             } elseif {[TypeOf $obj Isa "Point3d"] && [TypeOf $value Isa "Vector3d"]} {
 
                 set _normal [$value Normalized]
-                set _d      [expr {[tomato::mathvec3d::Dot $_normal $obj] * -1}]
+                set _d      [expr {Inv([tomato::mathvec3d::Dot $_normal $obj])}]
 
             } else {
                 #ruff
@@ -105,7 +105,7 @@ oo::define tomato::mathplane::Plane {
         return $_normal
     }
 
-    method IntersectionWith {entity {tolerance 1e-4}} {
+    method IntersectionWith {entity {tolerance $::tomato::helper::TolGeom}} {
         # Finds the intersection...
         # 
         # entity - Options described below.
@@ -116,13 +116,16 @@ oo::define tomato::mathplane::Plane {
         # tolerance - A tolerance (epsilon) to account for floating point error
         #
         # See also: IntersectionWithPlane IntersectionWithRay IntersectionWithLine
+        if {[llength [info level 0]] < 4} {
+            set tolerance $::tomato::helper::TolGeom
+        }
 
         switch -glob [$entity GetType] {
             *Plane {
                 return [tomato::mathplane::IntersectionWithPlane [self] $entity $tolerance]
             }
             *Ray3d {
-                return [tomato::mathplane::IntersectionWithRay [self] $entity]
+                return [tomato::mathplane::IntersectionWithRay [self] $entity $tolerance]
             }
             *Line3d {
                 return [tomato::mathplane::IntersectionWithLine [self] $entity $tolerance]
@@ -190,7 +193,7 @@ oo::define tomato::mathplane::Plane {
             }
             *Plane {
                 if {![[my Normal] IsParallelTo [$entity Normal] 1e-15]} {
-                    error "Planes are not parallel..."
+                    throw {Planesnotparallel} "Planes are not parallel..."
                 }
 
                 return [my SignedDistanceTo [$entity RootPoint]]
@@ -250,29 +253,37 @@ oo::define tomato::mathplane::Plane {
 
     }
 
-    method == {other {tolerance 1e-4}} {
+    method == {other {tolerance $::tomato::helper::TolEquals}} {
         # Gets value that indicates whether each pair of elements in two specified planes is equal.
         #
         # other     - The first plane to compare [Plane].
         # tolerance - A tolerance (epsilon) to adjust for floating point error.
         #
         # Returns true if the planes are the same. Otherwise false.
+        if {[llength [info level 0]] < 4} {
+            set tolerance $::tomato::helper::TolEquals
+        }
+
         return [expr {[tomato::mathplane::Equals [self] $other $tolerance]}]
     }
 
-    method != {other {tolerance 1e-4}} {
+    method != {other {tolerance $::tomato::helper::TolEquals}} {
         # Gets value that indicates whether any pair of elements in two specified planes is not equal.
         #
         # other - The second plane to compare [Plane].
         # tolerance - A tolerance (epsilon) to adjust for floating point error.
         #
         # Returns true if the planes are different. Otherwise false.
+        if {[llength [info level 0]] < 4} {
+            set tolerance $::tomato::helper::TolEquals
+        }
+
         return [expr {![tomato::mathplane::Equals [self] $other $tolerance]}]
     }
 
     method RootPoint {} {
         # Gets the point on the plane closest to origin.
-        return [[[my Normal] * [expr {[my D] * -1}]] ToPoint3D]
+        return [[[my Normal] * [expr {Inv([my D])}]] ToPoint3D]
     }
 
     method GetType {} {
@@ -285,7 +296,6 @@ oo::define tomato::mathplane::Plane {
         return [format {%s, %s, %s, %s} [my A] [my B] [my C] [my D]]
         
     }
-
 
     export A B C D Normal RootPoint ToString IntersectionWith Project SignedDistanceTo AbsoluteDistanceTo
     export == != MirrorAbout Rotate GetType
@@ -342,7 +352,7 @@ proc tomato::mathplane::ProjectLine3dOnplane {plane line direction} {
 }
 
 
-proc tomato::mathplane::FromPoints {p1 p2 p3 {tolerance 1e-4}} {
+proc tomato::mathplane::FromPoints {p1 p2 p3 {tolerance $::tomato::helper::TolGeom}} {
     # Initializes a new instance of the Plane class.
     # Creates a plane that contains the three given points.
     #
@@ -352,6 +362,9 @@ proc tomato::mathplane::FromPoints {p1 p2 p3 {tolerance 1e-4}} {
     # tolerance  - To ensure than the 3 points are not on the same line.
     #
     # Returns The plane containing the three points.
+    if {[llength [info level 0]] < 5} {
+        set tolerance $::tomato::helper::TolGeom
+    }
 
     # http://www.had2know.com/academics/equation-plane-through-3-points.html
     if {[$p1 == $p2] || [$p1 == $p3] || [$p2 == $p3]} {
@@ -359,12 +372,12 @@ proc tomato::mathplane::FromPoints {p1 p2 p3 {tolerance 1e-4}} {
     }
 
     set v1 [tomato::mathvec3d::Vector3d new [expr {[$p2 X] - [$p1 X]}] \
-                                          [expr {[$p2 Y] - [$p1 Y]}] \
-                                          [expr {[$p2 Z] - [$p1 Z]}]]
+                                            [expr {[$p2 Y] - [$p1 Y]}] \
+                                            [expr {[$p2 Z] - [$p1 Z]}]]
             
     set v2 [tomato::mathvec3d::Vector3d new [expr {[$p3 X] - [$p1 X]}] \
-                                          [expr {[$p3 Y] - [$p1 Y]}] \
-                                          [expr {[$p3 Z] - [$p1 Z]}]]
+                                            [expr {[$p3 Y] - [$p1 Y]}] \
+                                            [expr {[$p3 Z] - [$p1 Z]}]]
 
     set cross [tomato::mathvec3d::Cross $v1 $v2]
 
@@ -412,27 +425,29 @@ proc tomato::mathplane::IntersectionWithPlane {plane1 plane2 tolerance} {
         set pt [$v4 * [expr {1.0 / $det}]]
         
     } else {
-        error "Planes are parallel"
+        throw {Planesparallel} "Planes are parallel"
     }
 
     return [tomato::mathray3d::Ray3d new [$pt ToPoint3D] $dir]
 }
 
-proc tomato::mathplane::IntersectionWithRay {plane1 ray} {
+proc tomato::mathplane::IntersectionWithRay {plane1 ray tolerance} {
     # Finds the intersection between a ray and plane, throws if ray is parallel to the plane
     # <http://www.cs.princeton.edu/courses/archive/fall00/cs426/lectures/raycast/sld017.htm>
     # 
     # plane1  - [Plane]
     # ray     - [mathray3d::Ray3d]
+    # tolerance  - A tolerance (epsilon) to account for floating point error.
     #
     # Returns The point of intersection. [mathpt3d::Point3d]
 
-    if {[[$plane1 Normal] IsPerpendicularTo [$ray Direction]]} {
-        error "Ray is parallel to the plane..."
+    if {[[$plane1 Normal] IsPerpendicularTo [$ray Direction] $tolerance]} {
+        throw {Rayparallel} "Ray is parallel to the plane..."
     }
 
     set d [$plane1 SignedDistanceTo [$ray ThroughPoint]]
     set t [expr {(-1 * $d) / [[$ray Direction] DotProduct [$plane1 Normal]]}]
+    
     return [[$ray ThroughPoint] + [[$ray Direction] * $t]]
 }
 
@@ -453,7 +468,7 @@ proc tomato::mathplane::IntersectionWithLine {plane1 line tolerance} {
         set projectedPoint [$plane1 Project [$line StartPoint] $dir]
 
         if {[$projectedPoint == [$line StartPoint]]} {
-            error "Line lies in the plane"
+            throw {Linelies} "Line lies in the plane"
         }
 
     }
@@ -490,7 +505,7 @@ proc tomato::mathplane::Equals {plane other tolerance} {
         error "epsilon < 0"
     }
     return [expr {
-                  abs([$other D] - [$plane D]) < $tolerance && 
+                  (abs([$other D] - [$plane D]) < $tolerance) && 
                   [[$plane Normal] == [$other Normal]]
                 }]
 }
