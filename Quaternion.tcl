@@ -28,14 +28,14 @@ oo::class create tomato::mathquat::Quaternion {
 
         if {[llength $args] == 1} {
 
-            if {[llength [split {*}$args]] == 4} {
+            if {[llength {*}$args] == 4} {
                 #ruff
                 # * Create a quaternion by specifying a list of 4 real-numbered scalar elements.<br>
                 # ```
                 # tomato::mathquat::Quaternion new {1 2 3 4}
                 # > (1 + 2i + 3j + 4k)
                 # ```
-                lassign [split {*}$args] w x y z
+                lassign {*}$args w x y z
                 set _w $w
                 set _x $x
                 set _y $y
@@ -231,7 +231,7 @@ oo::define tomato::mathquat::Quaternion {
         # Gets a value indicating whether the quaternion q has length |q| = 1.
         # To normalize a quaternion to a length of 1, use the [Normalized] method.
         # All unit quaternions form a 3-sphere.
-        return [expr {abs(1.0 - [my NormSquared]) < 1e-14}]
+        return [expr {abs(1.0 - [my NormSquared]) < 1e-15}]
     }
 
     method Scalar {} {
@@ -261,10 +261,10 @@ oo::define tomato::mathquat::Quaternion {
         }
 
         set normSquared [my NormSquared]
-        return [tomato::mathquat::Quaternion new [expr {$_w         / double($normSquared)}] \
-                                                 [expr {($_x  * -1) / double($normSquared)}] \
-                                                 [expr {($_y  * -1) / double($normSquared)}] \
-                                                 [expr {($_z  * -1) / double($normSquared)}]]
+        return [tomato::mathquat::Quaternion new [expr {$_w      / double($normSquared)}] \
+                                                 [expr {Inv($_x) / double($normSquared)}] \
+                                                 [expr {Inv($_y) / double($normSquared)}] \
+                                                 [expr {Inv($_z) / double($normSquared)}]]
 
     }
 
@@ -292,10 +292,10 @@ oo::define tomato::mathquat::Quaternion {
         # Negate a quaternion.
         #
         # Returns A negated quaternion [Quaternion].
-        return [tomato::mathquat::Quaternion new [expr {$_w * -1}] \
-                                                 [expr {$_x * -1}] \
-                                                 [expr {$_y * -1}] \
-                                                 [expr {$_z * -1}]]
+        return [tomato::mathquat::Quaternion new [expr {Inv($_w)}] \
+                                                 [expr {Inv($_x)}] \
+                                                 [expr {Inv($_y)}] \
+                                                 [expr {Inv($_z)}]]
     }
 
     method + {entity} {
@@ -365,10 +365,10 @@ oo::define tomato::mathquat::Quaternion {
 
         if {[TypeOf $entity Isa "Quaternion"]} {
 
-            set ci [expr {($_x        * [$entity Real])  + ($_y * [$entity ImagZ]) - ($_z * [$entity ImagY]) + ($_w * [$entity ImagX])}]
-            set cj [expr {(($_x * -1) * [$entity ImagZ]) + ($_y * [$entity Real])  + ($_z * [$entity ImagX]) + ($_w * [$entity ImagY])}]
-            set ck [expr {($_x        * [$entity ImagY]) - ($_y * [$entity ImagX]) + ($_z * [$entity Real])  + ($_w * [$entity ImagZ])}]
-            set cr [expr {(($_x * -1) * [$entity ImagX]) - ($_y * [$entity ImagY]) - ($_z * [$entity ImagZ]) + ($_w * [$entity Real])}]
+            set ci [expr {($_x      * [$entity Real])  + ($_y * [$entity ImagZ]) - ($_z * [$entity ImagY]) + ($_w * [$entity ImagX])}]
+            set cj [expr {(Inv($_x) * [$entity ImagZ]) + ($_y * [$entity Real])  + ($_z * [$entity ImagX]) + ($_w * [$entity ImagY])}]
+            set ck [expr {($_x      * [$entity ImagY]) - ($_y * [$entity ImagX]) + ($_z * [$entity Real])  + ($_w * [$entity ImagZ])}]
+            set cr [expr {(Inv($_x) * [$entity ImagX]) - ($_y * [$entity ImagY]) - ($_z * [$entity ImagZ]) + ($_w * [$entity Real])}]
 
             return [tomato::mathquat::Quaternion new $cr $ci $cj $ck]
         }
@@ -423,7 +423,7 @@ oo::define tomato::mathquat::Quaternion {
         return [tomato::mathquat::Pow [self] $entity]
     }
 
-    method == {entity {tolerance $::tomato::helper::Epsilon}} {
+    method == {entity {tolerance $::tomato::helper::TolEquals}} {
         # Equality operator for two quaternions if $entity is quaternion component.
         # Equality operator for quaternion and double if $entity is double.
         # 
@@ -436,7 +436,7 @@ oo::define tomato::mathquat::Quaternion {
         # Returns true if the quaternions are the same if $entity is a quaternion or 
         # True if the real part of the quaternion is almost equal to the double and the rest of the quaternion is almost 0. Otherwise false.
         if {[llength [info level 0]] < 4} {
-            set tolerance $::tomato::helper::Epsilon
+            set tolerance $::tomato::helper::TolEquals
         }
 
         if {[string is double $entity]} {
@@ -454,7 +454,7 @@ oo::define tomato::mathquat::Quaternion {
 
     }
 
-    method != {entity {tolerance $::tomato::helper::Epsilon}} {
+    method != {entity {tolerance $::tomato::helper::TolEquals}} {
         # Inequality operator for two quaternions if $entity is quaternion component.
         # Inequality operator for quaternion and double if $entity is double.
         # 
@@ -467,7 +467,7 @@ oo::define tomato::mathquat::Quaternion {
         # Returns true if the quaternions are not the same if $entity is a quaternion or 
         # True if the real part of the quaternion is not equal to the double and the rest of the quaternion is almost 0. Otherwise false.
         if {[llength [info level 0]] < 4} {
-            set tolerance $::tomato::helper::Epsilon
+            set tolerance $::tomato::helper::TolEquals
         }
 
         return [expr {![my == $entity $tolerance]}]
@@ -566,9 +566,9 @@ oo::define tomato::mathquat::Quaternion {
         #
         # Returns A new conjugated quaternion [Quaternion]
         return [tomato::mathquat::Quaternion new $_w \
-                                                 [expr {$_x * -1}] \
-                                                 [expr {$_y * -1}] \
-                                                 [expr {$_z * -1}]]
+                                                 [expr {Inv($_x)}] \
+                                                 [expr {Inv($_y)}] \
+                                                 [expr {Inv($_z)}]]
 
     }
 
@@ -780,7 +780,7 @@ proc tomato::mathquat::Slerp {q0 q1 {arcposition 0.5}} {
     # Fix by reversing one quaternion
     if {$dot < 0.0} {
         set q0  [$q0 Negate]
-        set dot [expr {$dot * -1}]
+        set dot [expr {Inv($dot)}]
     }
 
     # sinalpha0 can not be zero
@@ -867,12 +867,10 @@ proc tomato::mathquat::_init_from_vector_angle {vector angle} {
 
 proc tomato::mathquat::_wrap_angle {alpha} {
 
-    set pi [tomato::helper::Pi]
+    set result [expr {fmod(($alpha + Pi()), (2 * Pi())) - Pi()}]
 
-    set result [expr {fmod(($alpha + $pi), (2 * $pi)) - $pi}]
-
-    if {$result == ($pi * -1)} {
-        set result $pi
+    if {$result == Inv(Pi())} {
+        set result [expr {Pi()}]
     }
 
     return $result
