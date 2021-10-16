@@ -5,7 +5,6 @@
 # 26-02-2021 : v1.0   Initial release
 # 21-03-2021 : v1.1   Add Quaternion Class
 # 26-09-2021 : v1.2   Add Triangle Class
-# 11-10-2021 : v1.2.1 Bug fixes
 # 16-10-2021 : 1.2.1
 #     - Bug fixes.
 #     - Tolerance geom and equal by default.
