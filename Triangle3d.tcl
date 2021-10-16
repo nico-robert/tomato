@@ -24,11 +24,12 @@ oo::class create tomato::mathtriangle::Triangle {
 
             if {[TypeOf $val Isa "Point3d"]} {
                 lappend _triangle $val
-            }
 
-            if {[string is list $val] && [llength $val] == 3} {
-                lassign $val x y z
-                lappend _triangle [tomato::mathpt3d::Point3d new $x $y $z]
+            } elseif {[string is list $val] && ([llength $val] == 3)} {
+                lappend _triangle [tomato::mathpt3d::Point3d new {*}$val]
+
+            } else {
+                error "list of 3 values or 'Point3d' class..."
             }
         }
 
@@ -170,9 +171,10 @@ oo::define tomato::mathtriangle::Triangle {
         return [tomato::mathpt3d::Centroid [list [my A] [my B] [my C]]]
     }
 
-    method IntersectionWith {entity {tolerance 1e-8}} {
+    method IntersectionWith {entity {tolerance $::tomato::helper::TolGeom}} {
         # Finds the intersection...
-        # 
+        # [Möller–Trumbore_intersection_algorithm](https://en.wikipedia.org/wiki/Möller–Trumbore_intersection_algorithm)
+        #
         # entity - Options described below.
         #
         # Ray    - [mathray3d::Ray3d]
@@ -180,9 +182,13 @@ oo::define tomato::mathtriangle::Triangle {
         # tolerance - A tolerance (epsilon) to account for floating point error
         #
         # Returns nothing is no intersection, A [mathpt3d::Point3d] if intersection.
+        if {[llength [info level 0]] < 4} {
+            set tolerance $::tomato::helper::TolGeom
+        }
+
         switch -glob [$entity GetType] {
             *Ray3d {
-                set ip [tomato::mathplane::IntersectionWithRay [my ToPlane] $entity]
+                set ip [tomato::mathplane::IntersectionWithRay [my ToPlane] $entity $tolerance]
             }
             *Line3d {
                 set ip [tomato::mathplane::IntersectionWithLine [my ToPlane] $entity $tolerance]
@@ -231,31 +237,44 @@ oo::define tomato::mathtriangle::Triangle {
 
     }
 
-    method == {other {tolerance 1e-4}} {
+    method == {other {tolerance $::tomato::helper::TolEquals}} {
         # Gets value that indicates whether each pair of elements in two specified points is equal.
         #
         # other     - The second triangle [Triangle] to compare.
         # tolerance - A tolerance (epsilon) to adjust for floating point error.
         #
         # Returns true if the triangles are the same. Otherwise false.
+        if {[llength [info level 0]] < 4} {
+            set tolerance $::tomato::helper::TolEquals
+        }
+
         return [expr {[tomato::mathtriangle::Equals [self] $other $tolerance]}]
         
     }
 
-    method != {other {tolerance 1e-4}} {
+    method != {other {tolerance $::tomato::helper::TolEquals}} {
         # Gets value that indicates whether any pair of elements in two specified points is not equal.
         #
         # other - The second triangle [Triangle] to compare.
         # tolerance - A tolerance (epsilon) to adjust for floating point error.
         #
         # Returns true if the triangles are different. Otherwise false.
+        if {[llength [info level 0]] < 4} {
+            set tolerance $::tomato::helper::TolEquals
+        }
+
         return [expr {![tomato::mathtriangle::Equals [self] $other $tolerance]}]
         
     }
 
+    method GetType {} {
+        # Gets the name of class.
+        return [tomato::helper::TypeClass [self]]
+    }
+
     export A B C AB AC BC Perimeter Aera Normal ToPlane
     export AngleA AngleB AngleC Centroid IntersectionWith
-    export BisectorA BisectorB BisectorC
+    export BisectorA BisectorB BisectorC GetType
     export == !=
 
 
