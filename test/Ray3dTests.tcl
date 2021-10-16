@@ -47,7 +47,7 @@ foreach value $TestCase {
     set plane1 [mathplane::Plane new [mathpt3d::Point3d new $rootPoint1] [mathvec3d::Vector3d new $unitVector1]]
     set plane2 [mathplane::Plane new [mathpt3d::Point3d new $rootPoint2] [mathvec3d::Vector3d new $unitVector2]]
 
-    set actual   [mathray3d::IntersectionRayWithPlane $plane1 $plane2]
+    set actual   [mathray3d::IntersectionPlaneWithPlane $plane1 $plane2]
     set expected [mathray3d::Ray3d new [mathpt3d::Point3d new $eps] [mathvec3d::Vector3d new $evs]]
 
     test IntersectionOf [list \
@@ -75,5 +75,38 @@ test LineToTest2 [list \
      mathpt3d::Equals [$line3DTo EndPoint] $point3D 1e-9
 } -result 1
 
+
+set TestCase {}
+
+lappend TestCase {{0 0 0} {1 -1 1} {0 0 0} {1 -1 1} 1}
+lappend TestCase {{0 0 2} {1 -1 1} {0 0 0} {1 -1 1} 0}
+lappend TestCase {{0 0 0} {1 -1 1} {0 0 0} {2 -1 1} 0}
+
+foreach value $TestCase {
+
+    lassign $value p1s v1s p2s v2s bool
+
+    set ray1 [mathray3d::Ray3d new [mathpt3d::Point3d new $p1s] [mathvec3d::Vector3d new $v1s]]
+    set ray2 [mathray3d::Ray3d new [mathpt3d::Point3d new $p2s] [mathvec3d::Vector3d new $v2s]]
+
+    test Equals [list \
+        Test Equals ray
+    ] -body {
+        mathray3d::Equals $ray1 $ray2 1e-9
+    } -result $bool
+
+    test Equals [list \
+        Test Equals == ray
+    ] -body {
+        $ray1 == $ray2
+    } -result $bool
+
+    test Equals [list \
+        Test Equals != ray
+    ] -body {
+        $ray1 != $ray2
+    } -result [expr {!$bool}]
+
+}
 
 cleanupTests

@@ -12,13 +12,13 @@ proc LogTests {} {
     set q0  [mathquat::Quaternion new {1 0 0 0}]
     set q00 [mathquat::Quaternion new {1 0 0 0}]
     set q1  [mathquat::Quaternion new {0 0 0 1}]
-    set q10 [mathquat::Quaternion new [list 0 0 0 [expr {[helper::Pi] / 2.0}]]]
+    set q10 [mathquat::Quaternion new [list 0 0 0 [expr {Pi() / 2.0}]]]
     set q2  [mathquat::Quaternion new {1 1 1 1}]
     set q20 [mathquat::Quaternion new [list \
                                     [expr {log(2)}] \
-                                    [expr {(1 / sqrt(3)) * ([helper::Pi] / 3.0)}] \
-                                    [expr {(1 / sqrt(3)) * ([helper::Pi] / 3.0)}] \
-                                    [expr {(1 / sqrt(3)) * ([helper::Pi] / 3.0)}] \
+                                    [expr {(1 / sqrt(3)) * (Pi() / 3.0)}] \
+                                    [expr {(1 / sqrt(3)) * (Pi() / 3.0)}] \
+                                    [expr {(1 / sqrt(3)) * (Pi() / 3.0)}] \
                                     ]]
     lappend tests [list $q0 $q00]
     lappend tests [list $q1 $q10]

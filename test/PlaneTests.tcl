@@ -22,7 +22,7 @@ set plane4 [mathplane::FromPoints [mathpt3d::Point3d new 0 0 3] [mathpt3d::Point
 test AreEqual [list \
     Test Equals : plane1 plane2 
 ] -body {
-     mathplane::Equals $plane1 $plane1 1e-4
+     mathplane::Equals $plane1 $plane2 1e-4
 } -result 1
 
 test AreEqual [list \
