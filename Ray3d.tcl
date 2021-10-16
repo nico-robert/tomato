@@ -50,7 +50,6 @@ oo::define tomato::mathray3d::Ray3d {
         return [list $_throughpoint $_direction]
     }
 
-
     method ShortestLineTo {point3d} {
         # the shortest line from a point to the ray
         #
@@ -64,26 +63,47 @@ oo::define tomato::mathray3d::Ray3d {
 
     }
 
-    method == {other {tolerance 1e-4}} {
+    method == {other {tolerance $::tomato::helper::TolEquals}} {
         # Gets value that indicates whether each pair of elements in two specified rays is equal.
         #
         # other     - The second ray [Ray3d] to compare.
         # tolerance - A tolerance (epsilon) to adjust for floating point error.
         #
         # Returns true if the rays are the same. Otherwise false.
+        if {[llength [info level 0]] < 4} {
+            set tolerance $::tomato::helper::TolEquals
+        }
+
         return [expr {[tomato::mathray3d::Equals [self] $other $tolerance]}]
         
     }
 
-    method != {other {tolerance 1e-4}} {
+    method != {other {tolerance $::tomato::helper::TolEquals}} {
         # Gets value that indicates whether any pair of elements in two specified rays is not equal.
         #
         # other - The second ray [Ray3d] to compare.
         # tolerance - A tolerance (epsilon) to adjust for floating point error.
         #
         # Returns true if the rays are different. Otherwise false.
+        if {[llength [info level 0]] < 4} {
+            set tolerance $::tomato::helper::TolEquals
+        }
+
         return [expr {![tomato::mathray3d::Equals [self] $other $tolerance]}]
         
+    }
+
+    method IsCollinear {other {tolerance $::tomato::helper::TolGeom}} {
+        # Returns a value to indicate if a pair of rays are collinear
+        #
+        # other - The ray to compare against [Ray3d]
+        # tolerance - A tolerance (epsilon) for plane parallel verification.
+        if {[llength [info level 0]] < 4} {
+            set tolerance $::tomato::helper::TolGeom
+        }
+
+        return [[my Direction] IsParallelTo [$other Direction] $tolerance]
+    
     }
 
     method GetType {} {
@@ -101,11 +121,27 @@ oo::define tomato::mathray3d::Ray3d {
 
     export ThroughPoint Direction Get ShortestLineTo ToString GetType
     export == !=
+    export IsCollinear
 
 }
 
+proc tomato::mathray3d::IntersectionRayWithPlane {ray plane {tolerance $::tomato::helper::TolGeom}} {
+    # Gets the intersection of ray and plane.
+    #
+    # ray       - [Ray3d]
+    # plane     - [mathplane::Plane]
+    # tolerance - A tolerance (epsilon) for ray parallel with plane verification.
+    #
+    # Returns a point [mathpt3d::Point3d] at the intersection with plane.
+    if {[llength [info level 0]] < 4} {
+        set tolerance $::tomato::helper::TolGeom
+    }
 
-proc tomato::mathray3d::IntersectionRayWithPlane {plane1 plane2 {tolerance 1e-9}} {
+    return [$plane IntersectionWith $ray $tolerance]
+
+}
+
+proc tomato::mathray3d::IntersectionPlaneWithPlane {plane1 plane2 {tolerance $::tomato::helper::TolGeom}} {
     # Gets the intersection of the two planes.
     #
     # plane1 - The first plane  [mathplane::Plane]
@@ -113,6 +149,10 @@ proc tomato::mathray3d::IntersectionRayWithPlane {plane1 plane2 {tolerance 1e-9}
     # tolerance - A tolerance (epsilon) for plane parallel verification.
     #
     # Returns a ray [Ray3d] at the intersection of two planes.
+    if {[llength [info level 0]] < 4} {
+        set tolerance $::tomato::helper::TolGeom
+    }
+
     return [$plane1 IntersectionWith $plane2 $tolerance]
 
 }
@@ -135,6 +175,6 @@ proc tomato::mathray3d::Equals {ray other tolerance} {
 
     return [expr {
                   [tomato::mathpt3d::Equals  [$ray ThroughPoint] [$other ThroughPoint] $tolerance] && 
-                  [tomato::mathvec3d::Equals [$ray Direction] [$ray Direction] $tolerance]
+                  [tomato::mathvec3d::Equals [$ray Direction] [$other Direction] $tolerance]
                 }]
 }
