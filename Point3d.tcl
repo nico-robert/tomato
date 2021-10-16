@@ -31,8 +31,9 @@ oo::class create tomato::mathpt3d::Point3d {
 
             } else {
                 # args list > ex : Point3d new {1 2 3}
-                if {[llength [split {*}$args]] == 3} {
-                    lassign [split {*}$args] x y z
+                if {[llength {*}$args] == 3} {
+                    lassign {*}$args x y z
+
                     set _x $x
                     set _y $y
                     set _z $z
@@ -45,6 +46,7 @@ oo::class create tomato::mathpt3d::Point3d {
         # args values > ex : Point3d new 1 2 3    
         } elseif {[llength $args] == 3} {
             lassign $args x y z
+
             set _x $x
             set _y $y
             set _z $z
@@ -115,9 +117,9 @@ oo::define tomato::mathpt3d::Point3d {
         # other - [mathvec3d::Vector3d]
         #
         # Returns a new point at the summed location
-        set ptx [expr {[my X] + [$other X]}]
-        set pty [expr {[my Y] + [$other Y]}]
-        set ptz [expr {[my Z] + [$other Z]}]
+        set ptx [expr {$_x + [$other X]}]
+        set pty [expr {$_y + [$other Y]}]
+        set ptz [expr {$_z + [$other Z]}]
 
         return [tomato::mathpt3d::Point3d new $ptx $pty $ptz]
     }
@@ -128,9 +130,9 @@ oo::define tomato::mathpt3d::Point3d {
         # other  - A vector [mathvec3d::Vector3d] or a Point [Point3d]
         #
         # Returns a new point [Point3d] at the difference if Point3d, a vector [mathvec3d::Vector3d] pointing to the difference if Vector3d.
-        set valuex [expr {[my X] - [$other X]}]
-        set valuey [expr {[my Y] - [$other Y]}]
-        set valuez [expr {[my Z] - [$other Z]}]
+        set valuex [expr {$_x - [$other X]}]
+        set valuey [expr {$_y - [$other Y]}]
+        set valuez [expr {$_z - [$other Z]}]
 
         if {[TypeOf $other Isa "Point3d"]} {
             return [tomato::mathvec3d::Vector3d new $valuex $valuey $valuez]
@@ -139,24 +141,32 @@ oo::define tomato::mathpt3d::Point3d {
         }
     }
 
-    method == {other {tolerance 1e-4}} {
+    method == {other {tolerance $::tomato::helper::TolEquals}} {
         # Gets value that indicates whether each pair of elements in two specified points is equal.
         #
         # other     - The second point [Point3d] to compare.
         # tolerance - A tolerance (epsilon) to adjust for floating point error.
         #
         # Returns true if the points are the same. Otherwise false.
+        if {[llength [info level 0]] < 4} {
+            set tolerance $::tomato::helper::TolEquals
+        }
+
         return [expr {[tomato::mathpt3d::Equals [self] $other $tolerance]}]
         
     }
 
-    method != {other {tolerance 1e-4}} {
+    method != {other {tolerance $::tomato::helper::TolEquals}} {
         # Gets value that indicates whether any pair of elements in two specified points is not equal.
         #
         # other - The second point [Point3d] to compare.
         # tolerance - A tolerance (epsilon) to adjust for floating point error.
         #
         # Returns true if the points are different. Otherwise false.
+        if {[llength [info level 0]] < 4} {
+            set tolerance $::tomato::helper::TolEquals
+        }
+
         return [expr {![tomato::mathpt3d::Equals [self] $other $tolerance]}]
         
     }
@@ -268,8 +278,8 @@ proc tomato::mathpt3d::Average {listaxisPt} {
 proc tomato::mathpt3d::MidPoint {pt1 pt2} {
     # Gets the midpoint of two points
     #
-    # pt1 - The first point [mathvec3d::Vector3d]
-    # pt2 - The second point
+    # pt1 - The first point [Point3d]
+    # pt2 - The second point [Point3d]
     #
     # Returns The midpoint of the points [Point3d]
     return [tomato::mathpt3d::Centroid [list $pt1 $pt2]]
@@ -313,7 +323,7 @@ proc tomato::mathpt3d::IntersectionOf3Planes {plane1 plane2 plane3} {
 
 }
 
-proc tomato::mathpt3d::IsCollinearPoints {p1 p2 p3 {tolerance $::tomato::helper::Epsilon}} {
+proc tomato::mathpt3d::IsCollinearPoints {p1 p2 p3 {tolerance $::tomato::helper::TolGeom}} {
     # Check if three points are collinear
     #
     # p1 - [Point3d]
@@ -321,13 +331,12 @@ proc tomato::mathpt3d::IsCollinearPoints {p1 p2 p3 {tolerance $::tomato::helper:
     # p3 - [Point3d]
     #
     # Returns true if the points are collinear, otherwise false.
-
-    set v1 [[tomato::mathline3d::Line3d new $p1 $p2] Direction]
-    set v2 [[tomato::mathline3d::Line3d new $p1 $p3] Direction]
-
     if {[llength [info level 0]] < 5} {
-        set tolerance $::tomato::helper::Epsilon
+        set tolerance $::tomato::helper::TolGeom
     }
+
+    set v1 [$p1 VectorTo $p2]
+    set v2 [$p1 VectorTo $p3]
 
     return [expr {[[tomato::mathvec3d::Cross $v1 $v2] Length] < $tolerance}]
 
@@ -361,8 +370,8 @@ proc tomato::mathpt3d::Equals {pt other tolerance} {
     }
 
     return [expr {
-                  abs([$other X] - [$pt X]) < $tolerance && 
-                  abs([$other Y] - [$pt Y]) < $tolerance && 
-                  abs([$other Z] - [$pt Z]) < $tolerance
+                  (abs([$other X] - [$pt X]) < $tolerance) && 
+                  (abs([$other Y] - [$pt Y]) < $tolerance) && 
+                  (abs([$other Z] - [$pt Z]) < $tolerance)
                 }]
 }
