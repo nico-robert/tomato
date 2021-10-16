@@ -2,9 +2,21 @@
 # Distributed under MIT license. Please see LICENSE for details.
 # tomato - math::geometry 3D library
 
-# 26-02-2021 : v1.0 Initial release
-# 21-03-2021 : v1.1 Add Quaternion Class
-# 26-09-2021 : v1.2 Add Triangle Class
+# 26-02-2021 : v1.0   Initial release
+# 21-03-2021 : v1.1   Add Quaternion Class
+# 26-09-2021 : v1.2   Add Triangle Class
+# 11-10-2021 : v1.2.1 Bug fixes
+# 16-10-2021 : 1.2.1
+#     - Bug fixes.
+#     - Tolerance geom and equal by default.
+#     - Generate a machine-readable error with *throw* command.
+#     - Helper.tcl : Add tcl::mathfunc : *Pi() + Inv()*.
+#     - Helper.tcl : Add *L2Norm* command.
+#     - Matrix.tcl : Add *==* and *!=* operators.
+#     - Matrix.tcl : Add *IsOrthogonal* command.
+#     - Matrix.tcl : Check if matrix is *singular*.
+#     - Ray3d.tcl  : Add *IntersectionRayWithPlane* command.
+#     - Triangle3d.tcl : Add *GetType* command.
 
 package require Tcl 8.6
 
@@ -23,7 +35,7 @@ source [file join $dir Triangle3d.tcl]
 source [file join $dir Helper.tcl]
 
 namespace eval tomato {
-    variable version 1.2
+    variable version 1.2.1
 
     variable _Intro {
         # tomato - math::geometry 3D library
