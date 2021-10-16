@@ -21,7 +21,6 @@ oo::class create tomato::mathvec3d::Vector3d {
         # List   - A TCL list including 3 components values.
         # values - 3 components values.
         #
-
         if {[llength $args] == 1} {
             # args Class Vector3d
             if {[TypeOf $args Isa "Vector3d"]} {
@@ -30,29 +29,28 @@ oo::class create tomato::mathvec3d::Vector3d {
                 set _y [$args Y]
                 set _z [$args Z]
                 
+            # args list > ex : Vector3d new {1 2 3}
+            } elseif {[llength {*}$args] == 3} {
+                lassign {*}$args x y z
+
+                set _x $x
+                set _y $y
+                set _z $z
+
             } else {
-                # args list > ex : Vector3d new {1 2 3}
-                if {[llength [split {*}$args]] == 3} {
-
-                    lassign [split {*}$args] x y z
-
-                    set _x $x
-                    set _y $y
-                    set _z $z
-
-                } else {
-                    #ruff
-                    # An error exception is raised if \[llength $args] != 3.
-                    error "Must be a list of 3 values... : $args"
-                }
+                #ruff
+                # An error exception is list is not equal to 3 or 'Vector3d' class
+                error "Must be a list of 3 values or 'Vector3d' class"
             }
         
         # args values > ex : Vector3d new 1 2 3
         } elseif {[llength $args] == 3} {
             lassign $args x y z
+
             set _x $x
             set _y $y
             set _z $z
+            
         } else {
             # default values
             set _x 0
@@ -151,14 +149,14 @@ oo::define tomato::mathvec3d::Vector3d {
 
     }
 
-    method IsNormalized {{tolerance $::tomato::helper::Epsilon}} {
+    method IsNormalized {{tolerance $::tomato::helper::TolGeom}} {
         # Check if vector is normalized.
         #
         # tolerance - The allowed deviation
         #
         # Returns true, if the Vector object is normalized. Otherwise false.
         if {[llength [info level 0]] < 3} {
-            set tolerance $::tomato::helper::Epsilon
+            set tolerance $::tomato::helper::TolGeom
         }
 
         set norm [my Length]
@@ -191,7 +189,7 @@ oo::define tomato::mathvec3d::Vector3d {
         return ""
     }
 
-    method IsPerpendicularTo {other {tolerance 1e-6}} {
+    method IsPerpendicularTo {other {tolerance $::tomato::helper::TolGeom}} {
         # Computes whether or not this vector is perpendicular to another vector using the dot product method and
         # comparing it to within a specified tolerance
         #
@@ -199,6 +197,10 @@ oo::define tomato::mathvec3d::Vector3d {
         # tolerance - A tolerance value for the dot product method.  Values below 2*[helper::DoublePrecision] may cause issues.
         #
         # Returns true if the vector dot product is within the given tolerance of zero, false if not.
+        if {[llength [info level 0]] < 4} {
+            set tolerance $::tomato::helper::TolGeom
+        }
+
         set va [self]
 
         set vaN    [$va Normalized]
@@ -209,7 +211,7 @@ oo::define tomato::mathvec3d::Vector3d {
 
     }
 
-    method IsParallelTo {other {tolerance 1e-10}} {
+    method IsParallelTo {other {tolerance $::tomato::helper::TolGeom}} {
         # Computes whether or not this vector is parallel to another vector using the Cross product method and comparing it
         # to within a specified tolerance.
         #
@@ -217,6 +219,10 @@ oo::define tomato::mathvec3d::Vector3d {
         # tolerance - A tolerance value for the Cross product method.  Values below 2*[helper::DoublePrecision] may cause issues.
         #
         # Returns true if the vector dot product is within the given tolerance of unity, false if it is not.
+        if {[llength [info level 0]] < 4} {
+            set tolerance $::tomato::helper::TolGeom
+        }
+
         set va [self]
 
         set vaN    [$va Normalized]
@@ -233,14 +239,13 @@ oo::define tomato::mathvec3d::Vector3d {
         # Gets a unit vector orthogonal to this
         #
         # Returns a new vector Normalized [Vector3d].
-        if {(([my X] * -1) - [my Y]) > 0.1} {
-
-            set v [tomato::mathvec3d::Vector3d new [my Z] [my Z] [expr {(([my X] * -1) - [my Y])}]]
+        if {(Inv($_x) - $_y) > 0.1} {
+            set v [tomato::mathvec3d::Vector3d new $_z $_z [expr {Inv($_x) - $_y}]]
             $v Normalize
             return $v
         }
 
-        set v [tomato::mathvec3d::Vector3d new [expr {(([my Y] * -1) - [my Z])}] [my X] [my X]]
+        set v [tomato::mathvec3d::Vector3d new [expr {Inv($_y)- $_z}] $_x $_x]
         $v Normalize
         return $v
 
@@ -272,9 +277,9 @@ oo::define tomato::mathvec3d::Vector3d {
         # other - The other vector [Vector3d] Object.
         #
         # Returns A new summed vector [Vector3d].
-        set vx [expr {[my X] + [$other X]}]
-        set vy [expr {[my Y] + [$other Y]}]
-        set vz [expr {[my Z] + [$other Z]}]
+        set vx [expr {$_x + [$other X]}]
+        set vy [expr {$_y + [$other Y]}]
+        set vz [expr {$_z + [$other Z]}]
 
         return [tomato::mathvec3d::Vector3d new $vx $vy $vz]
     }
@@ -285,9 +290,9 @@ oo::define tomato::mathvec3d::Vector3d {
         # other - The other vector [Vector3d] Object.
         #
         # Returns A new difference vector [Vector3d].
-        set vx [expr {[my X] - [$other X]}]
-        set vy [expr {[my Y] - [$other Y]}]
-        set vz [expr {[my Z] - [$other Z]}]
+        set vx [expr {$_x - [$other X]}]
+        set vy [expr {$_y - [$other Y]}]
+        set vz [expr {$_z - [$other Z]}]
 
         return [tomato::mathvec3d::Vector3d new $vx $vy $vz]
     }
@@ -303,14 +308,12 @@ oo::define tomato::mathvec3d::Vector3d {
         #
         # Returns A new scaled vector [Vector3d] if scalar or A scalar result if object.
         if {[tomato::helper::IsaObject $type]} {
-
             return [tomato::mathvec3d::Dot [self] $other]
-
         } else {
 
-            set vx [expr {[my X] * $type}]
-            set vy [expr {[my Y] * $type}]
-            set vz [expr {[my Z] * $type}]
+            set vx [expr {$_x * $type}]
+            set vy [expr {$_y * $type}]
+            set vz [expr {$_z * $type}]
 
             return [tomato::mathvec3d::Vector3d new $vx $vy $vz]
 
@@ -327,31 +330,39 @@ oo::define tomato::mathvec3d::Vector3d {
             error "Divide [tomato::helper::TypeClass [self]] by zero..."
         }
 
-        set vx [expr {[my X] / $scale}]
-        set vy [expr {[my Y] / $scale}]
-        set vz [expr {[my Z] / $scale}]
+        set vx [expr {$_x / $scale}]
+        set vy [expr {$_y / $scale}]
+        set vz [expr {$_z / $scale}]
 
         return [tomato::mathvec3d::Vector3d new $vx $vy $vz]
     }
 
-    method == {other {tolerance 1e-4}} {
+    method == {other {tolerance $::tomato::helper::TolEquals}} {
         # Gets value that indicates whether each pair of elements in two specified vectors is equal.
         #
         # other     - The second vector [Vector3d] to compare.
         # tolerance - A tolerance (epsilon) to adjust for floating point error.
         #
         # Returns true if the vectors are the same. Otherwise false.
+        if {[llength [info level 0]] < 4} {
+            set tolerance $::tomato::helper::TolEquals
+        }
+
         return [expr {[tomato::mathvec3d::Equals [self] $other $tolerance]}]
         
     }
 
-    method != {other {tolerance 1e-4}} {
+    method != {other {tolerance $::tomato::helper::TolEquals}} {
         # Gets value that indicates whether any pair of elements in two specified vectors is not equal.
         #
         # other - The second vector [Vector3d] to compare.
         # tolerance - A tolerance (epsilon) to adjust for floating point error.
         #
         # Returns true if the vectors are different. Otherwise false.
+        if {[llength [info level 0]] < 4} {
+            set tolerance $::tomato::helper::TolEquals
+        }
+
         return [expr {![tomato::mathvec3d::Equals [self] $other $tolerance]}]
         
     }
@@ -376,14 +387,8 @@ oo::define tomato::mathvec3d::Vector3d {
         set ptv [[$v ProjectOn $rp] Direction]
         set dp  [$pfv DotProduct $ptv]
         
-
-        if {abs($dp - 1) < 1e-15} {
-            return 0
-        }
-
-        if {abs($dp + 1) < 1e-15} {
-            return [tomato::helper::Pi]
-        }
+        if {abs($dp - 1.0) < 1e-15} {return 0}
+        if {abs($dp + 1.0) < 1e-15} {return [expr {Pi()}]}
 
         set angle       [expr {acos($dp)}]
         set cpv         [$pfv CrossProduct $ptv]
@@ -404,7 +409,10 @@ oo::define tomato::mathvec3d::Vector3d {
         set uv1 [my Normalized]
         set uv2 [$v Normalized]
 
-        set dp [format %.9f [$uv1 DotProduct $uv2]]
+        # Formatting value to avoid error : 'argument not in valid range'
+        # ex with this value : 1.0000000000000002
+        set t     [regexp -inline {[0-9]+$} $::tomato::helper::TolGeom]
+        set dp    [format "%.${t}f" [$uv1 DotProduct $uv2]] 
         set angle [expr {acos($dp)}]
 
         return $angle
@@ -428,21 +436,21 @@ oo::define tomato::mathvec3d::Vector3d {
         #
         # Returns a matrix [mathmatrix::Matrix]
 
-        set xy [expr {[my X] * [my Y]}]
-        set xz [expr {[my X] * [my Z]}]
-        set yz [expr {[my Y] * [my Z]}]
+        set xy [expr {$_x * $_y}]
+        set xz [expr {$_x * $_z}]
+        set yz [expr {$_y * $_z}]
 
         set mat [tomato::mathmatrix::Matrix new 3 3]
 
-        $mat SetCell 0 0 [expr {[my X] * [my X]}]
+        $mat SetCell 0 0 [expr {$_x * $_x}]
         $mat SetCell 1 0 $xy
         $mat SetCell 2 0 $xz
         $mat SetCell 0 1 $xy
-        $mat SetCell 1 1 [expr {[my Y] * [my Y]}]
+        $mat SetCell 1 1 [expr {$_y * $_y}]
         $mat SetCell 2 1 $yz
         $mat SetCell 0 2 $xz
         $mat SetCell 1 2 $yz
-        $mat SetCell 2 2 [expr {[my Z] * [my Z]}]
+        $mat SetCell 2 2 [expr {$_z * $_z}]
 
         return $mat
 
@@ -455,13 +463,13 @@ oo::define tomato::mathvec3d::Vector3d {
         set mat [tomato::mathmatrix::Matrix new 3 3]
 
         $mat SetCell 0 0 0.0
-        $mat SetCell 1 0 [my Z]
-        $mat SetCell 2 0 [expr {[my Y] * -1}]
-        $mat SetCell 0 1 [expr {[my Z] * -1}]
+        $mat SetCell 1 0 $_z
+        $mat SetCell 2 0 [expr {Inv($_y)}]
+        $mat SetCell 0 1 [expr {Inv($_z)}]
         $mat SetCell 1 1 0.0
-        $mat SetCell 2 1 [my X]
-        $mat SetCell 0 2 [my Y]
-        $mat SetCell 1 2 [expr {[my X] * -1}]
+        $mat SetCell 2 1 $_x
+        $mat SetCell 0 2 $_y
+        $mat SetCell 1 2 [expr {Inv($_x)}]
         $mat SetCell 2 2 0.0
        
        return $mat
@@ -472,7 +480,7 @@ oo::define tomato::mathvec3d::Vector3d {
         # Inverses the direction of the vector
         #
         # Returns a new vector [Vector3d] pointing in the opposite direction
-        return [tomato::mathvec3d::Vector3d new [expr {[my X] * -1}] [expr {[my Y] * -1}] [expr {[my Z] * -1}]]
+        return [tomato::mathvec3d::Vector3d new [expr {Inv($_x)}] [expr {Inv($_y)}] [expr {Inv($_z)}]]
     }
 
     method ToPoint3D {} {
@@ -679,7 +687,6 @@ proc tomato::mathvec3d::Cross {v1 v2} {
     return [tomato::mathvec3d::Vector3d new $vx $vy $vz]
 }
 
-
 proc tomato::mathvec3d::Equals {vector other tolerance} {
     # Indicate if this vector is equivalent to a given unit vector
     #
@@ -697,8 +704,8 @@ proc tomato::mathvec3d::Equals {vector other tolerance} {
     }
 
     return [expr {
-                  abs([$other X] - [$vector X]) < $tolerance && 
-                  abs([$other Y] - [$vector Y]) < $tolerance && 
-                  abs([$other Z] - [$vector Z]) < $tolerance
+                  (abs([$other X] - [$vector X]) < $tolerance) && 
+                  (abs([$other Y] - [$vector Y]) < $tolerance) && 
+                  (abs([$other Z] - [$vector Z]) < $tolerance)
                 }]
 }
