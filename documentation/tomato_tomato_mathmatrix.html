@@ -300,16 +300,19 @@ pre {
 <div style='clear:both;'></div>
 <table class='ruff_deflist'>
 <tr><td class='ruff_defitem'><a href="tomato_tomato_mathmatrix.html#::tomato::mathmatrix::Matrix::constructor" title="constructor" class='ruff_cmd'>constructor</a></td><td class='ruff_defitem'>Constructor for the class.</td></tr>
+<tr><td class='ruff_defitem'><a href="tomato_tomato_mathmatrix.html#::tomato::mathmatrix::Matrix::!=" title="!=" class='ruff_cmd'>!=</a></td><td class='ruff_defitem'>Gets value that indicates whether any pair of elements in two specified matrixes is not equal.</td></tr>
+<tr><td class='ruff_defitem'><a href="tomato_tomato_mathmatrix.html#::tomato::mathmatrix::Matrix::==" title="==" class='ruff_cmd'>==</a></td><td class='ruff_defitem'>Gets value that indicates whether each pair of elements in two specified matrixes is equal.</td></tr>
 <tr><td class='ruff_defitem'><a href="tomato_tomato_mathmatrix.html#::tomato::mathmatrix::Matrix::Add" title="Add" class='ruff_cmd'>Add</a></td><td class='ruff_defitem'>Add matrix to another matrix</td></tr>
 <tr><td class='ruff_defitem'><a href="tomato_tomato_mathmatrix.html#::tomato::mathmatrix::Matrix::ColumnCount" title="ColumnCount" class='ruff_cmd'>ColumnCount</a></td><td class='ruff_defitem'>Gets the number of columns.</td></tr>
 <tr><td class='ruff_defitem'><a href="tomato_tomato_mathmatrix.html#::tomato::mathmatrix::Matrix::Decompose" title="Decompose" class='ruff_cmd'>Decompose</a></td><td class='ruff_defitem'>The combined lower-upper decomposition of matrix</td></tr>
 <tr><td class='ruff_defitem'><a href="tomato_tomato_mathmatrix.html#::tomato::mathmatrix::Matrix::Determinant" title="Determinant" class='ruff_cmd'>Determinant</a></td><td class='ruff_defitem'>Gets the determinant of the matrix for which the Crout's LU decomposition was computed.</td></tr>
 <tr><td class='ruff_defitem'><a href="tomato_tomato_mathmatrix.html#::tomato::mathmatrix::Matrix::GetCell" title="GetCell" class='ruff_cmd'>GetCell</a></td><td class='ruff_defitem'>Gets the cell value of base matrix</td></tr>
 <tr><td class='ruff_defitem'><a href="tomato_tomato_mathmatrix.html#::tomato::mathmatrix::Matrix::GetColumn" title="GetColumn" class='ruff_cmd'>GetColumn</a></td><td class='ruff_defitem'>Gets Column of base matrix.</td></tr>
-<tr><td class='ruff_defitem'><a href="tomato_tomato_mathmatrix.html#::tomato::mathmatrix::Matrix::GetRow" title="GetRow" class='ruff_cmd'>GetRow</a></td><td class='ruff_defitem'>Set Row of base matrix.</td></tr>
+<tr><td class='ruff_defitem'><a href="tomato_tomato_mathmatrix.html#::tomato::mathmatrix::Matrix::GetRow" title="GetRow" class='ruff_cmd'>GetRow</a></td><td class='ruff_defitem'>Get Row of base matrix.</td></tr>
 <tr><td class='ruff_defitem'><a href="tomato_tomato_mathmatrix.html#::tomato::mathmatrix::Matrix::GetSize" title="GetSize" class='ruff_cmd'>GetSize</a></td><td class='ruff_defitem'>Returns the size of this object.</td></tr>
 <tr><td class='ruff_defitem'><a href="tomato_tomato_mathmatrix.html#::tomato::mathmatrix::Matrix::GetType" title="GetType" class='ruff_cmd'>GetType</a></td><td class='ruff_defitem'>Gets the name of class.</td></tr>
 <tr><td class='ruff_defitem'><a href="tomato_tomato_mathmatrix.html#::tomato::mathmatrix::Matrix::Inverse" title="Inverse" class='ruff_cmd'>Inverse</a></td><td class='ruff_defitem'>Matrix inverse using Crout's LU decomposition</td></tr>
+<tr><td class='ruff_defitem'><a href="tomato_tomato_mathmatrix.html#::tomato::mathmatrix::Matrix::IsOrthogonal" title="IsOrthogonal" class='ruff_cmd'>IsOrthogonal</a></td><td class='ruff_defitem'>Gets if matrix is orthogonal</td></tr>
 <tr><td class='ruff_defitem'><a href="tomato_tomato_mathmatrix.html#::tomato::mathmatrix::Matrix::Multiply" title="Multiply" class='ruff_cmd'>Multiply</a></td><td class='ruff_defitem'>Multiply matrix...</td></tr>
 <tr><td class='ruff_defitem'><a href="tomato_tomato_mathmatrix.html#::tomato::mathmatrix::Matrix::RowCount" title="RowCount" class='ruff_cmd'>RowCount</a></td><td class='ruff_defitem'>Gets the number of rows.</td></tr>
 <tr><td class='ruff_defitem'><a href="tomato_tomato_mathmatrix.html#::tomato::mathmatrix::Matrix::SetCell" title="SetCell" class='ruff_cmd'>SetCell</a></td><td class='ruff_defitem'>Set the cell value of base matrix</td></tr>
@@ -331,8 +334,8 @@ pre {
 <tr><td class='ruff_defitem'><code>col</code></td><td class='ruff_defitem'>Number of columns.</td></tr>
 <tr><td class='ruff_defitem'><code>value</code></td><td class='ruff_defitem'>Init value matrix Optional, default <code>0.0</code>.</td></tr>
 </table>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_246' href="javascript:toggleSource('246')">Show source</a></p>
-<div id='246' class='ruff_dyn_src'><pre>method constructor {row col {value 0.0}} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_250' href="javascript:toggleSource('250')">Show source</a></p>
+<div id='250' class='ruff_dyn_src'><pre>method constructor {row col {value 0.0}} {
 
     # Initializes a new base class for Matrix Class.
     #
@@ -356,6 +359,54 @@ pre {
     set _columnCount $col
     set _values $matrix
 }</pre></div>
+</div><h4 class='ruffmethod'><a name='::tomato::mathmatrix::Matrix::!='>!=</a><span class='ns_scope'> [<a href="tomato_tomato_mathmatrix.html#::tomato::mathmatrix::Matrix" title="::tomato::mathmatrix::Matrix" class='ruff_cmd'>::tomato::mathmatrix::Matrix</a>]</span><span class='tinylink'><a href='tomato_tomato_mathmatrix.html#::tomato::mathmatrix::Matrix'>Matrix</a>, <a href='#top'>Top</a>, <a href='tomato.html'>Main</a></span></h4>
+<div style='clear:both;'></div>
+<p class='ruff'>Gets value that indicates whether any pair of elements in two specified matrixes is not equal.</p>
+<div class='ruff_synopsis'><span class='ruff_cmd'>OBJECT !=</span> <span class='ruff_arg'>other ?tolerance?</span></div>
+<table class='ruff_deflist'>
+<tr><td class='ruff_defitem'><code>other</code></td><td class='ruff_defitem'>The second matrix <a href="tomato_tomato_mathmatrix.html#::tomato::mathmatrix::Matrix" title="Matrix" class='ruff_cmd'>Matrix</a> to compare.</td></tr>
+<tr><td class='ruff_defitem'><code>tolerance</code></td><td class='ruff_defitem'>A tolerance (epsilon) to adjust for floating point error. Optional, default <code>$::tomato::helper::TolEquals</code>.</td></tr>
+</table>
+<p class='ruff'>Returns true if the matrixes are different. Otherwise false.</p>
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_251' href="javascript:toggleSource('251')">Show source</a></p>
+<div id='251' class='ruff_dyn_src'><pre>method != {other {tolerance {$::tomato::helper::TolEquals}}} {
+
+    # Gets value that indicates whether any pair of elements in two specified matrixes is not equal.
+    #
+    # other - The second matrix [Matrix] to compare.
+    # tolerance - A tolerance (epsilon) to adjust for floating point error.
+    #
+    # Returns true if the matrixes are different. Otherwise false.
+    if {[llength [info level 0]] &lt; 4} {
+        set tolerance $::tomato::helper::TolEquals
+    }
+
+    return [expr {![tomato::mathmatrix::Equals [self] $other $tolerance]}]
+}</pre></div>
+</div><h4 class='ruffmethod'><a name='::tomato::mathmatrix::Matrix::=='>==</a><span class='ns_scope'> [<a href="tomato_tomato_mathmatrix.html#::tomato::mathmatrix::Matrix" title="::tomato::mathmatrix::Matrix" class='ruff_cmd'>::tomato::mathmatrix::Matrix</a>]</span><span class='tinylink'><a href='tomato_tomato_mathmatrix.html#::tomato::mathmatrix::Matrix'>Matrix</a>, <a href='#top'>Top</a>, <a href='tomato.html'>Main</a></span></h4>
+<div style='clear:both;'></div>
+<p class='ruff'>Gets value that indicates whether each pair of elements in two specified matrixes is equal.</p>
+<div class='ruff_synopsis'><span class='ruff_cmd'>OBJECT ==</span> <span class='ruff_arg'>other ?tolerance?</span></div>
+<table class='ruff_deflist'>
+<tr><td class='ruff_defitem'><code>other</code></td><td class='ruff_defitem'>The second matrix <a href="tomato_tomato_mathmatrix.html#::tomato::mathmatrix::Matrix" title="Matrix" class='ruff_cmd'>Matrix</a> to compare.</td></tr>
+<tr><td class='ruff_defitem'><code>tolerance</code></td><td class='ruff_defitem'>A tolerance (epsilon) to adjust for floating point error. Optional, default <code>$::tomato::helper::TolEquals</code>.</td></tr>
+</table>
+<p class='ruff'>Returns true if the matrixes are the same. Otherwise false.</p>
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_252' href="javascript:toggleSource('252')">Show source</a></p>
+<div id='252' class='ruff_dyn_src'><pre>method == {other {tolerance {$::tomato::helper::TolEquals}}} {
+
+    # Gets value that indicates whether each pair of elements in two specified matrixes is equal.
+    #
+    # other     - The second matrix [Matrix] to compare.
+    # tolerance - A tolerance (epsilon) to adjust for floating point error.
+    #
+    # Returns true if the matrixes are the same. Otherwise false.
+    if {[llength [info level 0]] &lt; 4} {
+        set tolerance $::tomato::helper::TolEquals
+    }
+
+    return [expr {[tomato::mathmatrix::Equals [self] $other $tolerance]}]
+}</pre></div>
 </div><h4 class='ruffmethod'><a name='::tomato::mathmatrix::Matrix::Add'>Add</a><span class='ns_scope'> [<a href="tomato_tomato_mathmatrix.html#::tomato::mathmatrix::Matrix" title="::tomato::mathmatrix::Matrix" class='ruff_cmd'>::tomato::mathmatrix::Matrix</a>]</span><span class='tinylink'><a href='tomato_tomato_mathmatrix.html#::tomato::mathmatrix::Matrix'>Matrix</a>, <a href='#top'>Top</a>, <a href='tomato.html'>Main</a></span></h4>
 <div style='clear:both;'></div>
 <p class='ruff'>Add matrix to another matrix</p>
@@ -364,8 +415,8 @@ pre {
 <tr><td class='ruff_defitem'><code>other</code></td><td class='ruff_defitem'><a href="tomato_tomato_mathmatrix.html#::tomato::mathmatrix::Matrix" title="Matrix" class='ruff_cmd'>Matrix</a></td></tr>
 </table>
 <p class='ruff'>Return a new base matrix <a href="tomato_tomato_mathmatrix.html#::tomato::mathmatrix::Matrix" title="Matrix" class='ruff_cmd'>Matrix</a></p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_247' href="javascript:toggleSource('247')">Show source</a></p>
-<div id='247' class='ruff_dyn_src'><pre>method Add {other} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_253' href="javascript:toggleSource('253')">Show source</a></p>
+<div id='253' class='ruff_dyn_src'><pre>method Add {other} {
 
     # Add matrix to another matrix
     #
@@ -383,8 +434,8 @@ pre {
 
         set addresult {}
 
-        foreach row1 [$mat GetRow $row] row2 [$other GetRow $row] {
-            lappend addresult [expr {$row1 + $row2}]
+        foreach cell1 [$mat GetRow $row] cell2 [$other GetRow $row] {
+            lappend addresult [expr {$cell1 + $cell2}]
         }
 
         $mat SetRow $row $addresult
@@ -396,8 +447,8 @@ pre {
 <div style='clear:both;'></div>
 <p class='ruff'>Gets the number of columns.</p>
 <div class='ruff_synopsis'><span class='ruff_cmd'>OBJECT ColumnCount</span> </div>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_248' href="javascript:toggleSource('248')">Show source</a></p>
-<div id='248' class='ruff_dyn_src'><pre>method ColumnCount {} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_254' href="javascript:toggleSource('254')">Show source</a></p>
+<div id='254' class='ruff_dyn_src'><pre>method ColumnCount {} {
 
     # Gets the number of columns.
     return $_columnCount
@@ -407,8 +458,8 @@ pre {
 <p class='ruff'>The combined lower-upper decomposition of matrix</p>
 <div class='ruff_synopsis'><span class='ruff_cmd'>OBJECT Decompose</span> </div>
 <p class='ruff'>See also: <a href="tomato_tomato_mathmatrix.html#::tomato::mathmatrix::MatrixDecompose" title="MatrixDecompose" class='ruff_cmd'>MatrixDecompose</a></p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_249' href="javascript:toggleSource('249')">Show source</a></p>
-<div id='249' class='ruff_dyn_src'><pre>method Decompose {} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_255' href="javascript:toggleSource('255')">Show source</a></p>
+<div id='255' class='ruff_dyn_src'><pre>method Decompose {} {
 
     # The combined lower-upper decomposition of matrix
     #
@@ -419,8 +470,8 @@ pre {
 <div style='clear:both;'></div>
 <p class='ruff'>Gets the determinant of the matrix for which the Crout's LU decomposition was computed.</p>
 <div class='ruff_synopsis'><span class='ruff_cmd'>OBJECT Determinant</span> </div>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_250' href="javascript:toggleSource('250')">Show source</a></p>
-<div id='250' class='ruff_dyn_src'><pre>method Determinant {} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_256' href="javascript:toggleSource('256')">Show source</a></p>
+<div id='256' class='ruff_dyn_src'><pre>method Determinant {} {
 
     # Gets the determinant of the matrix for which the Crout's LU decomposition was computed.
 
@@ -443,8 +494,8 @@ pre {
 <tr><td class='ruff_defitem'><code>colIndex</code></td><td class='ruff_defitem'>index of column</td></tr>
 </table>
 <p class='ruff'>Returns value of row/column</p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_251' href="javascript:toggleSource('251')">Show source</a></p>
-<div id='251' class='ruff_dyn_src'><pre>method GetCell {rowIndex colIndex} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_257' href="javascript:toggleSource('257')">Show source</a></p>
+<div id='257' class='ruff_dyn_src'><pre>method GetCell {rowIndex colIndex} {
 
     # Gets the cell value of base matrix
     #
@@ -468,8 +519,8 @@ pre {
 <tr><td class='ruff_defitem'><code>colIndex</code></td><td class='ruff_defitem'>index of column</td></tr>
 </table>
 <p class='ruff'>Returns values of column</p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_252' href="javascript:toggleSource('252')">Show source</a></p>
-<div id='252' class='ruff_dyn_src'><pre>method GetColumn {colIndex} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_258' href="javascript:toggleSource('258')">Show source</a></p>
+<div id='258' class='ruff_dyn_src'><pre>method GetColumn {colIndex} {
 
     # Gets Column of base matrix.
     #
@@ -490,16 +541,16 @@ pre {
 }</pre></div>
 </div><h4 class='ruffmethod'><a name='::tomato::mathmatrix::Matrix::GetRow'>GetRow</a><span class='ns_scope'> [<a href="tomato_tomato_mathmatrix.html#::tomato::mathmatrix::Matrix" title="::tomato::mathmatrix::Matrix" class='ruff_cmd'>::tomato::mathmatrix::Matrix</a>]</span><span class='tinylink'><a href='tomato_tomato_mathmatrix.html#::tomato::mathmatrix::Matrix'>Matrix</a>, <a href='#top'>Top</a>, <a href='tomato.html'>Main</a></span></h4>
 <div style='clear:both;'></div>
-<p class='ruff'>Set Row of base matrix.</p>
+<p class='ruff'>Get Row of base matrix.</p>
 <div class='ruff_synopsis'><span class='ruff_cmd'>OBJECT GetRow</span> <span class='ruff_arg'>rowIndex</span></div>
 <table class='ruff_deflist'>
 <tr><td class='ruff_defitem'><code>rowIndex</code></td><td class='ruff_defitem'>index of row</td></tr>
 </table>
 <p class='ruff'>Returns values of row</p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_253' href="javascript:toggleSource('253')">Show source</a></p>
-<div id='253' class='ruff_dyn_src'><pre>method GetRow {rowIndex} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_259' href="javascript:toggleSource('259')">Show source</a></p>
+<div id='259' class='ruff_dyn_src'><pre>method GetRow {rowIndex} {
 
-    # Set Row of base matrix.
+    # Get Row of base matrix.
     #
     # rowIndex  - index of row
     #
@@ -515,8 +566,8 @@ pre {
 <p class='ruff'>Returns the size of this object.</p>
 <div class='ruff_synopsis'><span class='ruff_cmd'>OBJECT GetSize</span> </div>
 <p class='ruff'>Returns the size of this object.</p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_254' href="javascript:toggleSource('254')">Show source</a></p>
-<div id='254' class='ruff_dyn_src'><pre>method GetSize {} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_260' href="javascript:toggleSource('260')">Show source</a></p>
+<div id='260' class='ruff_dyn_src'><pre>method GetSize {} {
 
     # Returns the size of this object.
     return [format {%sx%s} [my RowCount] [my ColumnCount]]
@@ -525,8 +576,8 @@ pre {
 <div style='clear:both;'></div>
 <p class='ruff'>Gets the name of class.</p>
 <div class='ruff_synopsis'><span class='ruff_cmd'>OBJECT GetType</span> </div>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_255' href="javascript:toggleSource('255')">Show source</a></p>
-<div id='255' class='ruff_dyn_src'><pre>method GetType {} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_261' href="javascript:toggleSource('261')">Show source</a></p>
+<div id='261' class='ruff_dyn_src'><pre>method GetType {} {
 
     # Gets the name of class.
     return [tomato::helper::TypeClass [self]]
@@ -535,11 +586,30 @@ pre {
 <div style='clear:both;'></div>
 <p class='ruff'>Matrix inverse using Crout's LU decomposition</p>
 <div class='ruff_synopsis'><span class='ruff_cmd'>OBJECT Inverse</span> </div>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_256' href="javascript:toggleSource('256')">Show source</a></p>
-<div id='256' class='ruff_dyn_src'><pre>method Inverse {} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_262' href="javascript:toggleSource('262')">Show source</a></p>
+<div id='262' class='ruff_dyn_src'><pre>method Inverse {} {
 
     # Matrix inverse using Crout's LU decomposition
+    if {[my Determinant] == 0.0} {
+        throw {singular} &quot;Matrix is singular...&quot;
+    }
+
     return [tomato::mathmatrix::MatrixInverse [self]]
+}</pre></div>
+</div><h4 class='ruffmethod'><a name='::tomato::mathmatrix::Matrix::IsOrthogonal'>IsOrthogonal</a><span class='ns_scope'> [<a href="tomato_tomato_mathmatrix.html#::tomato::mathmatrix::Matrix" title="::tomato::mathmatrix::Matrix" class='ruff_cmd'>::tomato::mathmatrix::Matrix</a>]</span><span class='tinylink'><a href='tomato_tomato_mathmatrix.html#::tomato::mathmatrix::Matrix'>Matrix</a>, <a href='#top'>Top</a>, <a href='tomato.html'>Main</a></span></h4>
+<div style='clear:both;'></div>
+<p class='ruff'>Gets if matrix is orthogonal</p>
+<div class='ruff_synopsis'><span class='ruff_cmd'>OBJECT IsOrthogonal</span> </div>
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_263' href="javascript:toggleSource('263')">Show source</a></p>
+<div id='263' class='ruff_dyn_src'><pre>method IsOrthogonal {} {
+
+    # Gets if matrix is orthogonal
+    if {[my ColumnCount] != [my RowCount]} {
+        # error &quot;Matrix is not square...&quot;
+        return 0
+    }
+
+    return [[[my Transpose] Multiply [self]] == [tomato::mathmatrix::CreateIdentity [my RowCount]]]
 }</pre></div>
 </div><h4 class='ruffmethod'><a name='::tomato::mathmatrix::Matrix::Multiply'>Multiply</a><span class='ns_scope'> [<a href="tomato_tomato_mathmatrix.html#::tomato::mathmatrix::Matrix" title="::tomato::mathmatrix::Matrix" class='ruff_cmd'>::tomato::mathmatrix::Matrix</a>]</span><span class='tinylink'><a href='tomato_tomato_mathmatrix.html#::tomato::mathmatrix::Matrix'>Matrix</a>, <a href='#top'>Top</a>, <a href='tomato.html'>Main</a></span></h4>
 <div style='clear:both;'></div>
@@ -552,8 +622,8 @@ pre {
 <tr><td class='ruff_defitem'><code>Vector</code></td><td class='ruff_defitem'><a href="tomato_tomato_mathvec3d.html#::tomato::mathvec3d::Vector3d" title="mathvec3d::Vector3d" class='ruff_cmd'>mathvec3d::Vector3d</a></td></tr>
 </table>
 <p class='ruff'>Returns a new base matrix <a href="tomato_tomato_mathmatrix.html#::tomato::mathmatrix::Matrix" title="Matrix" class='ruff_cmd'>Matrix</a> if double value , a TCL list for other types</p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_257' href="javascript:toggleSource('257')">Show source</a></p>
-<div id='257' class='ruff_dyn_src'><pre>method Multiply {entity} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_264' href="javascript:toggleSource('264')">Show source</a></p>
+<div id='264' class='ruff_dyn_src'><pre>method Multiply {entity} {
 
     # Multiply matrix...
     #
@@ -577,7 +647,7 @@ pre {
             }
 
             if {[$entity RowCount] == 1} {
-                return [tomato::mathmatrix::MatrixMulColumnVector $mat $entity]
+                return [tomato::mathmatrix::MatrixMulColumnVector $mat $entity] ; # return tcl list values
             }
 
             return [tomato::mathmatrix::MatrixMulMatrix $mat $entity] ; # return tcl list values
@@ -602,8 +672,8 @@ pre {
 <div style='clear:both;'></div>
 <p class='ruff'>Gets the number of rows.</p>
 <div class='ruff_synopsis'><span class='ruff_cmd'>OBJECT RowCount</span> </div>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_258' href="javascript:toggleSource('258')">Show source</a></p>
-<div id='258' class='ruff_dyn_src'><pre>method RowCount {} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_265' href="javascript:toggleSource('265')">Show source</a></p>
+<div id='265' class='ruff_dyn_src'><pre>method RowCount {} {
 
     # Gets the number of rows.
     return $_rowCount
@@ -618,8 +688,8 @@ pre {
 <tr><td class='ruff_defitem'><code>value</code></td><td class='ruff_defitem'>value of row/column</td></tr>
 </table>
 <p class='ruff'>Returns nothing</p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_259' href="javascript:toggleSource('259')">Show source</a></p>
-<div id='259' class='ruff_dyn_src'><pre>method SetCell {rowIndex colIndex value} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_266' href="javascript:toggleSource('266')">Show source</a></p>
+<div id='266' class='ruff_dyn_src'><pre>method SetCell {rowIndex colIndex value} {
 
     # Set the cell value of base matrix
     #
@@ -646,8 +716,8 @@ pre {
 <tr><td class='ruff_defitem'><code>columnlistvalues</code></td><td class='ruff_defitem'>values of column</td></tr>
 </table>
 <p class='ruff'>Returns nothing</p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_260' href="javascript:toggleSource('260')">Show source</a></p>
-<div id='260' class='ruff_dyn_src'><pre>method SetColumn {colIndex columnlistvalues} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_267' href="javascript:toggleSource('267')">Show source</a></p>
+<div id='267' class='ruff_dyn_src'><pre>method SetColumn {colIndex columnlistvalues} {
 
     # Set Column of base matrix.
     #
@@ -678,8 +748,8 @@ pre {
 <tr><td class='ruff_defitem'><code>rowlistvalues</code></td><td class='ruff_defitem'>values of row</td></tr>
 </table>
 <p class='ruff'>Returns nothing</p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_261' href="javascript:toggleSource('261')">Show source</a></p>
-<div id='261' class='ruff_dyn_src'><pre>method SetRow {rowIndex rowlistvalues} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_268' href="javascript:toggleSource('268')">Show source</a></p>
+<div id='268' class='ruff_dyn_src'><pre>method SetRow {rowIndex rowlistvalues} {
 
     # Set Row of base matrix.
     #
@@ -710,8 +780,8 @@ pre {
 <tr><td class='ruff_defitem'><code>subMatrix</code></td><td class='ruff_defitem'>The sub-matrix to copy from.</td></tr>
 </table>
 <p class='ruff'>Returns base matrix <a href="tomato_tomato_mathmatrix.html#::tomato::mathmatrix::Matrix" title="Matrix" class='ruff_cmd'>Matrix</a></p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_262' href="javascript:toggleSource('262')">Show source</a></p>
-<div id='262' class='ruff_dyn_src'><pre>method SetSubMatrix {args} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_269' href="javascript:toggleSource('269')">Show source</a></p>
+<div id='269' class='ruff_dyn_src'><pre>method SetSubMatrix {args} {
 
     # Copies the values of a given matrix into a region in this matrix.
     #
@@ -757,8 +827,8 @@ pre {
 <tr><td class='ruff_defitem'><code>columnCount</code></td><td class='ruff_defitem'>The number of columns to copy. Must be positive.</td></tr>
 </table>
 <p class='ruff'>Returns The requested sub-matrix <a href="tomato_tomato_mathmatrix.html#::tomato::mathmatrix::Matrix" title="Matrix" class='ruff_cmd'>Matrix</a>.</p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_263' href="javascript:toggleSource('263')">Show source</a></p>
-<div id='263' class='ruff_dyn_src'><pre>method SubMatrix {rowIndex rowCount columnIndex columnCount} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_270' href="javascript:toggleSource('270')">Show source</a></p>
+<div id='270' class='ruff_dyn_src'><pre>method SubMatrix {rowIndex rowCount columnIndex columnCount} {
 
     # Creates a matrix that contains the values from the requested sub-matrix.
     #
@@ -778,8 +848,8 @@ pre {
 <p class='ruff'>Returns a csys from Matrix.</p>
 <div class='ruff_synopsis'><span class='ruff_cmd'>OBJECT ToCsys</span> </div>
 <p class='ruff'>Returns a csys from Matrix.</p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_264' href="javascript:toggleSource('264')">Show source</a></p>
-<div id='264' class='ruff_dyn_src'><pre>method ToCsys {} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_271' href="javascript:toggleSource('271')">Show source</a></p>
+<div id='271' class='ruff_dyn_src'><pre>method ToCsys {} {
 
     # Returns a csys from Matrix.
     if {([my RowCount] != 4) &amp;&amp; ([my ColumnCount] != 4)} {
@@ -792,8 +862,8 @@ pre {
 <p class='ruff'>Returns a string representation of this object.</p>
 <div class='ruff_synopsis'><span class='ruff_cmd'>OBJECT ToMatrixString</span> </div>
 <p class='ruff'>Returns a string representation of this object.</p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_265' href="javascript:toggleSource('265')">Show source</a></p>
-<div id='265' class='ruff_dyn_src'><pre>method ToMatrixString {} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_272' href="javascript:toggleSource('272')">Show source</a></p>
+<div id='272' class='ruff_dyn_src'><pre>method ToMatrixString {} {
 
     # Returns a string representation of this object.
     return [join [my Values] &quot;\n&quot;]
@@ -803,8 +873,8 @@ pre {
 <p class='ruff'>Transpose a matrix. <a href="http://reference.wolfram.com/mathematica/ref/Transpose.html" >mathematica Transpose</a></p>
 <div class='ruff_synopsis'><span class='ruff_cmd'>OBJECT Transpose</span> </div>
 <p class='ruff'>Returns a new transposed matrix <a href="tomato_tomato_mathmatrix.html#::tomato::mathmatrix::Matrix" title="Matrix" class='ruff_cmd'>Matrix</a></p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_266' href="javascript:toggleSource('266')">Show source</a></p>
-<div id='266' class='ruff_dyn_src'><pre>method Transpose {} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_273' href="javascript:toggleSource('273')">Show source</a></p>
+<div id='273' class='ruff_dyn_src'><pre>method Transpose {} {
 
     # Transpose a matrix.
     # [mathematica Transpose](http://reference.wolfram.com/mathematica/ref/Transpose.html)
@@ -832,8 +902,8 @@ pre {
 <div style='clear:both;'></div>
 <p class='ruff'>Gets the matrix's data.</p>
 <div class='ruff_synopsis'><span class='ruff_cmd'>OBJECT Values</span> </div>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_267' href="javascript:toggleSource('267')">Show source</a></p>
-<div id='267' class='ruff_dyn_src'><pre>method Values {} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_274' href="javascript:toggleSource('274')">Show source</a></p>
+<div id='274' class='ruff_dyn_src'><pre>method Values {} {
 
     # Gets the matrix's data.
     return $_values
@@ -854,9 +924,9 @@ pre {
 <tr><td class='ruff_defitem'><code>targetColumnIndex</code></td><td class='ruff_defitem'>The column index of source</td></tr>
 <tr><td class='ruff_defitem'><code>columnCount</code></td><td class='ruff_defitem'>The number of columns to copy</td></tr>
 </table>
-<p class='ruff'>Returns matrix copy</p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_268' href="javascript:toggleSource('268')">Show source</a></p>
-<div id='268' class='ruff_dyn_src'><pre>proc ::tomato::mathmatrix::CopySubMatrixTo {target storage sourceRowIndex targetRowIndex rowCount sourceColumnIndex targetColumnIndex columnCount} {
+<p class='ruff'>Returns matrix copy <a href="tomato_tomato_mathmatrix.html#::tomato::mathmatrix::Matrix" title="Matrix" class='ruff_cmd'>Matrix</a></p>
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_275' href="javascript:toggleSource('275')">Show source</a></p>
+<div id='275' class='ruff_dyn_src'><pre>proc ::tomato::mathmatrix::CopySubMatrixTo {target storage sourceRowIndex targetRowIndex rowCount sourceColumnIndex targetColumnIndex columnCount} {
 
     # Copies the values of a given matrix into a region in this matrix.
     #
@@ -869,7 +939,7 @@ pre {
     # targetColumnIndex  - The column index of source
     # columnCount        - The number of columns to copy
     #
-    # Returns matrix copy
+    # Returns matrix copy [Matrix]
 
     if {$rowCount == 0 || $columnCount == 0} {
         return $target
@@ -900,8 +970,8 @@ pre {
 <tr><td class='ruff_defitem'><code>storage</code></td><td class='ruff_defitem'>The base matrix <a href="tomato_tomato_mathmatrix.html#::tomato::mathmatrix::Matrix" title="Matrix" class='ruff_cmd'>Matrix</a>.</td></tr>
 </table>
 <p class='ruff'>Returns matrix <a href="tomato_tomato_mathmatrix.html#::tomato::mathmatrix::Matrix" title="Matrix" class='ruff_cmd'>Matrix</a></p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_269' href="javascript:toggleSource('269')">Show source</a></p>
-<div id='269' class='ruff_dyn_src'><pre>proc ::tomato::mathmatrix::CopyTo {target storage} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_276' href="javascript:toggleSource('276')">Show source</a></p>
+<div id='276' class='ruff_dyn_src'><pre>proc ::tomato::mathmatrix::CopyTo {target storage} {
 
     # Copies the elements of this matrix to the given matrix.
     #
@@ -929,9 +999,9 @@ pre {
 <table class='ruff_deflist'>
 <tr><td class='ruff_defitem'><code>size</code></td><td class='ruff_defitem'>dimension of matrix</td></tr>
 </table>
-<p class='ruff'>Returns a new base matrix indentity</p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_270' href="javascript:toggleSource('270')">Show source</a></p>
-<div id='270' class='ruff_dyn_src'><pre>proc ::tomato::mathmatrix::CreateIdentity {size} {
+<p class='ruff'>Returns a new base matrix indentity <a href="tomato_tomato_mathmatrix.html#::tomato::mathmatrix::Matrix" title="Matrix" class='ruff_cmd'>Matrix</a></p>
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_277' href="javascript:toggleSource('277')">Show source</a></p>
+<div id='277' class='ruff_dyn_src'><pre>proc ::tomato::mathmatrix::CreateIdentity {size} {
 
     # Create a new identity matrix where each diagonal value is set to One.&lt;br&gt;
     # From package tcllib [math::linearalgebra](https://core.tcl-lang.org/tcllib/doc/trunk/embedded/md/tcllib/files/modules/math/linalg.md)
@@ -939,7 +1009,7 @@ pre {
     #
     # size - dimension of matrix
     #
-    # Returns a new base matrix indentity
+    # Returns a new base matrix indentity [Matrix]
     set mat [tomato::mathmatrix::Matrix new $size $size]
 
     while { $size &gt; 0 } {
@@ -948,6 +1018,52 @@ pre {
     }
 
     return $mat
+}</pre></div>
+</div><h4 class='ruffproc'><a name='::tomato::mathmatrix::Equals'>Equals</a><span class='ns_scope'> [<a href="tomato_tomato_mathmatrix.html#::tomato::mathmatrix" title="::tomato::mathmatrix" class='ruff_cmd'>::tomato::mathmatrix</a>]</span><span class='tinylink'><a href='tomato_tomato_mathmatrix.html#::tomato::mathmatrix'>mathmatrix</a>, <a href='#top'>Top</a>, <a href='tomato.html'>Main</a></span></h4>
+<div style='clear:both;'></div>
+<p class='ruff'>Indicate if this matrix is equivalent to a another matrix</p>
+<div class='ruff_synopsis'><span class='ruff_cmd'>Equals</span> <span class='ruff_arg'>mat other tolerance</span></div>
+<table class='ruff_deflist'>
+<tr><td class='ruff_defitem'><code>mat</code></td><td class='ruff_defitem'>First input matrix  <a href="tomato_tomato_mathmatrix.html#::tomato::mathmatrix::Matrix" title="Matrix" class='ruff_cmd'>Matrix</a></td></tr>
+<tr><td class='ruff_defitem'><code>other</code></td><td class='ruff_defitem'>Second input matrix <a href="tomato_tomato_mathmatrix.html#::tomato::mathmatrix::Matrix" title="Matrix" class='ruff_cmd'>Matrix</a></td></tr>
+<tr><td class='ruff_defitem'><code>tolerance</code></td><td class='ruff_defitem'>A tolerance (epsilon) to adjust for floating point error</td></tr>
+</table>
+<p class='ruff'>See : methods == !=</p>
+<p class='ruff'>An error exception is raised if tolerance (epsilon) &lt; 0.</p>
+<p class='ruff'>Returns true if matrixes are equal, otherwise false.</p>
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_278' href="javascript:toggleSource('278')">Show source</a></p>
+<div id='278' class='ruff_dyn_src'><pre>proc ::tomato::mathmatrix::Equals {mat other tolerance} {
+
+    # Indicate if this matrix is equivalent to a another matrix
+    #
+    # mat   - First input matrix  [Matrix]
+    # other - Second input matrix [Matrix]
+    # tolerance - A tolerance (epsilon) to adjust for floating point error
+    #
+    # Returns true if matrixes are equal, otherwise false.
+    #
+    # See : methods == !=
+    if {$tolerance &lt; 0} {
+        #ruff
+        # An error exception is raised if tolerance (epsilon) &lt; 0.
+        error &quot;epsilon &lt; 0&quot;
+    }
+
+    if {([$mat RowCount] != [$other RowCount]) || ([$mat ColumnCount] != [$other ColumnCount])} {
+        return 0
+    }
+
+    set len [$mat RowCount]
+
+    for {set row 0} {$row &lt; $len} {incr row} {
+        foreach cellmat [$mat GetRow $row] cellother [$other GetRow $row] {
+            if {abs($cellmat - $cellother) &gt; $tolerance} {
+                return 0
+            }
+        }
+    }
+
+    return 1
 }</pre></div>
 </div><h4 class='ruffproc'><a name='::tomato::mathmatrix::MatrixDecompose'>MatrixDecompose</a><span class='ns_scope'> [<a href="tomato_tomato_mathmatrix.html#::tomato::mathmatrix" title="::tomato::mathmatrix" class='ruff_cmd'>::tomato::mathmatrix</a>]</span><span class='tinylink'><a href='tomato_tomato_mathmatrix.html#::tomato::mathmatrix'>mathmatrix</a>, <a href='#top'>Top</a>, <a href='tomato.html'>Main</a></span></h4>
 <div style='clear:both;'></div>
@@ -960,8 +1076,8 @@ pre {
                 combined lower &amp; upper in lummat [Matrix] &amp; row permuations into permmat [Matrix].
 </pre>
 <p class='ruff'>Returns list with : +1 or -1 according to even or odd number of row permutations,<br></p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_271' href="javascript:toggleSource('271')">Show source</a></p>
-<div id='271' class='ruff_dyn_src'><pre>proc ::tomato::mathmatrix::MatrixDecompose {storage} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_279' href="javascript:toggleSource('279')">Show source</a></p>
+<div id='279' class='ruff_dyn_src'><pre>proc ::tomato::mathmatrix::MatrixDecompose {storage} {
 
     # Crout's LU decomposition for matrix determinant and inverse
     # [docs.microsoft.com](https://docs.microsoft.com/fr-fr/archive/msdn-magazine/2016/july/test-run-matrix-inversion-using-csharp)
@@ -996,7 +1112,6 @@ pre {
                 set max $xij
                 set piv $i
             }
-
         }
 
         if {$piv != $j} {
@@ -1009,10 +1124,9 @@ pre {
             $permmat SetCell 0 $piv [$permmat GetCell 0 $j]
             $permmat SetCell 0 $j $t
 
-            set toggle [expr {$toggle * -1}]
+            set toggle [expr {Inv($toggle)}]
 
         }
-
 
         set xjj [$lummat GetCell $j $j]
 
@@ -1040,8 +1154,8 @@ pre {
 <tr><td class='ruff_defitem'><code>storage</code></td><td class='ruff_defitem'>A Matrix <a href="tomato_tomato_mathmatrix.html#::tomato::mathmatrix::Matrix" title="Matrix" class='ruff_cmd'>Matrix</a></td></tr>
 </table>
 <p class='ruff'>Returns A Matrix Inverse</p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_272' href="javascript:toggleSource('272')">Show source</a></p>
-<div id='272' class='ruff_dyn_src'><pre>proc ::tomato::mathmatrix::MatrixInverse {storage} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_280' href="javascript:toggleSource('280')">Show source</a></p>
+<div id='280' class='ruff_dyn_src'><pre>proc ::tomato::mathmatrix::MatrixInverse {storage} {
 
     # Crout's LU decomposition for matrix inverse.
     #
@@ -1049,9 +1163,9 @@ pre {
     #
     # Returns A Matrix Inverse
 
-     set n [$storage RowCount]
-     set result [tomato::mathmatrix::Matrix new $n $n]
-     set result [tomato::mathmatrix::CopyTo $result $storage]
+    set n [$storage RowCount]
+    set result [tomato::mathmatrix::Matrix new $n $n]
+    set result [tomato::mathmatrix::CopyTo $result $storage]
 
     lassign [$storage Decompose] toggle lum perm
 
@@ -1085,8 +1199,8 @@ pre {
 <tr><td class='ruff_defitem'><code>other</code></td><td class='ruff_defitem'>double value</td></tr>
 </table>
 <p class='ruff'>Returns mul matrix <a href="tomato_tomato_mathmatrix.html#::tomato::mathmatrix::Matrix" title="Matrix" class='ruff_cmd'>Matrix</a></p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_273' href="javascript:toggleSource('273')">Show source</a></p>
-<div id='273' class='ruff_dyn_src'><pre>proc ::tomato::mathmatrix::MatrixMulByDouble {mat other} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_281' href="javascript:toggleSource('281')">Show source</a></p>
+<div id='281' class='ruff_dyn_src'><pre>proc ::tomato::mathmatrix::MatrixMulByDouble {mat other} {
 
     # Multiply matrix by double value
     #
@@ -1110,9 +1224,9 @@ pre {
 <tr><td class='ruff_defitem'><code>mat</code></td><td class='ruff_defitem'><a href="tomato_tomato_mathmatrix.html#::tomato::mathmatrix::Matrix" title="Matrix" class='ruff_cmd'>Matrix</a></td></tr>
 <tr><td class='ruff_defitem'><code>other</code></td><td class='ruff_defitem'><a href="tomato_tomato_mathmatrix.html#::tomato::mathmatrix::Matrix" title="Matrix" class='ruff_cmd'>Matrix</a></td></tr>
 </table>
-<p class='ruff'>Returns TCL list mul matrix <a href="tomato_tomato_mathmatrix.html#::tomato::mathmatrix::Matrix" title="Matrix" class='ruff_cmd'>Matrix</a></p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_274' href="javascript:toggleSource('274')">Show source</a></p>
-<div id='274' class='ruff_dyn_src'><pre>proc ::tomato::mathmatrix::MatrixMulColumnVector {mat other} {
+<p class='ruff'>Returns TCL list (mul matrix)</p>
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_282' href="javascript:toggleSource('282')">Show source</a></p>
+<div id='282' class='ruff_dyn_src'><pre>proc ::tomato::mathmatrix::MatrixMulColumnVector {mat other} {
 
     # Multiply matrix by column vector.&lt;br&gt;
     # From package tcllib [math::linearalgebra](https://core.tcl-lang.org/tcllib/doc/trunk/embedded/md/tcllib/files/modules/math/linalg.md)
@@ -1122,7 +1236,7 @@ pre {
     # mat   - [Matrix]
     # other - [Matrix]
     #
-    # Returns TCL list mul matrix [Matrix]
+    # Returns TCL list (mul matrix)
     set newvect {}
 
     set mat1 [$mat Values]
@@ -1149,8 +1263,8 @@ pre {
 <tr><td class='ruff_defitem'><code>other</code></td><td class='ruff_defitem'>Second matrix <a href="tomato_tomato_mathmatrix.html#::tomato::mathmatrix::Matrix" title="Matrix" class='ruff_cmd'>Matrix</a></td></tr>
 </table>
 <p class='ruff'>Returns mul matrix <a href="tomato_tomato_mathmatrix.html#::tomato::mathmatrix::Matrix" title="Matrix" class='ruff_cmd'>Matrix</a></p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_275' href="javascript:toggleSource('275')">Show source</a></p>
-<div id='275' class='ruff_dyn_src'><pre>proc ::tomato::mathmatrix::MatrixMulMatrix {mat other} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_283' href="javascript:toggleSource('283')">Show source</a></p>
+<div id='283' class='ruff_dyn_src'><pre>proc ::tomato::mathmatrix::MatrixMulMatrix {mat other} {
 
     # Multiply matrix by matrix.&lt;br&gt;
     # From package tcllib [math::linearalgebra](https://core.tcl-lang.org/tcllib/doc/trunk/embedded/md/tcllib/files/modules/math/linalg.md)
@@ -1189,9 +1303,9 @@ pre {
 <tr><td class='ruff_defitem'><code>mat</code></td><td class='ruff_defitem'>base matrix <a href="tomato_tomato_mathmatrix.html#::tomato::mathmatrix::Matrix" title="Matrix" class='ruff_cmd'>Matrix</a></td></tr>
 <tr><td class='ruff_defitem'><code>other</code></td><td class='ruff_defitem'>vector <a href="tomato_tomato_mathvec3d.html#::tomato::mathvec3d::Vector3d" title="mathvec3d::Vector3d" class='ruff_cmd'>mathvec3d::Vector3d</a></td></tr>
 </table>
-<p class='ruff'>Returns TCL list mul matrix <a href="tomato_tomato_mathmatrix.html#::tomato::mathmatrix::Matrix" title="Matrix" class='ruff_cmd'>Matrix</a></p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_276' href="javascript:toggleSource('276')">Show source</a></p>
-<div id='276' class='ruff_dyn_src'><pre>proc ::tomato::mathmatrix::MatrixMulVector {mat other} {
+<p class='ruff'>Returns TCL list (mul matrix)</p>
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_284' href="javascript:toggleSource('284')">Show source</a></p>
+<div id='284' class='ruff_dyn_src'><pre>proc ::tomato::mathmatrix::MatrixMulVector {mat other} {
 
     # Multiply matrix by vector.&lt;br&gt;
     # From package tcllib [math::linearalgebra](https://core.tcl-lang.org/tcllib/doc/trunk/embedded/md/tcllib/files/modules/math/linalg.md)
@@ -1200,7 +1314,7 @@ pre {
     # mat   - base matrix [Matrix]
     # other - vector [mathvec3d::Vector3d]
     #
-    # Returns TCL list mul matrix [Matrix]
+    # Returns TCL list (mul matrix)
     set newvect {}
     set mat1 [$mat Values]
     set vec1 [$other Get]
@@ -1224,8 +1338,8 @@ pre {
 <tr><td class='ruff_defitem'><code>data</code></td><td class='ruff_defitem'>list</td></tr>
 </table>
 <p class='ruff'>Returns A new <a href="tomato_tomato_mathmatrix.html#::tomato::mathmatrix::Matrix" title="Matrix" class='ruff_cmd'>Matrix</a></p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_277' href="javascript:toggleSource('277')">Show source</a></p>
-<div id='277' class='ruff_dyn_src'><pre>proc ::tomato::mathmatrix::SetNewDataListMatrix {data} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_285' href="javascript:toggleSource('285')">Show source</a></p>
+<div id='285' class='ruff_dyn_src'><pre>proc ::tomato::mathmatrix::SetNewDataListMatrix {data} {
 
     # Create a new base matrix [Matrix] based on a list
     #
@@ -1260,16 +1374,19 @@ pre {
 <h1><a href='tomato_tomato_mathvec3d.html'>tomato::mathvec3d</a></h1>
 <h1><a style='color: #006666;background-color: white; margin-left:-4px; padding-left:3px;padding-right:2px;' href='tomato_tomato_mathmatrix.html'>tomato::mathmatrix</a></h1>
 <hr><h1><a href='#::tomato::mathmatrix'>tomato::mathmatrix</a></h1><h2><a href='#::tomato::mathmatrix-Classes'>Classes</a></h2><h3><a href='tomato_tomato_mathmatrix.html#::tomato::mathmatrix::Matrix'>Matrix</a></h3><h4 class='tooltip'><a href='tomato_tomato_mathmatrix.html#::tomato::mathmatrix::Matrix::constructor'>constructor</a><span class='tooltiptext'>Initializes a new base class for Matrix Class.
+</span></h4><h4 class='tooltip'><a href='tomato_tomato_mathmatrix.html#::tomato::mathmatrix::Matrix::!='>!=</a><span class='tooltiptext'>Gets value that indicates whether any pair of elements in two specified matrixes is not equal.
+</span></h4><h4 class='tooltip'><a href='tomato_tomato_mathmatrix.html#::tomato::mathmatrix::Matrix::=='>==</a><span class='tooltiptext'>Gets value that indicates whether each pair of elements in two specified matrixes is equal.
 </span></h4><h4 class='tooltip'><a href='tomato_tomato_mathmatrix.html#::tomato::mathmatrix::Matrix::Add'>Add</a><span class='tooltiptext'>Add matrix to another matrix
 </span></h4><h4 class='tooltip'><a href='tomato_tomato_mathmatrix.html#::tomato::mathmatrix::Matrix::ColumnCount'>ColumnCount</a><span class='tooltiptext'>Gets the number of columns.
 </span></h4><h4 class='tooltip'><a href='tomato_tomato_mathmatrix.html#::tomato::mathmatrix::Matrix::Decompose'>Decompose</a><span class='tooltiptext'>The combined lower-upper decomposition of matrix
 </span></h4><h4 class='tooltip'><a href='tomato_tomato_mathmatrix.html#::tomato::mathmatrix::Matrix::Determinant'>Determinant</a><span class='tooltiptext'>Gets the determinant of the matrix for which the Crout's LU decomposition was computed.
 </span></h4><h4 class='tooltip'><a href='tomato_tomato_mathmatrix.html#::tomato::mathmatrix::Matrix::GetCell'>GetCell</a><span class='tooltiptext'>Gets the cell value of base matrix
 </span></h4><h4 class='tooltip'><a href='tomato_tomato_mathmatrix.html#::tomato::mathmatrix::Matrix::GetColumn'>GetColumn</a><span class='tooltiptext'>Gets Column of base matrix.
-</span></h4><h4 class='tooltip'><a href='tomato_tomato_mathmatrix.html#::tomato::mathmatrix::Matrix::GetRow'>GetRow</a><span class='tooltiptext'>Set Row of base matrix.
+</span></h4><h4 class='tooltip'><a href='tomato_tomato_mathmatrix.html#::tomato::mathmatrix::Matrix::GetRow'>GetRow</a><span class='tooltiptext'>Get Row of base matrix.
 </span></h4><h4 class='tooltip'><a href='tomato_tomato_mathmatrix.html#::tomato::mathmatrix::Matrix::GetSize'>GetSize</a><span class='tooltiptext'>Returns the size of this object.
 </span></h4><h4 class='tooltip'><a href='tomato_tomato_mathmatrix.html#::tomato::mathmatrix::Matrix::GetType'>GetType</a><span class='tooltiptext'>Gets the name of class.
 </span></h4><h4 class='tooltip'><a href='tomato_tomato_mathmatrix.html#::tomato::mathmatrix::Matrix::Inverse'>Inverse</a><span class='tooltiptext'>Matrix inverse using Crout's LU decomposition
+</span></h4><h4 class='tooltip'><a href='tomato_tomato_mathmatrix.html#::tomato::mathmatrix::Matrix::IsOrthogonal'>IsOrthogonal</a><span class='tooltiptext'>Gets if matrix is orthogonal
 </span></h4><h4 class='tooltip'><a href='tomato_tomato_mathmatrix.html#::tomato::mathmatrix::Matrix::Multiply'>Multiply</a><span class='tooltiptext'>Multiply matrix...
 </span></h4><h4 class='tooltip'><a href='tomato_tomato_mathmatrix.html#::tomato::mathmatrix::Matrix::RowCount'>RowCount</a><span class='tooltiptext'>Gets the number of rows.
 </span></h4><h4 class='tooltip'><a href='tomato_tomato_mathmatrix.html#::tomato::mathmatrix::Matrix::SetCell'>SetCell</a><span class='tooltiptext'>Set the cell value of base matrix
@@ -1284,6 +1401,7 @@ pre {
 </span></h4><h2><a href='#::tomato::mathmatrix-Commands'>Commands</a></h2><h4 class='tooltip'><a href='tomato_tomato_mathmatrix.html#::tomato::mathmatrix::CopySubMatrixTo'>CopySubMatrixTo</a><span class='tooltiptext'>Copies the values of a given matrix into a region in this matrix.
 </span></h4><h4 class='tooltip'><a href='tomato_tomato_mathmatrix.html#::tomato::mathmatrix::CopyTo'>CopyTo</a><span class='tooltiptext'>Copies the elements of this matrix to the given matrix.
 </span></h4><h4 class='tooltip'><a href='tomato_tomato_mathmatrix.html#::tomato::mathmatrix::CreateIdentity'>CreateIdentity</a><span class='tooltiptext'>Create a new identity matrix where each diagonal value is set to One.<br> From package tcllib <a href="https://core.tcl-lang.org/tcllib/doc/trunk/embedded/md/tcllib/files/modules/math/linalg.md" >math::linearalgebra</a> <em>(Modify according to my needs)</em>.
+</span></h4><h4 class='tooltip'><a href='tomato_tomato_mathmatrix.html#::tomato::mathmatrix::Equals'>Equals</a><span class='tooltiptext'>Indicate if this matrix is equivalent to a another matrix
 </span></h4><h4 class='tooltip'><a href='tomato_tomato_mathmatrix.html#::tomato::mathmatrix::MatrixDecompose'>MatrixDecompose</a><span class='tooltiptext'>Crout's LU decomposition for matrix determinant and inverse <a href="https://docs.microsoft.com/fr-fr/archive/msdn-magazine/2016/july/test-run-matrix-inversion-using-csharp" >docs.microsoft.com</a>
 </span></h4><h4 class='tooltip'><a href='tomato_tomato_mathmatrix.html#::tomato::mathmatrix::MatrixInverse'>MatrixInverse</a><span class='tooltiptext'>Crout's LU decomposition for matrix inverse.
 </span></h4><h4 class='tooltip'><a href='tomato_tomato_mathmatrix.html#::tomato::mathmatrix::MatrixMulByDouble'>MatrixMulByDouble</a><span class='tooltiptext'>Multiply matrix by double value
