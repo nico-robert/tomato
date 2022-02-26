@@ -44,7 +44,7 @@ Release :
     - Matrix.tcl : Check if matrix is *singular*.
     - Ray3d.tcl  : Add *IntersectionRayWithPlane* command.
     - Triangle3d.tcl : Add *GetType* command.
-*  **26-02-2021** : 1.2.2
+*  **26-02-2022** : 1.2.2
     - Vector3d.tcl : Correction 'lerp' command + cosmetic changes.
     - CoordinateSystem.tcl : Cosmetic changes.
     - Line3d.tcl : Cosmetic changes.
