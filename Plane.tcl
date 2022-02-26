@@ -1,4 +1,4 @@
-# Copyright (c) 2021 Nicolas ROBERT.
+# Copyright (c) 2021-2022 Nicolas ROBERT.
 # Distributed under MIT license. Please see LICENSE for details.
 
 namespace eval tomato::mathplane {
@@ -379,7 +379,7 @@ proc tomato::mathplane::FromPoints {p1 p2 p3 {tolerance $::tomato::helper::TolGe
                                             [expr {[$p3 Y] - [$p1 Y]}] \
                                             [expr {[$p3 Z] - [$p1 Z]}]]
 
-    set cross [tomato::mathvec3d::Cross $v1 $v2]
+    set cross [$v1 CrossProduct $v2]
 
     if {[$cross Length] < $tolerance} {
         error "The 3 points should not be on the same line"
@@ -407,7 +407,7 @@ proc tomato::mathplane::IntersectionWithPlane {plane1 plane2 tolerance} {
     #
     # plane1  - The first plane. [Plane]
     # plane2  - The second plane. [Plane]
-    # tolerance  - A tolerance (epsilon) to account for floating point error.
+    # tolerance  - A tolerance (epsilon) to check if planes are not parallel.
     #
     # Returns A ray at the intersection. [mathray3d::Ray3d]
 
@@ -433,22 +433,26 @@ proc tomato::mathplane::IntersectionWithPlane {plane1 plane2 tolerance} {
 
 proc tomato::mathplane::IntersectionWithRay {plane1 ray tolerance} {
     # Finds the intersection between a ray and plane, throws if ray is parallel to the plane
-    # <http://www.cs.princeton.edu/courses/archive/fall00/cs426/lectures/raycast/sld017.htm>
+    # <http://geomalgorithms.com/a05-_intersect-1.html>
     # 
     # plane1  - [Plane]
     # ray     - [mathray3d::Ray3d]
-    # tolerance  - A tolerance (epsilon) to account for floating point error.
+    # tolerance  - A tolerance (epsilon) to check if rays are not parallel.
     #
     # Returns The point of intersection. [mathpt3d::Point3d]
-
-    if {[[$plane1 Normal] IsPerpendicularTo [$ray Direction] $tolerance]} {
+    set u [$ray Direction]
+    set D [[$plane1 Normal] DotProduct $u]
+    
+    if {abs($D) < $tolerance} {
         throw {Rayparallel} "Ray is parallel to the plane..."
     }
 
-    set d [$plane1 SignedDistanceTo [$ray ThroughPoint]]
-    set t [expr {(-1 * $d) / [[$ray Direction] DotProduct [$plane1 Normal]]}]
-    
-    return [[$ray ThroughPoint] + [[$ray Direction] * $t]]
+    set w [[$ray ThroughPoint] - [$plane1 RootPoint]]
+    set N [[[$plane1 Normal] Negate] DotProduct $w]
+
+    set t [expr {$N / double($D)}]
+
+    return [[$ray ThroughPoint] + [$u * $t]]
 }
 
 proc tomato::mathplane::IntersectionWithLine {plane1 line tolerance} {
@@ -460,33 +464,30 @@ proc tomato::mathplane::IntersectionWithLine {plane1 line tolerance} {
     # tolerance - A tolerance (epsilon) to adjust for floating point error
     #
     # Returns Intersection Point [mathpt3d::Point3d] or nothing
-    set dir [$line Direction]
+    set u [[$line EndPoint] - [$line StartPoint]]
+    set w [[$line StartPoint] - [$plane1 RootPoint]]
 
-    if {[$dir IsPerpendicularTo [$plane1 Normal] $tolerance]} {
+    set D [[$plane1 Normal] DotProduct $u]
+    set N [expr {Inv([[$plane1 Normal] DotProduct $w])}]
 
-        # either parallel or lies in the plane
-        set projectedPoint [$plane1 Project [$line StartPoint] $dir]
-
-        if {[$projectedPoint == [$line StartPoint]]} {
+    if {abs($D) < $tolerance} {
+        if {$N == 0.0} {
             throw {Linelies} "Line lies in the plane"
+        } else {
+            # Line and plane are parallel
+            return ""
         }
-
     }
- 
-    set d [$plane1 SignedDistanceTo [$line StartPoint]]
-    set u [[$line StartPoint] VectorTo [$line EndPoint]]
-    set dot [$u DotProduct [$plane1 Normal]]
 
-    set t [expr {(-1 * $d) / double($dot)}]
+    set t [expr {$N / double($D)}]
 
-    if {($t > 1) || ($t < 0)} {
+    if {($t > 1.0) || ($t < 0.0)} {
         # They are not intersected
         return ""
     }
 
     return [[$line StartPoint] + [$u * $t]]
 
-    
 }
 
 proc tomato::mathplane::Equals {plane other tolerance} {
@@ -506,6 +507,6 @@ proc tomato::mathplane::Equals {plane other tolerance} {
     }
     return [expr {
                   (abs([$other D] - [$plane D]) < $tolerance) && 
-                  [[$plane Normal] == [$other Normal]]
+                  [[$plane Normal] == [$other Normal] $tolerance]
                 }]
 }
