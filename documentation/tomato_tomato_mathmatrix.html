@@ -559,7 +559,7 @@ pre {
         error &quot;Index Row must be between 0 &amp; [expr {$_rowCount - 1}]&quot;
     }
 
-    return [lindex [my Values] $rowIndex]
+    return [lindex $_values $rowIndex]
 }</pre></div>
 </div><h4 class='ruffmethod'><a name='::tomato::mathmatrix::Matrix::GetSize'>GetSize</a><span class='ns_scope'> [<a href="tomato_tomato_mathmatrix.html#::tomato::mathmatrix::Matrix" title="::tomato::mathmatrix::Matrix" class='ruff_cmd'>::tomato::mathmatrix::Matrix</a>]</span><span class='tinylink'><a href='tomato_tomato_mathmatrix.html#::tomato::mathmatrix::Matrix'>Matrix</a>, <a href='#top'>Top</a>, <a href='tomato.html'>Main</a></span></h4>
 <div style='clear:both;'></div>
@@ -809,7 +809,6 @@ pre {
     } elseif {[llength $args] == 5} {
 
         lassign $args rowIndex rowCount columnIndex columnCount subMatrix
-
         return [tomato::mathmatrix::CopySubMatrixTo $target $subMatrix 0 $rowIndex $rowCount 0 $columnIndex $columnCount]
 
     } else {

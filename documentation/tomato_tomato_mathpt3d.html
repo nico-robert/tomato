@@ -867,7 +867,7 @@ pre {
 <tr><td class='ruff_defitem'><code>p1</code></td><td class='ruff_defitem'><a href="tomato_tomato_mathpt3d.html#::tomato::mathpt3d::Point3d" title="Point3d" class='ruff_cmd'>Point3d</a></td></tr>
 <tr><td class='ruff_defitem'><code>p2</code></td><td class='ruff_defitem'><a href="tomato_tomato_mathpt3d.html#::tomato::mathpt3d::Point3d" title="Point3d" class='ruff_cmd'>Point3d</a></td></tr>
 <tr><td class='ruff_defitem'><code>p3</code></td><td class='ruff_defitem'><a href="tomato_tomato_mathpt3d.html#::tomato::mathpt3d::Point3d" title="Point3d" class='ruff_cmd'>Point3d</a></td></tr>
-<tr><td class='ruff_defitem'><code>tolerance</code></td><td class='ruff_defitem'>Not documented. Optional, default <code>$::tomato::helper::TolGeom</code>.</td></tr>
+<tr><td class='ruff_defitem'><code>tolerance</code></td><td class='ruff_defitem'>A tolerance (epsilon) for collinear points verification. Optional, default <code>$::tomato::helper::TolGeom</code>.</td></tr>
 </table>
 <p class='ruff'>Returns true if the points are collinear, otherwise false.</p>
 <div class='ruff_source'><p class='ruff_source_link'><a id='l_170' href="javascript:toggleSource('170')">Show source</a></p>
@@ -878,6 +878,7 @@ pre {
     # p1 - [Point3d]
     # p2 - [Point3d]
     # p3 - [Point3d]
+    # tolerance - A tolerance (epsilon) for collinear points verification.
     #
     # Returns true if the points are collinear, otherwise false.
     if {[llength [info level 0]] &lt; 5} {
@@ -887,7 +888,7 @@ pre {
     set v1 [$p1 VectorTo $p2]
     set v2 [$p1 VectorTo $p3]
 
-    return [expr {[[tomato::mathvec3d::Cross $v1 $v2] Length] &lt; $tolerance}]
+    return [expr {[[$v1 CrossProduct $v2] Length] &lt; $tolerance}]
 }</pre></div>
 </div><h4 class='ruffproc'><a name='::tomato::mathpt3d::MidPoint'>MidPoint</a><span class='ns_scope'> [<a href="tomato_tomato_mathpt3d.html#::tomato::mathpt3d" title="::tomato::mathpt3d" class='ruff_cmd'>::tomato::mathpt3d</a>]</span><span class='tinylink'><a href='tomato_tomato_mathpt3d.html#::tomato::mathpt3d'>mathpt3d</a>, <a href='#top'>Top</a>, <a href='tomato.html'>Main</a></span></h4>
 <div style='clear:both;'></div>

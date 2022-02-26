@@ -1343,7 +1343,7 @@ tomato::mathquat::Quaternion new
     }
 
     return [expr {
-                  abs([$quaternion Real]  - [$other Real])   &lt; $tolerance &amp;&amp;
+                  abs([$quaternion Real]  - [$other Real])  &lt; $tolerance &amp;&amp;
                   abs([$quaternion ImagX] - [$other ImagX]) &lt; $tolerance &amp;&amp;
                   abs([$quaternion ImagY] - [$other ImagY]) &lt; $tolerance &amp;&amp;
                   abs([$quaternion ImagZ] - [$other ImagZ]) &lt; $tolerance

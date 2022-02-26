@@ -922,7 +922,7 @@ pre {
         error $msg
     }
 
-    if {$singular || abs($det) &lt; $::tomato::helper::TolEquals} {
+    if {$singular || (abs($det) &lt; $::tomato::helper::TolEquals)} {
         set mat [[$toCs BaseClass] Multiply [$fromCs BaseClass]]
     } else {
         set mat [[$toCs BaseClass] Multiply [[$fromCs BaseClass] Inverse]]

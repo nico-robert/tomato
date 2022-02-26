@@ -441,7 +441,7 @@ pre {
     #
     # Returns A new scaled vector [Vector3d] if scalar or A scalar result if object.
     if {[tomato::helper::IsaObject $type]} {
-        return [tomato::mathvec3d::Dot [self] $other]
+        return [my DotProduct $other]
     } else {
 
         set vx [expr {$_x * $type}]
@@ -783,7 +783,7 @@ pre {
 <div class='ruff_synopsis'><span class='ruff_cmd'>OBJECT IsParallelTo</span> <span class='ruff_arg'>other ?tolerance?</span></div>
 <table class='ruff_deflist'>
 <tr><td class='ruff_defitem'><code>other</code></td><td class='ruff_defitem'>The other vector <a href="tomato_tomato_mathvec3d.html#::tomato::mathvec3d::Vector3d" title="Vector3d" class='ruff_cmd'>Vector3d</a> Object.</td></tr>
-<tr><td class='ruff_defitem'><code>tolerance</code></td><td class='ruff_defitem'>A tolerance value for the Cross product method.  Values below 2*<a href="tomato_tomato_helper.html#::tomato::helper::DoublePrecision" title="helper::DoublePrecision" class='ruff_cmd'>helper::DoublePrecision</a> may cause issues. Optional, default <code>$::tomato::helper::TolGeom</code>.</td></tr>
+<tr><td class='ruff_defitem'><code>tolerance</code></td><td class='ruff_defitem'>A tolerance value for the Cross product method. Optional, default <code>$::tomato::helper::TolGeom</code>.</td></tr>
 </table>
 <p class='ruff'>Returns true if the vector dot product is within the given tolerance of unity, false if it is not.</p>
 <div class='ruff_source'><p class='ruff_source_link'><a id='l_220' href="javascript:toggleSource('220')">Show source</a></p>
@@ -793,7 +793,7 @@ pre {
     # to within a specified tolerance.
     #
     # other - The other vector [Vector3d] Object.
-    # tolerance - A tolerance value for the Cross product method.  Values below 2*[helper::DoublePrecision] may cause issues.
+    # tolerance - A tolerance value for the Cross product method.
     #
     # Returns true if the vector dot product is within the given tolerance of unity, false if it is not.
     if {[llength [info level 0]] &lt; 4} {
@@ -805,7 +805,7 @@ pre {
     set vaN    [$va Normalized]
     set otherN [$other Normalized]
 
-    set cross [tomato::mathvec3d::Cross $vaN $otherN]
+    set cross [$vaN CrossProduct $otherN]
     set det   [$cross LengthSquared]
 
     return [expr {abs($det) &lt;= $tolerance}]
@@ -816,7 +816,7 @@ pre {
 <div class='ruff_synopsis'><span class='ruff_cmd'>OBJECT IsPerpendicularTo</span> <span class='ruff_arg'>other ?tolerance?</span></div>
 <table class='ruff_deflist'>
 <tr><td class='ruff_defitem'><code>other</code></td><td class='ruff_defitem'>The other vector <a href="tomato_tomato_mathvec3d.html#::tomato::mathvec3d::Vector3d" title="Vector3d" class='ruff_cmd'>Vector3d</a> Object.</td></tr>
-<tr><td class='ruff_defitem'><code>tolerance</code></td><td class='ruff_defitem'>A tolerance value for the dot product method.  Values below 2*<a href="tomato_tomato_helper.html#::tomato::helper::DoublePrecision" title="helper::DoublePrecision" class='ruff_cmd'>helper::DoublePrecision</a> may cause issues. Optional, default <code>$::tomato::helper::TolGeom</code>.</td></tr>
+<tr><td class='ruff_defitem'><code>tolerance</code></td><td class='ruff_defitem'>A tolerance value for the dot product method. Optional, default <code>$::tomato::helper::TolGeom</code>.</td></tr>
 </table>
 <p class='ruff'>Returns true if the vector dot product is within the given tolerance of zero, false if not.</p>
 <div class='ruff_source'><p class='ruff_source_link'><a id='l_221' href="javascript:toggleSource('221')">Show source</a></p>
@@ -826,7 +826,7 @@ pre {
     # comparing it to within a specified tolerance
     #
     # other - The other vector [Vector3d] Object.
-    # tolerance - A tolerance value for the dot product method.  Values below 2*[helper::DoublePrecision] may cause issues.
+    # tolerance - A tolerance value for the dot product method.
     #
     # Returns true if the vector dot product is within the given tolerance of zero, false if not.
     if {[llength [info level 0]] &lt; 4} {
@@ -838,7 +838,7 @@ pre {
     set vaN    [$va Normalized]
     set otherN [$other Normalized]
 
-    set dp [expr {abs([tomato::mathvec3d::Dot $vaN $otherN])}]
+    set dp [expr {abs([$vaN DotProduct $otherN])}]
     return [expr {$dp &lt; $tolerance}]
 }</pre></div>
 </div><h4 class='ruffmethod'><a name='::tomato::mathvec3d::Vector3d::Length'>Length</a><span class='ns_scope'> [<a href="tomato_tomato_mathvec3d.html#::tomato::mathvec3d::Vector3d" title="::tomato::mathvec3d::Vector3d" class='ruff_cmd'>::tomato::mathvec3d::Vector3d</a>]</span><span class='tinylink'><a href='tomato_tomato_mathvec3d.html#::tomato::mathvec3d::Vector3d'>Vector3d</a>, <a href='#top'>Top</a>, <a href='tomato.html'>Main</a></span></h4>
@@ -859,7 +859,7 @@ pre {
 <div id='223' class='ruff_dyn_src'><pre>method LengthSquared {} {
 
     # Gets the length of the vector squared
-    return [expr {(($_x**2) + ($_y**2) + ($_z**2))}]
+    return [expr {($_x**2) + ($_y**2) + ($_z**2)}]
 }</pre></div>
 </div><h4 class='ruffmethod'><a name='::tomato::mathvec3d::Vector3d::Negate'>Negate</a><span class='ns_scope'> [<a href="tomato_tomato_mathvec3d.html#::tomato::mathvec3d::Vector3d" title="::tomato::mathvec3d::Vector3d" class='ruff_cmd'>::tomato::mathvec3d::Vector3d</a>]</span><span class='tinylink'><a href='tomato_tomato_mathvec3d.html#::tomato::mathvec3d::Vector3d'>Vector3d</a>, <a href='#top'>Top</a>, <a href='tomato.html'>Main</a></span></h4>
 <div style='clear:both;'></div>
@@ -1016,7 +1016,7 @@ pre {
     # scaleFactor - a scalar
     #
     # Returns a new scaled vector [Vector3d]
-    return [[self] * $scaleFactor]
+    return [my * $scaleFactor]
 }</pre></div>
 </div><h4 class='ruffmethod'><a name='::tomato::mathvec3d::Vector3d::SignedAngleTo'>SignedAngleTo</a><span class='ns_scope'> [<a href="tomato_tomato_mathvec3d.html#::tomato::mathvec3d::Vector3d" title="::tomato::mathvec3d::Vector3d" class='ruff_cmd'>::tomato::mathvec3d::Vector3d</a>]</span><span class='tinylink'><a href='tomato_tomato_mathvec3d.html#::tomato::mathvec3d::Vector3d'>Vector3d</a>, <a href='#top'>Top</a>, <a href='tomato.html'>Main</a></span></h4>
 <div style='clear:both;'></div>
@@ -1026,7 +1026,7 @@ pre {
 <tr><td class='ruff_defitem'><code>v</code></td><td class='ruff_defitem'>The vector <a href="tomato_tomato_mathvec3d.html#::tomato::mathvec3d::Vector3d" title="Vector3d" class='ruff_cmd'>Vector3d</a> to calculate the signed angle to</td></tr>
 <tr><td class='ruff_defitem'><code>about</code></td><td class='ruff_defitem'>The vector <a href="tomato_tomato_mathvec3d.html#::tomato::mathvec3d::Vector3d" title="Vector3d" class='ruff_cmd'>Vector3d</a> around which to rotate to get the correct sign</td></tr>
 </table>
-<p class='ruff'>Returns A signed Angle.</p>
+<p class='ruff'>Returns A signed Angle (In radian).</p>
 <div class='ruff_source'><p class='ruff_source_link'><a id='l_231' href="javascript:toggleSource('231')">Show source</a></p>
 <div id='231' class='ruff_dyn_src'><pre>method SignedAngleTo {v about} {
 
@@ -1035,9 +1035,9 @@ pre {
     # v     - The vector [Vector3d] to calculate the signed angle to
     # about - The vector [Vector3d] around which to rotate to get the correct sign
     #
-    # Returns A signed Angle.
+    # Returns A signed Angle (In radian).
     if {[my IsParallelTo $about]} {
-        error &quot;FromVector parallel to aboutVector&quot;
+        error &quot;Self parallel to aboutVector&quot;
     }
 
     if {[$v IsParallelTo $about]} {
@@ -1327,9 +1327,9 @@ pre {
     # blend - The blend factor. v1 when blend=0, v2 when blend=1
     #
     # Returns v1 when blend=0, v2 when blend=1, and a linear combination otherwise..
-    set vx [expr {$scale * ([$v2 X] - [$v1 X]) + [$v1 X]}]
-    set vy [expr {$scale * ([$v2 Y] - [$v1 Y]) + [$v1 Y]}]
-    set vz [expr {$scale * ([$v2 Z] - [$v1 Z]) + [$v1 Z]}]
+    set vx [expr {$blend * ([$v2 X] - [$v1 X]) + [$v1 X]}]
+    set vy [expr {$blend * ([$v2 Y] - [$v1 Y]) + [$v1 Y]}]
+    set vz [expr {$blend * ([$v2 Z] - [$v1 Z]) + [$v1 Z]}]
 
     return [tomato::mathvec3d::Vector3d new $vx $vy $vz]
 }</pre></div>

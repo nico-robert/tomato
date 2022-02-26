@@ -771,7 +771,7 @@ pre {
     }
     return [expr {
                   (abs([$other D] - [$plane D]) &lt; $tolerance) &amp;&amp;
-                  [[$plane Normal] == [$other Normal]]
+                  [[$plane Normal] == [$other Normal] $tolerance]
                 }]
 }</pre></div>
 </div><h4 class='ruffproc'><a name='::tomato::mathplane::FromPoints'>FromPoints</a><span class='ns_scope'> [<a href="tomato_tomato_mathplane.html#::tomato::mathplane" title="::tomato::mathplane" class='ruff_cmd'>::tomato::mathplane</a>]</span><span class='tinylink'><a href='tomato_tomato_mathplane.html#::tomato::mathplane'>mathplane</a>, <a href='#top'>Top</a>, <a href='tomato.html'>Main</a></span></h4>
@@ -810,7 +810,7 @@ pre {
 
     set v2 [tomato::mathvec3d::Vector3d new [expr {[$p3 X] - [$p1 X]}]  [expr {[$p3 Y] - [$p1 Y]}]  [expr {[$p3 Z] - [$p1 Z]}]]
 
-    set cross [tomato::mathvec3d::Cross $v1 $v2]
+    set cross [$v1 CrossProduct $v2]
 
     if {[$cross Length] &lt; $tolerance} {
         error &quot;The 3 points should not be on the same line&quot;
@@ -839,26 +839,24 @@ pre {
     # tolerance - A tolerance (epsilon) to adjust for floating point error
     #
     # Returns Intersection Point [mathpt3d::Point3d] or nothing
-    set dir [$line Direction]
+    set u [[$line EndPoint] - [$line StartPoint]]
+    set w [[$line StartPoint] - [$plane1 RootPoint]]
 
-    if {[$dir IsPerpendicularTo [$plane1 Normal] $tolerance]} {
+    set D [[$plane1 Normal] DotProduct $u]
+    set N [expr {Inv([[$plane1 Normal] DotProduct $w])}]
 
-        # either parallel or lies in the plane
-        set projectedPoint [$plane1 Project [$line StartPoint] $dir]
-
-        if {[$projectedPoint == [$line StartPoint]]} {
+    if {abs($D) &lt; $tolerance} {
+        if {$N == 0.0} {
             throw {Linelies} &quot;Line lies in the plane&quot;
+        } else {
+            # Line and plane are parallel
+            return &quot;&quot;
         }
-
     }
 
-    set d [$plane1 SignedDistanceTo [$line StartPoint]]
-    set u [[$line StartPoint] VectorTo [$line EndPoint]]
-    set dot [$u DotProduct [$plane1 Normal]]
+    set t [expr {$N / double($D)}]
 
-    set t [expr {(-1 * $d) / double($dot)}]
-
-    if {($t &gt; 1) || ($t &lt; 0)} {
+    if {($t &gt; 1.0) || ($t &lt; 0.0)} {
         # They are not intersected
         return &quot;&quot;
     }
@@ -872,7 +870,7 @@ pre {
 <table class='ruff_deflist'>
 <tr><td class='ruff_defitem'><code>plane1</code></td><td class='ruff_defitem'>The first plane. <a href="tomato_tomato_mathplane.html#::tomato::mathplane::Plane" title="Plane" class='ruff_cmd'>Plane</a></td></tr>
 <tr><td class='ruff_defitem'><code>plane2</code></td><td class='ruff_defitem'>The second plane. <a href="tomato_tomato_mathplane.html#::tomato::mathplane::Plane" title="Plane" class='ruff_cmd'>Plane</a></td></tr>
-<tr><td class='ruff_defitem'><code>tolerance</code></td><td class='ruff_defitem'>A tolerance (epsilon) to account for floating point error.</td></tr>
+<tr><td class='ruff_defitem'><code>tolerance</code></td><td class='ruff_defitem'>A tolerance (epsilon) to check if planes are not parallel.</td></tr>
 </table>
 <p class='ruff'>Returns A ray at the intersection. <a href="tomato_tomato_mathray3d.html#::tomato::mathray3d::Ray3d" title="mathray3d::Ray3d" class='ruff_cmd'>mathray3d::Ray3d</a></p>
 <div class='ruff_source'><p class='ruff_source_link'><a id='l_192' href="javascript:toggleSource('192')">Show source</a></p>
@@ -882,7 +880,7 @@ pre {
     #
     # plane1  - The first plane. [Plane]
     # plane2  - The second plane. [Plane]
-    # tolerance  - A tolerance (epsilon) to account for floating point error.
+    # tolerance  - A tolerance (epsilon) to check if planes are not parallel.
     #
     # Returns A ray at the intersection. [mathray3d::Ray3d]
 
@@ -907,34 +905,38 @@ pre {
 }</pre></div>
 </div><h4 class='ruffproc'><a name='::tomato::mathplane::IntersectionWithRay'>IntersectionWithRay</a><span class='ns_scope'> [<a href="tomato_tomato_mathplane.html#::tomato::mathplane" title="::tomato::mathplane" class='ruff_cmd'>::tomato::mathplane</a>]</span><span class='tinylink'><a href='tomato_tomato_mathplane.html#::tomato::mathplane'>mathplane</a>, <a href='#top'>Top</a>, <a href='tomato.html'>Main</a></span></h4>
 <div style='clear:both;'></div>
-<p class='ruff'>Finds the intersection between a ray and plane, throws if ray is parallel to the plane <a href="http://www.cs.princeton.edu/courses/archive/fall00/cs426/lectures/raycast/sld017.htm">http://www.cs.princeton.edu/courses/archive/fall00/cs426/lectures/raycast/sld017.htm</a></p>
+<p class='ruff'>Finds the intersection between a ray and plane, throws if ray is parallel to the plane <a href="http://geomalgorithms.com/a05-_intersect-1.html">http://geomalgorithms.com/a05-_intersect-1.html</a></p>
 <div class='ruff_synopsis'><span class='ruff_cmd'>IntersectionWithRay</span> <span class='ruff_arg'>plane1 ray tolerance</span></div>
 <table class='ruff_deflist'>
 <tr><td class='ruff_defitem'><code>plane1</code></td><td class='ruff_defitem'><a href="tomato_tomato_mathplane.html#::tomato::mathplane::Plane" title="Plane" class='ruff_cmd'>Plane</a></td></tr>
 <tr><td class='ruff_defitem'><code>ray</code></td><td class='ruff_defitem'><a href="tomato_tomato_mathray3d.html#::tomato::mathray3d::Ray3d" title="mathray3d::Ray3d" class='ruff_cmd'>mathray3d::Ray3d</a></td></tr>
-<tr><td class='ruff_defitem'><code>tolerance</code></td><td class='ruff_defitem'>A tolerance (epsilon) to account for floating point error.</td></tr>
+<tr><td class='ruff_defitem'><code>tolerance</code></td><td class='ruff_defitem'>A tolerance (epsilon) to check if rays are not parallel.</td></tr>
 </table>
 <p class='ruff'>Returns The point of intersection. <a href="tomato_tomato_mathpt3d.html#::tomato::mathpt3d::Point3d" title="mathpt3d::Point3d" class='ruff_cmd'>mathpt3d::Point3d</a></p>
 <div class='ruff_source'><p class='ruff_source_link'><a id='l_193' href="javascript:toggleSource('193')">Show source</a></p>
 <div id='193' class='ruff_dyn_src'><pre>proc ::tomato::mathplane::IntersectionWithRay {plane1 ray tolerance} {
 
     # Finds the intersection between a ray and plane, throws if ray is parallel to the plane
-    # &lt;http://www.cs.princeton.edu/courses/archive/fall00/cs426/lectures/raycast/sld017.htm&gt;
+    # &lt;http://geomalgorithms.com/a05-_intersect-1.html&gt;
     #
     # plane1  - [Plane]
     # ray     - [mathray3d::Ray3d]
-    # tolerance  - A tolerance (epsilon) to account for floating point error.
+    # tolerance  - A tolerance (epsilon) to check if rays are not parallel.
     #
     # Returns The point of intersection. [mathpt3d::Point3d]
+    set u [$ray Direction]
+    set D [[$plane1 Normal] DotProduct $u]
 
-    if {[[$plane1 Normal] IsPerpendicularTo [$ray Direction] $tolerance]} {
+    if {abs($D) &lt; $tolerance} {
         throw {Rayparallel} &quot;Ray is parallel to the plane...&quot;
     }
 
-    set d [$plane1 SignedDistanceTo [$ray ThroughPoint]]
-    set t [expr {(-1 * $d) / [[$ray Direction] DotProduct [$plane1 Normal]]}]
+    set w [[$ray ThroughPoint] - [$plane1 RootPoint]]
+    set N [[[$plane1 Normal] Negate] DotProduct $w]
 
-    return [[$ray ThroughPoint] + [[$ray Direction] * $t]]
+    set t [expr {$N / double($D)}]
+
+    return [[$ray ThroughPoint] + [$u * $t]]
 }</pre></div>
 </div><h4 class='ruffproc'><a name='::tomato::mathplane::PointFromPlanes'>PointFromPlanes</a><span class='ns_scope'> [<a href="tomato_tomato_mathplane.html#::tomato::mathplane" title="::tomato::mathplane" class='ruff_cmd'>::tomato::mathplane</a>]</span><span class='tinylink'><a href='tomato_tomato_mathplane.html#::tomato::mathplane'>mathplane</a>, <a href='#top'>Top</a>, <a href='tomato.html'>Main</a></span></h4>
 <div style='clear:both;'></div>
@@ -1072,7 +1074,7 @@ pre {
 </span></h4><h4 class='tooltip'><a href='tomato_tomato_mathplane.html#::tomato::mathplane::FromPoints'>FromPoints</a><span class='tooltiptext'>Initializes a new instance of the Plane class. Creates a plane that contains the three given points.
 </span></h4><h4 class='tooltip'><a href='tomato_tomato_mathplane.html#::tomato::mathplane::IntersectionWithLine'>IntersectionWithLine</a><span class='tooltiptext'>Find intersection between Line3D and Plane <a href="http://geomalgorithms.com/a05-_intersect-1.html">http://geomalgorithms.com/a05-_intersect-1.html</a>
 </span></h4><h4 class='tooltip'><a href='tomato_tomato_mathplane.html#::tomato::mathplane::IntersectionWithPlane'>IntersectionWithPlane</a><span class='tooltiptext'>Finds the intersection of the two planes, throws if they are parallel
-</span></h4><h4 class='tooltip'><a href='tomato_tomato_mathplane.html#::tomato::mathplane::IntersectionWithRay'>IntersectionWithRay</a><span class='tooltiptext'>Finds the intersection between a ray and plane, throws if ray is parallel to the plane <a href="http://www.cs.princeton.edu/courses/archive/fall00/cs426/lectures/raycast/sld017.htm">http://www.cs.princeton.edu/courses/archive/fall00/cs426/lectures/raycast/sld017.htm</a>
+</span></h4><h4 class='tooltip'><a href='tomato_tomato_mathplane.html#::tomato::mathplane::IntersectionWithRay'>IntersectionWithRay</a><span class='tooltiptext'>Finds the intersection between a ray and plane, throws if ray is parallel to the plane <a href="http://geomalgorithms.com/a05-_intersect-1.html">http://geomalgorithms.com/a05-_intersect-1.html</a>
 </span></h4><h4 class='tooltip'><a href='tomato_tomato_mathplane.html#::tomato::mathplane::PointFromPlanes'>PointFromPlanes</a><span class='tooltiptext'>Gets a point of intersection between three planes
 </span></h4><h4 class='tooltip'><a href='tomato_tomato_mathplane.html#::tomato::mathplane::ProjectLine3dOnplane'>ProjectLine3dOnplane</a><span class='tooltiptext'>Projects a point onto the plane
 </span></h4><h4 class='tooltip'><a href='tomato_tomato_mathplane.html#::tomato::mathplane::ProjectPointOnplane'>ProjectPointOnplane</a><span class='tooltiptext'>Projects a point onto the plane
