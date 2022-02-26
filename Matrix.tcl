@@ -1,4 +1,4 @@
-# Copyright (c) 2021 Nicolas ROBERT.
+# Copyright (c) 2021-2022 Nicolas ROBERT.
 # Distributed under MIT license. Please see LICENSE for details.
 
 namespace eval tomato::mathmatrix {
@@ -158,7 +158,7 @@ oo::define tomato::mathmatrix::Matrix {
             error "Index Row must be between 0 & [expr {$_rowCount - 1}]"
         }
 
-        return [lindex [my Values] $rowIndex]
+        return [lindex $_values $rowIndex]
 
     }
 
@@ -280,7 +280,6 @@ oo::define tomato::mathmatrix::Matrix {
         } elseif {[llength $args] == 5} {
 
             lassign $args rowIndex rowCount columnIndex columnCount subMatrix
-
             return [tomato::mathmatrix::CopySubMatrixTo $target $subMatrix 0 $rowIndex $rowCount 0 $columnIndex $columnCount]
         
         } else {

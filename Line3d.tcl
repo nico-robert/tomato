@@ -1,4 +1,4 @@
-# Copyright (c) 2021 Nicolas ROBERT.
+# Copyright (c) 2021-2022 Nicolas ROBERT.
 # Distributed under MIT license. Please see LICENSE for details.
 
 namespace eval tomato::mathline3d {
@@ -86,9 +86,7 @@ oo::define tomato::mathline3d::Line3d {
             
             if {$dotProduct < 0} {
                 set dotProduct 0
-            }
-
-            if {$dotProduct > [my Length]} {
+            } elseif {$dotProduct > [my Length]} {
                 set dotProduct [my Length]
             }
         }
@@ -135,16 +133,16 @@ oo::define tomato::mathline3d::Line3d {
 
             # http://geomalgorithms.com/a07-_distance.html
             set point0 [my StartPoint]
-            set u [my Direction]
+            set u      [my Direction]
             set point1 [$other StartPoint]
-            set v [$other Direction]
+            set v      [$other Direction]
 
             set w0 [$point0 - $point1]
-            set a [$u DotProduct $u]
-            set b [$u DotProduct $v]
-            set c [$v DotProduct $v]
-            set d [$u DotProduct $w0]
-            set e [$v DotProduct $w0]
+            set a  [$u DotProduct $u]
+            set b  [$u DotProduct $v]
+            set c  [$v DotProduct $v]
+            set d  [$u DotProduct $w0]
+            set e  [$v DotProduct $w0]
 
             set sc [expr {(($b * $e) - ($c * $d)) / (($a * $c) - ($b * $b))}]
             set tc [expr {(($a * $e) - ($b * $d)) / (($a * $c) - ($b * $b))}]

@@ -1,4 +1,4 @@
-# Copyright (c) 2021 Nicolas ROBERT.
+# Copyright (c) 2021-2022 Nicolas ROBERT.
 # Distributed under MIT license. Please see LICENSE for details.
 
 namespace eval tomato::mathquat {
@@ -832,7 +832,7 @@ proc tomato::mathquat::Equals {quaternion other tolerance} {
     }
 
     return [expr {
-                  abs([$quaternion Real]  - [$other Real])   < $tolerance && 
+                  abs([$quaternion Real]  - [$other Real])  < $tolerance && 
                   abs([$quaternion ImagX] - [$other ImagX]) < $tolerance && 
                   abs([$quaternion ImagY] - [$other ImagY]) < $tolerance && 
                   abs([$quaternion ImagZ] - [$other ImagZ]) < $tolerance

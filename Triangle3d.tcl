@@ -1,4 +1,4 @@
-# Copyright (c) 2021 Nicolas ROBERT.
+# Copyright (c) 2021-2022 Nicolas ROBERT.
 # Distributed under MIT license. Please see LICENSE for details.
 
 namespace eval tomato::mathtriangle {
@@ -198,7 +198,7 @@ oo::define tomato::mathtriangle::Triangle {
                 # An error exception is raised if entity is not as described above.
                 error "Entity must be Line3d or Ray3d..."
             }
-        }   
+        }
 
         # get intersect point of line with triangle plane
         if {$ip eq ""} {

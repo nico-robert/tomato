@@ -1,4 +1,4 @@
-# Copyright (c) 2021 Nicolas ROBERT.
+# Copyright (c) 2021-2022 Nicolas ROBERT.
 # Distributed under MIT license. Please see LICENSE for details.
 
 namespace eval tomato::mathcsys {
@@ -601,7 +601,7 @@ proc tomato::mathcsys::CreateMappingCoordinateSystem {fromCs toCs} {
         error $msg
     }
 
-    if {$singular || abs($det) < $::tomato::helper::TolEquals} {
+    if {$singular || (abs($det) < $::tomato::helper::TolEquals)} {
         set mat [[$toCs BaseClass] Multiply [$fromCs BaseClass]]
     } else {
         set mat [[$toCs BaseClass] Multiply [[$fromCs BaseClass] Inverse]]
