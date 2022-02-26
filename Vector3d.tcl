@@ -1,4 +1,4 @@
-# Copyright (c) 2021 Nicolas ROBERT.
+# Copyright (c) 2021-2022 Nicolas ROBERT.
 # Distributed under MIT license. Please see LICENSE for details.
 
 namespace eval tomato::mathvec3d {
@@ -130,7 +130,7 @@ oo::define tomato::mathvec3d::Vector3d {
 
     method LengthSquared {} {
         # Gets the length of the vector squared
-        return [expr {(($_x**2) + ($_y**2) + ($_z**2))}]
+        return [expr {($_x**2) + ($_y**2) + ($_z**2)}]
     }
 
     method Normalized {} {
@@ -194,7 +194,7 @@ oo::define tomato::mathvec3d::Vector3d {
         # comparing it to within a specified tolerance
         #
         # other - The other vector [Vector3d] Object.
-        # tolerance - A tolerance value for the dot product method.  Values below 2*[helper::DoublePrecision] may cause issues.
+        # tolerance - A tolerance value for the dot product method.
         #
         # Returns true if the vector dot product is within the given tolerance of zero, false if not.
         if {[llength [info level 0]] < 4} {
@@ -206,7 +206,7 @@ oo::define tomato::mathvec3d::Vector3d {
         set vaN    [$va Normalized]
         set otherN [$other Normalized]
 
-        set dp [expr {abs([tomato::mathvec3d::Dot $vaN $otherN])}]
+        set dp [expr {abs([$vaN DotProduct $otherN])}]
         return [expr {$dp < $tolerance}]
 
     }
@@ -216,7 +216,7 @@ oo::define tomato::mathvec3d::Vector3d {
         # to within a specified tolerance.
         #
         # other - The other vector [Vector3d] Object.
-        # tolerance - A tolerance value for the Cross product method.  Values below 2*[helper::DoublePrecision] may cause issues.
+        # tolerance - A tolerance value for the Cross product method.
         #
         # Returns true if the vector dot product is within the given tolerance of unity, false if it is not.
         if {[llength [info level 0]] < 4} {
@@ -228,7 +228,7 @@ oo::define tomato::mathvec3d::Vector3d {
         set vaN    [$va Normalized]
         set otherN [$other Normalized]
 
-        set cross [tomato::mathvec3d::Cross $vaN $otherN]
+        set cross [$vaN CrossProduct $otherN]
         set det   [$cross LengthSquared]
 
         return [expr {abs($det) <= $tolerance}]
@@ -308,7 +308,7 @@ oo::define tomato::mathvec3d::Vector3d {
         #
         # Returns A new scaled vector [Vector3d] if scalar or A scalar result if object.
         if {[tomato::helper::IsaObject $type]} {
-            return [tomato::mathvec3d::Dot [self] $other]
+            return [my DotProduct $other]
         } else {
 
             set vx [expr {$_x * $type}]
@@ -373,9 +373,9 @@ oo::define tomato::mathvec3d::Vector3d {
         # v     - The vector [Vector3d] to calculate the signed angle to
         # about - The vector [Vector3d] around which to rotate to get the correct sign
         #
-        # Returns A signed Angle.
+        # Returns A signed Angle (In radian).
         if {[my IsParallelTo $about]} {
-            error "FromVector parallel to aboutVector"
+            error "Self parallel to aboutVector"
         }
 
         if {[$v IsParallelTo $about]} {
@@ -424,7 +424,7 @@ oo::define tomato::mathvec3d::Vector3d {
         # scaleFactor - a scalar
         #
         # Returns a new scaled vector [Vector3d]
-        return [[self] * $scaleFactor]
+        return [my * $scaleFactor]
 
     }
 
@@ -656,9 +656,9 @@ proc tomato::mathvec3d::Lerp {v1 v2 blend} {
     # blend - The blend factor. v1 when blend=0, v2 when blend=1
     #
     # Returns v1 when blend=0, v2 when blend=1, and a linear combination otherwise..
-    set vx [expr {$scale * ([$v2 X] - [$v1 X]) + [$v1 X]}]
-    set vy [expr {$scale * ([$v2 Y] - [$v1 Y]) + [$v1 Y]}]
-    set vz [expr {$scale * ([$v2 Z] - [$v1 Z]) + [$v1 Z]}]
+    set vx [expr {$blend * ([$v2 X] - [$v1 X]) + [$v1 X]}]
+    set vy [expr {$blend * ([$v2 Y] - [$v1 Y]) + [$v1 Y]}]
+    set vz [expr {$blend * ([$v2 Z] - [$v1 Z]) + [$v1 Z]}]
 
     return [tomato::mathvec3d::Vector3d new $vx $vy $vz]
 }
