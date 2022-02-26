@@ -1,4 +1,4 @@
-# Copyright (c) 2021 Nicolas ROBERT.
+# Copyright (c) 2021-2022 Nicolas ROBERT.
 # Distributed under MIT license. Please see LICENSE for details.
 
 namespace eval tomato::mathpt3d {
@@ -329,6 +329,7 @@ proc tomato::mathpt3d::IsCollinearPoints {p1 p2 p3 {tolerance $::tomato::helper:
     # p1 - [Point3d]
     # p2 - [Point3d]
     # p3 - [Point3d]
+    # tolerance - A tolerance (epsilon) for collinear points verification.
     #
     # Returns true if the points are collinear, otherwise false.
     if {[llength [info level 0]] < 5} {
@@ -338,7 +339,7 @@ proc tomato::mathpt3d::IsCollinearPoints {p1 p2 p3 {tolerance $::tomato::helper:
     set v1 [$p1 VectorTo $p2]
     set v2 [$p1 VectorTo $p3]
 
-    return [expr {[[tomato::mathvec3d::Cross $v1 $v2] Length] < $tolerance}]
+    return [expr {[[$v1 CrossProduct $v2] Length] < $tolerance}]
 
 }
 
