@@ -23,7 +23,7 @@ License :
 
 Examples :
 -------------------------
-See **[Start page Documentation](/documentation/tomato.html)**
+See **[Start page Documentation](http://htmlpreview.github.io/?https://github.com/nico-robert/tomato/blob/master/documentation/tomato.html)**
 
 Release :
 -------------------------
