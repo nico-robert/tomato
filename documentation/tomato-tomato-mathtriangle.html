@@ -1,0 +1,521 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"/>
+<title>tomato 1.2.3 Reference Manual</title>
+<link rel='stylesheet' type='text/css' href='assets/ruff-min.css' />
+<script type='text/javascript' src='assets/ruff-min.js'></script>
+</head>
+<body>
+<div class='ruff-layout'>
+<header class='ruff-layout-header ruff-hd'>
+<a style='text-decoration:none;' href='tomato.html'>tomato 1.2.3 Reference Manual</a>
+
+
+            <div id="ruffButtonBar">
+            <button id="ruffNavMove" onclick="ruffMoveNavPane()"></button>
+            <button id="ruffToggleTheme" onclick="ruffNextTheme()"></button>
+            </div>
+        </header><main class='ruff-layout-main ruff-bd'><h1 class='ruff'><a name='::tomato::mathtriangle'></a>::tomato::mathtriangle<span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h1>
+<div style='clear:both;'></div>
+<p class='ruff'>A Class representing a Triangle in 3D space</p>
+<h2 class='ruff'><a name='::tomato::mathtriangle-Classes'></a>Classes<span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h2>
+<div style='clear:both;'></div>
+<h3 class='ruffclass'><a name='::tomato::mathtriangle::Triangle'>Triangle</a><span class='ns_scope'> [<a href="tomato-tomato-mathtriangle.html#::tomato::mathtriangle" title="::tomato::mathtriangle" class='ruff_cmd'>::tomato::mathtriangle</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
+<div style='clear:both;'></div>
+<h5 class='ruff'>Method summary</h5><table class='ruff_deflist'>
+<tr><td><a href="tomato-tomato-mathtriangle.html#::tomato::mathtriangle::Triangle::constructor" title="constructor" class='ruff_cmd'>constructor</a></td><td>Constructor for the class.</td></tr>
+<tr><td><a href="tomato-tomato-mathtriangle.html#::tomato::mathtriangle::Triangle::!=" title="!=" class='ruff_cmd'>!=</a></td><td>Gets value that indicates whether any pair of elements in two specified points is not equal.</td></tr>
+<tr><td><a href="tomato-tomato-mathtriangle.html#::tomato::mathtriangle::Triangle::==" title="==" class='ruff_cmd'>==</a></td><td>Gets value that indicates whether each pair of elements in two specified points is equal.</td></tr>
+<tr><td><a href="tomato-tomato-mathtriangle.html#::tomato::mathtriangle::Triangle::A" title="A" class='ruff_cmd'>A</a></td><td>Returns the first point of the Triangle <a href="tomato-tomato-mathpt3d.html#::tomato::mathpt3d::Point3d" title="mathpt3d::Point3d" class='ruff_cmd'>mathpt3d::Point3d</a>.</td></tr>
+<tr><td><a href="tomato-tomato-mathtriangle.html#::tomato::mathtriangle::Triangle::AB" title="AB" class='ruff_cmd'>AB</a></td><td>Gets Length of AB side.</td></tr>
+<tr><td><a href="tomato-tomato-mathtriangle.html#::tomato::mathtriangle::Triangle::AC" title="AC" class='ruff_cmd'>AC</a></td><td>Gets Length of AC side.</td></tr>
+<tr><td><a href="tomato-tomato-mathtriangle.html#::tomato::mathtriangle::Triangle::Aera" title="Aera" class='ruff_cmd'>Aera</a></td><td>Gets Aera of the triangle.</td></tr>
+<tr><td><a href="tomato-tomato-mathtriangle.html#::tomato::mathtriangle::Triangle::AngleA" title="AngleA" class='ruff_cmd'>AngleA</a></td><td>Gets Angle at the vertex A</td></tr>
+<tr><td><a href="tomato-tomato-mathtriangle.html#::tomato::mathtriangle::Triangle::AngleB" title="AngleB" class='ruff_cmd'>AngleB</a></td><td>Gets Angle at the vertex B</td></tr>
+<tr><td><a href="tomato-tomato-mathtriangle.html#::tomato::mathtriangle::Triangle::AngleC" title="AngleC" class='ruff_cmd'>AngleC</a></td><td>Gets Angle at the vertex C</td></tr>
+<tr><td><a href="tomato-tomato-mathtriangle.html#::tomato::mathtriangle::Triangle::B" title="B" class='ruff_cmd'>B</a></td><td>Returns the second point of the Triangle <a href="tomato-tomato-mathpt3d.html#::tomato::mathpt3d::Point3d" title="mathpt3d::Point3d" class='ruff_cmd'>mathpt3d::Point3d</a>.</td></tr>
+<tr><td><a href="tomato-tomato-mathtriangle.html#::tomato::mathtriangle::Triangle::BC" title="BC" class='ruff_cmd'>BC</a></td><td>Gets Length of BC side.</td></tr>
+<tr><td><a href="tomato-tomato-mathtriangle.html#::tomato::mathtriangle::Triangle::BisectorA" title="BisectorA" class='ruff_cmd'>BisectorA</a></td><td>Angle bisector at the vertex A</td></tr>
+<tr><td><a href="tomato-tomato-mathtriangle.html#::tomato::mathtriangle::Triangle::BisectorB" title="BisectorB" class='ruff_cmd'>BisectorB</a></td><td>Angle bisector at the vertex B</td></tr>
+<tr><td><a href="tomato-tomato-mathtriangle.html#::tomato::mathtriangle::Triangle::BisectorC" title="BisectorC" class='ruff_cmd'>BisectorC</a></td><td>Angle bisector at the vertex C</td></tr>
+<tr><td><a href="tomato-tomato-mathtriangle.html#::tomato::mathtriangle::Triangle::C" title="C" class='ruff_cmd'>C</a></td><td>Returns the third point of the Triangle <a href="tomato-tomato-mathpt3d.html#::tomato::mathpt3d::Point3d" title="mathpt3d::Point3d" class='ruff_cmd'>mathpt3d::Point3d</a>.</td></tr>
+<tr><td><a href="tomato-tomato-mathtriangle.html#::tomato::mathtriangle::Triangle::Centroid" title="Centroid" class='ruff_cmd'>Centroid</a></td><td>Gets Centroid of the triangle</td></tr>
+<tr><td><a href="tomato-tomato-mathtriangle.html#::tomato::mathtriangle::Triangle::GetType" title="GetType" class='ruff_cmd'>GetType</a></td><td>Gets the name of class.</td></tr>
+<tr><td><a href="tomato-tomato-mathtriangle.html#::tomato::mathtriangle::Triangle::IntersectionWith" title="IntersectionWith" class='ruff_cmd'>IntersectionWith</a></td><td>Finds the intersection... <a href="https://en.wikipedia.org/wiki/Möller–Trumbore_intersection_algorithm" >Möller–Trumbore_intersection_algorithm</a></td></tr>
+<tr><td><a href="tomato-tomato-mathtriangle.html#::tomato::mathtriangle::Triangle::Normal" title="Normal" class='ruff_cmd'>Normal</a></td><td>Gets Normal of the triangle <a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d::Vector3d" title="mathvec3d::Vector3d" class='ruff_cmd'>mathvec3d::Vector3d</a>.</td></tr>
+<tr><td><a href="tomato-tomato-mathtriangle.html#::tomato::mathtriangle::Triangle::Perimeter" title="Perimeter" class='ruff_cmd'>Perimeter</a></td><td>Gets Perimeter of the triangle.</td></tr>
+<tr><td><a href="tomato-tomato-mathtriangle.html#::tomato::mathtriangle::Triangle::ToPlane" title="ToPlane" class='ruff_cmd'>ToPlane</a></td><td>Convert triangle to plane object <a href="tomato-tomato-mathplane.html#::tomato::mathplane::Plane" title="mathplane::Plane" class='ruff_cmd'>mathplane::Plane</a>.</td></tr>
+</table>
+<h4 class='ruffmethod'><a name='::tomato::mathtriangle::Triangle::constructor'>constructor</a><span class='ns_scope'> [<a href="tomato-tomato-mathtriangle.html#::tomato::mathtriangle::Triangle" title="::tomato::mathtriangle::Triangle" class='ruff_cmd'>::tomato::mathtriangle::Triangle</a>]</span><span class='ruff-uplink'><a href='tomato-tomato-mathtriangle.html#::tomato::mathtriangle::Triangle'>Triangle</a>, <a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h4>
+<div style='clear:both;'></div>
+<p class='ruff'>Initializes a new Triangle Class.</p>
+<div class='ruff_synopsis'><span class='ruff_cmd'>Triangle create OBJNAME</span> <span class='ruff_arg'>?args?</span><br><span class='ruff_cmd'>Triangle new</span> <span class='ruff_arg'>?args?</span></div>
+<h5 class='ruff'>Parameters</h5><table class='ruff_deflist'>
+<tr><td><code>args</code></td><td>Options described below.</td></tr>
+<tr><td><code>3 values</code></td><td><a href="tomato-tomato-mathpt3d.html#::tomato::mathpt3d::Point3d" title="mathpt3d::Point3d" class='ruff_cmd'>mathpt3d::Point3d</a></td></tr>
+<tr><td><code>list</code></td><td>3 distinct values that represent the coordinates X, Y, Z.</td></tr>
+</table>
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_11' href="javascript:toggleSource('11')">Show source</a></p>
+<div id='11' class='ruff_dyn_src'><pre>method constructor {args} {
+
+    # Initializes a new Triangle Class.
+    #
+    # args - Options described below.
+    #
+    # 3 values - [mathpt3d::Point3d]
+    # list     - 3 distinct values that represent the coordinates X, Y, Z.
+    #
+    if {[llength $args] != 3} {
+        error &quot;Must be a list of 3 values... : \$args = [llength $args]&quot;
+    }
+
+    set _triangle {}
+
+    foreach val $args {
+
+        if {[TypeOf $val Isa &quot;Point3d&quot;]} {
+            lappend _triangle $val
+
+        } elseif {[string is list $val] &amp;&amp; ([llength $val] == 3)} {
+            lappend _triangle [tomato::mathpt3d::Point3d new {*}$val]
+
+        } else {
+            error &quot;list of 3 values or 'Point3d' class...&quot;
+        }
+    }
+
+    if {[llength $_triangle] != 3} {
+        error &quot;Triangle must be a list of 3 values... : $_triangle&quot;
+    }
+
+    if {[tomato::mathpt3d::IsCollinearPoints {*}$_triangle]} {
+        error &quot;Collinear points...&quot;
+    }
+
+    lassign $_triangle _a _b _c
+}</pre></div>
+</div><h4 class='ruffmethod'><a name='::tomato::mathtriangle::Triangle::!='>!=</a><span class='ns_scope'> [<a href="tomato-tomato-mathtriangle.html#::tomato::mathtriangle::Triangle" title="::tomato::mathtriangle::Triangle" class='ruff_cmd'>::tomato::mathtriangle::Triangle</a>]</span><span class='ruff-uplink'><a href='tomato-tomato-mathtriangle.html#::tomato::mathtriangle::Triangle'>Triangle</a>, <a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h4>
+<div style='clear:both;'></div>
+<p class='ruff'>Gets value that indicates whether any pair of elements in two specified points is not equal.</p>
+<div class='ruff_synopsis'><span class='ruff_cmd'>OBJECT !=</span> <span class='ruff_arg'>other ?tolerance?</span></div>
+<h5 class='ruff'>Parameters</h5><table class='ruff_deflist'>
+<tr><td><code>other</code></td><td>The second triangle <a href="tomato-tomato-mathtriangle.html#::tomato::mathtriangle::Triangle" title="Triangle" class='ruff_cmd'>Triangle</a> to compare.</td></tr>
+<tr><td><code>tolerance</code></td><td>A tolerance (epsilon) to adjust for floating point error. Optional, default <code>$::tomato::helper::TolEquals</code>.</td></tr>
+</table>
+<h5 class='ruff'>Return value</h5><p class='ruff'>Returns <code>True</code> if the triangles are different. Otherwise <code>False</code>.</p>
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_12' href="javascript:toggleSource('12')">Show source</a></p>
+<div id='12' class='ruff_dyn_src'><pre>method != {other {tolerance {$::tomato::helper::TolEquals}}} {
+
+    # Gets value that indicates whether any pair of elements in two specified points is not equal.
+    #
+    # other - The second triangle [Triangle] to compare.
+    # tolerance - A tolerance (epsilon) to adjust for floating point error.
+    #
+    # Returns `True` if the triangles are different. Otherwise `False`.
+    if {[llength [info level 0]] &lt; 4} {
+        set tolerance $::tomato::helper::TolEquals
+    }
+
+    return [expr {![tomato::mathtriangle::Equals [self] $other $tolerance]}]
+}</pre></div>
+</div><h4 class='ruffmethod'><a name='::tomato::mathtriangle::Triangle::=='>==</a><span class='ns_scope'> [<a href="tomato-tomato-mathtriangle.html#::tomato::mathtriangle::Triangle" title="::tomato::mathtriangle::Triangle" class='ruff_cmd'>::tomato::mathtriangle::Triangle</a>]</span><span class='ruff-uplink'><a href='tomato-tomato-mathtriangle.html#::tomato::mathtriangle::Triangle'>Triangle</a>, <a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h4>
+<div style='clear:both;'></div>
+<p class='ruff'>Gets value that indicates whether each pair of elements in two specified points is equal.</p>
+<div class='ruff_synopsis'><span class='ruff_cmd'>OBJECT ==</span> <span class='ruff_arg'>other ?tolerance?</span></div>
+<h5 class='ruff'>Parameters</h5><table class='ruff_deflist'>
+<tr><td><code>other</code></td><td>The second triangle <a href="tomato-tomato-mathtriangle.html#::tomato::mathtriangle::Triangle" title="Triangle" class='ruff_cmd'>Triangle</a> to compare.</td></tr>
+<tr><td><code>tolerance</code></td><td>A tolerance (epsilon) to adjust for floating point error. Optional, default <code>$::tomato::helper::TolEquals</code>.</td></tr>
+</table>
+<h5 class='ruff'>Return value</h5><p class='ruff'>Returns <code>True</code> if the triangles are the same. Otherwise <code>False</code>.</p>
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_13' href="javascript:toggleSource('13')">Show source</a></p>
+<div id='13' class='ruff_dyn_src'><pre>method == {other {tolerance {$::tomato::helper::TolEquals}}} {
+
+    # Gets value that indicates whether each pair of elements in two specified points is equal.
+    #
+    # other     - The second triangle [Triangle] to compare.
+    # tolerance - A tolerance (epsilon) to adjust for floating point error.
+    #
+    # Returns `True` if the triangles are the same. Otherwise `False`.
+    if {[llength [info level 0]] &lt; 4} {
+        set tolerance $::tomato::helper::TolEquals
+    }
+
+    return [expr {[tomato::mathtriangle::Equals [self] $other $tolerance]}]
+}</pre></div>
+</div><h4 class='ruffmethod'><a name='::tomato::mathtriangle::Triangle::A'>A</a><span class='ns_scope'> [<a href="tomato-tomato-mathtriangle.html#::tomato::mathtriangle::Triangle" title="::tomato::mathtriangle::Triangle" class='ruff_cmd'>::tomato::mathtriangle::Triangle</a>]</span><span class='ruff-uplink'><a href='tomato-tomato-mathtriangle.html#::tomato::mathtriangle::Triangle'>Triangle</a>, <a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h4>
+<div style='clear:both;'></div>
+<p class='ruff'>Returns the first point of the Triangle <a href="tomato-tomato-mathpt3d.html#::tomato::mathpt3d::Point3d" title="mathpt3d::Point3d" class='ruff_cmd'>mathpt3d::Point3d</a>.</p>
+<div class='ruff_synopsis'><span class='ruff_cmd'>OBJECT A</span> </div>
+<h5 class='ruff'>Return value</h5><p class='ruff'>Returns the first point of the Triangle <a href="tomato-tomato-mathpt3d.html#::tomato::mathpt3d::Point3d" title="mathpt3d::Point3d" class='ruff_cmd'>mathpt3d::Point3d</a>.</p>
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_14' href="javascript:toggleSource('14')">Show source</a></p>
+<div id='14' class='ruff_dyn_src'><pre>method A {} {
+
+    # Returns the first point of the Triangle [mathpt3d::Point3d].
+    return $_a
+}</pre></div>
+</div><h4 class='ruffmethod'><a name='::tomato::mathtriangle::Triangle::AB'>AB</a><span class='ns_scope'> [<a href="tomato-tomato-mathtriangle.html#::tomato::mathtriangle::Triangle" title="::tomato::mathtriangle::Triangle" class='ruff_cmd'>::tomato::mathtriangle::Triangle</a>]</span><span class='ruff-uplink'><a href='tomato-tomato-mathtriangle.html#::tomato::mathtriangle::Triangle'>Triangle</a>, <a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h4>
+<div style='clear:both;'></div>
+<p class='ruff'>Gets Length of AB side.</p>
+<div class='ruff_synopsis'><span class='ruff_cmd'>OBJECT AB</span> </div>
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_15' href="javascript:toggleSource('15')">Show source</a></p>
+<div id='15' class='ruff_dyn_src'><pre>method AB {} {
+
+    # Gets Length of AB side.
+    return [$_a DistanceTo $_b]
+}</pre></div>
+</div><h4 class='ruffmethod'><a name='::tomato::mathtriangle::Triangle::AC'>AC</a><span class='ns_scope'> [<a href="tomato-tomato-mathtriangle.html#::tomato::mathtriangle::Triangle" title="::tomato::mathtriangle::Triangle" class='ruff_cmd'>::tomato::mathtriangle::Triangle</a>]</span><span class='ruff-uplink'><a href='tomato-tomato-mathtriangle.html#::tomato::mathtriangle::Triangle'>Triangle</a>, <a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h4>
+<div style='clear:both;'></div>
+<p class='ruff'>Gets Length of AC side.</p>
+<div class='ruff_synopsis'><span class='ruff_cmd'>OBJECT AC</span> </div>
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_16' href="javascript:toggleSource('16')">Show source</a></p>
+<div id='16' class='ruff_dyn_src'><pre>method AC {} {
+
+    # Gets Length of AC side.
+    return [$_a DistanceTo $_c]
+}</pre></div>
+</div><h4 class='ruffmethod'><a name='::tomato::mathtriangle::Triangle::Aera'>Aera</a><span class='ns_scope'> [<a href="tomato-tomato-mathtriangle.html#::tomato::mathtriangle::Triangle" title="::tomato::mathtriangle::Triangle" class='ruff_cmd'>::tomato::mathtriangle::Triangle</a>]</span><span class='ruff-uplink'><a href='tomato-tomato-mathtriangle.html#::tomato::mathtriangle::Triangle'>Triangle</a>, <a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h4>
+<div style='clear:both;'></div>
+<p class='ruff'>Gets Aera of the triangle.</p>
+<div class='ruff_synopsis'><span class='ruff_cmd'>OBJECT Aera</span> </div>
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_17' href="javascript:toggleSource('17')">Show source</a></p>
+<div id='17' class='ruff_dyn_src'><pre>method Aera {} {
+
+    # Gets Aera of the triangle.
+    set v1 [$_a VectorTo $_b]
+    set v2 [$_a VectorTo $_c]
+
+    return [expr {0.5 * [[$v1 CrossProduct $v2] Length]}]
+}</pre></div>
+</div><h4 class='ruffmethod'><a name='::tomato::mathtriangle::Triangle::AngleA'>AngleA</a><span class='ns_scope'> [<a href="tomato-tomato-mathtriangle.html#::tomato::mathtriangle::Triangle" title="::tomato::mathtriangle::Triangle" class='ruff_cmd'>::tomato::mathtriangle::Triangle</a>]</span><span class='ruff-uplink'><a href='tomato-tomato-mathtriangle.html#::tomato::mathtriangle::Triangle'>Triangle</a>, <a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h4>
+<div style='clear:both;'></div>
+<p class='ruff'>Gets Angle at the vertex A</p>
+<div class='ruff_synopsis'><span class='ruff_cmd'>OBJECT AngleA</span> </div>
+<h5 class='ruff'>Return value</h5><p class='ruff'>Returns The angle in radian between the vectors, with a range between 0° and 180°</p>
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_18' href="javascript:toggleSource('18')">Show source</a></p>
+<div id='18' class='ruff_dyn_src'><pre>method AngleA {} {
+
+    # Gets Angle at the vertex A
+    #
+    # Returns The angle in radian between the vectors, with a range between 0° and 180°
+    set v1 [$_a VectorTo $_b]
+    set v2 [$_a VectorTo $_c]
+
+    return [$v1 AngleTo $v2]
+}</pre></div>
+</div><h4 class='ruffmethod'><a name='::tomato::mathtriangle::Triangle::AngleB'>AngleB</a><span class='ns_scope'> [<a href="tomato-tomato-mathtriangle.html#::tomato::mathtriangle::Triangle" title="::tomato::mathtriangle::Triangle" class='ruff_cmd'>::tomato::mathtriangle::Triangle</a>]</span><span class='ruff-uplink'><a href='tomato-tomato-mathtriangle.html#::tomato::mathtriangle::Triangle'>Triangle</a>, <a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h4>
+<div style='clear:both;'></div>
+<p class='ruff'>Gets Angle at the vertex B</p>
+<div class='ruff_synopsis'><span class='ruff_cmd'>OBJECT AngleB</span> </div>
+<h5 class='ruff'>Return value</h5><p class='ruff'>Returns The angle in radian between the vectors, with a range between 0° and 180°</p>
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_19' href="javascript:toggleSource('19')">Show source</a></p>
+<div id='19' class='ruff_dyn_src'><pre>method AngleB {} {
+
+    # Gets Angle at the vertex B
+    #
+    # Returns The angle in radian between the vectors, with a range between 0° and 180°
+    set v1 [$_b VectorTo $_a]
+    set v2 [$_b VectorTo $_c]
+
+    return [$v1 AngleTo $v2]
+}</pre></div>
+</div><h4 class='ruffmethod'><a name='::tomato::mathtriangle::Triangle::AngleC'>AngleC</a><span class='ns_scope'> [<a href="tomato-tomato-mathtriangle.html#::tomato::mathtriangle::Triangle" title="::tomato::mathtriangle::Triangle" class='ruff_cmd'>::tomato::mathtriangle::Triangle</a>]</span><span class='ruff-uplink'><a href='tomato-tomato-mathtriangle.html#::tomato::mathtriangle::Triangle'>Triangle</a>, <a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h4>
+<div style='clear:both;'></div>
+<p class='ruff'>Gets Angle at the vertex C</p>
+<div class='ruff_synopsis'><span class='ruff_cmd'>OBJECT AngleC</span> </div>
+<h5 class='ruff'>Return value</h5><p class='ruff'>Returns The angle in radian between the vectors, with a range between 0° and 180°</p>
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_20' href="javascript:toggleSource('20')">Show source</a></p>
+<div id='20' class='ruff_dyn_src'><pre>method AngleC {} {
+
+    # Gets Angle at the vertex C
+    #
+    # Returns The angle in radian between the vectors, with a range between 0° and 180°
+    set v1 [$_c VectorTo $_a]
+    set v2 [$_c VectorTo $_b]
+
+    return [$v1 AngleTo $v2]
+}</pre></div>
+</div><h4 class='ruffmethod'><a name='::tomato::mathtriangle::Triangle::B'>B</a><span class='ns_scope'> [<a href="tomato-tomato-mathtriangle.html#::tomato::mathtriangle::Triangle" title="::tomato::mathtriangle::Triangle" class='ruff_cmd'>::tomato::mathtriangle::Triangle</a>]</span><span class='ruff-uplink'><a href='tomato-tomato-mathtriangle.html#::tomato::mathtriangle::Triangle'>Triangle</a>, <a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h4>
+<div style='clear:both;'></div>
+<p class='ruff'>Returns the second point of the Triangle <a href="tomato-tomato-mathpt3d.html#::tomato::mathpt3d::Point3d" title="mathpt3d::Point3d" class='ruff_cmd'>mathpt3d::Point3d</a>.</p>
+<div class='ruff_synopsis'><span class='ruff_cmd'>OBJECT B</span> </div>
+<h5 class='ruff'>Return value</h5><p class='ruff'>Returns the second point of the Triangle <a href="tomato-tomato-mathpt3d.html#::tomato::mathpt3d::Point3d" title="mathpt3d::Point3d" class='ruff_cmd'>mathpt3d::Point3d</a>.</p>
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_21' href="javascript:toggleSource('21')">Show source</a></p>
+<div id='21' class='ruff_dyn_src'><pre>method B {} {
+
+    # Returns the second point of the Triangle [mathpt3d::Point3d].
+    return $_b
+}</pre></div>
+</div><h4 class='ruffmethod'><a name='::tomato::mathtriangle::Triangle::BC'>BC</a><span class='ns_scope'> [<a href="tomato-tomato-mathtriangle.html#::tomato::mathtriangle::Triangle" title="::tomato::mathtriangle::Triangle" class='ruff_cmd'>::tomato::mathtriangle::Triangle</a>]</span><span class='ruff-uplink'><a href='tomato-tomato-mathtriangle.html#::tomato::mathtriangle::Triangle'>Triangle</a>, <a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h4>
+<div style='clear:both;'></div>
+<p class='ruff'>Gets Length of BC side.</p>
+<div class='ruff_synopsis'><span class='ruff_cmd'>OBJECT BC</span> </div>
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_22' href="javascript:toggleSource('22')">Show source</a></p>
+<div id='22' class='ruff_dyn_src'><pre>method BC {} {
+
+    # Gets Length of BC side.
+    return [$_b DistanceTo $_c]
+}</pre></div>
+</div><h4 class='ruffmethod'><a name='::tomato::mathtriangle::Triangle::BisectorA'>BisectorA</a><span class='ns_scope'> [<a href="tomato-tomato-mathtriangle.html#::tomato::mathtriangle::Triangle" title="::tomato::mathtriangle::Triangle" class='ruff_cmd'>::tomato::mathtriangle::Triangle</a>]</span><span class='ruff-uplink'><a href='tomato-tomato-mathtriangle.html#::tomato::mathtriangle::Triangle'>Triangle</a>, <a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h4>
+<div style='clear:both;'></div>
+<p class='ruff'>Angle bisector at the vertex A</p>
+<div class='ruff_synopsis'><span class='ruff_cmd'>OBJECT BisectorA</span> </div>
+<h5 class='ruff'>Return value</h5><p class='ruff'>Returns <a href="tomato-tomato-mathline3d.html#::tomato::mathline3d::Line3d" title="mathline3d::Line3d" class='ruff_cmd'>mathline3d::Line3d</a></p>
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_23' href="javascript:toggleSource('23')">Show source</a></p>
+<div id='23' class='ruff_dyn_src'><pre>method BisectorA {} {
+
+    # Angle bisector at the vertex A
+    #
+    # Returns [mathline3d::Line3d]
+    set p [$_b + [[$_c - $_b] / [expr {1.0 + [my AC] / [my AB]}]]]
+
+    return [tomato::mathline3d::Line3d new $_a $p]
+}</pre></div>
+</div><h4 class='ruffmethod'><a name='::tomato::mathtriangle::Triangle::BisectorB'>BisectorB</a><span class='ns_scope'> [<a href="tomato-tomato-mathtriangle.html#::tomato::mathtriangle::Triangle" title="::tomato::mathtriangle::Triangle" class='ruff_cmd'>::tomato::mathtriangle::Triangle</a>]</span><span class='ruff-uplink'><a href='tomato-tomato-mathtriangle.html#::tomato::mathtriangle::Triangle'>Triangle</a>, <a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h4>
+<div style='clear:both;'></div>
+<p class='ruff'>Angle bisector at the vertex B</p>
+<div class='ruff_synopsis'><span class='ruff_cmd'>OBJECT BisectorB</span> </div>
+<h5 class='ruff'>Return value</h5><p class='ruff'>Returns <a href="tomato-tomato-mathline3d.html#::tomato::mathline3d::Line3d" title="mathline3d::Line3d" class='ruff_cmd'>mathline3d::Line3d</a></p>
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_24' href="javascript:toggleSource('24')">Show source</a></p>
+<div id='24' class='ruff_dyn_src'><pre>method BisectorB {} {
+
+    # Angle bisector at the vertex B
+    #
+    # Returns [mathline3d::Line3d]
+    set p [$_c + [[$_a - $_c] / [expr {1.0 + [my AB] / [my BC]}]]]
+
+    return [tomato::mathline3d::Line3d new $_b $p]
+}</pre></div>
+</div><h4 class='ruffmethod'><a name='::tomato::mathtriangle::Triangle::BisectorC'>BisectorC</a><span class='ns_scope'> [<a href="tomato-tomato-mathtriangle.html#::tomato::mathtriangle::Triangle" title="::tomato::mathtriangle::Triangle" class='ruff_cmd'>::tomato::mathtriangle::Triangle</a>]</span><span class='ruff-uplink'><a href='tomato-tomato-mathtriangle.html#::tomato::mathtriangle::Triangle'>Triangle</a>, <a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h4>
+<div style='clear:both;'></div>
+<p class='ruff'>Angle bisector at the vertex C</p>
+<div class='ruff_synopsis'><span class='ruff_cmd'>OBJECT BisectorC</span> </div>
+<h5 class='ruff'>Return value</h5><p class='ruff'>Returns <a href="tomato-tomato-mathline3d.html#::tomato::mathline3d::Line3d" title="mathline3d::Line3d" class='ruff_cmd'>mathline3d::Line3d</a></p>
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_25' href="javascript:toggleSource('25')">Show source</a></p>
+<div id='25' class='ruff_dyn_src'><pre>method BisectorC {} {
+
+    # Angle bisector at the vertex C
+    #
+    # Returns [mathline3d::Line3d]
+    set p [$_a + [[$_b - $_a] / [expr {1.0 + [my BC] / [my AC]}]]]
+
+    return [tomato::mathline3d::Line3d new $_c $p]
+}</pre></div>
+</div><h4 class='ruffmethod'><a name='::tomato::mathtriangle::Triangle::C'>C</a><span class='ns_scope'> [<a href="tomato-tomato-mathtriangle.html#::tomato::mathtriangle::Triangle" title="::tomato::mathtriangle::Triangle" class='ruff_cmd'>::tomato::mathtriangle::Triangle</a>]</span><span class='ruff-uplink'><a href='tomato-tomato-mathtriangle.html#::tomato::mathtriangle::Triangle'>Triangle</a>, <a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h4>
+<div style='clear:both;'></div>
+<p class='ruff'>Returns the third point of the Triangle <a href="tomato-tomato-mathpt3d.html#::tomato::mathpt3d::Point3d" title="mathpt3d::Point3d" class='ruff_cmd'>mathpt3d::Point3d</a>.</p>
+<div class='ruff_synopsis'><span class='ruff_cmd'>OBJECT C</span> </div>
+<h5 class='ruff'>Return value</h5><p class='ruff'>Returns the third point of the Triangle <a href="tomato-tomato-mathpt3d.html#::tomato::mathpt3d::Point3d" title="mathpt3d::Point3d" class='ruff_cmd'>mathpt3d::Point3d</a>.</p>
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_26' href="javascript:toggleSource('26')">Show source</a></p>
+<div id='26' class='ruff_dyn_src'><pre>method C {} {
+
+    # Returns the third point of the Triangle [mathpt3d::Point3d].
+    return $_c
+}</pre></div>
+</div><h4 class='ruffmethod'><a name='::tomato::mathtriangle::Triangle::Centroid'>Centroid</a><span class='ns_scope'> [<a href="tomato-tomato-mathtriangle.html#::tomato::mathtriangle::Triangle" title="::tomato::mathtriangle::Triangle" class='ruff_cmd'>::tomato::mathtriangle::Triangle</a>]</span><span class='ruff-uplink'><a href='tomato-tomato-mathtriangle.html#::tomato::mathtriangle::Triangle'>Triangle</a>, <a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h4>
+<div style='clear:both;'></div>
+<p class='ruff'>Gets Centroid of the triangle</p>
+<div class='ruff_synopsis'><span class='ruff_cmd'>OBJECT Centroid</span> </div>
+<h5 class='ruff'>Return value</h5><p class='ruff'>Returns <a href="tomato-tomato-mathpt3d.html#::tomato::mathpt3d::Point3d" title="mathpt3d::Point3d" class='ruff_cmd'>mathpt3d::Point3d</a></p>
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_27' href="javascript:toggleSource('27')">Show source</a></p>
+<div id='27' class='ruff_dyn_src'><pre>method Centroid {} {
+
+    # Gets Centroid of the triangle
+    #
+    # Returns [mathpt3d::Point3d]
+    return [tomato::mathpt3d::Centroid [list $_a $_b $_c]]
+}</pre></div>
+</div><h4 class='ruffmethod'><a name='::tomato::mathtriangle::Triangle::GetType'>GetType</a><span class='ns_scope'> [<a href="tomato-tomato-mathtriangle.html#::tomato::mathtriangle::Triangle" title="::tomato::mathtriangle::Triangle" class='ruff_cmd'>::tomato::mathtriangle::Triangle</a>]</span><span class='ruff-uplink'><a href='tomato-tomato-mathtriangle.html#::tomato::mathtriangle::Triangle'>Triangle</a>, <a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h4>
+<div style='clear:both;'></div>
+<p class='ruff'>Gets the name of class.</p>
+<div class='ruff_synopsis'><span class='ruff_cmd'>OBJECT GetType</span> </div>
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_28' href="javascript:toggleSource('28')">Show source</a></p>
+<div id='28' class='ruff_dyn_src'><pre>method GetType {} {
+
+    # Gets the name of class.
+    return [tomato::helper::TypeClass [self]]
+}</pre></div>
+</div><h4 class='ruffmethod'><a name='::tomato::mathtriangle::Triangle::IntersectionWith'>IntersectionWith</a><span class='ns_scope'> [<a href="tomato-tomato-mathtriangle.html#::tomato::mathtriangle::Triangle" title="::tomato::mathtriangle::Triangle" class='ruff_cmd'>::tomato::mathtriangle::Triangle</a>]</span><span class='ruff-uplink'><a href='tomato-tomato-mathtriangle.html#::tomato::mathtriangle::Triangle'>Triangle</a>, <a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h4>
+<div style='clear:both;'></div>
+<p class='ruff'>Finds the intersection... <a href="https://en.wikipedia.org/wiki/Möller–Trumbore_intersection_algorithm" >Möller–Trumbore_intersection_algorithm</a></p>
+<div class='ruff_synopsis'><span class='ruff_cmd'>OBJECT IntersectionWith</span> <span class='ruff_arg'>obj ?tolerance?</span></div>
+<h5 class='ruff'>Parameters</h5><table class='ruff_deflist'>
+<tr><td><code>obj</code></td><td>Options described below.</td></tr>
+<tr><td><code>tolerance</code></td><td>A tolerance (epsilon) to account for floating point error Optional, default <code>$::tomato::helper::TolGeom</code>.</td></tr>
+<tr><td><code>Line</code></td><td><a href="tomato-tomato-mathline3d.html#::tomato::mathline3d::Line3d" title="mathline3d::Line3d" class='ruff_cmd'>mathline3d::Line3d</a></td></tr>
+<tr><td><code>Ray</code></td><td><a href="tomato-tomato-mathray3d.html#::tomato::mathray3d::Ray3d" title="mathray3d::Ray3d" class='ruff_cmd'>mathray3d::Ray3d</a></td></tr>
+</table>
+<h5 class='ruff'>Description</h5><p class='ruff'>An error exception is raised if <code>$obj</code> is not as described above.</p>
+<h5 class='ruff'>Return value</h5><p class='ruff'>Returns nothing is no intersection, A <a href="tomato-tomato-mathpt3d.html#::tomato::mathpt3d::Point3d" title="mathpt3d::Point3d" class='ruff_cmd'>mathpt3d::Point3d</a> if intersection.</p>
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_29' href="javascript:toggleSource('29')">Show source</a></p>
+<div id='29' class='ruff_dyn_src'><pre>method IntersectionWith {obj {tolerance {$::tomato::helper::TolGeom}}} {
+
+    # Finds the intersection...
+    # [Möller–Trumbore_intersection_algorithm](https://en.wikipedia.org/wiki/Möller–Trumbore_intersection_algorithm)
+    #
+    # obj - Options described below.
+    #
+    # Ray    - [mathray3d::Ray3d]
+    # Line   - [mathline3d::Line3d]
+    # tolerance - A tolerance (epsilon) to account for floating point error
+    #
+    # Returns nothing is no intersection, A [mathpt3d::Point3d] if intersection.
+    if {[llength [info level 0]] &lt; 4} {
+        set tolerance $::tomato::helper::TolGeom
+    }
+
+    switch -glob [$obj GetType] {
+        *Ray3d {
+            set ip [tomato::mathplane::IntersectionWithRay [my ToPlane] $obj $tolerance]
+        }
+        *Line3d {
+            set ip [tomato::mathplane::IntersectionWithLine [my ToPlane] $obj $tolerance]
+        }
+        default {
+            #ruff
+            # An error exception is raised if $obj is not as described above.
+            error &quot;Obj must be Line3d or Ray3d...&quot;
+        }
+    }
+
+    # get intersect point of line with triangle plane
+    if {$ip eq &quot;&quot;} {
+        # no intersection...
+        return {}
+    }
+
+    set u [$_b VectorTo $_a]
+    set v [$_c VectorTo $_a]
+    set w [$ip VectorTo $_a]
+
+    set uu [$u DotProduct $u]
+    set uv [$u DotProduct $v]
+    set vv [$v DotProduct $v]
+
+    set wu [$w DotProduct $u]
+    set wv [$w DotProduct $v]
+
+    set D [expr {($uv * $uv) - ($uu * $vv)}]
+
+    # ip is outside T ?
+    set s [expr {(($uv * $wv) - ($vv * $wu)) / $D}]
+
+    if {$s &lt; 0.0 || $s &gt; 1.0}  {
+        return &quot;&quot;
+    }
+
+    # ip is outside T ?
+    set t [expr {(($uv * $wu) - ($uu * $wv)) / $D}]
+
+    if {$t &lt; 0.0 || ($s + $t) &gt; 1.0}  {
+        return &quot;&quot;
+    }
+
+    return $ip
+}</pre></div>
+</div><h4 class='ruffmethod'><a name='::tomato::mathtriangle::Triangle::Normal'>Normal</a><span class='ns_scope'> [<a href="tomato-tomato-mathtriangle.html#::tomato::mathtriangle::Triangle" title="::tomato::mathtriangle::Triangle" class='ruff_cmd'>::tomato::mathtriangle::Triangle</a>]</span><span class='ruff-uplink'><a href='tomato-tomato-mathtriangle.html#::tomato::mathtriangle::Triangle'>Triangle</a>, <a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h4>
+<div style='clear:both;'></div>
+<p class='ruff'>Gets Normal of the triangle <a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d::Vector3d" title="mathvec3d::Vector3d" class='ruff_cmd'>mathvec3d::Vector3d</a>.</p>
+<div class='ruff_synopsis'><span class='ruff_cmd'>OBJECT Normal</span> </div>
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_30' href="javascript:toggleSource('30')">Show source</a></p>
+<div id='30' class='ruff_dyn_src'><pre>method Normal {} {
+
+    # Gets Normal of the triangle [mathvec3d::Vector3d].
+    set v1 [$_a VectorTo $_b]
+    set v2 [$_a VectorTo $_c]
+
+    return [$v1 CrossProduct $v2]
+}</pre></div>
+</div><h4 class='ruffmethod'><a name='::tomato::mathtriangle::Triangle::Perimeter'>Perimeter</a><span class='ns_scope'> [<a href="tomato-tomato-mathtriangle.html#::tomato::mathtriangle::Triangle" title="::tomato::mathtriangle::Triangle" class='ruff_cmd'>::tomato::mathtriangle::Triangle</a>]</span><span class='ruff-uplink'><a href='tomato-tomato-mathtriangle.html#::tomato::mathtriangle::Triangle'>Triangle</a>, <a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h4>
+<div style='clear:both;'></div>
+<p class='ruff'>Gets Perimeter of the triangle.</p>
+<div class='ruff_synopsis'><span class='ruff_cmd'>OBJECT Perimeter</span> </div>
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_31' href="javascript:toggleSource('31')">Show source</a></p>
+<div id='31' class='ruff_dyn_src'><pre>method Perimeter {} {
+
+    # Gets Perimeter of the triangle.
+    return [expr {[my AB] + [my BC] + [my AC]}]
+}</pre></div>
+</div><h4 class='ruffmethod'><a name='::tomato::mathtriangle::Triangle::ToPlane'>ToPlane</a><span class='ns_scope'> [<a href="tomato-tomato-mathtriangle.html#::tomato::mathtriangle::Triangle" title="::tomato::mathtriangle::Triangle" class='ruff_cmd'>::tomato::mathtriangle::Triangle</a>]</span><span class='ruff-uplink'><a href='tomato-tomato-mathtriangle.html#::tomato::mathtriangle::Triangle'>Triangle</a>, <a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h4>
+<div style='clear:both;'></div>
+<p class='ruff'>Convert triangle to plane object <a href="tomato-tomato-mathplane.html#::tomato::mathplane::Plane" title="mathplane::Plane" class='ruff_cmd'>mathplane::Plane</a>.</p>
+<div class='ruff_synopsis'><span class='ruff_cmd'>OBJECT ToPlane</span> </div>
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_32' href="javascript:toggleSource('32')">Show source</a></p>
+<div id='32' class='ruff_dyn_src'><pre>method ToPlane {} {
+
+    # Convert triangle to plane object [mathplane::Plane].
+    return [tomato::mathplane::Plane new $_a [my Normal]]
+}</pre></div>
+</div><h2 class='ruff'><a name='::tomato::mathtriangle-Commands'></a>Commands<span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h2>
+<div style='clear:both;'></div>
+<h3 class='ruffproc'><a name='::tomato::mathtriangle::Equals'>Equals</a><span class='ns_scope'> [<a href="tomato-tomato-mathtriangle.html#::tomato::mathtriangle" title="::tomato::mathtriangle" class='ruff_cmd'>::tomato::mathtriangle</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
+<div style='clear:both;'></div>
+<p class='ruff'>Gets a value to indicate if a pair of triangles are equal</p>
+<div class='ruff_synopsis'><span class='ruff_cmd'>Equals</span> <span class='ruff_arg'>triangle other tolerance</span></div>
+<h5 class='ruff'>Parameters</h5><table class='ruff_deflist'>
+<tr><td><code>triangle</code></td><td>First input triangle <a href="tomato-tomato-mathtriangle.html#::tomato::mathtriangle::Triangle" title="Triangle" class='ruff_cmd'>Triangle</a></td></tr>
+<tr><td><code>other</code></td><td>Second input triangle <a href="tomato-tomato-mathtriangle.html#::tomato::mathtriangle::Triangle" title="Triangle" class='ruff_cmd'>Triangle</a></td></tr>
+<tr><td><code>tolerance</code></td><td>A tolerance (epsilon) to adjust for floating point error</td></tr>
+</table>
+<h5 class='ruff'>Description</h5><p class='ruff'>See : methods == !=</p>
+<p class='ruff'>An error exception is raised if tolerance (epsilon) &lt; 0.</p>
+<h5 class='ruff'>Return value</h5><p class='ruff'>Returns <code>True</code> if the triangles are equal, otherwise false.</p>
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_33' href="javascript:toggleSource('33')">Show source</a></p>
+<div id='33' class='ruff_dyn_src'><pre>proc ::tomato::mathtriangle::Equals {triangle other tolerance} {
+
+    # Gets a value to indicate if a pair of triangles are equal
+    #
+    # triangle  - First input triangle [Triangle]
+    # other     - Second input triangle [Triangle]
+    # tolerance - A tolerance (epsilon) to adjust for floating point error
+    #
+    # Returns `True` if the triangles are equal, otherwise false.
+    #
+    # See : methods == !=
+    if {$tolerance &lt; 0} {
+        #ruff
+        # An error exception is raised if tolerance (epsilon) &lt; 0.
+        error &quot;epsilon &lt; 0&quot;
+    }
+
+    return [expr {[[$triangle Centroid] == [$other Centroid] $tolerance] &amp;&amp;
+                  (([$triangle Aera] - [$other Aera]) &lt; $tolerance)
+                  }]
+}</pre></div>
+</div></main><nav class='ruff-nav'><ul ><li class='ruff-toc1'><a style='padding-top:2px;' href='tomato.html'>Start page</a></li>
+<li class='ruff-toc1'><a href='tomato-docindex.html' accesskey='i'>Index</a></li>
+<hr>
+<li class='ruff-toc1'><a href='tomato-tomato-helper.html'>tomato::helper</a></li>
+<li class='ruff-toc1'><a class='ruff-highlight' href='tomato-tomato-mathtriangle.html'>tomato::mathtriangle</a></li>
+<li class='ruff-toc1'><a href='tomato-tomato-mathcsys.html'>tomato::mathcsys</a></li>
+<li class='ruff-toc1'><a href='tomato-tomato-mathquat.html'>tomato::mathquat</a></li>
+<li class='ruff-toc1'><a href='tomato-tomato-mathline3d.html'>tomato::mathline3d</a></li>
+<li class='ruff-toc1'><a href='tomato-tomato-mathray3d.html'>tomato::mathray3d</a></li>
+<li class='ruff-toc1'><a href='tomato-tomato-mathpt3d.html'>tomato::mathpt3d</a></li>
+<li class='ruff-toc1'><a href='tomato-tomato-mathplane.html'>tomato::mathplane</a></li>
+<li class='ruff-toc1'><a href='tomato-tomato-mathmatrix3d.html'>tomato::mathmatrix3d</a></li>
+<li class='ruff-toc1'><a href='tomato-tomato-mathvec3d.html'>tomato::mathvec3d</a></li>
+<li class='ruff-toc1'><a href='tomato-tomato-mathmatrix.html'>tomato::mathmatrix</a></li>
+<hr><li class='ruff-toc2'><a href='#::tomato::mathtriangle-Classes'>Classes</a></li><li class='ruff-toc3'><a href='tomato-tomato-mathtriangle.html#::tomato::mathtriangle::Triangle'>Triangle</a></li><li class='ruff-toc4 ruff-tip'><a href='tomato-tomato-mathtriangle.html#::tomato::mathtriangle::Triangle::constructor'>constructor</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>Triangle create OBJNAME</span> <span class='ruff_arg'>?args?</span>
+<span class='ruff_cmd'>Triangle new</span> <span class='ruff_arg'>?args?</span></pre>Initializes a new Triangle Class.
+</span></li><li class='ruff-toc4 ruff-tip'><a href='tomato-tomato-mathtriangle.html#::tomato::mathtriangle::Triangle::!='>!=</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>OBJECT !=</span> <span class='ruff_arg'>other ?tolerance?</span></pre>Gets value that indicates whether any pair of elements in two specified points is not equal.
+</span></li><li class='ruff-toc4 ruff-tip'><a href='tomato-tomato-mathtriangle.html#::tomato::mathtriangle::Triangle::=='>==</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>OBJECT ==</span> <span class='ruff_arg'>other ?tolerance?</span></pre>Gets value that indicates whether each pair of elements in two specified points is equal.
+</span></li><li class='ruff-toc4 ruff-tip'><a href='tomato-tomato-mathtriangle.html#::tomato::mathtriangle::Triangle::A'>A</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>OBJECT A</span> </pre>Returns the first point of the Triangle <a href="tomato-tomato-mathpt3d.html#::tomato::mathpt3d::Point3d" title="mathpt3d::Point3d" class='ruff_cmd'>mathpt3d::Point3d</a>.
+</span></li><li class='ruff-toc4 ruff-tip'><a href='tomato-tomato-mathtriangle.html#::tomato::mathtriangle::Triangle::AB'>AB</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>OBJECT AB</span> </pre>Gets Length of AB side.
+</span></li><li class='ruff-toc4 ruff-tip'><a href='tomato-tomato-mathtriangle.html#::tomato::mathtriangle::Triangle::AC'>AC</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>OBJECT AC</span> </pre>Gets Length of AC side.
+</span></li><li class='ruff-toc4 ruff-tip'><a href='tomato-tomato-mathtriangle.html#::tomato::mathtriangle::Triangle::Aera'>Aera</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>OBJECT Aera</span> </pre>Gets Aera of the triangle.
+</span></li><li class='ruff-toc4 ruff-tip'><a href='tomato-tomato-mathtriangle.html#::tomato::mathtriangle::Triangle::AngleA'>AngleA</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>OBJECT AngleA</span> </pre>Gets Angle at the vertex A
+</span></li><li class='ruff-toc4 ruff-tip'><a href='tomato-tomato-mathtriangle.html#::tomato::mathtriangle::Triangle::AngleB'>AngleB</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>OBJECT AngleB</span> </pre>Gets Angle at the vertex B
+</span></li><li class='ruff-toc4 ruff-tip'><a href='tomato-tomato-mathtriangle.html#::tomato::mathtriangle::Triangle::AngleC'>AngleC</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>OBJECT AngleC</span> </pre>Gets Angle at the vertex C
+</span></li><li class='ruff-toc4 ruff-tip'><a href='tomato-tomato-mathtriangle.html#::tomato::mathtriangle::Triangle::B'>B</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>OBJECT B</span> </pre>Returns the second point of the Triangle <a href="tomato-tomato-mathpt3d.html#::tomato::mathpt3d::Point3d" title="mathpt3d::Point3d" class='ruff_cmd'>mathpt3d::Point3d</a>.
+</span></li><li class='ruff-toc4 ruff-tip'><a href='tomato-tomato-mathtriangle.html#::tomato::mathtriangle::Triangle::BC'>BC</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>OBJECT BC</span> </pre>Gets Length of BC side.
+</span></li><li class='ruff-toc4 ruff-tip'><a href='tomato-tomato-mathtriangle.html#::tomato::mathtriangle::Triangle::BisectorA'>BisectorA</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>OBJECT BisectorA</span> </pre>Angle bisector at the vertex A
+</span></li><li class='ruff-toc4 ruff-tip'><a href='tomato-tomato-mathtriangle.html#::tomato::mathtriangle::Triangle::BisectorB'>BisectorB</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>OBJECT BisectorB</span> </pre>Angle bisector at the vertex B
+</span></li><li class='ruff-toc4 ruff-tip'><a href='tomato-tomato-mathtriangle.html#::tomato::mathtriangle::Triangle::BisectorC'>BisectorC</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>OBJECT BisectorC</span> </pre>Angle bisector at the vertex C
+</span></li><li class='ruff-toc4 ruff-tip'><a href='tomato-tomato-mathtriangle.html#::tomato::mathtriangle::Triangle::C'>C</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>OBJECT C</span> </pre>Returns the third point of the Triangle <a href="tomato-tomato-mathpt3d.html#::tomato::mathpt3d::Point3d" title="mathpt3d::Point3d" class='ruff_cmd'>mathpt3d::Point3d</a>.
+</span></li><li class='ruff-toc4 ruff-tip'><a href='tomato-tomato-mathtriangle.html#::tomato::mathtriangle::Triangle::Centroid'>Centroid</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>OBJECT Centroid</span> </pre>Gets Centroid of the triangle
+</span></li><li class='ruff-toc4 ruff-tip'><a href='tomato-tomato-mathtriangle.html#::tomato::mathtriangle::Triangle::GetType'>GetType</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>OBJECT GetType</span> </pre>Gets the name of class.
+</span></li><li class='ruff-toc4 ruff-tip'><a href='tomato-tomato-mathtriangle.html#::tomato::mathtriangle::Triangle::IntersectionWith'>IntersectionWith</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>OBJECT IntersectionWith</span> <span class='ruff_arg'>obj ?tolerance?</span></pre>Finds the intersection... <a href="https://en.wikipedia.org/wiki/Möller–Trumbore_intersection_algorithm" >Möller–Trumbore_intersection_algorithm</a>
+</span></li><li class='ruff-toc4 ruff-tip'><a href='tomato-tomato-mathtriangle.html#::tomato::mathtriangle::Triangle::Normal'>Normal</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>OBJECT Normal</span> </pre>Gets Normal of the triangle <a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d::Vector3d" title="mathvec3d::Vector3d" class='ruff_cmd'>mathvec3d::Vector3d</a>.
+</span></li><li class='ruff-toc4 ruff-tip'><a href='tomato-tomato-mathtriangle.html#::tomato::mathtriangle::Triangle::Perimeter'>Perimeter</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>OBJECT Perimeter</span> </pre>Gets Perimeter of the triangle.
+</span></li><li class='ruff-toc4 ruff-tip'><a href='tomato-tomato-mathtriangle.html#::tomato::mathtriangle::Triangle::ToPlane'>ToPlane</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>OBJECT ToPlane</span> </pre>Convert triangle to plane object <a href="tomato-tomato-mathplane.html#::tomato::mathplane::Plane" title="mathplane::Plane" class='ruff_cmd'>mathplane::Plane</a>.
+</span></li><li class='ruff-toc2'><a href='#::tomato::mathtriangle-Commands'>Commands</a></li><li class='ruff-toc3 ruff-tip'><a href='tomato-tomato-mathtriangle.html#::tomato::mathtriangle::Equals'>Equals</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>Equals</span> <span class='ruff_arg'>triangle other tolerance</span></pre>Gets a value to indicate if a pair of triangles are equal
+</span></li></ul></nav><footer class='ruff-layout-footer ruff-ft'><div style='float: right;'>Document generated by <a href='https://ruff.magicsplat.com'>Ruff!</a></div></footer>
+</div></body></html>

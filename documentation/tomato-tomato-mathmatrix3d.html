@@ -1,0 +1,203 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"/>
+<title>tomato 1.2.3 Reference Manual</title>
+<link rel='stylesheet' type='text/css' href='assets/ruff-min.css' />
+<script type='text/javascript' src='assets/ruff-min.js'></script>
+</head>
+<body>
+<div class='ruff-layout'>
+<header class='ruff-layout-header ruff-hd'>
+<a style='text-decoration:none;' href='tomato.html'>tomato 1.2.3 Reference Manual</a>
+
+
+            <div id="ruffButtonBar">
+            <button id="ruffNavMove" onclick="ruffMoveNavPane()"></button>
+            <button id="ruffToggleTheme" onclick="ruffNextTheme()"></button>
+            </div>
+        </header><main class='ruff-layout-main ruff-bd'><h1 class='ruff'><a name='::tomato::mathmatrix3d'></a>::tomato::mathmatrix3d<span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h1>
+<div style='clear:both;'></div>
+<p class='ruff'>Helper class for working with 3D matrixes</p>
+<h2 class='ruff'><a name='::tomato::mathmatrix3d-Commands'></a>Commands<span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h2>
+<div style='clear:both;'></div>
+<h3 class='ruffproc'><a name='::tomato::mathmatrix3d::RotationAroundArbitraryVector'>RotationAroundArbitraryVector</a><span class='ns_scope'> [<a href="tomato-tomato-mathmatrix3d.html#::tomato::mathmatrix3d" title="::tomato::mathmatrix3d" class='ruff_cmd'>::tomato::mathmatrix3d</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
+<div style='clear:both;'></div>
+<p class='ruff'>Creates a rotation matrix around an arbitrary vector</p>
+<div class='ruff_synopsis'><span class='ruff_cmd'>RotationAroundArbitraryVector</span> <span class='ruff_arg'>aboutVector angle</span></div>
+<h5 class='ruff'>Parameters</h5><table class='ruff_deflist'>
+<tr><td><code>aboutVector</code></td><td>The vector. <a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d::Vector3d" title="mathvec3d::Vector3d" class='ruff_cmd'>mathvec3d::Vector3d</a></td></tr>
+<tr><td><code>angle</code></td><td>Angle in radians</td></tr>
+</table>
+<h5 class='ruff'>Return value</h5><p class='ruff'>Returns A transform matrix <a href="tomato-tomato-mathmatrix.html#::tomato::mathmatrix::Matrix" title="mathmatrix::Matrix" class='ruff_cmd'>mathmatrix::Matrix</a></p>
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_199' href="javascript:toggleSource('199')">Show source</a></p>
+<div id='199' class='ruff_dyn_src'><pre>proc ::tomato::mathmatrix3d::RotationAroundArbitraryVector {aboutVector angle} {
+
+    # Creates a rotation matrix around an arbitrary vector
+    #
+    # aboutVector - The vector. [mathvec3d::Vector3d]
+    # angle - Angle in radians
+    #
+    # Returns A transform matrix [mathmatrix::Matrix]
+
+    # http://en.wikipedia.org/wiki/Rotation_matrix
+    set unitTensorProduct  [$aboutVector GetUnitTensorProduct]
+    set crossproductMatrix [$aboutVector CrossProductMatrix]
+
+    set mat [tomato::mathmatrix::CreateIdentity 3]
+
+    set r1 [$mat Multiply [expr {cos($angle)}]]
+    set r2 [$crossproductMatrix Multiply [expr {sin($angle)}]]
+    set r3 [$unitTensorProduct Multiply [expr {1 - cos($angle)}]]
+
+    set totalR [[$r1 Add $r2] Add $r3]
+
+    return $totalR
+}</pre></div>
+</div><h3 class='ruffproc'><a name='::tomato::mathmatrix3d::RotationAroundXAxis'>RotationAroundXAxis</a><span class='ns_scope'> [<a href="tomato-tomato-mathmatrix3d.html#::tomato::mathmatrix3d" title="::tomato::mathmatrix3d" class='ruff_cmd'>::tomato::mathmatrix3d</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
+<div style='clear:both;'></div>
+<p class='ruff'>Creates a rotation matrix around the X axis</p>
+<div class='ruff_synopsis'><span class='ruff_cmd'>RotationAroundXAxis</span> <span class='ruff_arg'>angle</span></div>
+<h5 class='ruff'>Parameters</h5><table class='ruff_deflist'>
+<tr><td><code>angle</code></td><td>The Angle in degrees</td></tr>
+</table>
+<h5 class='ruff'>Return value</h5><p class='ruff'>Returns A rotation matrix <a href="tomato-tomato-mathmatrix.html#::tomato::mathmatrix::Matrix" title="mathmatrix::Matrix" class='ruff_cmd'>mathmatrix::Matrix</a></p>
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_200' href="javascript:toggleSource('200')">Show source</a></p>
+<div id='200' class='ruff_dyn_src'><pre>proc ::tomato::mathmatrix3d::RotationAroundXAxis {angle} {
+
+    # Creates a rotation matrix around the X axis
+    #
+    # angle - The Angle in degrees
+    #
+    # Returns A rotation matrix [mathmatrix::Matrix]
+
+    set rotationMatrix [tomato::mathmatrix::Matrix new 3 3]
+    set angletoradian  [tomato::helper::DegreesToRadians $angle]
+
+    $rotationMatrix SetCell 0 0 1.0
+    $rotationMatrix SetCell 1 1 [expr {cos($angletoradian)}]
+    $rotationMatrix SetCell 1 2 [expr {-sin($angletoradian)}]
+    $rotationMatrix SetCell 2 1 [expr {sin($angletoradian)}]
+    $rotationMatrix SetCell 2 2 [expr {cos($angletoradian)}]
+
+    return $rotationMatrix
+}</pre></div>
+</div><h3 class='ruffproc'><a name='::tomato::mathmatrix3d::RotationAroundYAxis'>RotationAroundYAxis</a><span class='ns_scope'> [<a href="tomato-tomato-mathmatrix3d.html#::tomato::mathmatrix3d" title="::tomato::mathmatrix3d" class='ruff_cmd'>::tomato::mathmatrix3d</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
+<div style='clear:both;'></div>
+<p class='ruff'>Creates a rotation matrix around the Y axis</p>
+<div class='ruff_synopsis'><span class='ruff_cmd'>RotationAroundYAxis</span> <span class='ruff_arg'>angle</span></div>
+<h5 class='ruff'>Parameters</h5><table class='ruff_deflist'>
+<tr><td><code>angle</code></td><td>The Angle in degrees</td></tr>
+</table>
+<h5 class='ruff'>Return value</h5><p class='ruff'>Returns A rotation matrix <a href="tomato-tomato-mathmatrix.html#::tomato::mathmatrix::Matrix" title="mathmatrix::Matrix" class='ruff_cmd'>mathmatrix::Matrix</a></p>
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_201' href="javascript:toggleSource('201')">Show source</a></p>
+<div id='201' class='ruff_dyn_src'><pre>proc ::tomato::mathmatrix3d::RotationAroundYAxis {angle} {
+
+    # Creates a rotation matrix around the Y axis
+    #
+    # angle - The Angle in degrees
+    #
+    # Returns A rotation matrix [mathmatrix::Matrix]
+
+    set rotationMatrix [tomato::mathmatrix::Matrix new 3 3]
+    set angletoradian  [tomato::helper::DegreesToRadians $angle]
+
+    $rotationMatrix SetCell 0 0 [expr {cos($angletoradian)}]
+    $rotationMatrix SetCell 0 2 [expr {sin($angletoradian)}]
+    $rotationMatrix SetCell 1 1 1.0
+    $rotationMatrix SetCell 2 0 [expr {-sin($angletoradian)}]
+    $rotationMatrix SetCell 2 2 [expr {cos($angletoradian)}]
+
+    return $rotationMatrix
+}</pre></div>
+</div><h3 class='ruffproc'><a name='::tomato::mathmatrix3d::RotationAroundZAxis'>RotationAroundZAxis</a><span class='ns_scope'> [<a href="tomato-tomato-mathmatrix3d.html#::tomato::mathmatrix3d" title="::tomato::mathmatrix3d" class='ruff_cmd'>::tomato::mathmatrix3d</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
+<div style='clear:both;'></div>
+<p class='ruff'>Creates a rotation matrix around the Z axis</p>
+<div class='ruff_synopsis'><span class='ruff_cmd'>RotationAroundZAxis</span> <span class='ruff_arg'>angle</span></div>
+<h5 class='ruff'>Parameters</h5><table class='ruff_deflist'>
+<tr><td><code>angle</code></td><td>The Angle in degrees</td></tr>
+</table>
+<h5 class='ruff'>Return value</h5><p class='ruff'>Returns A rotation matrix <a href="tomato-tomato-mathmatrix.html#::tomato::mathmatrix::Matrix" title="mathmatrix::Matrix" class='ruff_cmd'>mathmatrix::Matrix</a></p>
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_202' href="javascript:toggleSource('202')">Show source</a></p>
+<div id='202' class='ruff_dyn_src'><pre>proc ::tomato::mathmatrix3d::RotationAroundZAxis {angle} {
+
+    # Creates a rotation matrix around the Z axis
+    #
+    # angle - The Angle in degrees
+    #
+    # Returns A rotation matrix [mathmatrix::Matrix]
+
+    set rotationMatrix [tomato::mathmatrix::Matrix new 3 3]
+    set angletoradian  [tomato::helper::DegreesToRadians $angle]
+
+    $rotationMatrix SetCell 0 0 [expr {cos($angletoradian)}]
+    $rotationMatrix SetCell 0 1 [expr {-sin($angletoradian)}]
+    $rotationMatrix SetCell 1 0 [expr {sin($angletoradian)}]
+    $rotationMatrix SetCell 1 1 [expr {cos($angletoradian)}]
+    $rotationMatrix SetCell 2 2 1.0
+
+    return $rotationMatrix
+}</pre></div>
+</div><h3 class='ruffproc'><a name='::tomato::mathmatrix3d::RotationTo'>RotationTo</a><span class='ns_scope'> [<a href="tomato-tomato-mathmatrix3d.html#::tomato::mathmatrix3d" title="::tomato::mathmatrix3d" class='ruff_cmd'>::tomato::mathmatrix3d</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
+<div style='clear:both;'></div>
+<p class='ruff'>Sets to the matrix of rotation that would align the <code>from</code> vector with the <code>to</code> vector. The optional Axis argument may be used when the two vectors are parallel and in opposite directions to specify a specific solution, but is otherwise ignored.</p>
+<div class='ruff_synopsis'><span class='ruff_cmd'>RotationTo</span> <span class='ruff_arg'>fromVector toVector ?axis?</span></div>
+<h5 class='ruff'>Parameters</h5><table class='ruff_deflist'>
+<tr><td><code>fromVector</code></td><td>Input Vector object to align from. <a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d::Vector3d" title="mathvec3d::Vector3d" class='ruff_cmd'>mathvec3d::Vector3d</a></td></tr>
+<tr><td><code>toVector</code></td><td>Input Vector object to align to. <a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d::Vector3d" title="mathvec3d::Vector3d" class='ruff_cmd'>mathvec3d::Vector3d</a></td></tr>
+<tr><td><code>axis</code></td><td>Input Vector object. <a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d::Vector3d" title="mathvec3d::Vector3d" class='ruff_cmd'>mathvec3d::Vector3d</a> Optional, default <code>null</code>.</td></tr>
+</table>
+<h5 class='ruff'>Return value</h5><p class='ruff'>Returns A transform matrix <a href="tomato-tomato-mathmatrix.html#::tomato::mathmatrix::Matrix" title="mathmatrix::Matrix" class='ruff_cmd'>mathmatrix::Matrix</a></p>
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_203' href="javascript:toggleSource('203')">Show source</a></p>
+<div id='203' class='ruff_dyn_src'><pre>proc ::tomato::mathmatrix3d::RotationTo {fromVector toVector {axis null}} {
+
+    # Sets to the matrix of rotation that would align the `from` vector with the `to` vector.
+    # The optional Axis argument may be used when the two vectors are parallel
+    # and in opposite directions to specify a specific solution, but is otherwise ignored.
+    #
+    # fromVector - Input Vector object to align from. [mathvec3d::Vector3d]
+    # toVector   - Input Vector object to align to. [mathvec3d::Vector3d]
+    # axis       - Input Vector object. [mathvec3d::Vector3d]
+    #
+    # Returns A transform matrix [mathmatrix::Matrix]
+
+    set fromVectornormalize [$fromVector Normalized]
+    set toVectornormalize   [$toVector Normalized]
+
+    if {[$fromVectornormalize == $toVectornormalize]} {
+        return [tomato::mathmatrix::CreateIdentity 3]
+    }
+
+    if {[$fromVectornormalize IsParallelTo $toVectornormalize]} {
+
+        if {$axis eq &quot;null&quot;} {
+            set axis [$fromVector Orthogonal]
+        }
+
+    } else {
+        set axis [$fromVectornormalize CrossProduct $toVectornormalize]
+        $axis Normalize
+    }
+
+    set signedAngleTo [$fromVectornormalize SignedAngleTo $toVectornormalize $axis]
+
+    return [tomato::mathmatrix3d::RotationAroundArbitraryVector $axis $signedAngleTo]
+}</pre></div>
+</div></main><nav class='ruff-nav'><ul ><li class='ruff-toc1'><a style='padding-top:2px;' href='tomato.html'>Start page</a></li>
+<li class='ruff-toc1'><a href='tomato-docindex.html' accesskey='i'>Index</a></li>
+<hr>
+<li class='ruff-toc1'><a href='tomato-tomato-helper.html'>tomato::helper</a></li>
+<li class='ruff-toc1'><a href='tomato-tomato-mathtriangle.html'>tomato::mathtriangle</a></li>
+<li class='ruff-toc1'><a href='tomato-tomato-mathcsys.html'>tomato::mathcsys</a></li>
+<li class='ruff-toc1'><a href='tomato-tomato-mathquat.html'>tomato::mathquat</a></li>
+<li class='ruff-toc1'><a href='tomato-tomato-mathline3d.html'>tomato::mathline3d</a></li>
+<li class='ruff-toc1'><a href='tomato-tomato-mathray3d.html'>tomato::mathray3d</a></li>
+<li class='ruff-toc1'><a href='tomato-tomato-mathpt3d.html'>tomato::mathpt3d</a></li>
+<li class='ruff-toc1'><a href='tomato-tomato-mathplane.html'>tomato::mathplane</a></li>
+<li class='ruff-toc1'><a class='ruff-highlight' href='tomato-tomato-mathmatrix3d.html'>tomato::mathmatrix3d</a></li>
+<li class='ruff-toc1'><a href='tomato-tomato-mathvec3d.html'>tomato::mathvec3d</a></li>
+<li class='ruff-toc1'><a href='tomato-tomato-mathmatrix.html'>tomato::mathmatrix</a></li>
+<hr><li class='ruff-toc2'><a href='#::tomato::mathmatrix3d-Commands'>Commands</a></li><li class='ruff-toc3 ruff-tip'><a href='tomato-tomato-mathmatrix3d.html#::tomato::mathmatrix3d::RotationAroundArbitraryVector'>RotationAroundArbitraryVector</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>RotationAroundArbitraryVector</span> <span class='ruff_arg'>aboutVector angle</span></pre>Creates a rotation matrix around an arbitrary vector
+</span></li><li class='ruff-toc3 ruff-tip'><a href='tomato-tomato-mathmatrix3d.html#::tomato::mathmatrix3d::RotationAroundXAxis'>RotationAroundXAxis</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>RotationAroundXAxis</span> <span class='ruff_arg'>angle</span></pre>Creates a rotation matrix around the X axis
+</span></li><li class='ruff-toc3 ruff-tip'><a href='tomato-tomato-mathmatrix3d.html#::tomato::mathmatrix3d::RotationAroundYAxis'>RotationAroundYAxis</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>RotationAroundYAxis</span> <span class='ruff_arg'>angle</span></pre>Creates a rotation matrix around the Y axis
+</span></li><li class='ruff-toc3 ruff-tip'><a href='tomato-tomato-mathmatrix3d.html#::tomato::mathmatrix3d::RotationAroundZAxis'>RotationAroundZAxis</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>RotationAroundZAxis</span> <span class='ruff_arg'>angle</span></pre>Creates a rotation matrix around the Z axis
+</span></li><li class='ruff-toc3 ruff-tip'><a href='tomato-tomato-mathmatrix3d.html#::tomato::mathmatrix3d::RotationTo'>RotationTo</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>RotationTo</span> <span class='ruff_arg'>fromVector toVector ?axis?</span></pre>Sets to the matrix of rotation that would align the <code>from</code> vector with the <code>to</code> vector. The optional Axis argument may be used when the two vectors are parallel and in opposite directions to specify a specific solution, but is otherwise ignored.
+</span></li></ul></nav><footer class='ruff-layout-footer ruff-ft'><div style='float: right;'>Document generated by <a href='https://ruff.magicsplat.com'>Ruff!</a></div></footer>
+</div></body></html>
