@@ -26,6 +26,9 @@
 #     - Point3d.tcl : Cosmetic changes + tolerance documentation for 'IsCollinearPoints' command.
 #     - Quaternion.tcl : Cosmetic changes.
 #     - Triangle3d.tcl : Cosmetic changes.
+# 01-10-2022 : v1.2.3
+#     - Cosmetic changes.
+#     - Updated `Ruff!` package to version 2.3 (documentation).
 
 package require Tcl 8.6
 
@@ -44,13 +47,13 @@ source [file join $dir Triangle3d.tcl]
 source [file join $dir Helper.tcl]
 
 namespace eval tomato {
-    variable version 1.2.2
+    variable version 1.2.3
     variable dir $dir
 
     variable _Intro {
         # tomato - math::geometry 3D library
-        ` tomato math::geometry ` is an opensource geometry 3D library with basics functions for working
-        in 3D space...
+        `tomato math::geometry` is an opensource geometry 3D library with basics functions for working
+        in 3D space...<br/>
         This [Tcl](https://www.tcl.tk) package is inspired , copied (as best I could) from this great library written in .Net [Math.NET Spatial](https://spatial.mathdotnet.com/#Math-NET-Spatial).
         Some features for this class `Quaternion` are inspired by this python library [pyquaternion](http://kieranwynn.github.io/pyquaternion/).
         

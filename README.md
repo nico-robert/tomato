@@ -54,3 +54,6 @@ Release :
     - Point3d.tcl : Cosmetic changes + tolerance documentation for 'IsCollinearPoints' command.
     - Quaternion.tcl : Cosmetic changes.
     - Triangle3d.tcl : Cosmetic changes.
+*  **01-10-2022** : 1.2.3
+    - Cosmetic changes.
+    - Updated `Ruff!` package to version 2.3 (documentation).
