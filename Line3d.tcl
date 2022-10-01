@@ -117,7 +117,7 @@ oo::define tomato::mathline3d::Line3d {
 
     method ClosestPointsBetween {other {mustBeOnSegments ""}} {
         # Computes the pair of points which represent the closest distance between this Line3D and another Line3D, with the first
-        # point being the point on this Line3D, and the second point being the corresponding point on the other Line3D.  If the lines
+        # point being the point on this Line3D, and the second point being the corresponding point on the other Line3D. If the lines
         # intersect the points will be identical, if the lines are parallel the first point will be the start point of this line.
         #
         # other - line [Line3d] to compute the closest points with
@@ -213,7 +213,7 @@ oo::define tomato::mathline3d::Line3d {
         # intersectingPlane - [mathplane::Plane]
         # tolerance - A tolerance (epsilon) to compensate for floating point error.
         #
-        # Returns A point [mathpt3d::Point3d] where the line and plane intersect, *** nothing *** if no such point exists
+        # Returns A [mathpt3d::Point3d] where the line and plane intersect, *** nothing *** if no such point exists
         if {[llength [info level 0]] < 4} {
             set tolerance $::tomato::helper::TolGeom
         }
@@ -228,7 +228,7 @@ oo::define tomato::mathline3d::Line3d {
         # other     - The second line [Line3d] to compare.
         # tolerance - A tolerance (epsilon) to adjust for floating point error.
         #
-        # Returns true if the lines are the same. Otherwise false.
+        # Returns `True` if the lines are the same. Otherwise `False`.
         if {[llength [info level 0]] < 4} {
             set tolerance $::tomato::helper::TolEquals
         }
@@ -243,7 +243,7 @@ oo::define tomato::mathline3d::Line3d {
         # other - The second line [Line3d] to compare.
         # tolerance - A tolerance (epsilon) to adjust for floating point error.
         #
-        # Returns true if the lines are different. Otherwise false
+        # Returns `True` if the lines are different. Otherwise `False`
         if {[llength [info level 0]] < 4} {
             set tolerance $::tomato::helper::TolEquals
         }
@@ -278,7 +278,7 @@ proc tomato::mathline3d::Equals {line other tolerance} {
     # other - Second input line [Line3d]
     # tolerance - A tolerance (epsilon) to adjust for floating point error
     #
-    # Returns true if the lines are equal, otherwise false.
+    # Returns `True` if the lines are equal, otherwise false.
     #
     # See : methods == !=
     if {$tolerance < 0} {

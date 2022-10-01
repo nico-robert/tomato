@@ -71,6 +71,8 @@ oo::define tomato::mathmatrix::Matrix {
         }
 
         lset _values [list $rowIndex $colIndex] $value
+
+        return {}
     }
 
     method GetCell {rowIndex colIndex} {
@@ -109,6 +111,8 @@ oo::define tomato::mathmatrix::Matrix {
         for {set row 0} {$row < $len} {incr row} {
             lset _values [list $row $colIndex] [lindex $columnlistvalues $row]
         }
+
+        return {}
     }
 
     method GetColumn {colIndex} {
@@ -146,6 +150,8 @@ oo::define tomato::mathmatrix::Matrix {
         }
 
         lset _values $rowIndex $rowlistvalues
+
+        return {}
     }
 
     method GetRow {rowIndex} {
@@ -199,7 +205,7 @@ oo::define tomato::mathmatrix::Matrix {
         # Matrix - [Matrix]
         # Vector - [mathvec3d::Vector3d]
         #
-        # Returns a new base matrix [Matrix] if double value , a TCL list for other types
+        # Returns a new base matrix [Matrix] if double value , a Tcl list for other types
         set mat [oo::copy [self]]
 
         if {[string is double $entity]} {
@@ -314,7 +320,7 @@ oo::define tomato::mathmatrix::Matrix {
     }
 
     method Determinant {} {
-        # Gets the determinant of the matrix for which the Crout's LU decomposition was computed.
+        # Gets the determinant of the matrix for which the `Crout's LU` decomposition was computed.
 
         lassign [my Decompose] toggle lum perm
         set result $toggle
@@ -336,7 +342,7 @@ oo::define tomato::mathmatrix::Matrix {
     }
 
     method Inverse {} {
-        # Matrix inverse using Crout's LU decomposition
+        # Matrix inverse using `Crout's LU` decomposition
         if {[my Determinant] == 0.0} {
             throw {singular} "Matrix is singular..." 
         }
@@ -362,7 +368,7 @@ oo::define tomato::mathmatrix::Matrix {
         # other     - The second matrix [Matrix] to compare.
         # tolerance - A tolerance (epsilon) to adjust for floating point error.
         #
-        # Returns true if the matrixes are the same. Otherwise false.
+        # Returns `True` if the matrixes are the same. Otherwise `False`.
         if {[llength [info level 0]] < 4} {
             set tolerance $::tomato::helper::TolEquals
         }
@@ -377,7 +383,7 @@ oo::define tomato::mathmatrix::Matrix {
         # other - The second matrix [Matrix] to compare.
         # tolerance - A tolerance (epsilon) to adjust for floating point error.
         #
-        # Returns true if the matrixes are different. Otherwise false.
+        # Returns `True` if the matrixes are different. Otherwise `False`.
         if {[llength [info level 0]] < 4} {
             set tolerance $::tomato::helper::TolEquals
         }
@@ -554,7 +560,7 @@ proc tomato::mathmatrix::MatrixMulVector {mat other} {
     # mat   - base matrix [Matrix]
     # other - vector [mathvec3d::Vector3d]
     #
-    # Returns TCL list (mul matrix)
+    # Returns Tcl list (mul matrix)
     set newvect {}
     set mat1 [$mat Values]
     set vec1 [$other Get]
@@ -580,7 +586,7 @@ proc tomato::mathmatrix::MatrixMulColumnVector {mat other} {
     # mat   - [Matrix]
     # other - [Matrix]
     #
-    # Returns TCL list (mul matrix)
+    # Returns Tcl list (mul matrix)
     set newvect {}
 
     set mat1 [$mat Values]
@@ -616,7 +622,7 @@ proc tomato::mathmatrix::MatrixMulByDouble {mat other} {
 }
 
 proc tomato::mathmatrix::MatrixDecompose {storage} {
-    # Crout's LU decomposition for matrix determinant and inverse
+    # `Crout's LU` decomposition for matrix determinant and inverse
     # [docs.microsoft.com](https://docs.microsoft.com/fr-fr/archive/msdn-magazine/2016/july/test-run-matrix-inversion-using-csharp)
     #
     # storage - [Matrix]
@@ -634,7 +640,7 @@ proc tomato::mathmatrix::MatrixDecompose {storage} {
     # make permmat
     set permmat [tomato::mathmatrix::Matrix new 1 $n]
     for {set i 0} {$i < $n} {incr i} {
-        $permmat SetCell 0 $i $i
+        $permmat SetCell 0 $i [expr {double($i)}]
     }
 
     for {set j 0} {$j < [expr {$n - 1}]} {incr j} { ; # process by column. note n-1 
@@ -643,7 +649,6 @@ proc tomato::mathmatrix::MatrixDecompose {storage} {
         set piv $j
 
         for {set i [expr {$j + 1}]} {$i < $n} {incr i} { ; # find pivot index
-
             set xij [expr {abs([$lummat GetCell $i $j])}]
             if {$xij > $max} {
                 set max $xij
@@ -670,7 +675,7 @@ proc tomato::mathmatrix::MatrixDecompose {storage} {
         if {$xjj != 0.0} {
             
             for {set i [expr {$j + 1}]} {$i < $n} {incr i} {
-                set xij [expr {[$lummat GetCell $i $j] / $xjj}]
+                set xij [expr {[$lummat GetCell $i $j] / double($xjj)}]
                 $lummat SetCell $i $j $xij
 
                 for {set k [expr {$j + 1}]} {$k < $n} {incr k} {
@@ -685,7 +690,7 @@ proc tomato::mathmatrix::MatrixDecompose {storage} {
 }
 
 proc tomato::mathmatrix::MatrixInverse {storage} {
-    # Crout's LU decomposition for matrix inverse.
+    # `Crout's LU` decomposition for matrix inverse.
     #
     # storage - A Matrix [Matrix]
     #
@@ -701,13 +706,11 @@ proc tomato::mathmatrix::MatrixInverse {storage} {
 
     for {set i 0} {$i < $n} {incr i} {
         for {set j 0} {$j < $n} {incr j} {
-            
             if {$i == [$perm GetCell 0 $j]} {
                 $b SetCell 0 $j 1.0
             } else {
                 $b SetCell 0 $j 0.0
             }
-
         }
 
         set x [tomato::mathmatrix::_MatrixHelper $lum $b]
@@ -726,7 +729,7 @@ proc tomato::mathmatrix::Equals {mat other tolerance} {
     # other - Second input matrix [Matrix]
     # tolerance - A tolerance (epsilon) to adjust for floating point error
     #
-    # Returns true if matrixes are equal, otherwise false.
+    # Returns `True` if matrixes are equal, otherwise false.
     #
     # See : methods == !=
     if {$tolerance < 0} {
@@ -771,7 +774,7 @@ proc tomato::mathmatrix::_MatrixHelper {luMatrix bMatrix} {
 
     set nms1 [expr {$n - 1}] 
 
-    $x SetCell 0 $nms1 [expr {[$x GetCell 0 $nms1] / [$luMatrix GetCell $nms1 $nms1]}]
+    $x SetCell 0 $nms1 [expr {[$x GetCell 0 $nms1] / double([$luMatrix GetCell $nms1 $nms1])}]
 
     for {set i [expr {$n - 2}] } {$i >= 0} {incr i -1} {
         set sum [$x GetCell 0 $i]
@@ -780,7 +783,7 @@ proc tomato::mathmatrix::_MatrixHelper {luMatrix bMatrix} {
             set sum [expr {$sum - ([$luMatrix GetCell $i $j] * [$x GetCell 0 $j])}]
         }
 
-        $x SetCell 0 $i [expr {$sum / [$luMatrix GetCell $i $i]}]
+        $x SetCell 0 $i [expr {$sum / double([$luMatrix GetCell $i $i])}]
         
     }
 

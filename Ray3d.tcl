@@ -46,7 +46,7 @@ oo::define tomato::mathray3d::Ray3d {
     }
 
     method Get {} {
-        # Gets the start point and direction of the ray in the form of a TCL list
+        # Gets the start point and direction of the ray in the form of a Tcl list
         return [list $_throughpoint $_direction]
     }
 
@@ -69,7 +69,7 @@ oo::define tomato::mathray3d::Ray3d {
         # other     - The second ray [Ray3d] to compare.
         # tolerance - A tolerance (epsilon) to adjust for floating point error.
         #
-        # Returns true if the rays are the same. Otherwise false.
+        # Returns `True` if the rays are the same. Otherwise `False`.
         if {[llength [info level 0]] < 4} {
             set tolerance $::tomato::helper::TolEquals
         }
@@ -84,7 +84,7 @@ oo::define tomato::mathray3d::Ray3d {
         # other - The second ray [Ray3d] to compare.
         # tolerance - A tolerance (epsilon) to adjust for floating point error.
         #
-        # Returns true if the rays are different. Otherwise false.
+        # Returns `True` if the rays are different. Otherwise `False`.
         if {[llength [info level 0]] < 4} {
             set tolerance $::tomato::helper::TolEquals
         }
@@ -164,7 +164,7 @@ proc tomato::mathray3d::Equals {ray other tolerance} {
     # other - Second input ray [Ray3d]
     # tolerance - A tolerance (epsilon) to adjust for floating point error
     #
-    # Returns true if the rays are equal, otherwise false.
+    # Returns `True` if the rays are equal, otherwise false.
     #
     # See : methods == !=
     if {$tolerance < 0} {

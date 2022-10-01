@@ -13,7 +13,12 @@ oo::class create tomato::mathtriangle::Triangle {
 
     constructor {args} {
         # Initializes a new Triangle Class.
-
+        #
+        # args - Options described below.
+        #
+        # 3 values - [mathpt3d::Point3d]
+        # list     - 3 distinct values that represent the coordinates X, Y, Z.
+        #
         if {[llength $args] != 3} {
             error "Must be a list of 3 values... : \$args = [llength $args]"
         }
@@ -168,14 +173,14 @@ oo::define tomato::mathtriangle::Triangle {
         # Gets Centroid of the triangle
         #
         # Returns [mathpt3d::Point3d]
-        return [tomato::mathpt3d::Centroid [list [my A] [my B] [my C]]]
+        return [tomato::mathpt3d::Centroid [list $_a $_b $_c]]
     }
 
-    method IntersectionWith {entity {tolerance $::tomato::helper::TolGeom}} {
+    method IntersectionWith {obj {tolerance $::tomato::helper::TolGeom}} {
         # Finds the intersection...
         # [Möller–Trumbore_intersection_algorithm](https://en.wikipedia.org/wiki/Möller–Trumbore_intersection_algorithm)
         #
-        # entity - Options described below.
+        # obj - Options described below.
         #
         # Ray    - [mathray3d::Ray3d]
         # Line   - [mathline3d::Line3d]
@@ -186,24 +191,24 @@ oo::define tomato::mathtriangle::Triangle {
             set tolerance $::tomato::helper::TolGeom
         }
 
-        switch -glob [$entity GetType] {
+        switch -glob [$obj GetType] {
             *Ray3d {
-                set ip [tomato::mathplane::IntersectionWithRay [my ToPlane] $entity $tolerance]
+                set ip [tomato::mathplane::IntersectionWithRay [my ToPlane] $obj $tolerance]
             }
             *Line3d {
-                set ip [tomato::mathplane::IntersectionWithLine [my ToPlane] $entity $tolerance]
+                set ip [tomato::mathplane::IntersectionWithLine [my ToPlane] $obj $tolerance]
             }
             default {
                 #ruff
-                # An error exception is raised if entity is not as described above.
-                error "Entity must be Line3d or Ray3d..."
+                # An error exception is raised if $obj is not as described above.
+                error "Obj must be Line3d or Ray3d..."
             }
         }
 
         # get intersect point of line with triangle plane
         if {$ip eq ""} {
             # no intersection...
-            return ""
+            return {}
         }
 
         set u [$_b VectorTo $_a]
@@ -243,7 +248,7 @@ oo::define tomato::mathtriangle::Triangle {
         # other     - The second triangle [Triangle] to compare.
         # tolerance - A tolerance (epsilon) to adjust for floating point error.
         #
-        # Returns true if the triangles are the same. Otherwise false.
+        # Returns `True` if the triangles are the same. Otherwise `False`.
         if {[llength [info level 0]] < 4} {
             set tolerance $::tomato::helper::TolEquals
         }
@@ -258,7 +263,7 @@ oo::define tomato::mathtriangle::Triangle {
         # other - The second triangle [Triangle] to compare.
         # tolerance - A tolerance (epsilon) to adjust for floating point error.
         #
-        # Returns true if the triangles are different. Otherwise false.
+        # Returns `True` if the triangles are different. Otherwise `False`.
         if {[llength [info level 0]] < 4} {
             set tolerance $::tomato::helper::TolEquals
         }
@@ -288,7 +293,7 @@ proc tomato::mathtriangle::Equals {triangle other tolerance} {
     # other     - Second input triangle [Triangle]
     # tolerance - A tolerance (epsilon) to adjust for floating point error
     #
-    # Returns true if the triangles are equal, otherwise false.
+    # Returns `True` if the triangles are equal, otherwise false.
     #
     # See : methods == !=
     if {$tolerance < 0} {

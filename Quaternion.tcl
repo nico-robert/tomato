@@ -24,6 +24,7 @@ oo::class create tomato::mathquat::Quaternion {
         # values     - 3 values or 4 values
         # component1 - -scalar & -vector
         # component2 - -axis & -angle
+        # no values  - default to `Quaternion(1 +0i +0j +0k)`.
         #
 
         if {[llength $args] == 1} {
@@ -104,7 +105,7 @@ oo::class create tomato::mathquat::Quaternion {
                 if {[string match "*-scalar*" $args] && ![string match "*-vector*" $args]} {
                     #ruff
                     # * Create a quaternion by specifying a scalar and a vector.<br>
-                    # The scalar (real) and vector (imaginary) parts of the desired quaternion.
+                    # The scalar (real) and vector (imaginary) parts of the desired quaternion.<br>
                     # -vector - Can be a Vector3d class [mathvec3d::Vector3d] or list of 3 values
                     # ```
                     # tomato::mathquat::Quaternion new -scalar 1 -vector {1 1 1}
@@ -116,7 +117,7 @@ oo::class create tomato::mathquat::Quaternion {
                 if {[string match "*-axis*" $args] && ![string match "*-angle*" $args]} {
                     #ruff
                     # * Create a quaternion by specifying a axis and a angle in degrees.<br>
-                    # Specify the angle (degrees) for a rotation about an axis vector \[x, y, z] to be described by the quaternion object
+                    # Specify the angle (degrees) for a rotation about an axis vector \[x, y, z] to be described by the quaternion object<br>
                     # -axis - Can be a Vector3d class [mathvec3d::Vector3d] or list of 3 values
                     # ```
                     # tomato::mathquat::Quaternion new -axis {0 1 0} -angle 90
@@ -168,7 +169,7 @@ oo::class create tomato::mathquat::Quaternion {
 
             }
 
-        } else {
+        } elseif {[llength $args] == 0} {
             #ruff
             # * Default value :
             # ```
@@ -179,6 +180,10 @@ oo::class create tomato::mathquat::Quaternion {
             set _x 0
             set _y 0
             set _z 0
+        } else {
+            #ruff
+            # An error exception is raised if `args` is not the one desired.
+            error "The argument does not match the requested values, please refer to the documentation..."
         }
     }
 }
@@ -206,7 +211,7 @@ oo::define tomato::mathquat::Quaternion {
     }
 
     method Get {} {
-        # Gets values from the Quaternion Class under TCL list form.
+        # Gets values from the Quaternion Class under Tcl list form.
         return [list $_x $_y $_z $_w]
     }
 
@@ -221,9 +226,9 @@ oo::define tomato::mathquat::Quaternion {
     }
 
     method Arg {} {
-        # Gets the argument phi = arg(q) of the quaternion q, such that q = r*(cos(phi) + <br>
-        # u*sin(phi)) = r*exp(phi*u) where r is the absolute and u the unit vector of <br>
-        # q.
+        # Gets the argument `phi = arg(q)` of the quaternion `q`, such that `q = r*(cos(phi) + 
+        # u*sin(phi)) = r*exp(phi*u)`<br> where `r` is the absolute and `u` the unit vector of
+        # `q`.
         return [expr {acos($_w / [my Norm])}]
     }
 
@@ -235,22 +240,22 @@ oo::define tomato::mathquat::Quaternion {
     }
 
     method Scalar {} {
-        # Gets a new Quaternion q with the Scalar part only.
+        # Gets a new Quaternion `q` with the Scalar part only.
         return [tomato::mathquat::Quaternion new $_w 0 0 0]
     }
 
     method Vector {} {
-        # Gets a new Quaternion q with the Vector part only.
+        # Gets a new Quaternion `q` with the Vector part only.
         return [tomato::mathquat::Quaternion new 0 $_x $_y $_z]
     }
 
     method NormalizedVector {} {
-        # Gets a new normalized Quaternion u with the Vector part only, such that ||u|| = 1.
+        # Gets a new normalized Quaternion `u` with the Vector part only, such that `||u|| = 1`.
         return [tomato::mathquat::ToUnitQuaternion 0 $_x $_y $_z]
     }
 
     method Normalized {} {
-        # Gets a new normalized Quaternion q with the direction of this quaternion.
+        # Gets a new normalized Quaternion `q` with the direction of this quaternion.
         return [expr {[[self] == $::tomato::mathquat::Zero] ? [self] : [tomato::mathquat::ToUnitQuaternion $_w $_x $_y $_z]}]
     }
 
@@ -298,103 +303,103 @@ oo::define tomato::mathquat::Quaternion {
                                                  [expr {Inv($_z)}]]
     }
 
-    method + {entity} {
-        # Add a floating point number to a quaternion, if $entity is double
-        # or Add a quaternion to a quaternion, if $entity is an Quaternion object.
+    method + {obj} {
+        # Add a floating point number to a quaternion, if $obj is double
+        # or add a quaternion to a quaternion, if $obj is an Quaternion object.
         #
-        # entity - Options described below.
-        #
-        # scalar - A double value.
-        # object - A Quaternion component.
-        #
-        # Returns A quaternion whose real value is increased by a scalar if $entity is double value or <br>
-        # the sum of two quaternions [Quaternion] if $entity is a quaternion object.
-        if {[string is double $entity]} {
-            return [tomato::mathquat::Quaternion new [expr {$_w + $entity}] $_x $_y $_z]
-        }
-
-        if {[TypeOf $entity Isa "Quaternion"]} {
-            return [tomato::mathquat::Quaternion new [expr {$_w + [$entity Real]}] \
-                                                     [expr {$_x + [$entity ImagX]}] \
-                                                     [expr {$_y + [$entity ImagY]}] \
-                                                     [expr {$_z + [$entity ImagZ]}]]
-        }
-
-    }
-
-    method - {entity} {
-        # Subtract a floating point number from a quaternion, if $entity is double
-        # or Subtract a quaternion from a quaternion, if $entity is an Quaternion object.
-        #
-        # entity - Options described below.
+        # obj - Options described below.
         #
         # scalar - A double value.
         # object - A Quaternion component.
         #
-        # Returns A quaternion whose real value is discreased by a scalar if $entity is double value or <br>
-        # the quaternion [Quaternion] difference if $entity is a quaternion object.
-        if {[string is double $entity]} {
-            return [tomato::mathquat::Quaternion new [expr {$_w - $entity}] $_x $_y $_z]
+        # Returns A quaternion whose real value is increased by a scalar if $obj is double value.<br>
+        # Or the sum of two quaternions [Quaternion] if $obj is a quaternion object.
+        if {[string is double $obj]} {
+            return [tomato::mathquat::Quaternion new [expr {$_w + $obj}] $_x $_y $_z]
         }
 
-        if {[TypeOf $entity Isa "Quaternion"]} {
-            return [tomato::mathquat::Quaternion new [expr {$_w - [$entity Real]}] \
-                                                     [expr {$_x - [$entity ImagX]}] \
-                                                     [expr {$_y - [$entity ImagY]}] \
-                                                     [expr {$_z - [$entity ImagZ]}]]
+        if {[TypeOf $obj Isa "Quaternion"]} {
+            return [tomato::mathquat::Quaternion new [expr {$_w + [$obj Real]}] \
+                                                     [expr {$_x + [$obj ImagX]}] \
+                                                     [expr {$_y + [$obj ImagY]}] \
+                                                     [expr {$_z + [$obj ImagZ]}]]
         }
 
     }
 
-    method * {entity} {
-        # Multiply a floating point number with a quaternion, if $entity is double
-        # or Multiply a quaternion with a quaternion, if $entity is an Quaternion object.
+    method - {obj} {
+        # Subtract a floating point number from a quaternion, if $obj is double.<br>
+        # Or subtract a quaternion from a quaternion, if $obj is an Quaternion object.
         #
-        # entity - Options described below.
+        # obj - Options described below.
+        #
+        # scalar - A double value.
+        # object - A Quaternion component.
+        #
+        # Returns A quaternion whose real value is discreased by a scalar if $obj is double value.<br>
+        # Or the quaternion [Quaternion] difference if $obj is a quaternion object.
+        if {[string is double $obj]} {
+            return [tomato::mathquat::Quaternion new [expr {$_w - $obj}] $_x $_y $_z]
+        }
+
+        if {[TypeOf $obj Isa "Quaternion"]} {
+            return [tomato::mathquat::Quaternion new [expr {$_w - [$obj Real]}] \
+                                                     [expr {$_x - [$obj ImagX]}] \
+                                                     [expr {$_y - [$obj ImagY]}] \
+                                                     [expr {$_z - [$obj ImagZ]}]]
+        }
+
+    }
+
+    method * {obj} {
+        # Multiply a floating point number with a quaternion, if $obj is double.<br>
+        # Or multiply a quaternion with a quaternion, if $obj is an Quaternion object.
+        #
+        # obj - Options described below.
         #
         # scalar - A double value.
         # object - A Quaternion component.
         #
         # Returns A new quaternion [Quaternion].
-        if {[string is double $entity]} {
-            return [tomato::mathquat::Quaternion new [expr {$_w * $entity}] \
-                                                     [expr {$_x * $entity}] \
-                                                     [expr {$_y * $entity}] \
-                                                     [expr {$_z * $entity}]]
+        if {[string is double $obj]} {
+            return [tomato::mathquat::Quaternion new [expr {$_w * $obj}] \
+                                                     [expr {$_x * $obj}] \
+                                                     [expr {$_y * $obj}] \
+                                                     [expr {$_z * $obj}]]
         }
 
-        if {[TypeOf $entity Isa "Quaternion"]} {
+        if {[TypeOf $obj Isa "Quaternion"]} {
 
-            set ci [expr {($_x      * [$entity Real])  + ($_y * [$entity ImagZ]) - ($_z * [$entity ImagY]) + ($_w * [$entity ImagX])}]
-            set cj [expr {(Inv($_x) * [$entity ImagZ]) + ($_y * [$entity Real])  + ($_z * [$entity ImagX]) + ($_w * [$entity ImagY])}]
-            set ck [expr {($_x      * [$entity ImagY]) - ($_y * [$entity ImagX]) + ($_z * [$entity Real])  + ($_w * [$entity ImagZ])}]
-            set cr [expr {(Inv($_x) * [$entity ImagX]) - ($_y * [$entity ImagY]) - ($_z * [$entity ImagZ]) + ($_w * [$entity Real])}]
+            set ci [expr {($_x      * [$obj Real])  + ($_y * [$obj ImagZ]) - ($_z * [$obj ImagY]) + ($_w * [$obj ImagX])}]
+            set cj [expr {(Inv($_x) * [$obj ImagZ]) + ($_y * [$obj Real])  + ($_z * [$obj ImagX]) + ($_w * [$obj ImagY])}]
+            set ck [expr {($_x      * [$obj ImagY]) - ($_y * [$obj ImagX]) + ($_z * [$obj Real])  + ($_w * [$obj ImagZ])}]
+            set cr [expr {(Inv($_x) * [$obj ImagX]) - ($_y * [$obj ImagY]) - ($_z * [$obj ImagZ]) + ($_w * [$obj Real])}]
 
             return [tomato::mathquat::Quaternion new $cr $ci $cj $ck]
         }
 
     }
 
-    method / {entity} {
-        # Divide a quaternion by a floating point number, if $entity is double
-        # or Divide a quaternion by a quaternion, if $entity is an Quaternion object.
+    method / {obj} {
+        # Divide a quaternion by a floating point number, if $obj is double.<br>
+        # Or divide a quaternion by a quaternion, if $obj is an Quaternion object.
         #
-        # entity - Options described below.
+        # obj - Options described below.
         #
         # scalar - A double value.
         # object - A Quaternion component.
         #
         # Returns A new divided quaternion [Quaternion].
-        if {[string is double $entity]} {
-            return [tomato::mathquat::Quaternion new [expr {$_w / double($entity)}] \
-                                                     [expr {$_x / double($entity)}] \
-                                                     [expr {$_y / double($entity)}] \
-                                                     [expr {$_z / double($entity)}]]
+        if {[string is double $obj]} {
+            return [tomato::mathquat::Quaternion new [expr {$_w / double($obj)}] \
+                                                     [expr {$_x / double($obj)}] \
+                                                     [expr {$_y / double($obj)}] \
+                                                     [expr {$_z / double($obj)}]]
         }
 
-        if {[TypeOf $entity Isa "Quaternion"]} {
+        if {[TypeOf $obj Isa "Quaternion"]} {
 
-            if {[$entity == $::tomato::mathquat::Zero]} {
+            if {[$obj == $::tomato::mathquat::Zero]} {
                 if {[[self] == $::tomato::mathquat::Zero]} {
                     return [tomato::mathquat::Quaternion new "NaN" "NaN" "NaN" "NaN"]
                 }
@@ -403,74 +408,74 @@ oo::define tomato::mathquat::Quaternion {
                 
             }
 
-            set normSquared [$entity NormSquared]
-            set t0 [expr {(([$entity Real] * $_w) + ([$entity ImagX] * $_x) + ([$entity ImagY] * $_y) + ([$entity ImagZ] * $_z)) / double($normSquared)}]
-            set t1 [expr {(([$entity Real] * $_x) - ([$entity ImagX] * $_w) - ([$entity ImagY] * $_z) + ([$entity ImagZ] * $_y)) / double($normSquared)}]
-            set t2 [expr {(([$entity Real] * $_y) + ([$entity ImagX] * $_z) - ([$entity ImagY] * $_w) - ([$entity ImagZ] * $_x)) / double($normSquared)}]
-            set t3 [expr {(([$entity Real] * $_z) - ([$entity ImagX] * $_y) + ([$entity ImagY] * $_x) - ([$entity ImagZ] * $_w)) / double($normSquared)}]
+            set normSquared [$obj NormSquared]
+            set t0 [expr {(([$obj Real] * $_w) + ([$obj ImagX] * $_x) + ([$obj ImagY] * $_y) + ([$obj ImagZ] * $_z)) / double($normSquared)}]
+            set t1 [expr {(([$obj Real] * $_x) - ([$obj ImagX] * $_w) - ([$obj ImagY] * $_z) + ([$obj ImagZ] * $_y)) / double($normSquared)}]
+            set t2 [expr {(([$obj Real] * $_y) + ([$obj ImagX] * $_z) - ([$obj ImagY] * $_w) - ([$obj ImagZ] * $_x)) / double($normSquared)}]
+            set t3 [expr {(([$obj Real] * $_z) - ([$obj ImagX] * $_y) + ([$obj ImagY] * $_x) - ([$obj ImagZ] * $_w)) / double($normSquared)}]
 
             return [tomato::mathquat::Quaternion new $t0 $t1 $t2 $t3]
         }
 
     }
 
-    method ^ {entity} {
+    method ^ {obj} {
         # Raise a quaternion to a floating point number.
         #
-        # entity - A double value.
+        # obj - A double value.
         #
         # Returns A new quaternion [Quaternion].
-        return [tomato::mathquat::Pow [self] $entity]
+        return [tomato::mathquat::Pow [self] $obj]
     }
 
-    method == {entity {tolerance $::tomato::helper::TolEquals}} {
-        # Equality operator for two quaternions if $entity is quaternion component.
-        # Equality operator for quaternion and double if $entity is double.
+    method == {obj {tolerance $::tomato::helper::TolEquals}} {
+        # Equality operator for two quaternions if $obj is quaternion component.<br>
+        # Equality operator for quaternion and double if $obj is double.
         # 
-        # entity - Options described below.
+        # obj - Options described below.
         #
         # scalar    - A double value.
         # object    - A Quaternion component.
         # tolerance - A tolerance (epsilon) to adjust for floating point error.
         #
-        # Returns true if the quaternions are the same if $entity is a quaternion or 
-        # True if the real part of the quaternion is almost equal to the double and the rest of the quaternion is almost 0. Otherwise false.
+        # Returns `True` if the quaternions are the same if $obj is a quaternion or 
+        # True if the real part of the quaternion is almost equal to the double and the rest of the quaternion is almost 0. Otherwise `False`.
         if {[llength [info level 0]] < 4} {
             set tolerance $::tomato::helper::TolEquals
         }
 
-        if {[string is double $entity]} {
+        if {[string is double $obj]} {
             return [expr {
-                            (($_w - $entity) < $tolerance) &&
+                            (($_w - $obj) < $tolerance) &&
                             (($_x - 0) < $tolerance) &&
                             (($_y - 0) < $tolerance) &&
                             (($_z - 0) < $tolerance)
                         }]
         }
 
-        if {[TypeOf $entity Isa "Quaternion"]} {
-            return [tomato::mathquat::Equals [self] $entity $tolerance]
+        if {[TypeOf $obj Isa "Quaternion"]} {
+            return [tomato::mathquat::Equals [self] $obj $tolerance]
         }
 
     }
 
-    method != {entity {tolerance $::tomato::helper::TolEquals}} {
-        # Inequality operator for two quaternions if $entity is quaternion component.
-        # Inequality operator for quaternion and double if $entity is double.
+    method != {obj {tolerance $::tomato::helper::TolEquals}} {
+        # Inequality operator for two quaternions if $obj is quaternion component.<br>
+        # Inequality operator for quaternion and double if $obj is double.
         # 
-        # entity - Options described below.
+        # obj - Options described below.
         #
         # scalar    - A double value.
         # object    - A Quaternion component.
         # tolerance - A tolerance (epsilon) to adjust for floating point error.
         #
-        # Returns true if the quaternions are not the same if $entity is a quaternion or 
-        # True if the real part of the quaternion is not equal to the double and the rest of the quaternion is almost 0. Otherwise false.
+        # Returns `True` if the quaternions are not the same if $obj is a quaternion or 
+        # True if the real part of the quaternion is not equal to the double and the rest of the quaternion is almost 0. Otherwise `False`.
         if {[llength [info level 0]] < 4} {
             set tolerance $::tomato::helper::TolEquals
         }
 
-        return [expr {![my == $entity $tolerance]}]
+        return [expr {![my == $obj $tolerance]}]
     }
 
     method Distance {q} {
@@ -513,29 +518,29 @@ oo::define tomato::mathquat::Quaternion {
 
     }
 
-    method Rotate {entity} {
+    method Rotate {obj} {
         # Rotate a 3D vector or 3D point by the rotation stored in the Quaternion object
         #
-        # entity - Options described below.
+        # obj - Options described below.
         #
         # point  - A point object.
         # vector - A vector object.
         #
         # Returns The rotated vector or point returned as the same type it was specified at input
-        set myentity $entity
+        set myentity $obj
 
-        if {[TypeOf $entity Isa "Vector3d"]} {
+        if {[TypeOf $obj Isa "Vector3d"]} {
 
-            if {![$entity IsNormalized]} {
-                set myentity [$entity Normalized]
+            if {![$obj IsNormalized]} {
+                set myentity [$obj Normalized]
             }
             
-        } elseif {[TypeOf $entity Isa "Point3d"]} {
+        } elseif {[TypeOf $obj Isa "Point3d"]} {
 
-            set myentity [$entity ToVector3D] ; # convert to vector
+            set myentity [$obj ToVector3D] ; # convert to vector
             
         } else {
-            error "Entity must be an Class Vector3d Or an Class Point3d..."
+            error "Obj must be an Class Vector3d Or an Class Point3d..."
         }
 
         set quat [tomato::mathquat::Quaternion new $myentity]
@@ -547,7 +552,7 @@ oo::define tomato::mathquat::Quaternion {
 
         set result [$q RotateUnitQuaternion $quat]
 
-        if {[TypeOf $entity Isa "Vector3d"]} {
+        if {[TypeOf $obj Isa "Vector3d"]} {
             return [$result ToVector3D]
         } else {
             return [[$result ToVector3D] ToPoint3D]
@@ -628,7 +633,7 @@ oo::define tomato::mathquat::Quaternion {
     method Angle {} {
         # Gets the angle (in radians) describing the magnitude of the quaternion rotation about it's rotation axis.
         #
-        # Returns A real number in the range (-pi:pi) describing the angle of rotation
+        # Returns A real number in the range `[-pi:pi]` describing the angle of rotation
         # in radians about a Quaternion object's axis of rotation
         set q [self]
 
@@ -817,7 +822,7 @@ proc tomato::mathquat::Equals {quaternion other tolerance} {
     # other      - Second input vector [Quaternion]
     # tolerance  - A tolerance (epsilon) to adjust for floating point error
     #
-    # Returns true if the quaternions are equal, otherwise false.
+    # Returns `True` if the quaternions are equal, otherwise false.
     #
     # See : methods == !=
 

@@ -17,9 +17,10 @@ oo::class create tomato::mathpt3d::Point3d {
         #
         # args - Options described below.
         #
-        # Class  - A Class [Point3d].
-        # List   - A TCL list including 3 components values.
-        # values - 3 components values.
+        # Class     - A Class [Point3d].
+        # List      - A Tcl list including 3 components values.
+        # values    - 3 components values.
+        # no values - default to `Point3d(0.0, 0.0, 0.0)`.
 
         if {[llength $args] == 1} {
             # args Class Point3d
@@ -38,8 +39,6 @@ oo::class create tomato::mathpt3d::Point3d {
                     set _y $y
                     set _z $z
                 } else {
-                    #ruff
-                    # An error exception is raised if length \[list] $args != 3.
                     error "Must be a list of 3 values... : $args"
                 }
             }
@@ -50,11 +49,15 @@ oo::class create tomato::mathpt3d::Point3d {
             set _x $x
             set _y $y
             set _z $z
-        } else {
+        } elseif {[llength $args] == 0} {
             # default values
             set _x 0.0
             set _y 0.0
             set _z 0.0
+        } else {
+            #ruff
+            # An error exception is raised if `args` is not the one desired.
+            error "The argument does not match the requested values, please refer to the documentation..."
         }
     }
 }
@@ -77,7 +80,7 @@ oo::define tomato::mathpt3d::Point3d {
     }
 
     method Get {} {
-        # Gets values from the Point3d Class under TCL list form.
+        # Gets values from the Point3d Class under Tcl list form.
         return [list $_x $_y $_z]
     }
 
@@ -147,7 +150,7 @@ oo::define tomato::mathpt3d::Point3d {
         # other     - The second point [Point3d] to compare.
         # tolerance - A tolerance (epsilon) to adjust for floating point error.
         #
-        # Returns true if the points are the same. Otherwise false.
+        # Returns `True` if the points are the same. Otherwise `False`.
         if {[llength [info level 0]] < 4} {
             set tolerance $::tomato::helper::TolEquals
         }
@@ -162,7 +165,7 @@ oo::define tomato::mathpt3d::Point3d {
         # other - The second point [Point3d] to compare.
         # tolerance - A tolerance (epsilon) to adjust for floating point error.
         #
-        # Returns true if the points are different. Otherwise false.
+        # Returns `True` if the points are different. Otherwise `False`.
         if {[llength [info level 0]] < 4} {
             set tolerance $::tomato::helper::TolEquals
         }
@@ -268,7 +271,7 @@ oo::define tomato::mathpt3d::Point3d {
 proc tomato::mathpt3d::Average {listaxisPt} {
     # Gets the average value of list
     #
-    # listaxisPt - list in the form of a TCL list
+    # listaxisPt - list in the form of a Tcl list
     #
     # Returns The average value
     return [expr {[tcl::mathop::+ {*}$listaxisPt 0.0] / max(1, [llength $listaxisPt])}]
@@ -331,7 +334,7 @@ proc tomato::mathpt3d::IsCollinearPoints {p1 p2 p3 {tolerance $::tomato::helper:
     # p3 - [Point3d]
     # tolerance - A tolerance (epsilon) for collinear points verification.
     #
-    # Returns true if the points are collinear, otherwise false.
+    # Returns `True` if the points are collinear, otherwise false.
     if {[llength [info level 0]] < 5} {
         set tolerance $::tomato::helper::TolGeom
     }
@@ -361,7 +364,7 @@ proc tomato::mathpt3d::Equals {pt other tolerance} {
     # other - Second input point [Point3d]
     # tolerance - A tolerance (epsilon) to adjust for floating point error
     #
-    # Returns true if the points are equal, otherwise false.
+    # Returns `True` if the points are equal, otherwise false.
     #
     # See : methods == !=
     if {$tolerance < 0} {

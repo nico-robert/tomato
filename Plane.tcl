@@ -24,6 +24,7 @@ oo::class create tomato::mathplane::Plane {
         #                        + The Plane's normal vector. [mathvec3d::Vector3d].
         # 4 values               - List of 4 values or 4 distinct values : The first 3 values represent The Plane's normal vector<br>
         #                          and the last the distance to the Plane along its normal from the origin
+        # no values              - default to `Vector3d(0.0, 0.0, 1.0)` and the distance to the Plane along its normal to `-1`
 
         if {[llength $args] == 2} {
 
@@ -45,16 +46,12 @@ oo::class create tomato::mathplane::Plane {
                 set _d      [expr {Inv([tomato::mathvec3d::Dot $_normal $obj])}]
 
             } else {
-                #ruff
-                # An error exception is raised if \[llength $args] == 2 and two values are not as described above.
                 error "Args must be A Vector3d with double value , A Vector3d with Point3d Or A Point3d with Vector3d..."
             }
 
         } elseif {[llength $args] == 1} {
 
             if {[llength {*}$args] != 4} {
-                #ruff
-                # An error exception is raised if \[length {*}$args] != 4.
                 error "Must be a list of 4 values... : $args"
             }
 
@@ -64,16 +61,19 @@ oo::class create tomato::mathplane::Plane {
 
 
         } elseif {[llength $args] == 4} {
-        
             lassign $args x y z d
 
             set _normal [[tomato::mathvec3d::Vector3d new $x $y $z] Normalized]
             set _d $d
-
-        } else {
+        } elseif {[llength $args] == 0} {
             # Default value
+
             set _normal [tomato::mathvec3d::Vector3d new 0.0 0.0 1.0]
             set _d -1
+        } else {
+            #ruff
+            # An error exception is raised if `args` is not the one desired.
+            error "The argument does not match the requested values, please refer to the documentation..."
         }
     }
 }
@@ -105,10 +105,10 @@ oo::define tomato::mathplane::Plane {
         return $_normal
     }
 
-    method IntersectionWith {entity {tolerance $::tomato::helper::TolGeom}} {
+    method IntersectionWith {obj {tolerance $::tomato::helper::TolGeom}} {
         # Finds the intersection...
         # 
-        # entity - Options described below.
+        # obj - Options described below.
         #
         # Plane  - [Plane]
         # Ray    - [mathray3d::Ray3d]
@@ -120,29 +120,29 @@ oo::define tomato::mathplane::Plane {
             set tolerance $::tomato::helper::TolGeom
         }
 
-        switch -glob [$entity GetType] {
+        switch -glob [$obj GetType] {
             *Plane {
-                return [tomato::mathplane::IntersectionWithPlane [self] $entity $tolerance]
+                return [tomato::mathplane::IntersectionWithPlane [self] $obj $tolerance]
             }
             *Ray3d {
-                return [tomato::mathplane::IntersectionWithRay [self] $entity $tolerance]
+                return [tomato::mathplane::IntersectionWithRay [self] $obj $tolerance]
             }
             *Line3d {
-                return [tomato::mathplane::IntersectionWithLine [self] $entity $tolerance]
+                return [tomato::mathplane::IntersectionWithLine [self] $obj $tolerance]
             }
             default {
                 #ruff
-                # An error exception is raised if entity is not as described above.
-                error "Entity must be Plane, Line3d or Ray3d..."
+                # An error exception is raised if $obj is not as described above.
+                error "Obj must be Plane, Line3d or Ray3d..."
             }
         }
 
     }
 
-    method Project {entity {direction "null"}} {
-        # Projection...
+    method Project {obj {direction "null"}} {
+        # Project $obj on plane.
         # 
-        # entity - Options described below.
+        # obj - Options described below.
         #
         # Point  - [mathpt3d::Point3d]
         # Vector - [mathvec3d::Vector3d]
@@ -151,64 +151,64 @@ oo::define tomato::mathplane::Plane {
         #
         # See also: ProjectPointOnplane ProjectVectorOnplane ProjectLine3dOnplane
 
-        switch -glob [$entity GetType] {
+        switch -glob [$obj GetType] {
             *Point3d {
-                return [tomato::mathplane::ProjectPointOnplane [self] $entity $direction]
+                return [tomato::mathplane::ProjectPointOnplane [self] $obj $direction]
             }
             *Vector3d {
-                return [tomato::mathplane::ProjectVectorOnplane [self] $entity $direction]
+                return [tomato::mathplane::ProjectVectorOnplane [self] $obj $direction]
             }
             *Line3d {
-                return [tomato::mathplane::ProjectLine3dOnplane [self] $entity $direction]
+                return [tomato::mathplane::ProjectLine3dOnplane [self] $obj $direction]
             }
             default {
                 #ruff
-                # An error exception is raised if entity is not as described above.
-                error "Entity must be Point3d, Vector3d or Line3d..."
+                # An error exception is raised if $obj is not as described above.
+                error "Obj must be Point3d, Vector3d or Line3d..."
             }
         }
 
     }
 
-    method SignedDistanceTo {entity} {
+    method SignedDistanceTo {obj} {
         # Gets the signed distance
         # 
-        # entity - Options described below.
+        # obj - Options described below.
         #
         # Point  - [mathpt3d::Point3d]
         # Plane  - [Plane]
         # Ray    - [mathray3d::Ray3d]
         #
         # Returns 
-        # The distance to the point along the "Normal" if entity is Point
-        # The distance to the plane along the "Normal" if entity is Plane
-        # The distance to the ThroughPoint of "ray" along the "Normal" if entity is Ray
+        # The distance to the point along the `Normal` if $obj is Point
+        # The distance to the plane along the `Normal` if $obj is Plane
+        # The distance to the ThroughPoint of `ray` along the `Normal` if $obj is Ray
 
-        switch -glob [$entity GetType] {
+        switch -glob [$obj GetType] {
             *Point3d {
-                set p [my Project $entity]
-                set v [$p VectorTo $entity]
+                set p [my Project $obj]
+                set v [$p VectorTo $obj]
 
                 return [$v DotProduct [my Normal]]
             }
             *Plane {
-                if {![[my Normal] IsParallelTo [$entity Normal] 1e-15]} {
+                if {![[my Normal] IsParallelTo [$obj Normal] 1e-15]} {
                     throw {Planesnotparallel} "Planes are not parallel..."
                 }
 
-                return [my SignedDistanceTo [$entity RootPoint]]
+                return [my SignedDistanceTo [$obj RootPoint]]
             }
             *Ray3d {
-                if {abs([[$entity Direction] DotProduct [my Normal]] - 0) < 1e-15} {
-                    return [my SignedDistanceTo [$entity ThroughPoint]]
+                if {abs([[$obj Direction] DotProduct [my Normal]] - 0) < 1e-15} {
+                    return [my SignedDistanceTo [$obj ThroughPoint]]
                 }
 
                 return 0
                 }
             default {
                 #ruff
-                # An error exception is raised if entity is not as described above.
-                error "Entity must be Point3d, Plane or Ray3d..."
+                # An error exception is raised if $obj is not as described above.
+                error "Obj must be Point3d, Plane or Ray3d..."
             }
         }
 
@@ -253,13 +253,17 @@ oo::define tomato::mathplane::Plane {
 
     }
 
+    method IsCoplanarTo {obj} {
+
+    }
+
     method == {other {tolerance $::tomato::helper::TolEquals}} {
         # Gets value that indicates whether each pair of elements in two specified planes is equal.
         #
         # other     - The first plane to compare [Plane].
         # tolerance - A tolerance (epsilon) to adjust for floating point error.
         #
-        # Returns true if the planes are the same. Otherwise false.
+        # Returns `True` if the planes are the same. Otherwise `False`.
         if {[llength [info level 0]] < 4} {
             set tolerance $::tomato::helper::TolEquals
         }
@@ -273,7 +277,7 @@ oo::define tomato::mathplane::Plane {
         # other - The second plane to compare [Plane].
         # tolerance - A tolerance (epsilon) to adjust for floating point error.
         #
-        # Returns true if the planes are different. Otherwise false.
+        # Returns `True` if the planes are different. Otherwise `False`.
         if {[llength [info level 0]] < 4} {
             set tolerance $::tomato::helper::TolEquals
         }
@@ -298,7 +302,7 @@ oo::define tomato::mathplane::Plane {
     }
 
     export A B C D Normal RootPoint ToString IntersectionWith Project SignedDistanceTo AbsoluteDistanceTo
-    export == != MirrorAbout Rotate GetType
+    export == != MirrorAbout Rotate GetType IsCoplanarTo
 
 }
 
@@ -307,7 +311,7 @@ proc tomato::mathplane::ProjectPointOnplane {plane point direction} {
     #
     # plane - The plane projection [Plane]
     # point - [mathpt3d::Point3d]
-    # direction - The direction of projection [mathvec3d::Vector3d] (can be equal to "null")
+    # direction - The direction of projection [mathvec3d::Vector3d] (can be equal to `null`)
     #
     # Returns A projected point [mathpt3d::Point3d]
 
@@ -324,7 +328,7 @@ proc tomato::mathplane::ProjectVectorOnplane {plane vector direction} {
     #
     # plane - The plane projection [Plane]
     # vector - [mathvec3d::Vector3d]
-    # direction - The direction of projection [mathvec3d::Vector3d] (can be equal to "null")
+    # direction - The direction of projection [mathvec3d::Vector3d] (can be equal to `null`)
     #
     # Returns A projected ray [mathray3d::Ray3d]
 
@@ -475,7 +479,7 @@ proc tomato::mathplane::IntersectionWithLine {plane1 line tolerance} {
             throw {Linelies} "Line lies in the plane"
         } else {
             # Line and plane are parallel
-            return ""
+            return {}
         }
     }
 
@@ -483,7 +487,7 @@ proc tomato::mathplane::IntersectionWithLine {plane1 line tolerance} {
 
     if {($t > 1.0) || ($t < 0.0)} {
         # They are not intersected
-        return ""
+        return {}
     }
 
     return [[$line StartPoint] + [$u * $t]]
@@ -497,7 +501,7 @@ proc tomato::mathplane::Equals {plane other tolerance} {
     # other - Second input plane [Plane]
     # tolerance - A tolerance (epsilon) to adjust for floating point error
     #
-    # Returns true if the planes are equal, otherwise false.
+    # Returns `True` if the planes are equal, otherwise false.
     #
     # See : methods == !=
     if {$tolerance < 0} {

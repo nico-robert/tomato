@@ -16,7 +16,7 @@ proc tomato::mathmatrix3d::RotationAroundXAxis {angle} {
     set rotationMatrix [tomato::mathmatrix::Matrix new 3 3]
     set angletoradian  [tomato::helper::DegreesToRadians $angle]
 
-    $rotationMatrix SetCell 0 0 1
+    $rotationMatrix SetCell 0 0 1.0
     $rotationMatrix SetCell 1 1 [expr {cos($angletoradian)}]
     $rotationMatrix SetCell 1 2 [expr {-sin($angletoradian)}]
     $rotationMatrix SetCell 2 1 [expr {sin($angletoradian)}]
@@ -38,7 +38,7 @@ proc tomato::mathmatrix3d::RotationAroundYAxis {angle} {
 
     $rotationMatrix SetCell 0 0 [expr {cos($angletoradian)}]
     $rotationMatrix SetCell 0 2 [expr {sin($angletoradian)}]
-    $rotationMatrix SetCell 1 1 1
+    $rotationMatrix SetCell 1 1 1.0
     $rotationMatrix SetCell 2 0 [expr {-sin($angletoradian)}]
     $rotationMatrix SetCell 2 2 [expr {cos($angletoradian)}]
 
@@ -60,14 +60,14 @@ proc tomato::mathmatrix3d::RotationAroundZAxis {angle} {
     $rotationMatrix SetCell 0 1 [expr {-sin($angletoradian)}]
     $rotationMatrix SetCell 1 0 [expr {sin($angletoradian)}]
     $rotationMatrix SetCell 1 1 [expr {cos($angletoradian)}]
-    $rotationMatrix SetCell 2 2 1
+    $rotationMatrix SetCell 2 2 1.0
 
     return $rotationMatrix
 
 }
 
 proc tomato::mathmatrix3d::RotationTo {fromVector toVector {axis "null"}} {
-    # Sets to the matrix of rotation that would align the 'from' vector with the 'to' vector.
+    # Sets to the matrix of rotation that would align the `from` vector with the `to` vector.
     # The optional Axis argument may be used when the two vectors are parallel
     # and in opposite directions to specify a specific solution, but is otherwise ignored.
     #

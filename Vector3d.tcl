@@ -17,9 +17,10 @@ oo::class create tomato::mathvec3d::Vector3d {
         #
         # args - Options described below.
         #
-        # Class  - A Class [Vector3d].
-        # List   - A TCL list including 3 components values.
-        # values - 3 components values.
+        # Class      - A Class [Vector3d].
+        # List       - A Tcl list including 3 components values.
+        # values     - 3 components values.
+        # no values  - default to `Vector3d(0.0, 0.0, 1.0)`.
         #
         if {[llength $args] == 1} {
             # args Class Vector3d
@@ -38,8 +39,6 @@ oo::class create tomato::mathvec3d::Vector3d {
                 set _z $z
 
             } else {
-                #ruff
-                # An error exception is list is not equal to 3 or 'Vector3d' class
                 error "Must be a list of 3 values or 'Vector3d' class"
             }
         
@@ -50,12 +49,15 @@ oo::class create tomato::mathvec3d::Vector3d {
             set _x $x
             set _y $y
             set _z $z
-            
-        } else {
+        } elseif {[llength $args] == 0} {
             # default values
-            set _x 0
-            set _y 0
-            set _z 1
+            set _x 0.0
+            set _y 0.0
+            set _z 1.0
+        } else {
+            #ruff
+            # An error exception is raised if `args` is not the one desired.
+            error "The argument does not match the requested values, please refer to the documentation..."
         }
     }
 }
@@ -78,7 +80,7 @@ oo::define tomato::mathvec3d::Vector3d {
     }
 
     method Get {} {
-        # Gets values from the Vector3D Class under TCL list form.
+        # Gets values from the Vector3D Class under Tcl list form.
         return [list $_x $_y $_z]
     }
 
@@ -101,7 +103,6 @@ oo::define tomato::mathvec3d::Vector3d {
                 "-Y"    {set _y $value}
                 "-Z"    {set _z $value}
                 default {error "Unknown key '$key' specified"}
-
             }
         }
     }
@@ -120,7 +121,6 @@ oo::define tomato::mathvec3d::Vector3d {
             "-Z" {return $_z}
             default {error "Unknown key '$key' : $axis"}
         }
-
     }
 
     method Length {} {
@@ -154,7 +154,7 @@ oo::define tomato::mathvec3d::Vector3d {
         #
         # tolerance - The allowed deviation
         #
-        # Returns true, if the Vector object is normalized. Otherwise false.
+        # Returns `True`, if the Vector object is normalized. Otherwise `False`.
         if {[llength [info level 0]] < 3} {
             set tolerance $::tomato::helper::TolGeom
         }
@@ -186,7 +186,7 @@ oo::define tomato::mathvec3d::Vector3d {
         set _y [expr {$_y * $scale}]
         set _z [expr {$_z * $scale}]
 
-        return ""
+        return {}
     }
 
     method IsPerpendicularTo {other {tolerance $::tomato::helper::TolGeom}} {
@@ -196,14 +196,12 @@ oo::define tomato::mathvec3d::Vector3d {
         # other - The other vector [Vector3d] Object.
         # tolerance - A tolerance value for the dot product method.
         #
-        # Returns true if the vector dot product is within the given tolerance of zero, false if not.
+        # Returns `True` if the vector dot product is within the given tolerance of zero, false if not.
         if {[llength [info level 0]] < 4} {
             set tolerance $::tomato::helper::TolGeom
         }
 
-        set va [self]
-
-        set vaN    [$va Normalized]
+        set vaN    [my Normalized]
         set otherN [$other Normalized]
 
         set dp [expr {abs([$vaN DotProduct $otherN])}]
@@ -218,14 +216,12 @@ oo::define tomato::mathvec3d::Vector3d {
         # other - The other vector [Vector3d] Object.
         # tolerance - A tolerance value for the Cross product method.
         #
-        # Returns true if the vector dot product is within the given tolerance of unity, false if it is not.
+        # Returns `True` if the vector dot product is within the given tolerance of unity, false if it is not.
         if {[llength [info level 0]] < 4} {
             set tolerance $::tomato::helper::TolGeom
         }
 
-        set va [self]
-
-        set vaN    [$va Normalized]
+        set vaN    [my Normalized]
         set otherN [$other Normalized]
 
         set cross [$vaN CrossProduct $otherN]
@@ -245,7 +241,7 @@ oo::define tomato::mathvec3d::Vector3d {
             return $v
         }
 
-        set v [tomato::mathvec3d::Vector3d new [expr {Inv($_y)- $_z}] $_x $_x]
+        set v [tomato::mathvec3d::Vector3d new [expr {Inv($_y) - $_z}] $_x $_x]
         $v Normalize
         return $v
 
@@ -343,7 +339,7 @@ oo::define tomato::mathvec3d::Vector3d {
         # other     - The second vector [Vector3d] to compare.
         # tolerance - A tolerance (epsilon) to adjust for floating point error.
         #
-        # Returns true if the vectors are the same. Otherwise false.
+        # Returns `True` if the vectors are the same. Otherwise `False`.
         if {[llength [info level 0]] < 4} {
             set tolerance $::tomato::helper::TolEquals
         }
@@ -358,7 +354,7 @@ oo::define tomato::mathvec3d::Vector3d {
         # other - The second vector [Vector3d] to compare.
         # tolerance - A tolerance (epsilon) to adjust for floating point error.
         #
-        # Returns true if the vectors are different. Otherwise false.
+        # Returns `True` if the vectors are different. Otherwise `False`.
         if {[llength [info level 0]] < 4} {
             set tolerance $::tomato::helper::TolEquals
         }
@@ -430,9 +426,9 @@ oo::define tomato::mathvec3d::Vector3d {
 
     method GetUnitTensorProduct {} {
         # A matrix with the unit tensor product<br>
-        # \[ux^2,  ux*uy, ux*uz]<br>
-        # \[ux*uy, uy^2,  uy*uz]<br>
-        # \[ux*uz, uy*uz, uz^2]
+        # `[ux^2,  ux*uy, ux*uz]`<br>
+        # `[ux*uy, uy^2,  uy*uz]`<br>
+        # `[ux*uz, uy*uz, uz^2]`
         #
         # Returns a matrix [mathmatrix::Matrix]
 
@@ -490,50 +486,50 @@ oo::define tomato::mathvec3d::Vector3d {
         return [tomato::mathpt3d::Point3d new $_x $_y $_z]
     }
 
-    method ProjectOn {entity} {
-        # Projects the vector onto a plane if '$entity' is a plane
-        # The Dot product of the current vector and a unit vector if '$entity' is a vector.
+    method ProjectOn {obj} {
+        # Projects the vector onto a plane if $obj is a plane
+        # The Dot product of the current vector and a unit vector if $obj is a vector.
         #
-        # entity - Options described below.
+        # obj - Options described below.
         #
         # Vector3d - [Vector3d]
         # Plane    - [mathplane::Plane]
         #
-        # Returns a new vector [Vector3d] if '$entity' is a vector or a new Ray if '$entity' is a Plane.
-        switch -glob [$entity GetType] {
+        # Returns a new vector [Vector3d] if $obj is a vector or a new Ray if $obj is a [mathplane::Plane].
+        switch -glob [$obj GetType] {
             *Vector3d {
-                set pd [my DotProduct [$entity Normalized]]
-                return [$entity * $pd]
+                set pd [my DotProduct [$obj Normalized]]
+                return [$obj * $pd]
             }
             *Plane {
-                return [$entity Project [self]]
+                return [$obj Project [self]]
             }
             default {
-                error "Entity must be Vector3d or Plane..."
+                error "Obj must be Vector3d or Plane..."
             }
         }
 
     }
 
-    method TransformBy {entity} {
+    method TransformBy {obj} {
         # Transforms the vector by a coordinate system 
         #
-        # entity - Options described below.
+        # obj - Options described below.
         #
         # Matrix           - [mathmatrix::Matrix]
         # coordinatesystem - [mathcsys::Csys]
         #
         # Returns a new transformed vector [Vector3d]
-        switch -glob [$entity GetType] {
+        switch -glob [$obj GetType] {
             *Csys {
-                return [$entity Transform [self]]
+                return [$obj Transform [self]]
             }
             *Matrix {
-                lassign [$entity Multiply [self]] x y z
+                lassign [$obj Multiply [self]] x y z
                 return [tomato::mathvec3d::Vector3d new $x $y $z]
             }
             default {
-                error "Entity must be Matrix or Csys..."
+                error "Obj must be Matrix or Csys..."
             }
         }
     }
@@ -653,9 +649,9 @@ proc tomato::mathvec3d::Lerp {v1 v2 blend} {
     #
     # v1 - [Vector3d]
     # v2 - [Vector3d]
-    # blend - The blend factor. v1 when blend=0, v2 when blend=1
+    # blend - The blend factor. v1 when `blend=0`, v2 when `blend=1`.
     #
-    # Returns v1 when blend=0, v2 when blend=1, and a linear combination otherwise..
+    # Returns v1 when `blend=0`, v2 when `blend=1`, and a linear combination otherwise.
     set vx [expr {$blend * ([$v2 X] - [$v1 X]) + [$v1 X]}]
     set vy [expr {$blend * ([$v2 Y] - [$v1 Y]) + [$v1 Y]}]
     set vz [expr {$blend * ([$v2 Z] - [$v1 Z]) + [$v1 Z]}]
@@ -694,7 +690,7 @@ proc tomato::mathvec3d::Equals {vector other tolerance} {
     # other - Second input vector [Vector3d]
     # tolerance - A tolerance (epsilon) to adjust for floating point error
     #
-    # Returns true if the vectors are equal, otherwise false.
+    # Returns `True` if the vectors are equal, otherwise false.
     #
     # See : methods == !=
     if {$tolerance < 0} {

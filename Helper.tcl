@@ -78,7 +78,7 @@ proc tomato::helper::TypeOf {obj Isa myclass} {
     # Isa  - name (arg Not Used...)
     # myclass - The name of class.
     #
-    # Returns True or False.
+    # Returns `True` or `False`.
 
     if {![tomato::helper::IsaObject $obj]} {
        return 0 
@@ -95,7 +95,7 @@ proc tomato::helper::TypeClass {obj} {
     # Returns name of class or nothing.
 
     if {![tomato::helper::IsaObject $obj]} {
-       return "" 
+       return {} 
     }
 
     return [info object class $obj]
@@ -106,7 +106,7 @@ proc tomato::helper::IsaObject {obj} {
     #
     # obj  - Instance.
     #
-    # Returns True or False.
+    # Returns `True` or `False`.
 
     return [info object isa object $obj]
 }
@@ -119,7 +119,7 @@ proc tomato::helper::DoublePrecision {} {
 }
 
 proc tomato::helper::MachineEpsilon {} {
-    # Actual double precision machine epsilon, the smallest number that can be subtracted from 1, yielding a results different than 1.
+    # Actual double precision machine epsilon, the smallest number that can be subtracted from 1, yielding a results different than 1.<br>
     # This is also known as unit roundoff error. According to the definition of Prof. Demmel.
     # On a standard machine this is equivalent to `DoublePrecision`.
     #
@@ -142,7 +142,7 @@ proc tomato::helper::L2Norm {x y z {exception False}} {
     # z - The z component
     # exception - Throw an exception if result is false
     #
-    # Returns True or false 
+    # Returns `True` or `False` 
     set norm [expr {sqrt(($x**2) + ($y**2) + ($z**2))}]
 
     if {$norm < $::tomato::helper::Epsilon} {

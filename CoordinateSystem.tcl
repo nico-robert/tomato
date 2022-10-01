@@ -19,16 +19,21 @@ oo::class create tomato::mathcsys::Csys {
         #
         # args - Options described below.
         #
-        # Matrix   - A Matrix. [mathmatrix::Matrix]<br>
-        #            Xaxis  == Column 0<br>
-        #            Yaxis  == Column 1<br>
-        #            Zaxis  == Column 2<br>
-        #            Origin == Column 3
-        # 4 values - 4 distinct values :<br>
-        #            The first value represents the origin [mathpt3d::Point3d]<br>
-        #            The second value represents the Xaxis [mathvec3d::Vector3d]<br>
-        #            The third value represents the Yaxis [mathvec3d::Vector3d]<br>
-        #            The fourth value represents the Zaxis [mathvec3d::Vector3d]<br>
+        # Matrix     - A Matrix. [mathmatrix::Matrix]<br>
+        #              Xaxis  == Column 0<br>
+        #              Yaxis  == Column 1<br>
+        #              Zaxis  == Column 2<br>
+        #              Origin == Column 3
+        # 4 values   - 4 distinct values :<br>
+        #              The first value represents the origin [mathpt3d::Point3d]<br>
+        #              The second value represents the Xaxis [mathvec3d::Vector3d]<br>
+        #              The third value represents the Yaxis [mathvec3d::Vector3d]<br>
+        #              The fourth value represents the Zaxis [mathvec3d::Vector3d]<br>
+        # no values  - default<br>
+        #              `Origin(0.0, 0.0, 0.0)`<br>
+        #              `Xaxis(1.0, 0.0, 0.0)`<br>
+        #              `Yaxis(0.0, 1.0, 0.0)`<br>
+        #              `Zaxis(0.0, 0.0, 1.0)`<br>
 
         if {[llength $args] == 1} {
 
@@ -45,9 +50,9 @@ oo::class create tomato::mathcsys::Csys {
 
         } elseif {[llength $args] == 4} {
 
-            foreach entity $args {
-                if {![tomato::helper::IsaObject $entity]} {
-                    error "\$entity must be a object..."
+            foreach obj $args {
+                if {![tomato::helper::IsaObject $obj]} {
+                    error "\$obj must be a object..."
                 }
             }
 
@@ -57,9 +62,9 @@ oo::class create tomato::mathcsys::Csys {
                 error "\[lindex $args 0\] must be a Point3d..."
             }
 
-            foreach entity [list $v1 $v2 $v3] {
-                if {![TypeOf $entity Isa "Vector3d"]} {
-                    error "\$entity must be a Vector3d..."
+            foreach obj [list $v1 $v2 $v3] {
+                if {![TypeOf $obj Isa "Vector3d"]} {
+                    error "\$obj must be a Vector3d..."
                 }
             }
 
@@ -76,7 +81,7 @@ oo::class create tomato::mathcsys::Csys {
             $mat SetColumn 2 [list {*}[$_zaxis Get] 0]
             $mat SetColumn 3 [list {*}[$_origin Get] 1]
 
-        } else {
+        } elseif {[llength $args] == 0} {
             # default values
             set mat [tomato::mathmatrix::Matrix new 4 4]
             set _baseclass $mat
@@ -90,7 +95,10 @@ oo::class create tomato::mathcsys::Csys {
             $mat SetColumn 1 [list {*}[$_yaxis Get] 0]
             $mat SetColumn 2 [list {*}[$_zaxis Get] 0]
             $mat SetColumn 3 [list {*}[$_origin Get] 1]
-
+        } else {
+            #ruff
+            # An error exception is raised if `args` is not the one desired.
+            error "The argument does not match the requested values, please refer to the documentation..."
         }
     }
 }
@@ -147,38 +155,38 @@ oo::define tomato::mathcsys::Csys {
 
     }
 
-    method Transform {entity} {
+    method Transform {obj} {
         # Transforms...
         # 
-        # entity - Options described below.
+        # obj - Options described below.
         #
         # Csys     - [Csys]
         # Vector3d - [mathvec3d::Vector3d]
         # Point3d  - [mathpt3d::Point3d]
         # Ray3d    - [mathray3d::Ray3d]
         #
-        # Returns a new entity transformed
+        # Returns a new obj transformed
 
-        switch -glob [$entity GetType] {
+        switch -glob [$obj GetType] {
             *Csys {
-                return [tomato::mathcsys::Csys new [[my BaseClass] Multiply [$entity BaseClass]]]
+                return [tomato::mathcsys::Csys new [[my BaseClass] Multiply [$obj BaseClass]]]
             }
             *Vector3d {
                 set matrix [tomato::mathcsys::GetRotationSubMatrix [self]]
-                lassign [$matrix Multiply $entity] x y z
+                lassign [$matrix Multiply $obj] x y z
 
                 return [tomato::mathvec3d::Vector3d new $x $y $z]
             }
             *Point3d {
                 set mat [tomato::mathmatrix::Matrix new 1 4]
-                $mat SetRow 0 [list {*}[$entity Get] 1]
+                $mat SetRow 0 [list {*}[$obj Get] 1]
 
                 lassign [[my BaseClass] Multiply $mat] x y z
 
                 return [tomato::mathpt3d::Point3d new $x $y $z]
             }
             *Ray3d {
-                return [tomato::mathray3d::Ray3d new [[self] Transform [$entity ThroughPoint]] [[self] Transform [$entity Direction]]]
+                return [tomato::mathray3d::Ray3d new [my Transform [$obj ThroughPoint]] [my Transform [$obj Direction]]]
             }
             default {
                 error "Entity must be Csys, Vector3d, Point3d or Ray3d..."
@@ -187,22 +195,22 @@ oo::define tomato::mathcsys::Csys {
 
     }
 
-    method TransformBy {entity} {
+    method TransformBy {obj} {
         # Transforms...
         # 
-        # entity - Options described below.
+        # obj - Options described below.
         #
         # Csys   - [Csys]
         # Matrix - [mathmatrix::Matrix]
         #
         # Returns this by the coordinate system and returns the transformed if csys or a transformed coordinate system if matrix.
 
-        switch -glob [$entity GetType] {
+        switch -glob [$obj GetType] {
             *Csys {
-                return [$entity Transform [self]]
+                return [$obj Transform [self]]
             }
             *Matrix {
-                return [tomato::mathcsys::Csys new [$entity Multiply [my BaseClass]]]
+                return [tomato::mathcsys::Csys new [$obj Multiply [my BaseClass]]]
             }
             default {
                 error "Entity must be Csys or Matrix..."
@@ -274,20 +282,20 @@ oo::define tomato::mathcsys::Csys {
 
     }
 
-    method TransformToCoordSys {entity} {
-        # Transforms entity according to this change matrix
+    method TransformToCoordSys {obj} {
+        # Transforms obj according to this change matrix
         # 
-        # entity - Options described below.
+        # obj - Options described below.
         #
         # Ray3d   - [mathray3d::Ray3d]
         # Point3d - [mathpt3d::Point3d]
         #
         # Returns a transformed point if Point3d or a transformed ray [mathray3d::Ray3d] if Ray3d.
 
-        switch -glob [$entity GetType] {
+        switch -glob [$obj GetType] {
             *Ray3d {
-                set p  [$entity ThroughPoint]
-                set uv [$entity Direction]
+                set p  [$obj ThroughPoint]
+                set uv [$obj Direction]
 
                 set baseChangeMatrix [my BaseChangeMatrix]
 
@@ -299,9 +307,7 @@ oo::define tomato::mathcsys::Csys {
             }
             *Point3d {
                 set baseChangeMatrix [my BaseChangeMatrix]
-                set point [[[$baseChangeMatrix ToCsys] Transform $entity] + [my OffsetToBase]]
-
-                return $point
+                return [[[$baseChangeMatrix ToCsys] Transform $obj] + [my OffsetToBase]]
             }
             default {
                 error "Entity must be Ray3d Or Point3d..."
@@ -310,20 +316,20 @@ oo::define tomato::mathcsys::Csys {
 
     }
 
-    method TransformFromCoordSys {entity} {
-        # Transforms entity according to the inverse of this change matrix
+    method TransformFromCoordSys {obj} {
+        # Transforms obj according to the inverse of this change matrix
         # 
-        # entity - Options described below.
+        # obj - Options described below.
         #
         # Ray3d   - [mathray3d::Ray3d]
         # Point3d - [mathpt3d::Point3d]
         #
         # Returns a transformed point [mathpt3d::Point3d] if Point3d or a transformed ray if Ray3d.
 
-        switch -glob [$entity GetType] {
+        switch -glob [$obj GetType] {
             *Ray3d {
-                set p  [$entity ThroughPoint]
-                set uv [$entity Direction]
+                set p  [$obj ThroughPoint]
+                set uv [$obj Direction]
 
                 set baseChangeMatrix [my BaseChangeMatrix]
                 set matinv    [$baseChangeMatrix Inverse]
@@ -336,9 +342,7 @@ oo::define tomato::mathcsys::Csys {
             }
             *Point3d {
                 set baseChangeMatrix [my BaseChangeMatrix]
-                set point [[[[$baseChangeMatrix Inverse] ToCsys] Transform $entity] + [my OffsetToBase]]
-
-                return $point
+                return [[[[$baseChangeMatrix Inverse] ToCsys] Transform $obj] + [my OffsetToBase]]
             }
             default {
                 error "Entity must be Ray3d Or Point3d..."
@@ -371,7 +375,7 @@ oo::define tomato::mathcsys::Csys {
         # other     - The second coordinate system [Csys] to compare.
         # tolerance - A tolerance (epsilon) to adjust for floating point error.
         #
-        # Returns true if the coordinate system are the same. Otherwise false.
+        # Returns `True` if the coordinate system are the same. Otherwise `False`.
         if {[llength [info level 0]] < 4} {
             set tolerance $::tomato::helper::TolEquals
         }
@@ -386,7 +390,7 @@ oo::define tomato::mathcsys::Csys {
         # other - The second coordinate system [Csys] to compare.
         # tolerance - A tolerance (epsilon) to adjust for floating point error.
         #
-        # Returns true if the coordinate system are different. Otherwise false.
+        # Returns `True` if the coordinate system are different. Otherwise `False`.
         if {[llength [info level 0]] < 4} {
             set tolerance $::tomato::helper::TolEquals
         }
@@ -462,7 +466,7 @@ proc tomato::mathcsys::Parse {args} {
 }
 
 proc tomato::mathcsys::RotateTo {fromVector3D toVector3D {axis "null"}} {
-    # Sets to the matrix of rotation that aligns the 'from' vector with the 'to' vector.<br>
+    # Sets to the matrix of rotation that aligns the `from` vector with the `to` vector.<br>
     # The optional Axis argument may be used when the two vectors are perpendicular and in opposite directions<br>
     # to specify a specific solution, but is otherwise ignored.<br>
     #
@@ -474,9 +478,8 @@ proc tomato::mathcsys::RotateTo {fromVector3D toVector3D {axis "null"}} {
 
     set r [tomato::mathmatrix3d::RotationTo $fromVector3D $toVector3D $axis]
     set coordinateSystem [tomato::mathcsys::Csys new]
-    set cs [tomato::mathcsys::SetRotationSubMatrix $r $coordinateSystem]
 
-    return $cs
+    return [tomato::mathcsys::SetRotationSubMatrix $r $coordinateSystem]
 
 }
 
@@ -516,7 +519,7 @@ proc tomato::mathcsys::RotationAngleVector {angle v} {
     set mat [tomato::mathmatrix::Matrix new 4 4]
     $mat SetSubMatrix 0 3 0 3 [tomato::mathmatrix3d::RotationAroundArbitraryVector [$v Normalized] [tomato::helper::DegreesToRadians $angle]]
 
-    $mat SetCell 3 3 1
+    $mat SetCell 3 3 1.0
 
     return [tomato::mathcsys::Csys new $mat]
 
@@ -584,7 +587,7 @@ proc tomato::mathcsys::GetRotationSubMatrix {coordinateSystem} {
 }
 
 proc tomato::mathcsys::CreateMappingCoordinateSystem {fromCs toCs} {
-    # Creates a coordinate system that maps from the 'from' coordinate system to the 'to' coordinate system.
+    # Creates a coordinate system that maps from the `from` coordinate system to the `to` coordinate system.
     #
     # fromCs - The from coordinate system [Csys]
     # toCs   - The to coordinate system [Csys]
@@ -607,14 +610,14 @@ proc tomato::mathcsys::CreateMappingCoordinateSystem {fromCs toCs} {
         set mat [[$toCs BaseClass] Multiply [[$fromCs BaseClass] Inverse]]
     }
 
-    $mat SetCell 3 3 1
+    $mat SetCell 3 3 1.0
 
     return [tomato::mathcsys::Csys new $mat]
 
 }
 
 proc tomato::mathcsys::SetToAlignCoordinateSystems {fromOrigin fromXAxis fromYAxis fromZAxis toOrigin toXAxis toYAxis toZAxis} {
-    # Sets this matrix to be the matrix that maps from the 'from' coordinate system to the 'to' coordinate system.
+    # Sets this matrix to be the matrix that maps from the `from` coordinate system to the `to` coordinate system.
     #
     # fromOrigin - Input [mathpt3d::Point3d] that defines the origin to map the coordinate system from
     # fromXAxis  - Input [mathvec3d::Vector3d] object that defines the X-axis to map the coordinate system from.
@@ -652,7 +655,7 @@ proc tomato::mathcsys::Equals {cs other tolerance} {
     # other - Second input coordinate system  [Csys]
     # tolerance - A tolerance (epsilon) to adjust for floating point error
     #
-    # Returns true if the coordinate system are equal, otherwise false.
+    # Returns `True` if the coordinate system are equal, otherwise false.
     #
     # See : methods == !=
     if {$tolerance < 0} {
