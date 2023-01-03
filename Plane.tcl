@@ -1,4 +1,4 @@
-# Copyright (c) 2021-2022 Nicolas ROBERT.
+# Copyright (c) 2021-2023 Nicolas ROBERT.
 # Distributed under MIT license. Please see LICENSE for details.
 
 namespace eval tomato::mathplane {
@@ -253,10 +253,6 @@ oo::define tomato::mathplane::Plane {
 
     }
 
-    method IsCoplanarTo {obj} {
-
-    }
-
     method == {other {tolerance $::tomato::helper::TolEquals}} {
         # Gets value that indicates whether each pair of elements in two specified planes is equal.
         #
@@ -302,7 +298,7 @@ oo::define tomato::mathplane::Plane {
     }
 
     export A B C D Normal RootPoint ToString IntersectionWith Project SignedDistanceTo AbsoluteDistanceTo
-    export == != MirrorAbout Rotate GetType IsCoplanarTo
+    export == != MirrorAbout Rotate GetType
 
 }
 
