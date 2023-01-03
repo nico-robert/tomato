@@ -15,12 +15,12 @@ foreach value $TestCase {
     lassign $value p1s p2s evs
 
     set l         [mathline3d::Line3d new [mathpt3d::Point3d new $p1s] [mathpt3d::Point3d new $p2s]]
-    set excpected [[mathvec3d::Vector3d new $evs] Normalized]
+    set expected [[mathvec3d::Vector3d new $evs] Normalized]
 
     test AreEqual [list \
-        Test Equals excpected l.Direction : $value 
+        Test Equals expected l.Direction : $value 
     ] -body {
-         mathvec3d::Equals [$l Direction] $excpected 1e-9
+         mathvec3d::Equals [$l Direction] $expected 1e-9
     } -result 1
 
 }
@@ -36,13 +36,13 @@ foreach value $TestCase {
     set line  [mathline3d::Line3d new [mathpt3d::Point3d new $p1s] [mathpt3d::Point3d new $p2s]]
     set plane [mathplane::Plane new [mathpt3d::Point3d new $rootPoint] [mathvec3d::Vector3d new $unitVector]]
 
-    set excpected [mathline3d::Line3d new [mathpt3d::Point3d new $ep1s] [mathpt3d::Point3d new $ep2s]]
+    set expected [mathline3d::Line3d new [mathpt3d::Point3d new $ep1s] [mathpt3d::Point3d new $ep2s]]
     set lineproject [$line ProjectOn $plane]
 
     test ProjectOn [list \
-        Test ProjectOn excpected lineproject : $value 
+        Test ProjectOn expected lineproject : $value 
     ] -body {
-         mathline3d::Equals $lineproject $excpected 1e-9
+         mathline3d::Equals $lineproject $expected 1e-9
     } -result 1
 
 }
