@@ -1,4 +1,4 @@
-# Copyright (c) 2021-2022 Nicolas ROBERT.
+# Copyright (c) 2021-2023 Nicolas ROBERT.
 # Distributed under MIT license. Please see LICENSE for details.
 
 lappend auto_path [file dirname [file dirname [file dirname [info script]]]]

@@ -1,4 +1,4 @@
-# Copyright (c) 2021-2022 Nicolas ROBERT.
+# Copyright (c) 2021-2023 Nicolas ROBERT.
 # Distributed under MIT license. Please see LICENSE for details.
 
 namespace eval tomato::mathmatrix {
@@ -451,7 +451,7 @@ proc tomato::mathmatrix::CreateIdentity {size} {
     #
     # size - dimension of matrix
     #
-    # Returns a new base matrix indentity [Matrix]
+    # Returns a new base matrix identity [Matrix]
     set mat [tomato::mathmatrix::Matrix new $size $size]
 
     while { $size > 0 } {
@@ -628,7 +628,7 @@ proc tomato::mathmatrix::MatrixDecompose {storage} {
     # storage - [Matrix]
     # 
     # Returns list with : +1 or -1 according to even or odd number of row permutations,<br>
-    #                     combined lower & upper in lummat [Matrix] & row permuations into permmat [Matrix].
+    #                     combined lower & upper in lummat [Matrix] & row permutations into permmat [Matrix].
 
     set toggle 1 ; # even (+1) or odd (-1) row permutations
     set n [$storage RowCount]

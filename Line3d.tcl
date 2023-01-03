@@ -1,4 +1,4 @@
-# Copyright (c) 2021-2022 Nicolas ROBERT.
+# Copyright (c) 2021-2023 Nicolas ROBERT.
 # Distributed under MIT license. Please see LICENSE for details.
 
 namespace eval tomato::mathline3d {
