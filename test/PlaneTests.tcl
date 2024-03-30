@@ -355,4 +355,44 @@ foreach value $TestCase {
     }
 }
 
+set p1 [mathpt3d::Point3d new 1 0 0]
+set p2 [mathpt3d::Point3d new 0 1 0]
+set p3 [mathpt3d::Point3d new 0 0 1]
+set plane1 [mathplane::FromPoints $p1 $p2 $p3] 
+set plane2 [mathplane::FromPoints $p1 $p3 $p2] 
+set plane3 [mathplane::FromPoints $p2 $p1 $p3] 
+set plane4 [mathplane::FromPoints $p2 $p3 $p1] 
+set plane5 [mathplane::FromPoints $p3 $p1 $p2] 
+set plane6 [mathplane::FromPoints $p3 $p2 $p1] 
+
+test RobustFromPointsIndependentOfPointOrder.AreEqual [list \
+    Test Equals : plane1 plane2 
+] -body {
+     mathplane::Equals $plane1 $plane2 1e-4
+} -result 1
+
+test RobustFromPointsIndependentOfPointOrder.AreEqual [list \
+    Test Equals : plane1 plane3 
+] -body {
+     mathplane::Equals $plane1 $plane3 1e-4
+} -result 1
+
+test RobustFromPointsIndependentOfPointOrder.AreEqual [list \
+    Test Equals : plane1 plane4 
+] -body {
+     mathplane::Equals $plane1 $plane4 1e-4
+} -result 1
+
+test RobustFromPointsIndependentOfPointOrder.AreEqual [list \
+    Test Equals : plane1 plane5 
+] -body {
+     mathplane::Equals $plane1 $plane5 1e-4
+} -result 1
+
+test RobustFromPointsIndependentOfPointOrder.AreEqual [list \
+    Test Equals : plane1 plane6
+] -body {
+     mathplane::Equals $plane1 $plane6 1e-4
+} -result 1
+
 cleanupTests
