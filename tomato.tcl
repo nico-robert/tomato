@@ -1,11 +1,11 @@
-# Copyright (c) 2021-2023 Nicolas ROBERT.
+# Copyright (c) 2021-2024 Nicolas ROBERT.
 # Distributed under MIT license. Please see LICENSE for details.
 # tomato - math::geometry 3D library
 
-# 26-02-2021 : v1.0   Initial release
-# 21-03-2021 : v1.1   Add Quaternion Class
-# 26-09-2021 : v1.2   Add Triangle Class
-# 16-10-2021 : v1.2.1
+# 26-Feb-2021 : v1.0   Initial release
+# 21-Mar-2021 : v1.1   Add Quaternion Class
+# 26-Sep-2021 : v1.2   Add Triangle Class
+# 16-Oct-2021 : v1.2.1
 #     - Bug fixes.
 #     - Tolerance geom and equal by default.
 #     - Generate a machine-readable error with *throw* command.
@@ -16,7 +16,7 @@
 #     - Matrix.tcl : Check if matrix is *singular*.
 #     - Ray3d.tcl  : Add *IntersectionRayWithPlane* command.
 #     - Triangle3d.tcl : Add *GetType* command.
-# 26-02-2022 : v1.2.2 
+# 26-Feb-2022 : v1.2.2 
 #     - Vector3d.tcl : Correction 'lerp' command + cosmetic changes.
 #     - CoordinateSystem.tcl : Cosmetic changes.
 #     - Line3d.tcl : Cosmetic changes.
@@ -26,29 +26,19 @@
 #     - Point3d.tcl : Cosmetic changes + tolerance documentation for 'IsCollinearPoints' command.
 #     - Quaternion.tcl : Cosmetic changes.
 #     - Triangle3d.tcl : Cosmetic changes.
-# 01-10-2022 : v1.2.3
+# 01-Oct-2022 : v1.2.3
 #     - Cosmetic changes.
 #     - Updated `Ruff!` package to version 2.3 (documentation).
+# 30-Mar-2024 : v1.2.4
+#     - CoordinateSystem.tcl : Fixes order of YPR (yaw-pitch-roll) transformation.
+#     - Plane.tcl : Fixes FromPoints procedure which is independent of point order.
+#     - Cosmetic changes.
 
-package require Tcl 8.6
-
-set dir [file dirname [file normalize [info script]]]
-
-source [file join $dir Matrix.tcl]
-source [file join $dir Matrix3d.tcl]
-source [file join $dir Vector3d.tcl]
-source [file join $dir Point3d.tcl]
-source [file join $dir Ray3d.tcl]
-source [file join $dir Line3d.tcl]
-source [file join $dir Plane.tcl]
-source [file join $dir CoordinateSystem.tcl]
-source [file join $dir Quaternion.tcl]
-source [file join $dir Triangle3d.tcl]
-source [file join $dir Helper.tcl]
+package require Tcl 8.6-
 
 namespace eval tomato {
-    variable version 1.2.3
-    variable dir $dir
+    variable version 1.2.4
+    variable dir [file dirname [file normalize [info script]]]
 
     variable _Intro {
         # tomato - math::geometry 3D library
@@ -175,7 +165,5 @@ namespace eval tomato {
         **tomato math::geometry** is covered under the terms of the [MIT](LICENSE.md) license.
     }
 }
-
-namespace import tomato::helper::TypeOf
 
 package provide tomato $::tomato::version

@@ -27,13 +27,13 @@ See **[Start page Documentation](http://htmlpreview.github.io/?https://github.co
 
 Release :
 -------------------------
-*  **26-02-2021** : 1.0
+*  **26-Feb-2021** : 1.0
     - Initial release.
-*  **21-03-2021** : 1.1
+*  **21-Mar-2021** : 1.1
     - Add Quaternion Class.
-*  **26-09-2021** : 1.2
+*  **26-Sep-2021** : 1.2
     -  Add Triangle Class.
-*  **16-10-2021** : 1.2.1
+*  **16-Oct-2021** : 1.2.1
     - Bug fixes.
     - Tolerance geom and equal by default.
     - Generate a machine-readable error with *throw* command.
@@ -44,7 +44,7 @@ Release :
     - Matrix.tcl : Check if matrix is *singular*.
     - Ray3d.tcl  : Add *IntersectionRayWithPlane* command.
     - Triangle3d.tcl : Add *GetType* command.
-*  **26-02-2022** : 1.2.2 
+*  **26-Feb-2022** : 1.2.2 
     - Vector3d.tcl : Correction 'lerp' command + cosmetic changes.
     - CoordinateSystem.tcl : Cosmetic changes.
     - Line3d.tcl : Cosmetic changes.
@@ -54,6 +54,10 @@ Release :
     - Point3d.tcl : Cosmetic changes + tolerance documentation for 'IsCollinearPoints' command.
     - Quaternion.tcl : Cosmetic changes.
     - Triangle3d.tcl : Cosmetic changes.
-*  **01-10-2022** : 1.2.3
+*  **01-Oct-2022** : 1.2.3
     - Cosmetic changes.
     - Updated `Ruff!` package to version 2.3 (documentation).
+*  **30-Mar-2024** : 1.2.4
+    - CoordinateSystem.tcl : Fixes order of YPR (yaw-pitch-roll) transformation.
+    - Plane.tcl : Fixes FromPoints procedure which is independent of point order.
+    - Cosmetic changes.
