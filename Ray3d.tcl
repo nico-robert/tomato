@@ -1,4 +1,4 @@
-# Copyright (c) 2021-2023 Nicolas ROBERT.
+# Copyright (c) 2021-2024 Nicolas ROBERT.
 # Distributed under MIT license. Please see LICENSE for details.
 
 namespace eval tomato::mathray3d {
@@ -18,13 +18,13 @@ oo::class create tomato::mathray3d::Ray3d {
         # direction - [mathvec3d::Vector3d].
         #
 
-        if {[TypeOf $point Isa "Point3d"]} {
+        if {[tomato::helper::TypeOf $point Isa "Point3d"]} {
             set _throughpoint $point
         } else {
             error "Must be 'Point3d' ClassType"
         }
 
-        if {[TypeOf $direction Isa "Vector3d"]} {
+        if {[tomato::helper::TypeOf $direction Isa "Vector3d"]} {
             set _direction [$direction Normalized]
         } else {
             error "Must be 'Vector3d' ClassType"

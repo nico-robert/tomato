@@ -1,4 +1,4 @@
-# Copyright (c) 2021-2023 Nicolas ROBERT.
+# Copyright (c) 2021-2024 Nicolas ROBERT.
 # Distributed under MIT license. Please see LICENSE for details.
 
 namespace eval tomato::mathline3d {
@@ -16,8 +16,8 @@ oo::class create tomato::mathline3d::Line3d {
         # pt     - [mathpt3d::Point3d]
         # other  - [mathpt3d::Point3d]
 
-        if {![TypeOf $pt Isa "Point3d"]}    {error "Must be 'Point3d' ClassType"}
-        if {![TypeOf $other Isa "Point3d"]} {error "Must be 'Point3d' ClassType"}
+        if {![tomato::helper::TypeOf $pt Isa "Point3d"]}    {error "Must be 'Point3d' ClassType"}
+        if {![tomato::helper::TypeOf $other Isa "Point3d"]} {error "Must be 'Point3d' ClassType"}
 
         set _startpoint $pt
         set _endpoint $other

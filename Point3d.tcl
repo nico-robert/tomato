@@ -1,4 +1,4 @@
-# Copyright (c) 2021-2023 Nicolas ROBERT.
+# Copyright (c) 2021-2024 Nicolas ROBERT.
 # Distributed under MIT license. Please see LICENSE for details.
 
 namespace eval tomato::mathpt3d {
@@ -24,7 +24,7 @@ oo::class create tomato::mathpt3d::Point3d {
 
         if {[llength $args] == 1} {
             # args Class Point3d
-            if {[TypeOf $args Isa "Point3d"]} {
+            if {[tomato::helper::TypeOf $args Isa "Point3d"]} {
 
                 set _x [$args X]
                 set _y [$args Y]
@@ -137,7 +137,7 @@ oo::define tomato::mathpt3d::Point3d {
         set valuey [expr {$_y - [$other Y]}]
         set valuez [expr {$_z - [$other Z]}]
 
-        if {[TypeOf $other Isa "Point3d"]} {
+        if {[tomato::helper::TypeOf $other Isa "Point3d"]} {
             return [tomato::mathvec3d::Vector3d new $valuex $valuey $valuez]
         } else {
             return [tomato::mathpt3d::Point3d new $valuex $valuey $valuez]

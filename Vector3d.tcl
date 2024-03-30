@@ -1,4 +1,4 @@
-# Copyright (c) 2021-2023 Nicolas ROBERT.
+# Copyright (c) 2021-2024 Nicolas ROBERT.
 # Distributed under MIT license. Please see LICENSE for details.
 
 namespace eval tomato::mathvec3d {
@@ -24,7 +24,7 @@ oo::class create tomato::mathvec3d::Vector3d {
         #
         if {[llength $args] == 1} {
             # args Class Vector3d
-            if {[TypeOf $args Isa "Vector3d"]} {
+            if {[tomato::helper::TypeOf $args Isa "Vector3d"]} {
 
                 set _x [$args X]
                 set _y [$args Y]

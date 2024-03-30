@@ -1,4 +1,4 @@
-# Copyright (c) 2021-2023 Nicolas ROBERT.
+# Copyright (c) 2021-2024 Nicolas ROBERT.
 # Distributed under MIT license. Please see LICENSE for details.
 
 namespace eval tomato::mathtriangle {
@@ -27,7 +27,7 @@ oo::class create tomato::mathtriangle::Triangle {
 
         foreach val $args {
 
-            if {[TypeOf $val Isa "Point3d"]} {
+            if {[tomato::helper::TypeOf $val Isa "Point3d"]} {
                 lappend _triangle $val
 
             } elseif {[string is list $val] && ([llength $val] == 3)} {

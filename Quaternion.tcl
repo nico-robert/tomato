@@ -1,4 +1,4 @@
-# Copyright (c) 2021-2023 Nicolas ROBERT.
+# Copyright (c) 2021-2024 Nicolas ROBERT.
 # Distributed under MIT license. Please see LICENSE for details.
 
 namespace eval tomato::mathquat {
@@ -42,7 +42,7 @@ oo::class create tomato::mathquat::Quaternion {
                 set _y $y
                 set _z $z
 
-            } elseif {[TypeOf $args Isa "Vector3d"]} {
+            } elseif {[tomato::helper::TypeOf $args Isa "Vector3d"]} {
                 #ruff
                 # * Create a quaternion by specifying a Vector3d Class.<br>
                 # ```
@@ -138,7 +138,7 @@ oo::class create tomato::mathquat::Quaternion {
                         "-scalar" {dict set options Scalar $value}
                         "-axis" -
                         "-vector" {
-                                    if {[TypeOf $value Isa "Vector3d"]} {
+                                    if {[tomato::helper::TypeOf $value Isa "Vector3d"]} {
                                         dict set options Vector $value
                                     } elseif {[string is list $value] && [llength $value] == 3} {
                                         dict set options Vector [tomato::mathvec3d::Vector3d new $value]
@@ -318,7 +318,7 @@ oo::define tomato::mathquat::Quaternion {
             return [tomato::mathquat::Quaternion new [expr {$_w + $obj}] $_x $_y $_z]
         }
 
-        if {[TypeOf $obj Isa "Quaternion"]} {
+        if {[tomato::helper::TypeOf $obj Isa "Quaternion"]} {
             return [tomato::mathquat::Quaternion new [expr {$_w + [$obj Real]}] \
                                                      [expr {$_x + [$obj ImagX]}] \
                                                      [expr {$_y + [$obj ImagY]}] \
@@ -342,7 +342,7 @@ oo::define tomato::mathquat::Quaternion {
             return [tomato::mathquat::Quaternion new [expr {$_w - $obj}] $_x $_y $_z]
         }
 
-        if {[TypeOf $obj Isa "Quaternion"]} {
+        if {[tomato::helper::TypeOf $obj Isa "Quaternion"]} {
             return [tomato::mathquat::Quaternion new [expr {$_w - [$obj Real]}] \
                                                      [expr {$_x - [$obj ImagX]}] \
                                                      [expr {$_y - [$obj ImagY]}] \
@@ -368,7 +368,7 @@ oo::define tomato::mathquat::Quaternion {
                                                      [expr {$_z * $obj}]]
         }
 
-        if {[TypeOf $obj Isa "Quaternion"]} {
+        if {[tomato::helper::TypeOf $obj Isa "Quaternion"]} {
 
             set ci [expr {($_x      * [$obj Real])  + ($_y * [$obj ImagZ]) - ($_z * [$obj ImagY]) + ($_w * [$obj ImagX])}]
             set cj [expr {(Inv($_x) * [$obj ImagZ]) + ($_y * [$obj Real])  + ($_z * [$obj ImagX]) + ($_w * [$obj ImagY])}]
@@ -397,7 +397,7 @@ oo::define tomato::mathquat::Quaternion {
                                                      [expr {$_z / double($obj)}]]
         }
 
-        if {[TypeOf $obj Isa "Quaternion"]} {
+        if {[tomato::helper::TypeOf $obj Isa "Quaternion"]} {
 
             if {[$obj == $::tomato::mathquat::Zero]} {
                 if {[[self] == $::tomato::mathquat::Zero]} {
@@ -453,7 +453,7 @@ oo::define tomato::mathquat::Quaternion {
                         }]
         }
 
-        if {[TypeOf $obj Isa "Quaternion"]} {
+        if {[tomato::helper::TypeOf $obj Isa "Quaternion"]} {
             return [tomato::mathquat::Equals [self] $obj $tolerance]
         }
 
@@ -529,13 +529,13 @@ oo::define tomato::mathquat::Quaternion {
         # Returns The rotated vector or point returned as the same type it was specified at input
         set myentity $obj
 
-        if {[TypeOf $obj Isa "Vector3d"]} {
+        if {[tomato::helper::TypeOf $obj Isa "Vector3d"]} {
 
             if {![$obj IsNormalized]} {
                 set myentity [$obj Normalized]
             }
             
-        } elseif {[TypeOf $obj Isa "Point3d"]} {
+        } elseif {[tomato::helper::TypeOf $obj Isa "Point3d"]} {
 
             set myentity [$obj ToVector3D] ; # convert to vector
             
@@ -552,7 +552,7 @@ oo::define tomato::mathquat::Quaternion {
 
         set result [$q RotateUnitQuaternion $quat]
 
-        if {[TypeOf $obj Isa "Vector3d"]} {
+        if {[tomato::helper::TypeOf $obj Isa "Vector3d"]} {
             return [$result ToVector3D]
         } else {
             return [[$result ToVector3D] ToPoint3D]
@@ -715,7 +715,7 @@ proc tomato::mathquat::Pow {q power} {
 
     }
 
-    if {[TypeOf $power Isa "Quaternion"]} {
+    if {[tomato::helper::TypeOf $power Isa "Quaternion"]} {
 
         if {[$q == $::tomato::mathquat::Zero]} {return $::tomato::mathquat::Zero}
         if {[$q == $::tomato::mathquat::One]} {return $::tomato::mathquat::One}     
