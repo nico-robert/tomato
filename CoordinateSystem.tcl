@@ -1,4 +1,4 @@
-# Copyright (c) 2021-2023 Nicolas ROBERT.
+# Copyright (c) 2021-2024 Nicolas ROBERT.
 # Distributed under MIT license. Please see LICENSE for details.
 
 namespace eval tomato::mathcsys {
@@ -37,7 +37,7 @@ oo::class create tomato::mathcsys::Csys {
 
         if {[llength $args] == 1} {
 
-            if {[TypeOf $args Isa "Matrix"]} {
+            if {[tomato::helper::TypeOf $args Isa "Matrix"]} {
                 
                 set _baseclass $args
                 set _xaxis   [tomato::mathvec3d::Vector3d new [lrange [$_baseclass GetColumn 0] 0 2]]
@@ -58,12 +58,12 @@ oo::class create tomato::mathcsys::Csys {
 
             lassign $args _or v1 v2 v3
 
-            if {![TypeOf $_or Isa "Point3d"]} {
+            if {![tomato::helper::TypeOf $_or Isa "Point3d"]} {
                 error "\[lindex $args 0\] must be a Point3d..."
             }
 
             foreach obj [list $v1 $v2 $v3] {
-                if {![TypeOf $obj Isa "Vector3d"]} {
+                if {![tomato::helper::TypeOf $obj Isa "Vector3d"]} {
                     error "\$obj must be a Vector3d..."
                 }
             }
@@ -517,7 +517,10 @@ proc tomato::mathcsys::RotationAngleVector {angle v} {
     # Returns A rotating coordinate system [Csys]
 
     set mat [tomato::mathmatrix::Matrix new 4 4]
-    $mat SetSubMatrix 0 3 0 3 [tomato::mathmatrix3d::RotationAroundArbitraryVector [$v Normalized] [tomato::helper::DegreesToRadians $angle]]
+    $mat SetSubMatrix 0 3 0 3 [tomato::mathmatrix3d::RotationAroundArbitraryVector \
+                              [$v Normalized] \
+                              [tomato::helper::DegreesToRadians $angle] \
+    ]
 
     $mat SetCell 3 3 1.0
 
@@ -526,8 +529,9 @@ proc tomato::mathcsys::RotationAngleVector {angle v} {
 }
 
 proc tomato::mathcsys::RotationByAngles {yaw pitch roll} {
-    # Rotation around Z (yaw) then around Y (pitch) and then around X (roll)
-    # http://en.wikipedia.org/wiki/Aircraft_principal_axes
+    # Successive intrinsic rotations around Z (yaw) then around Y (pitch) and then around X (roll)
+    # Gives an order of magnitude speed improvement.
+    # https://en.wikipedia.org/wiki/Rotation_matrix#General_rotations
     #
     # yaw   - Rotates around Z (angle in degrees)
     # pitch - Rotates around Y (angle in degrees)
@@ -535,13 +539,38 @@ proc tomato::mathcsys::RotationByAngles {yaw pitch roll} {
     #
     # Returns A rotated coordinate system [Csys]
 
-    set cs [tomato::mathcsys::Csys new]
+    set yR [tomato::helper::DegreesToRadians $yaw]
+    set pR [tomato::helper::DegreesToRadians $pitch]
+    set rR [tomato::helper::DegreesToRadians $roll]
 
-    set yt [tomato::mathcsys::Yaw $yaw]
-    set pt [tomato::mathcsys::Pitch $pitch]
-    set rt [tomato::mathcsys::Roll $roll]
+    set cosY [expr {cos($yR)}]
+    set sinY [expr {sin($yR)}]
+    set cosP [expr {cos($pR)}]
+    set sinP [expr {sin($pR)}]
+    set cosR [expr {cos($rR)}]
+    set sinR [expr {sin($rR)}]
 
-    return [$rt Transform [$pt Transform [$yt Transform $cs]]]
+    set origin [tomato::mathpt3d::Point3d new]
+
+    set xAxis  [tomato::mathvec3d::Vector3d new \
+                        [expr {$cosY * $cosP}] \
+                        [expr {$sinY * $cosP}] \
+                        [expr {Inv($sinP)}] \
+               ]
+
+    set yAxis  [tomato::mathvec3d::Vector3d new \
+                        [expr {($cosY * $sinP * $sinR) - ($sinY * $cosR)}] \
+                        [expr {($sinY * $sinP * $sinR) + ($cosY * $cosR)}] \
+                        [expr {$cosP * $sinR}] \
+               ]
+
+    set zAxis  [tomato::mathvec3d::Vector3d new \
+                        [expr {($cosY * $sinP * $cosR) + ($sinY * $sinR)}] \
+                        [expr {($sinY * $sinP * $cosR) - ($cosY * $sinR)}] \
+                        [expr {$cosP * $cosR}] \
+               ]
+
+    return [tomato::mathcsys::Csys new $origin $xAxis $yAxis $zAxis]
 
 }
 
@@ -619,14 +648,14 @@ proc tomato::mathcsys::CreateMappingCoordinateSystem {fromCs toCs} {
 proc tomato::mathcsys::SetToAlignCoordinateSystems {fromOrigin fromXAxis fromYAxis fromZAxis toOrigin toXAxis toYAxis toZAxis} {
     # Sets this matrix to be the matrix that maps from the `from` coordinate system to the `to` coordinate system.
     #
-    # fromOrigin - Input [mathpt3d::Point3d] that defines the origin to map the coordinate system from
-    # fromXAxis  - Input [mathvec3d::Vector3d] object that defines the X-axis to map the coordinate system from.
-    # fromYAxis  - Input [mathvec3d::Vector3d] object that defines the Y-axis to map the coordinate system from.
-    # fromZAxis  - Input [mathvec3d::Vector3d] object that defines the Z-axis to map the coordinate system from.
-    # toOrigin   - Input [mathpt3d::Point3d] object that defines the origin to map the coordinate system to.
-    # toXAxis    - Input [mathvec3d::Vector3d] object that defines the X-axis to map the coordinate system to.
-    # toYAxis    - Input [mathvec3d::Vector3d] object that defines the Y-axis to map the coordinate system to.
-    # toZAxis    - Input [mathvec3d::Vector3d] object that defines the Z-axis to map the coordinate system to.
+    # fromOrigin - Input [mathpt3d::Point3d]   that defines the origin to map the coordinate system from
+    # fromXAxis  - Input [mathvec3d::Vector3d] that defines the X-axis to map the coordinate system from.
+    # fromYAxis  - Input [mathvec3d::Vector3d] that defines the Y-axis to map the coordinate system from.
+    # fromZAxis  - Input [mathvec3d::Vector3d] that defines the Z-axis to map the coordinate system from.
+    # toOrigin   - Input [mathpt3d::Point3d]   that defines the origin to map the coordinate system to.
+    # toXAxis    - Input [mathvec3d::Vector3d] that defines the X-axis to map the coordinate system to.
+    # toYAxis    - Input [mathvec3d::Vector3d] that defines the Y-axis to map the coordinate system to.
+    # toZAxis    - Input [mathvec3d::Vector3d] that defines the Z-axis to map the coordinate system to.
     #
     # Returns A mapping coordinate system [Csys]
 
