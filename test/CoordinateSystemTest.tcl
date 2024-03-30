@@ -99,6 +99,13 @@ lappend TestCase  {{0} {90} {0} {1 2 3} {3 2 -1}}
 lappend TestCase  {{0} {-90} {0} {1 2 3} {-3 2 1}}
 lappend TestCase  {{0} {0} {90} {1 2 3} {1 -3 2}}
 lappend TestCase  {{0} {0} {-90} {1 2 3} {1 3 -2}}
+lappend TestCase  {{90} {90} {90} {1 2 3} {3 2 -1}}
+lappend TestCase  {{90} {0} {90} {1 2 3} {3 1 2}}
+lappend TestCase  {{180} {0} {90} {1 2 3} {-1 3 2}}
+lappend TestCase  {{180} {-90} {0} {1 2 3} {3 -2 1}}
+lappend TestCase  {{90} {10} {0} {1 2 3} {-2 1.506 2.781}}
+lappend TestCase  {{90} {10} {30} {1 2 3} {-0.232 1.609 3.370}}
+lappend TestCase  {{15} {-23} {48} {1 2 3} {-0.199 -0.976 3.607}}
 
 foreach value $TestCase {
 
@@ -117,7 +124,7 @@ foreach value $TestCase {
     test RotationYawPitchRoll [list \
         Test Equals : rotatedPoint  > $value
     ] -body {
-        mathpt3d::Equals $expected $rotatedPoint 1e-4
+        mathpt3d::Equals $expected $rotatedPoint 1e-3
     } -result 1
 
 }
