@@ -1,4 +1,4 @@
-# Copyright (c) 2021-2023 Nicolas ROBERT.
+# Copyright (c) 2021-2024 Nicolas ROBERT.
 # Distributed under MIT license. Please see LICENSE for details.
 
 namespace eval tomato::mathplane {
@@ -30,17 +30,26 @@ oo::class create tomato::mathplane::Plane {
 
             lassign $args obj value
 
-            if {[TypeOf $obj Isa "Vector3d"] && [string is double $value]} {
+            if {
+                [tomato::helper::TypeOf $obj Isa "Vector3d"] &&
+                [string is double $value]
+            } {
 
                 set _normal [$obj Normalized]
                 set _d      [expr {Inv($value)}]
 
-            } elseif {[TypeOf $obj Isa "Vector3d"] && [TypeOf $value Isa "Point3d"]} {
+            } elseif {
+                [tomato::helper::TypeOf $obj Isa "Vector3d"] && 
+                [tomato::helper::TypeOf $value Isa "Point3d"]
+            } {
 
                 set _normal [$obj Normalized]
                 set _d      [expr {Inv([tomato::mathvec3d::Dot $_normal $value])}]
 
-            } elseif {[TypeOf $obj Isa "Point3d"] && [TypeOf $value Isa "Vector3d"]} {
+            } elseif {
+                [tomato::helper::TypeOf $obj Isa "Point3d"] &&
+                [tomato::helper::TypeOf $value Isa "Vector3d"]
+            } {
 
                 set _normal [$value Normalized]
                 set _d      [expr {Inv([tomato::mathvec3d::Dot $_normal $obj])}]
@@ -385,7 +394,16 @@ proc tomato::mathplane::FromPoints {p1 p2 p3 {tolerance $::tomato::helper::TolGe
         error "The 3 points should not be on the same line"
     }
 
-    return [tomato::mathplane::Plane new [$cross Normalized] $p1]
+    set normal [$cross Normalized]
+    set distanceFromOrigin [$normal DotProduct $p1]
+
+    if {$distanceFromOrigin < 0} {
+        # make sure the plane is defined in its Hesse normal form
+        # https://en.wikipedia.org/wiki/Hesse_normal_form
+        set normal [$normal Negate]
+    }
+
+    return [tomato::mathplane::Plane new $normal $p1]
 
 }
 
