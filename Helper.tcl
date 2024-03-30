@@ -1,12 +1,9 @@
-# Copyright (c) 2021-2023 Nicolas ROBERT.
+# Copyright (c) 2021-2024 Nicolas ROBERT.
 # Distributed under MIT license. Please see LICENSE for details.
 
 namespace eval tomato::helper {
     # Ruff documentation
     variable _ruff_preamble "Helper tomato::math..."
-
-    # export
-    namespace export TypeOf
 
     # The number of binary digits used to represent the binary number for a double precision floating
     # point value. i.e. there are this many digits used to represent the
