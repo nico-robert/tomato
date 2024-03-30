@@ -1,12 +1,12 @@
 <!DOCTYPE html><html><head><meta charset="utf-8"/>
-<title>tomato 1.2.3 Reference Manual</title>
+<title>tomato 1.2.4 Reference Manual</title>
 <link rel='stylesheet' type='text/css' href='assets/ruff-min.css' />
 <script type='text/javascript' src='assets/ruff-min.js'></script>
 </head>
 <body>
 <div class='ruff-layout'>
 <header class='ruff-layout-header ruff-hd'>
-<a style='text-decoration:none;' href='tomato.html'>tomato 1.2.3 Reference Manual</a>
+<a style='text-decoration:none;' href='tomato.html'>tomato 1.2.4 Reference Manual</a>
 
 
             <div id="ruffButtonBar">
@@ -55,8 +55,8 @@
     # pt     - [mathpt3d::Point3d]
     # other  - [mathpt3d::Point3d]
 
-    if {![TypeOf $pt Isa &quot;Point3d&quot;]}    {error &quot;Must be 'Point3d' ClassType&quot;}
-    if {![TypeOf $other Isa &quot;Point3d&quot;]} {error &quot;Must be 'Point3d' ClassType&quot;}
+    if {![tomato::helper::TypeOf $pt Isa &quot;Point3d&quot;]}    {error &quot;Must be 'Point3d' ClassType&quot;}
+    if {![tomato::helper::TypeOf $other Isa &quot;Point3d&quot;]} {error &quot;Must be 'Point3d' ClassType&quot;}
 
     set _startpoint $pt
     set _endpoint $other

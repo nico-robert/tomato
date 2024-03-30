@@ -1,12 +1,12 @@
 <!DOCTYPE html><html><head><meta charset="utf-8"/>
-<title>tomato 1.2.3 Reference Manual</title>
+<title>tomato 1.2.4 Reference Manual</title>
 <link rel='stylesheet' type='text/css' href='assets/ruff-min.css' />
 <script type='text/javascript' src='assets/ruff-min.js'></script>
 </head>
 <body>
 <div class='ruff-layout'>
 <header class='ruff-layout-header ruff-hd'>
-<a style='text-decoration:none;' href='tomato.html'>tomato 1.2.3 Reference Manual</a>
+<a style='text-decoration:none;' href='tomato.html'>tomato 1.2.4 Reference Manual</a>
 
 
             <div id="ruffButtonBar">
@@ -49,13 +49,13 @@
     # direction - [mathvec3d::Vector3d].
     #
 
-    if {[TypeOf $point Isa &quot;Point3d&quot;]} {
+    if {[tomato::helper::TypeOf $point Isa &quot;Point3d&quot;]} {
         set _throughpoint $point
     } else {
         error &quot;Must be 'Point3d' ClassType&quot;
     }
 
-    if {[TypeOf $direction Isa &quot;Vector3d&quot;]} {
+    if {[tomato::helper::TypeOf $direction Isa &quot;Vector3d&quot;]} {
         set _direction [$direction Normalized]
     } else {
         error &quot;Must be 'Vector3d' ClassType&quot;

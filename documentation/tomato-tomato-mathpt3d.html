@@ -1,12 +1,12 @@
 <!DOCTYPE html><html><head><meta charset="utf-8"/>
-<title>tomato 1.2.3 Reference Manual</title>
+<title>tomato 1.2.4 Reference Manual</title>
 <link rel='stylesheet' type='text/css' href='assets/ruff-min.css' />
 <script type='text/javascript' src='assets/ruff-min.js'></script>
 </head>
 <body>
 <div class='ruff-layout'>
 <header class='ruff-layout-header ruff-hd'>
-<a style='text-decoration:none;' href='tomato.html'>tomato 1.2.3 Reference Manual</a>
+<a style='text-decoration:none;' href='tomato.html'>tomato 1.2.4 Reference Manual</a>
 
 
             <div id="ruffButtonBar">
@@ -69,7 +69,7 @@
 
     if {[llength $args] == 1} {
         # args Class Point3d
-        if {[TypeOf $args Isa &quot;Point3d&quot;]} {
+        if {[tomato::helper::TypeOf $args Isa &quot;Point3d&quot;]} {
 
             set _x [$args X]
             set _y [$args Y]
@@ -171,7 +171,7 @@
     set valuey [expr {$_y - [$other Y]}]
     set valuez [expr {$_z - [$other Z]}]
 
-    if {[TypeOf $other Isa &quot;Point3d&quot;]} {
+    if {[tomato::helper::TypeOf $other Isa &quot;Point3d&quot;]} {
         return [tomato::mathvec3d::Vector3d new $valuex $valuey $valuez]
     } else {
         return [tomato::mathpt3d::Point3d new $valuex $valuey $valuez]

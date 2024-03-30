@@ -1,12 +1,12 @@
 <!DOCTYPE html><html><head><meta charset="utf-8"/>
-<title>tomato 1.2.3 Reference Manual</title>
+<title>tomato 1.2.4 Reference Manual</title>
 <link rel='stylesheet' type='text/css' href='assets/ruff-min.css' />
 <script type='text/javascript' src='assets/ruff-min.js'></script>
 </head>
 <body>
 <div class='ruff-layout'>
 <header class='ruff-layout-header ruff-hd'>
-<a style='text-decoration:none;' href='tomato.html'>tomato 1.2.3 Reference Manual</a>
+<a style='text-decoration:none;' href='tomato.html'>tomato 1.2.4 Reference Manual</a>
 
 
             <div id="ruffButtonBar">
@@ -262,7 +262,7 @@
 </span> ::tomato::mathmatrix3d</li><li class='ruff-tip'><a href='tomato-tomato-mathmatrix3d.html#::tomato::mathmatrix3d::RotationAroundXAxis'>RotationAroundXAxis</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>RotationAroundXAxis</span> <span class='ruff_arg'>angle</span></pre>Creates a rotation matrix around the X axis
 </span> ::tomato::mathmatrix3d</li><li class='ruff-tip'><a href='tomato-tomato-mathmatrix3d.html#::tomato::mathmatrix3d::RotationAroundYAxis'>RotationAroundYAxis</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>RotationAroundYAxis</span> <span class='ruff_arg'>angle</span></pre>Creates a rotation matrix around the Y axis
 </span> ::tomato::mathmatrix3d</li><li class='ruff-tip'><a href='tomato-tomato-mathmatrix3d.html#::tomato::mathmatrix3d::RotationAroundZAxis'>RotationAroundZAxis</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>RotationAroundZAxis</span> <span class='ruff_arg'>angle</span></pre>Creates a rotation matrix around the Z axis
-</span> ::tomato::mathmatrix3d</li><li class='ruff-tip'><a href='tomato-tomato-mathcsys.html#::tomato::mathcsys::RotationByAngles'>RotationByAngles</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>RotationByAngles</span> <span class='ruff_arg'>yaw pitch roll</span></pre>Rotation around Z (yaw) then around Y (pitch) and then around X (roll) http://en.wikipedia.org/wiki/Aircraft_principal_axes
+</span> ::tomato::mathmatrix3d</li><li class='ruff-tip'><a href='tomato-tomato-mathcsys.html#::tomato::mathcsys::RotationByAngles'>RotationByAngles</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>RotationByAngles</span> <span class='ruff_arg'>yaw pitch roll</span></pre>Successive intrinsic rotations around Z (yaw) then around Y (pitch) and then around X (roll) Gives an order of magnitude speed improvement. https://en.wikipedia.org/wiki/Rotation_matrix#General_rotations
 </span> ::tomato::mathcsys</li><li class='ruff-tip'><a href='tomato-tomato-mathmatrix3d.html#::tomato::mathmatrix3d::RotationTo'>RotationTo</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>RotationTo</span> <span class='ruff_arg'>fromVector toVector ?axis?</span></pre>Sets to the matrix of rotation that would align the <code>from</code> vector with the <code>to</code> vector. The optional Axis argument may be used when the two vectors are parallel and in opposite directions to specify a specific solution, but is otherwise ignored.
 </span> ::tomato::mathmatrix3d</li><li class='ruff-tip'><a href='tomato-tomato-mathmatrix.html#::tomato::mathmatrix::Matrix::RowCount'>RowCount</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>OBJECT RowCount</span> </pre>Gets the number of rows.
 </span> ::tomato::mathmatrix::Matrix</li><li class='ruff-tip'><a href='tomato-tomato-mathquat.html#::tomato::mathquat::Quaternion::Scalar'>Scalar</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>OBJECT Scalar</span> </pre>Gets a new Quaternion <code>q</code> with the Scalar part only.

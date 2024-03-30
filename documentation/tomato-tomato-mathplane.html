@@ -1,12 +1,12 @@
 <!DOCTYPE html><html><head><meta charset="utf-8"/>
-<title>tomato 1.2.3 Reference Manual</title>
+<title>tomato 1.2.4 Reference Manual</title>
 <link rel='stylesheet' type='text/css' href='assets/ruff-min.css' />
 <script type='text/javascript' src='assets/ruff-min.js'></script>
 </head>
 <body>
 <div class='ruff-layout'>
 <header class='ruff-layout-header ruff-hd'>
-<a style='text-decoration:none;' href='tomato.html'>tomato 1.2.3 Reference Manual</a>
+<a style='text-decoration:none;' href='tomato.html'>tomato 1.2.4 Reference Manual</a>
 
 
             <div id="ruffButtonBar">
@@ -74,17 +74,26 @@
 
         lassign $args obj value
 
-        if {[TypeOf $obj Isa &quot;Vector3d&quot;] &amp;&amp; [string is double $value]} {
+        if {
+            [tomato::helper::TypeOf $obj Isa &quot;Vector3d&quot;] &amp;&amp;
+            [string is double $value]
+        } {
 
             set _normal [$obj Normalized]
             set _d      [expr {Inv($value)}]
 
-        } elseif {[TypeOf $obj Isa &quot;Vector3d&quot;] &amp;&amp; [TypeOf $value Isa &quot;Point3d&quot;]} {
+        } elseif {
+            [tomato::helper::TypeOf $obj Isa &quot;Vector3d&quot;] &amp;&amp;
+            [tomato::helper::TypeOf $value Isa &quot;Point3d&quot;]
+        } {
 
             set _normal [$obj Normalized]
             set _d      [expr {Inv([tomato::mathvec3d::Dot $_normal $value])}]
 
-        } elseif {[TypeOf $obj Isa &quot;Point3d&quot;] &amp;&amp; [TypeOf $value Isa &quot;Vector3d&quot;]} {
+        } elseif {
+            [tomato::helper::TypeOf $obj Isa &quot;Point3d&quot;] &amp;&amp;
+            [tomato::helper::TypeOf $value Isa &quot;Vector3d&quot;]
+        } {
 
             set _normal [$value Normalized]
             set _d      [expr {Inv([tomato::mathvec3d::Dot $_normal $obj])}]
@@ -538,7 +547,16 @@
         error &quot;The 3 points should not be on the same line&quot;
     }
 
-    return [tomato::mathplane::Plane new [$cross Normalized] $p1]
+    set normal [$cross Normalized]
+    set distanceFromOrigin [$normal DotProduct $p1]
+
+    if {$distanceFromOrigin &lt; 0} {
+        # make sure the plane is defined in its Hesse normal form
+        # https://en.wikipedia.org/wiki/Hesse_normal_form
+        set normal [$normal Negate]
+    }
+
+    return [tomato::mathplane::Plane new $normal $p1]
 }</pre></div>
 </div><h3 class='ruffproc'><a name='::tomato::mathplane::IntersectionWithLine'>IntersectionWithLine</a><span class='ns_scope'> [<a href="tomato-tomato-mathplane.html#::tomato::mathplane" title="::tomato::mathplane" class='ruff_cmd'>::tomato::mathplane</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
 <div style='clear:both;'></div>
