@@ -23,164 +23,164 @@
 <p class='ruff'>Creates a rotation matrix around an arbitrary vector</p>
 <div class='ruff_synopsis'><span class='ruff_cmd'>RotationAroundArbitraryVector</span> <span class='ruff_arg'>aboutVector angle</span></div>
 <h5 class='ruff'>Parameters</h5><table class='ruff_deflist'>
-<tr><td><code>aboutVector</code></td><td>The vector. <a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d::Vector3d" title="mathvec3d::Vector3d" class='ruff_cmd'>mathvec3d::Vector3d</a></td></tr>
-<tr><td><code>angle</code></td><td>Angle in radians</td></tr>
+<tr><td><nobr><code>aboutVector</code></nobr></td><td>The vector. <a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d::Vector3d" title="mathvec3d::Vector3d" class='ruff_cmd'>mathvec3d::Vector3d</a></td></tr>
+<tr><td><nobr><code>angle</code></nobr></td><td>Angle in radians</td></tr>
 </table>
 <h5 class='ruff'>Return value</h5><p class='ruff'>Returns A transform matrix <a href="tomato-tomato-mathmatrix.html#::tomato::mathmatrix::Matrix" title="mathmatrix::Matrix" class='ruff_cmd'>mathmatrix::Matrix</a></p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_198' href="javascript:toggleSource('198')">Show source</a></p>
-<div id='198' class='ruff_dyn_src'><pre>proc ::tomato::mathmatrix3d::RotationAroundArbitraryVector {aboutVector angle} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_tomato_mathmatrix3d_RotationAroundArbitraryVector' href="javascript:toggleSource('tomato_mathmatrix3d_RotationAroundArbitraryVector')">Show source</a></p>
+<div id='tomato_mathmatrix3d_RotationAroundArbitraryVector' class='ruff_dyn_src'><pre>proc ::tomato::mathmatrix3d::RotationAroundArbitraryVector {aboutVector angle} {
 
-    # Creates a rotation matrix around an arbitrary vector
-    #
-    # aboutVector - The vector. [mathvec3d::Vector3d]
-    # angle - Angle in radians
-    #
-    # Returns A transform matrix [mathmatrix::Matrix]
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Creates a rotation matrix around an arbitrary vector</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # aboutVector - The vector. [mathvec3d::Vector3d]</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # angle - Angle in radians</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Returns A transform matrix [mathmatrix::Matrix]</span>
 
-    # http://en.wikipedia.org/wiki/Rotation_matrix
-    set unitTensorProduct  [$aboutVector GetUnitTensorProduct]
-    set crossproductMatrix [$aboutVector CrossProductMatrix]
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # http://en.wikipedia.org/wiki/Rotation_matrix</span>
+    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> unitTensorProduct  [<span style="color: rgb(233, 98, 98);">$aboutVector</span> GetUnitTensorProduct]
+    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> crossproductMatrix [<span style="color: rgb(233, 98, 98);">$aboutVector</span> CrossProductMatrix]
 
-    set mat [tomato::mathmatrix::CreateIdentity 3]
+    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> mat [tomato::mathmatrix::CreateIdentity 3]
 
-    set r1 [$mat Multiply [expr {cos($angle)}]]
-    set r2 [$crossproductMatrix Multiply [expr {sin($angle)}]]
-    set r3 [$unitTensorProduct Multiply [expr {1 - cos($angle)}]]
+    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> r1 [<span style="color: rgb(233, 98, 98);">$mat</span> Multiply [expr {cos(<span style="color: rgb(233, 98, 98);">$angle</span>)}]]
+    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> r2 [<span style="color: rgb(233, 98, 98);">$crossproductMatrix</span> Multiply [expr {sin(<span style="color: rgb(233, 98, 98);">$angle</span>)}]]
+    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> r3 [<span style="color: rgb(233, 98, 98);">$unitTensorProduct</span> Multiply [expr {1 - cos(<span style="color: rgb(233, 98, 98);">$angle</span>)}]]
 
-    set totalR [[$r1 Add $r2] Add $r3]
+    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> totalR [[<span style="color: rgb(233, 98, 98);">$r1</span> Add <span style="color: rgb(233, 98, 98);">$r2</span>] Add <span style="color: rgb(233, 98, 98);">$r3</span>]
 
-    return $totalR
+    <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> <span style="color: rgb(233, 98, 98);">$totalR</span>
 }</pre></div>
 </div><h3 class='ruffproc'><a name='::tomato::mathmatrix3d::RotationAroundXAxis'>RotationAroundXAxis</a><span class='ns_scope'> [<a href="tomato-tomato-mathmatrix3d.html#::tomato::mathmatrix3d" title="::tomato::mathmatrix3d" class='ruff_cmd'>::tomato::mathmatrix3d</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
 <div style='clear:both;'></div>
 <p class='ruff'>Creates a rotation matrix around the X axis</p>
 <div class='ruff_synopsis'><span class='ruff_cmd'>RotationAroundXAxis</span> <span class='ruff_arg'>angle</span></div>
 <h5 class='ruff'>Parameters</h5><table class='ruff_deflist'>
-<tr><td><code>angle</code></td><td>The Angle in degrees</td></tr>
+<tr><td><nobr><code>angle</code></nobr></td><td>The Angle in degrees</td></tr>
 </table>
 <h5 class='ruff'>Return value</h5><p class='ruff'>Returns A rotation matrix <a href="tomato-tomato-mathmatrix.html#::tomato::mathmatrix::Matrix" title="mathmatrix::Matrix" class='ruff_cmd'>mathmatrix::Matrix</a></p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_199' href="javascript:toggleSource('199')">Show source</a></p>
-<div id='199' class='ruff_dyn_src'><pre>proc ::tomato::mathmatrix3d::RotationAroundXAxis {angle} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_tomato_mathmatrix3d_RotationAroundXAxis' href="javascript:toggleSource('tomato_mathmatrix3d_RotationAroundXAxis')">Show source</a></p>
+<div id='tomato_mathmatrix3d_RotationAroundXAxis' class='ruff_dyn_src'><pre>proc ::tomato::mathmatrix3d::RotationAroundXAxis {angle} {
 
-    # Creates a rotation matrix around the X axis
-    #
-    # angle - The Angle in degrees
-    #
-    # Returns A rotation matrix [mathmatrix::Matrix]
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Creates a rotation matrix around the X axis</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # angle - The Angle in degrees</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Returns A rotation matrix [mathmatrix::Matrix]</span>
 
-    set rotationMatrix [tomato::mathmatrix::Matrix new 3 3]
-    set angletoradian  [tomato::helper::DegreesToRadians $angle]
+    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> rotationMatrix [tomato::mathmatrix::Matrix new 3 3]
+    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> angletoradian  [tomato::helper::DegreesToRadians <span style="color: rgb(233, 98, 98);">$angle</span>]
 
-    $rotationMatrix SetCell 0 0 1.0
-    $rotationMatrix SetCell 1 1 [expr {cos($angletoradian)}]
-    $rotationMatrix SetCell 1 2 [expr {-sin($angletoradian)}]
-    $rotationMatrix SetCell 2 1 [expr {sin($angletoradian)}]
-    $rotationMatrix SetCell 2 2 [expr {cos($angletoradian)}]
+    <span style="color: rgb(233, 98, 98);">$rotationMatrix</span> SetCell 0 0 1.0
+    <span style="color: rgb(233, 98, 98);">$rotationMatrix</span> SetCell 1 1 [expr {cos(<span style="color: rgb(233, 98, 98);">$angletoradian</span>)}]
+    <span style="color: rgb(233, 98, 98);">$rotationMatrix</span> SetCell 1 2 [expr {-sin(<span style="color: rgb(233, 98, 98);">$angletoradian</span>)}]
+    <span style="color: rgb(233, 98, 98);">$rotationMatrix</span> SetCell 2 1 [expr {sin(<span style="color: rgb(233, 98, 98);">$angletoradian</span>)}]
+    <span style="color: rgb(233, 98, 98);">$rotationMatrix</span> SetCell 2 2 [expr {cos(<span style="color: rgb(233, 98, 98);">$angletoradian</span>)}]
 
-    return $rotationMatrix
+    <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> <span style="color: rgb(233, 98, 98);">$rotationMatrix</span>
 }</pre></div>
 </div><h3 class='ruffproc'><a name='::tomato::mathmatrix3d::RotationAroundYAxis'>RotationAroundYAxis</a><span class='ns_scope'> [<a href="tomato-tomato-mathmatrix3d.html#::tomato::mathmatrix3d" title="::tomato::mathmatrix3d" class='ruff_cmd'>::tomato::mathmatrix3d</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
 <div style='clear:both;'></div>
 <p class='ruff'>Creates a rotation matrix around the Y axis</p>
 <div class='ruff_synopsis'><span class='ruff_cmd'>RotationAroundYAxis</span> <span class='ruff_arg'>angle</span></div>
 <h5 class='ruff'>Parameters</h5><table class='ruff_deflist'>
-<tr><td><code>angle</code></td><td>The Angle in degrees</td></tr>
+<tr><td><nobr><code>angle</code></nobr></td><td>The Angle in degrees</td></tr>
 </table>
 <h5 class='ruff'>Return value</h5><p class='ruff'>Returns A rotation matrix <a href="tomato-tomato-mathmatrix.html#::tomato::mathmatrix::Matrix" title="mathmatrix::Matrix" class='ruff_cmd'>mathmatrix::Matrix</a></p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_200' href="javascript:toggleSource('200')">Show source</a></p>
-<div id='200' class='ruff_dyn_src'><pre>proc ::tomato::mathmatrix3d::RotationAroundYAxis {angle} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_tomato_mathmatrix3d_RotationAroundYAxis' href="javascript:toggleSource('tomato_mathmatrix3d_RotationAroundYAxis')">Show source</a></p>
+<div id='tomato_mathmatrix3d_RotationAroundYAxis' class='ruff_dyn_src'><pre>proc ::tomato::mathmatrix3d::RotationAroundYAxis {angle} {
 
-    # Creates a rotation matrix around the Y axis
-    #
-    # angle - The Angle in degrees
-    #
-    # Returns A rotation matrix [mathmatrix::Matrix]
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Creates a rotation matrix around the Y axis</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # angle - The Angle in degrees</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Returns A rotation matrix [mathmatrix::Matrix]</span>
 
-    set rotationMatrix [tomato::mathmatrix::Matrix new 3 3]
-    set angletoradian  [tomato::helper::DegreesToRadians $angle]
+    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> rotationMatrix [tomato::mathmatrix::Matrix new 3 3]
+    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> angletoradian  [tomato::helper::DegreesToRadians <span style="color: rgb(233, 98, 98);">$angle</span>]
 
-    $rotationMatrix SetCell 0 0 [expr {cos($angletoradian)}]
-    $rotationMatrix SetCell 0 2 [expr {sin($angletoradian)}]
-    $rotationMatrix SetCell 1 1 1.0
-    $rotationMatrix SetCell 2 0 [expr {-sin($angletoradian)}]
-    $rotationMatrix SetCell 2 2 [expr {cos($angletoradian)}]
+    <span style="color: rgb(233, 98, 98);">$rotationMatrix</span> SetCell 0 0 [expr {cos(<span style="color: rgb(233, 98, 98);">$angletoradian</span>)}]
+    <span style="color: rgb(233, 98, 98);">$rotationMatrix</span> SetCell 0 2 [expr {sin(<span style="color: rgb(233, 98, 98);">$angletoradian</span>)}]
+    <span style="color: rgb(233, 98, 98);">$rotationMatrix</span> SetCell 1 1 1.0
+    <span style="color: rgb(233, 98, 98);">$rotationMatrix</span> SetCell 2 0 [expr {-sin(<span style="color: rgb(233, 98, 98);">$angletoradian</span>)}]
+    <span style="color: rgb(233, 98, 98);">$rotationMatrix</span> SetCell 2 2 [expr {cos(<span style="color: rgb(233, 98, 98);">$angletoradian</span>)}]
 
-    return $rotationMatrix
+    <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> <span style="color: rgb(233, 98, 98);">$rotationMatrix</span>
 }</pre></div>
 </div><h3 class='ruffproc'><a name='::tomato::mathmatrix3d::RotationAroundZAxis'>RotationAroundZAxis</a><span class='ns_scope'> [<a href="tomato-tomato-mathmatrix3d.html#::tomato::mathmatrix3d" title="::tomato::mathmatrix3d" class='ruff_cmd'>::tomato::mathmatrix3d</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
 <div style='clear:both;'></div>
 <p class='ruff'>Creates a rotation matrix around the Z axis</p>
 <div class='ruff_synopsis'><span class='ruff_cmd'>RotationAroundZAxis</span> <span class='ruff_arg'>angle</span></div>
 <h5 class='ruff'>Parameters</h5><table class='ruff_deflist'>
-<tr><td><code>angle</code></td><td>The Angle in degrees</td></tr>
+<tr><td><nobr><code>angle</code></nobr></td><td>The Angle in degrees</td></tr>
 </table>
 <h5 class='ruff'>Return value</h5><p class='ruff'>Returns A rotation matrix <a href="tomato-tomato-mathmatrix.html#::tomato::mathmatrix::Matrix" title="mathmatrix::Matrix" class='ruff_cmd'>mathmatrix::Matrix</a></p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_201' href="javascript:toggleSource('201')">Show source</a></p>
-<div id='201' class='ruff_dyn_src'><pre>proc ::tomato::mathmatrix3d::RotationAroundZAxis {angle} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_tomato_mathmatrix3d_RotationAroundZAxis' href="javascript:toggleSource('tomato_mathmatrix3d_RotationAroundZAxis')">Show source</a></p>
+<div id='tomato_mathmatrix3d_RotationAroundZAxis' class='ruff_dyn_src'><pre>proc ::tomato::mathmatrix3d::RotationAroundZAxis {angle} {
 
-    # Creates a rotation matrix around the Z axis
-    #
-    # angle - The Angle in degrees
-    #
-    # Returns A rotation matrix [mathmatrix::Matrix]
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Creates a rotation matrix around the Z axis</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # angle - The Angle in degrees</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Returns A rotation matrix [mathmatrix::Matrix]</span>
 
-    set rotationMatrix [tomato::mathmatrix::Matrix new 3 3]
-    set angletoradian  [tomato::helper::DegreesToRadians $angle]
+    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> rotationMatrix [tomato::mathmatrix::Matrix new 3 3]
+    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> angletoradian  [tomato::helper::DegreesToRadians <span style="color: rgb(233, 98, 98);">$angle</span>]
 
-    $rotationMatrix SetCell 0 0 [expr {cos($angletoradian)}]
-    $rotationMatrix SetCell 0 1 [expr {-sin($angletoradian)}]
-    $rotationMatrix SetCell 1 0 [expr {sin($angletoradian)}]
-    $rotationMatrix SetCell 1 1 [expr {cos($angletoradian)}]
-    $rotationMatrix SetCell 2 2 1.0
+    <span style="color: rgb(233, 98, 98);">$rotationMatrix</span> SetCell 0 0 [expr {cos(<span style="color: rgb(233, 98, 98);">$angletoradian</span>)}]
+    <span style="color: rgb(233, 98, 98);">$rotationMatrix</span> SetCell 0 1 [expr {-sin(<span style="color: rgb(233, 98, 98);">$angletoradian</span>)}]
+    <span style="color: rgb(233, 98, 98);">$rotationMatrix</span> SetCell 1 0 [expr {sin(<span style="color: rgb(233, 98, 98);">$angletoradian</span>)}]
+    <span style="color: rgb(233, 98, 98);">$rotationMatrix</span> SetCell 1 1 [expr {cos(<span style="color: rgb(233, 98, 98);">$angletoradian</span>)}]
+    <span style="color: rgb(233, 98, 98);">$rotationMatrix</span> SetCell 2 2 1.0
 
-    return $rotationMatrix
+    <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> <span style="color: rgb(233, 98, 98);">$rotationMatrix</span>
 }</pre></div>
 </div><h3 class='ruffproc'><a name='::tomato::mathmatrix3d::RotationTo'>RotationTo</a><span class='ns_scope'> [<a href="tomato-tomato-mathmatrix3d.html#::tomato::mathmatrix3d" title="::tomato::mathmatrix3d" class='ruff_cmd'>::tomato::mathmatrix3d</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
 <div style='clear:both;'></div>
 <p class='ruff'>Sets to the matrix of rotation that would align the <code>from</code> vector with the <code>to</code> vector. The optional Axis argument may be used when the two vectors are parallel and in opposite directions to specify a specific solution, but is otherwise ignored.</p>
 <div class='ruff_synopsis'><span class='ruff_cmd'>RotationTo</span> <span class='ruff_arg'>fromVector toVector ?axis?</span></div>
 <h5 class='ruff'>Parameters</h5><table class='ruff_deflist'>
-<tr><td><code>fromVector</code></td><td>Input Vector object to align from. <a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d::Vector3d" title="mathvec3d::Vector3d" class='ruff_cmd'>mathvec3d::Vector3d</a></td></tr>
-<tr><td><code>toVector</code></td><td>Input Vector object to align to. <a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d::Vector3d" title="mathvec3d::Vector3d" class='ruff_cmd'>mathvec3d::Vector3d</a></td></tr>
-<tr><td><code>axis</code></td><td>Input Vector object. <a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d::Vector3d" title="mathvec3d::Vector3d" class='ruff_cmd'>mathvec3d::Vector3d</a> Optional, default <code>null</code>.</td></tr>
+<tr><td><nobr><code>fromVector</code></nobr></td><td>Input Vector object to align from. <a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d::Vector3d" title="mathvec3d::Vector3d" class='ruff_cmd'>mathvec3d::Vector3d</a></td></tr>
+<tr><td><nobr><code>toVector</code></nobr></td><td>Input Vector object to align to. <a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d::Vector3d" title="mathvec3d::Vector3d" class='ruff_cmd'>mathvec3d::Vector3d</a></td></tr>
+<tr><td><nobr><code>axis</code></nobr></td><td>Input Vector object. <a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d::Vector3d" title="mathvec3d::Vector3d" class='ruff_cmd'>mathvec3d::Vector3d</a> Optional, default <code>null</code>.</td></tr>
 </table>
 <h5 class='ruff'>Return value</h5><p class='ruff'>Returns A transform matrix <a href="tomato-tomato-mathmatrix.html#::tomato::mathmatrix::Matrix" title="mathmatrix::Matrix" class='ruff_cmd'>mathmatrix::Matrix</a></p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_202' href="javascript:toggleSource('202')">Show source</a></p>
-<div id='202' class='ruff_dyn_src'><pre>proc ::tomato::mathmatrix3d::RotationTo {fromVector toVector {axis null}} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_tomato_mathmatrix3d_RotationTo' href="javascript:toggleSource('tomato_mathmatrix3d_RotationTo')">Show source</a></p>
+<div id='tomato_mathmatrix3d_RotationTo' class='ruff_dyn_src'><pre>proc ::tomato::mathmatrix3d::RotationTo {fromVector toVector {axis null}} {
 
-    # Sets to the matrix of rotation that would align the `from` vector with the `to` vector.
-    # The optional Axis argument may be used when the two vectors are parallel
-    # and in opposite directions to specify a specific solution, but is otherwise ignored.
-    #
-    # fromVector - Input Vector object to align from. [mathvec3d::Vector3d]
-    # toVector   - Input Vector object to align to. [mathvec3d::Vector3d]
-    # axis       - Input Vector object. [mathvec3d::Vector3d]
-    #
-    # Returns A transform matrix [mathmatrix::Matrix]
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Sets to the matrix of rotation that would align the `from` vector with the `to` vector.</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # The optional Axis argument may be used when the two vectors are parallel</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # and in opposite directions to specify a specific solution, but is otherwise ignored.</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # fromVector - Input Vector object to align from. [mathvec3d::Vector3d]</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # toVector   - Input Vector object to align to. [mathvec3d::Vector3d]</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # axis       - Input Vector object. [mathvec3d::Vector3d]</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Returns A transform matrix [mathmatrix::Matrix]</span>
 
-    set fromVectornormalize [$fromVector Normalized]
-    set toVectornormalize   [$toVector Normalized]
+    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> fromVectornormalize [<span style="color: rgb(233, 98, 98);">$fromVector</span> Normalized]
+    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> toVectornormalize   [<span style="color: rgb(233, 98, 98);">$toVector</span> Normalized]
 
-    if {[$fromVectornormalize == $toVectornormalize]} {
-        return [tomato::mathmatrix::CreateIdentity 3]
+    if {[<span style="color: rgb(233, 98, 98);">$fromVectornormalize</span> == <span style="color: rgb(233, 98, 98);">$toVectornormalize</span>]} {
+        <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> [tomato::mathmatrix::CreateIdentity 3]
     }
 
-    if {[$fromVectornormalize IsParallelTo $toVectornormalize]} {
+    if {[<span style="color: rgb(233, 98, 98);">$fromVectornormalize</span> IsParallelTo <span style="color: rgb(233, 98, 98);">$toVectornormalize</span>]} {
 
-        if {$axis eq &quot;null&quot;} {
-            set axis [$fromVector Orthogonal]
+        if {<span style="color: rgb(233, 98, 98);">$axis</span> eq <span style="color: hsl(120, 71%, 16%);">&quot;null&quot;</span>} {
+            <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> axis [<span style="color: rgb(233, 98, 98);">$fromVector</span> Orthogonal]
         }
 
     } else {
-        set axis [$fromVectornormalize CrossProduct $toVectornormalize]
-        $axis Normalize
+        <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> axis [<span style="color: rgb(233, 98, 98);">$fromVectornormalize</span> CrossProduct <span style="color: rgb(233, 98, 98);">$toVectornormalize</span>]
+        <span style="color: rgb(233, 98, 98);">$axis</span> Normalize
     }
 
-    set signedAngleTo [$fromVectornormalize SignedAngleTo $toVectornormalize $axis]
+    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> signedAngleTo [<span style="color: rgb(233, 98, 98);">$fromVectornormalize</span> SignedAngleTo <span style="color: rgb(233, 98, 98);">$toVectornormalize</span> <span style="color: rgb(233, 98, 98);">$axis</span>]
 
-    return [tomato::mathmatrix3d::RotationAroundArbitraryVector $axis $signedAngleTo]
+    <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> [tomato::mathmatrix3d::RotationAroundArbitraryVector <span style="color: rgb(233, 98, 98);">$axis</span> <span style="color: rgb(233, 98, 98);">$signedAngleTo</span>]
 }</pre></div>
-</div></main><nav class='ruff-nav'><ul ><li class='ruff-toc1'><a style='padding-top:2px;' href='tomato.html'>Start page</a></li>
+</div></main><nav class='ruff-nav'><ul style='position: sticky; top: 0;'><li class='ruff-toc1'><a style='padding-top:2px;' href='tomato.html'>Start page</a></li>
 <li class='ruff-toc1'><a href='tomato-docindex.html' accesskey='i'>Index</a></li>
 <hr>
 <li class='ruff-toc1'><a href='tomato-tomato-helper.html'>tomato::helper</a></li>
@@ -201,3 +201,4 @@
 </span></li><li class='ruff-toc3 ruff-tip'><a href='tomato-tomato-mathmatrix3d.html#::tomato::mathmatrix3d::RotationTo'>RotationTo</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>RotationTo</span> <span class='ruff_arg'>fromVector toVector ?axis?</span></pre>Sets to the matrix of rotation that would align the <code>from</code> vector with the <code>to</code> vector. The optional Axis argument may be used when the two vectors are parallel and in opposite directions to specify a specific solution, but is otherwise ignored.
 </span></li></ul></nav><footer class='ruff-layout-footer ruff-ft'><div style='float: right;'>Document generated by <a href='https://ruff.magicsplat.com'>Ruff!</a></div></footer>
 </div></body></html>
+

@@ -18,22 +18,22 @@
 <p class='ruff'><code>tomato math::geometry</code> is an opensource geometry 3D library with basics functions for working in 3D space...<br/> This <a href="https://www.tcl.tk" >Tcl</a> package is inspired , copied (as best I could) from this great library written in .Net <a href="https://spatial.mathdotnet.com/#Math-NET-Spatial" >Math.NET Spatial</a>. Some features for this class <code>Quaternion</code> are inspired by this python library <a href="http://kieranwynn.github.io/pyquaternion/" >pyquaternion</a>.</p>
 <p class='ruff'><strong> Currently geometries supported are : </strong></p>
 <table class='ruff_deflist'>
-<tr><td>Vector</td><td><em> A Class representing a Vector in 3D space </em></td></tr>
-<tr><td>Ray</td><td><em> A Class representing a Ray in 3D space </em></td></tr>
-<tr><td>Point</td><td><em> A Class representing a Point in 3D space </em></td></tr>
-<tr><td>Plane</td><td><em> A Class representing a Plane in 3D space </em></td></tr>
-<tr><td>Matrix3d</td><td><em> Helper class for working with 3D matrixes </em></td></tr>
-<tr><td>Basic Matrix</td><td><em> Defines the base class for Matrix classes </em> (basic matrixes for <code>CoordinateSystem</code>, <code>Matrix3d</code> and <code>Vector</code>)</td></tr>
-<tr><td>Line</td><td><em> A Class representing a Line in 3D space </em></td></tr>
-<tr><td>Coordinate System</td><td><em> A Class representing a Coordinate System </em></td></tr>
-<tr><td>Quaternion</td><td><em> A Class representing a Quaternion </em></td></tr>
-<tr><td>Triangle</td><td><em> A Class representing a Triangle in 3D space </em></td></tr>
+<tr><td><nobr>Vector</nobr></td><td><em> A Class representing a Vector in 3D space </em></td></tr>
+<tr><td><nobr>Ray</nobr></td><td><em> A Class representing a Ray in 3D space </em></td></tr>
+<tr><td><nobr>Point</nobr></td><td><em> A Class representing a Point in 3D space </em></td></tr>
+<tr><td><nobr>Plane</nobr></td><td><em> A Class representing a Plane in 3D space </em></td></tr>
+<tr><td><nobr>Matrix3d</nobr></td><td><em> Helper class for working with 3D matrixes </em></td></tr>
+<tr><td><nobr>Basic Matrix</nobr></td><td><em> Defines the base class for Matrix classes </em> (basic matrixes for <code>CoordinateSystem</code>, <code>Matrix3d</code> and <code>Vector</code>)</td></tr>
+<tr><td><nobr>Line</nobr></td><td><em> A Class representing a Line in 3D space </em></td></tr>
+<tr><td><nobr>Coordinate System</nobr></td><td><em> A Class representing a Coordinate System </em></td></tr>
+<tr><td><nobr>Quaternion</nobr></td><td><em> A Class representing a Quaternion </em></td></tr>
+<tr><td><nobr>Triangle</nobr></td><td><em> A Class representing a Triangle in 3D space </em></td></tr>
 </table>
 <h4 class='ruff'><a name='Examples'></a>Examples<span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h4>
 <div style='clear:both;'></div>
 
 <figure  class='ruff-snippet ruff-figure'><pre class='ruff'>
-package require tomato
+<span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">package</span> require tomato
 namespace path tomato
 </pre>
 
@@ -42,12 +42,12 @@ namespace path tomato
 </ul>
 
 <figure  class='ruff-snippet ruff-figure'><pre class='ruff'>
-set v1 [mathvec3d::Vector3d new {1 0 0}]
-set v2 [mathvec3d::Vector3d new 0 1 0]
+<span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> v1 [mathvec3d::Vector3d new {1 0 0}]
+<span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> v2 [mathvec3d::Vector3d new 0 1 0]
 
-set angletov1v2 [$v1 AngleTo $v2]
-puts [helper::RadiansToDegrees $angletov1v2]
-# 90.0
+<span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> angletov1v2 [<span style="color: rgb(233, 98, 98);">$v1</span> AngleTo <span style="color: rgb(233, 98, 98);">$v2</span>]
+<span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">puts</span> [helper::RadiansToDegrees <span style="color: rgb(233, 98, 98);">$angletov1v2</span>]
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;"># 90.0</span>
 </pre>
 
 </figure><ul class='ruff'>
@@ -55,10 +55,10 @@ puts [helper::RadiansToDegrees $angletov1v2]
 </ul>
 
 <figure  class='ruff-snippet ruff-figure'><pre class='ruff'>
-set v1 [mathvec3d::Vector3d new {1 0 0}]
-set v2 [mathvec3d::Vector3d new {1 0 0}]
-puts [$v1 IsParallelTo $v2]
-# True
+<span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> v1 [mathvec3d::Vector3d new {1 0 0}]
+<span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> v2 [mathvec3d::Vector3d new {1 0 0}]
+<span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">puts</span> [<span style="color: rgb(233, 98, 98);">$v1</span> IsParallelTo <span style="color: rgb(233, 98, 98);">$v2</span>]
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;"># True</span>
 </pre>
 
 </figure><ul class='ruff'>
@@ -66,11 +66,11 @@ puts [$v1 IsParallelTo $v2]
 </ul>
 
 <figure  class='ruff-snippet ruff-figure'><pre class='ruff'>
-set p1  [mathpt3d::Point3d new {0 0 0}]
-set p2  [mathpt3d::Point3d new {0 0 1}]
+<span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> p1  [mathpt3d::Point3d new {0 0 0}]
+<span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> p2  [mathpt3d::Point3d new {0 0 1}]
 
-puts [$p1 DistanceTo $p2]
-# 1
+<span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">puts</span> [<span style="color: rgb(233, 98, 98);">$p1</span> DistanceTo <span style="color: rgb(233, 98, 98);">$p2</span>]
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;"># 1</span>
 </pre>
 
 </figure><ul class='ruff'>
@@ -78,12 +78,12 @@ puts [$p1 DistanceTo $p2]
 </ul>
 
 <figure  class='ruff-snippet ruff-figure'><pre class='ruff'>
-set p [mathpt3d::Point3d new {1 2 3}]
-set angle 90
-set css [mathcsys::RotationAngleVector $angle [mathvec3d::Vector3d new {0 0 1}]]
-set rotatedPoint [$css Transform $p]
-puts [$rotatedPoint ToString]
-# -2 1 3
+<span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> p [mathpt3d::Point3d new {1 2 3}]
+<span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> angle 90
+<span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> css [mathcsys::RotationAngleVector <span style="color: rgb(233, 98, 98);">$angle</span> [mathvec3d::Vector3d new {0 0 1}]]
+<span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> rotatedPoint [<span style="color: rgb(233, 98, 98);">$css</span> Transform <span style="color: rgb(233, 98, 98);">$p</span>]
+<span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">puts</span> [<span style="color: rgb(233, 98, 98);">$rotatedPoint</span> ToString]
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;"># -2 1 3</span>
 </pre>
 
 </figure><ul class='ruff'>
@@ -91,10 +91,10 @@ puts [$rotatedPoint ToString]
 </ul>
 
 <figure  class='ruff-snippet ruff-figure'><pre class='ruff'>
-set plane [mathplane::Plane new [mathpt3d::Point3d new {0 0 0}] [mathvec3d::Vector3d new {0 0 1}]]
-set projectedPoint [$plane Project [mathpt3d::Point3d new {1 2 3}]]
-puts [$projectedPoint ToString]
-# 1 2 0
+<span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> plane [mathplane::Plane new [mathpt3d::Point3d new {0 0 0}] [mathvec3d::Vector3d new {0 0 1}]]
+<span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> projectedPoint [<span style="color: rgb(233, 98, 98);">$plane</span> Project [mathpt3d::Point3d new {1 2 3}]]
+<span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">puts</span> [<span style="color: rgb(233, 98, 98);">$projectedPoint</span> ToString]
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;"># 1 2 0</span>
 </pre>
 
 </figure><ul class='ruff'>
@@ -102,22 +102,22 @@ puts [$projectedPoint ToString]
 </ul>
 
 <figure  class='ruff-snippet ruff-figure'><pre class='ruff'>
-set origin [mathpt3d::Point3d new {1 2 3}]
-set xAxis  [mathvec3d::Vector3d new {1 0 0}]
-set yAxis  [mathvec3d::Vector3d new {0 1 0}]
-set zAxis  [mathvec3d::Vector3d new {0 0 1}]
+<span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> origin [mathpt3d::Point3d new {1 2 3}]
+<span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> xAxis  [mathvec3d::Vector3d new {1 0 0}]
+<span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> yAxis  [mathvec3d::Vector3d new {0 1 0}]
+<span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> zAxis  [mathvec3d::Vector3d new {0 0 1}]
 
-set css [mathcsys::Csys new $origin $xAxis $yAxis $zAxis]
+<span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> css [mathcsys::Csys new <span style="color: rgb(233, 98, 98);">$origin</span> <span style="color: rgb(233, 98, 98);">$xAxis</span> <span style="color: rgb(233, 98, 98);">$yAxis</span> <span style="color: rgb(233, 98, 98);">$zAxis</span>]
 
-# Get baseclass
-set base [$css BaseClass]
-puts [$base ToMatrixString]
-# Column1 = XAxis; Column2 = YAxis; Column3 = ZAxis; Column4 = Origin
-# 
-# 1 0 0 1
-# 0 1 0 2
-# 0 0 1 3
-# 0 0 0 1
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;"># Get baseclass</span>
+<span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> base [<span style="color: rgb(233, 98, 98);">$css</span> BaseClass]
+<span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">puts</span> [<span style="color: rgb(233, 98, 98);">$base</span> ToMatrixString]
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;"># Column1 = XAxis; Column2 = YAxis; Column3 = ZAxis; Column4 = Origin</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;"># </span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;"># 1 0 0 1</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;"># 0 1 0 2</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;"># 0 0 1 3</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;"># 0 0 0 1</span>
 </pre>
 
 </figure><ul class='ruff'>
@@ -125,13 +125,13 @@ puts [$base ToMatrixString]
 </ul>
 
 <figure  class='ruff-snippet ruff-figure'><pre class='ruff'>
-set ray [mathray3d::Ray3d new [mathpt3d::Point3d new {0 0 0}] [mathvec3d::Vector3d new {0 0 1}]]
-set point3D [mathpt3d::Point3d new {1 0 0}]
-set line3DTo [$ray ShortestLineTo $point3D]
-puts [[$line3DTo StartPoint] ToString]
-# 0 0 0
-puts [[$line3DTo EndPoint] ToString]
-# 1 0 0
+<span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> ray [mathray3d::Ray3d new [mathpt3d::Point3d new {0 0 0}] [mathvec3d::Vector3d new {0 0 1}]]
+<span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> point3D [mathpt3d::Point3d new {1 0 0}]
+<span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> line3DTo [<span style="color: rgb(233, 98, 98);">$ray</span> ShortestLineTo <span style="color: rgb(233, 98, 98);">$point3D</span>]
+<span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">puts</span> [[<span style="color: rgb(233, 98, 98);">$line3DTo</span> StartPoint] ToString]
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;"># 0 0 0</span>
+<span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">puts</span> [[<span style="color: rgb(233, 98, 98);">$line3DTo</span> EndPoint] ToString]
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;"># 1 0 0</span>
 </pre>
 
 </figure><ul class='ruff'>
@@ -139,33 +139,33 @@ puts [[$line3DTo EndPoint] ToString]
 </ul>
 
 <figure  class='ruff-snippet ruff-figure'><pre class='ruff'>
-set vector          [mathvec3d::Vector3d new 0 1 0]
-set null_quaternion [mathquat::Quaternion new -axis $vector -angle 0]
-set my_quaternion   [mathquat::Quaternion new -axis $vector -angle 90]
+<span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> vector          [mathvec3d::Vector3d new 0 1 0]
+<span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> null_quaternion [mathquat::Quaternion new -axis <span style="color: rgb(233, 98, 98);">$vector</span> -angle 0]
+<span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> my_quaternion   [mathquat::Quaternion new -axis <span style="color: rgb(233, 98, 98);">$vector</span> -angle 90]
 
-set mypoint [mathpt3d::Point3d new 0 0 4]
+<span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> mypoint [mathpt3d::Point3d new 0 0 4]
 
-foreach q [tomato::mathquat::_intermediates $null_quaternion $my_quaternion 9 True] {
-    set my_interpolated_point [$q Rotate $mypoint]
-    puts &quot;[$my_interpolated_point ToString] &gt; Angle = [helper::RadiansToDegrees [$q Angle]] about Axis vector : \[[$vector ToString]\]&quot;
+<span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">foreach</span> q [tomato::mathquat::_intermediates <span style="color: rgb(233, 98, 98);">$null_quaternion</span> <span style="color: rgb(233, 98, 98);">$my_quaternion</span> 9 True] {
+    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> my_interpolated_point [<span style="color: rgb(233, 98, 98);">$q</span> Rotate <span style="color: rgb(233, 98, 98);">$mypoint</span>]
+    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">puts</span> <span style="color: hsl(120, 71%, 16%);">&quot;[<span style="color: rgb(233, 98, 98);">$my_interpolated_point</span> ToString] &gt; Angle = [helper::RadiansToDegrees [<span style="color: rgb(233, 98, 98);">$q</span> Angle]] about Axis vector : \[[<span style="color: rgb(233, 98, 98);">$vector</span> ToString]\]&quot;</span>
 }
-# 0.0, 0.0, 4.0                               &gt; Angle = 0.0  about Axis vector : [0, 1, 0]
-# 0.6257378601609235, 0.0, 3.950753362380551  &gt; Angle = 9.0  about Axis vector : [0, 1, 0]
-# 1.2360679774997898, 0.0, 3.8042260651806146 &gt; Angle = 18.0 about Axis vector : [0, 1, 0]
-# 1.8159619989581872, 0.0, 3.564026096753471  &gt; Angle = 27.0 about Axis vector : [0, 1, 0]
-# 2.351141009169892, 0.0, 3.2360679774997894  &gt; Angle = 36.0 about Axis vector : [0, 1, 0]
-# 2.8284271247461903, 0.0, 2.82842712474619   &gt; Angle = 45.0 about Axis vector : [0, 1, 0]
-# 3.2360679774997894, 0.0, 2.351141009169892  &gt; Angle = 54.0 about Axis vector : [0, 1, 0]
-# 3.564026096753471, 0.0, 1.8159619989581879  &gt; Angle = 63.0 about Axis vector : [0, 1, 0]
-# 3.8042260651806146, 0.0, 1.2360679774997898 &gt; Angle = 72.0 about Axis vector : [0, 1, 0]
-# 3.9507533623805515, 0.0, 0.625737860160924  &gt; Angle = 81.0 about Axis vector : [0, 1, 0]
-# 4.0, 0.0, 8.881784197001252e-16             &gt; Angle = 90.0 about Axis vector : [0, 1, 0]
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;"># 0.0, 0.0, 4.0                               &gt; Angle = 0.0  about Axis vector : [0, 1, 0]</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;"># 0.6257378601609235, 0.0, 3.950753362380551  &gt; Angle = 9.0  about Axis vector : [0, 1, 0]</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;"># 1.2360679774997898, 0.0, 3.8042260651806146 &gt; Angle = 18.0 about Axis vector : [0, 1, 0]</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;"># 1.8159619989581872, 0.0, 3.564026096753471  &gt; Angle = 27.0 about Axis vector : [0, 1, 0]</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;"># 2.351141009169892, 0.0, 3.2360679774997894  &gt; Angle = 36.0 about Axis vector : [0, 1, 0]</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;"># 2.8284271247461903, 0.0, 2.82842712474619   &gt; Angle = 45.0 about Axis vector : [0, 1, 0]</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;"># 3.2360679774997894, 0.0, 2.351141009169892  &gt; Angle = 54.0 about Axis vector : [0, 1, 0]</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;"># 3.564026096753471, 0.0, 1.8159619989581879  &gt; Angle = 63.0 about Axis vector : [0, 1, 0]</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;"># 3.8042260651806146, 0.0, 1.2360679774997898 &gt; Angle = 72.0 about Axis vector : [0, 1, 0]</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;"># 3.9507533623805515, 0.0, 0.625737860160924  &gt; Angle = 81.0 about Axis vector : [0, 1, 0]</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;"># 4.0, 0.0, 8.881784197001252e-16             &gt; Angle = 90.0 about Axis vector : [0, 1, 0]</span>
 </pre>
 
 </figure><h4 class='ruff'><a name='License'></a>License<span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h4>
 <div style='clear:both;'></div>
 <p class='ruff'><br> <strong>tomato math::geometry</strong> is covered under the terms of the <a href="LICENSE.md" >MIT</a> license.</p>
-</main><nav class='ruff-nav'><ul ><li class='ruff-toc1'><a class='ruff-highlight' style='padding-top:2px;' href='tomato.html'>Start page</a></li>
+</main><nav class='ruff-nav'><ul style='position: sticky; top: 0;'><li class='ruff-toc1'><a class='ruff-highlight' style='padding-top:2px;' href='tomato.html'>Start page</a></li>
 <li class='ruff-toc1'><a href='tomato-docindex.html' accesskey='i'>Index</a></li>
 <hr>
 <li class='ruff-toc1'><a href='tomato-tomato-helper.html'>tomato::helper</a></li>
@@ -181,3 +181,4 @@ foreach q [tomato::mathquat::_intermediates $null_quaternion $my_quaternion 9 Tr
 <li class='ruff-toc1'><a href='tomato-tomato-mathmatrix.html'>tomato::mathmatrix</a></li>
 <hr><li class='ruff-toc4'><a href='#Examples'>Examples</a></li><li class='ruff-toc4'><a href='#License'>License</a></li></ul></nav><footer class='ruff-layout-footer ruff-ft'><div style='float: right;'>Document generated by <a href='https://ruff.magicsplat.com'>Ruff!</a></div></footer>
 </div></body></html>
+

@@ -23,220 +23,220 @@
 <p class='ruff'>Clamps a number between a minimum and a maximum.</p>
 <div class='ruff_synopsis'><span class='ruff_cmd'>Clamp</span> <span class='ruff_arg'>n min max</span></div>
 <h5 class='ruff'>Parameters</h5><table class='ruff_deflist'>
-<tr><td><code>n</code></td><td>The number to clamp.</td></tr>
-<tr><td><code>min</code></td><td>The minimum allowed value.</td></tr>
-<tr><td><code>max</code></td><td>The maximum allowed value.</td></tr>
+<tr><td><nobr><code>n</code></nobr></td><td>The number to clamp.</td></tr>
+<tr><td><nobr><code>min</code></nobr></td><td>The minimum allowed value.</td></tr>
+<tr><td><nobr><code>max</code></nobr></td><td>The maximum allowed value.</td></tr>
 </table>
 <h5 class='ruff'>Return value</h5><p class='ruff'>Returns min, if n is lower than min; max, if n is higher than max; n otherwise.</p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_1' href="javascript:toggleSource('1')">Show source</a></p>
-<div id='1' class='ruff_dyn_src'><pre>proc ::tomato::helper::Clamp {n min max} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_tomato_helper_Clamp' href="javascript:toggleSource('tomato_helper_Clamp')">Show source</a></p>
+<div id='tomato_helper_Clamp' class='ruff_dyn_src'><pre>proc ::tomato::helper::Clamp {n min max} {
 
-    # Clamps a number between a minimum and a maximum.
-    #
-    # n   - The number to clamp.
-    # min - The minimum allowed value.
-    # max - The maximum allowed value.
-    #
-    # Returns min, if n is lower than min; max, if n is higher than max; n otherwise.
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Clamps a number between a minimum and a maximum.</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # n   - The number to clamp.</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # min - The minimum allowed value.</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # max - The maximum allowed value.</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Returns min, if n is lower than min; max, if n is higher than max; n otherwise.</span>
 
-    return [expr {max(min($n, $max), $min)}]
+    <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> [expr {max(min(<span style="color: rgb(233, 98, 98);">$n</span>, <span style="color: rgb(233, 98, 98);">$max</span>), <span style="color: rgb(233, 98, 98);">$min</span>)}]
 }</pre></div>
 </div><h3 class='ruffproc'><a name='::tomato::helper::DegreesToRadians'>DegreesToRadians</a><span class='ns_scope'> [<a href="tomato-tomato-helper.html#::tomato::helper" title="::tomato::helper" class='ruff_cmd'>::tomato::helper</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
 <div style='clear:both;'></div>
 <p class='ruff'>Convert degrees to radians.</p>
 <div class='ruff_synopsis'><span class='ruff_cmd'>DegreesToRadians</span> <span class='ruff_arg'>degrees</span></div>
 <h5 class='ruff'>Parameters</h5><table class='ruff_deflist'>
-<tr><td><code>degrees</code></td><td>An angle in degrees.</td></tr>
+<tr><td><nobr><code>degrees</code></nobr></td><td>An angle in degrees.</td></tr>
 </table>
 <h5 class='ruff'>Return value</h5><p class='ruff'>Returns The angle expressed in radians.</p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_2' href="javascript:toggleSource('2')">Show source</a></p>
-<div id='2' class='ruff_dyn_src'><pre>proc ::tomato::helper::DegreesToRadians {degrees} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_tomato_helper_DegreesToRadians' href="javascript:toggleSource('tomato_helper_DegreesToRadians')">Show source</a></p>
+<div id='tomato_helper_DegreesToRadians' class='ruff_dyn_src'><pre>proc ::tomato::helper::DegreesToRadians {degrees} {
 
-    # Convert degrees to radians.
-    #
-    # degrees - An angle in degrees.
-    #
-    # Returns The angle expressed in radians.
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Convert degrees to radians.</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # degrees - An angle in degrees.</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Returns The angle expressed in radians.</span>
 
-    set degToRad [expr {Pi() / 180.0}]
-    return [expr {$degrees * $degToRad}]
+    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> degToRad [expr {Pi() / 180.0}]
+    <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> [expr {<span style="color: rgb(233, 98, 98);">$degrees</span> * <span style="color: rgb(233, 98, 98);">$degToRad</span>}]
 }</pre></div>
 </div><h3 class='ruffproc'><a name='::tomato::helper::DoublePrecision'>DoublePrecision</a><span class='ns_scope'> [<a href="tomato-tomato-helper.html#::tomato::helper" title="::tomato::helper" class='ruff_cmd'>::tomato::helper</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
 <div style='clear:both;'></div>
 <p class='ruff'>Standard epsilon, the maximum relative precision of IEEE 754 double-precision floating numbers (64 bit). According to the definition of Prof. Demmel and used in LAPACK and Scilab.</p>
 <div class='ruff_synopsis'><span class='ruff_cmd'>DoublePrecision</span> </div>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_3' href="javascript:toggleSource('3')">Show source</a></p>
-<div id='3' class='ruff_dyn_src'><pre>proc ::tomato::helper::DoublePrecision {} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_tomato_helper_DoublePrecision' href="javascript:toggleSource('tomato_helper_DoublePrecision')">Show source</a></p>
+<div id='tomato_helper_DoublePrecision' class='ruff_dyn_src'><pre>proc ::tomato::helper::DoublePrecision {} {
 
-    # Standard epsilon, the maximum relative precision of IEEE 754 double-precision floating numbers (64 bit).
-    # According to the definition of Prof. Demmel and used in LAPACK and Scilab.
-    return [expr {pow(2, -$::tomato::helper::DoubleWidth)}]
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Standard epsilon, the maximum relative precision of IEEE 754 double-precision floating numbers (64 bit).</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # According to the definition of Prof. Demmel and used in LAPACK and Scilab.</span>
+    <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> [expr {pow(2, -<span style="color: rgb(233, 98, 98);">$::tomato::helper::DoubleWidth</span>)}]
 }</pre></div>
 </div><h3 class='ruffproc'><a name='::tomato::helper::IsaObject'>IsaObject</a><span class='ns_scope'> [<a href="tomato-tomato-helper.html#::tomato::helper" title="::tomato::helper" class='ruff_cmd'>::tomato::helper</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
 <div style='clear:both;'></div>
 <p class='ruff'>Check if variable <code>$obj</code> is an object</p>
 <div class='ruff_synopsis'><span class='ruff_cmd'>IsaObject</span> <span class='ruff_arg'>obj</span></div>
 <h5 class='ruff'>Parameters</h5><table class='ruff_deflist'>
-<tr><td><code>obj</code></td><td>Instance.</td></tr>
+<tr><td><nobr><code>obj</code></nobr></td><td>Instance.</td></tr>
 </table>
 <h5 class='ruff'>Return value</h5><p class='ruff'>Returns <code>True</code> or <code>False</code>.</p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_4' href="javascript:toggleSource('4')">Show source</a></p>
-<div id='4' class='ruff_dyn_src'><pre>proc ::tomato::helper::IsaObject {obj} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_tomato_helper_IsaObject' href="javascript:toggleSource('tomato_helper_IsaObject')">Show source</a></p>
+<div id='tomato_helper_IsaObject' class='ruff_dyn_src'><pre>proc ::tomato::helper::IsaObject {obj} {
 
-    # Check if variable $obj is an object
-    #
-    # obj  - Instance.
-    #
-    # Returns `True` or `False`.
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Check if variable <span style="color: rgb(233, 98, 98);">$obj</span> is an object</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # obj  - Instance.</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Returns `True` or `False`.</span>
 
-    return [info object isa object $obj]
+    <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> [info object isa object <span style="color: rgb(233, 98, 98);">$obj</span>]
 }</pre></div>
 </div><h3 class='ruffproc'><a name='::tomato::helper::L2Norm'>L2Norm</a><span class='ns_scope'> [<a href="tomato-tomato-helper.html#::tomato::helper" title="::tomato::helper" class='ruff_cmd'>::tomato::helper</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
 <div style='clear:both;'></div>
 <p class='ruff'>Check if the provided values are scaled to L2 norm</p>
 <div class='ruff_synopsis'><span class='ruff_cmd'>L2Norm</span> <span class='ruff_arg'>x y z ?exception?</span></div>
 <h5 class='ruff'>Parameters</h5><table class='ruff_deflist'>
-<tr><td><code>x</code></td><td>The x component</td></tr>
-<tr><td><code>y</code></td><td>The y component</td></tr>
-<tr><td><code>z</code></td><td>The z component</td></tr>
-<tr><td><code>exception</code></td><td>Throw an exception if result is false Optional, default <code>False</code>.</td></tr>
+<tr><td><nobr><code>x</code></nobr></td><td>The x component</td></tr>
+<tr><td><nobr><code>y</code></nobr></td><td>The y component</td></tr>
+<tr><td><nobr><code>z</code></nobr></td><td>The z component</td></tr>
+<tr><td><nobr><code>exception</code></nobr></td><td>Throw an exception if result is false Optional, default <code>False</code>.</td></tr>
 </table>
 <h5 class='ruff'>Return value</h5><p class='ruff'>Returns <code>True</code> or <code>False</code></p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_5' href="javascript:toggleSource('5')">Show source</a></p>
-<div id='5' class='ruff_dyn_src'><pre>proc ::tomato::helper::L2Norm {x y z {exception False}} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_tomato_helper_L2Norm' href="javascript:toggleSource('tomato_helper_L2Norm')">Show source</a></p>
+<div id='tomato_helper_L2Norm' class='ruff_dyn_src'><pre>proc ::tomato::helper::L2Norm {x y z {exception False}} {
 
-    # Check if the provided values are scaled to L2 norm
-    #
-    # x - The x component
-    # y - The y component
-    # z - The z component
-    # exception - Throw an exception if result is false
-    #
-    # Returns `True` or `False`
-    set norm [expr {sqrt(($x**2) + ($y**2) + ($z**2))}]
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Check if the provided values are scaled to L2 norm</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # x - The x component</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # y - The y component</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # z - The z component</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # exception - Throw an exception if result is false</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Returns `True` or `False`</span>
+    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> norm [expr {sqrt((<span style="color: rgb(233, 98, 98);">$x</span>**2) + (<span style="color: rgb(233, 98, 98);">$y</span>**2) + (<span style="color: rgb(233, 98, 98);">$z</span>**2))}]
 
-    if {$norm &lt; $::tomato::helper::Epsilon} {
-        if {$exception} {
-            throw {LessNormEuclideanNorm} &quot;The Euclidean norm of x, y, z is less than tolerance Epsilon&quot;
+    if {<span style="color: rgb(233, 98, 98);">$norm</span> &lt; <span style="color: rgb(233, 98, 98);">$::tomato::helper::Epsilon</span>} {
+        if {<span style="color: rgb(233, 98, 98);">$exception</span>} {
+            throw {LessNormEuclideanNorm} <span style="color: hsl(120, 71%, 16%);">&quot;The Euclidean norm of x, y, z is less than tolerance Epsilon&quot;</span>
         }
-        return 0
+        <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> 0
     }
 
-    if {abs($norm - 1.0) &gt; $::tomato::helper::Epsilon} {
-        if {$exception} {
-            throw {MoreNormEuclideanNorm} &quot;The Euclidean norm of x, y, z differs more than tolerance Epsilon from 1&quot;
+    if {abs(<span style="color: rgb(233, 98, 98);">$norm</span> - 1.0) &gt; <span style="color: rgb(233, 98, 98);">$::tomato::helper::Epsilon</span>} {
+        if {<span style="color: rgb(233, 98, 98);">$exception</span>} {
+            throw {MoreNormEuclideanNorm} <span style="color: hsl(120, 71%, 16%);">&quot;The Euclidean norm of x, y, z differs more than tolerance Epsilon from 1&quot;</span>
         }
-        return 0
+        <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> 0
     }
 
-    return 1
+    <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> 1
 }</pre></div>
 </div><h3 class='ruffproc'><a name='::tomato::helper::MachineEpsilon'>MachineEpsilon</a><span class='ns_scope'> [<a href="tomato-tomato-helper.html#::tomato::helper" title="::tomato::helper" class='ruff_cmd'>::tomato::helper</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
 <div style='clear:both;'></div>
 <p class='ruff'>Actual double precision machine epsilon, the smallest number that can be subtracted from 1, yielding a results different than 1.<br> This is also known as unit roundoff error. According to the definition of Prof. Demmel. On a standard machine this is equivalent to <code>DoublePrecision</code>.</p>
 <div class='ruff_synopsis'><span class='ruff_cmd'>MachineEpsilon</span> </div>
 <h5 class='ruff'>Description</h5><p class='ruff'>Return Positive Machine epsilon</p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_6' href="javascript:toggleSource('6')">Show source</a></p>
-<div id='6' class='ruff_dyn_src'><pre>proc ::tomato::helper::MachineEpsilon {} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_tomato_helper_MachineEpsilon' href="javascript:toggleSource('tomato_helper_MachineEpsilon')">Show source</a></p>
+<div id='tomato_helper_MachineEpsilon' class='ruff_dyn_src'><pre>proc ::tomato::helper::MachineEpsilon {} {
 
-    # Actual double precision machine epsilon, the smallest number that can be subtracted from 1, yielding a results different than 1.&lt;br&gt;
-    # This is also known as unit roundoff error. According to the definition of Prof. Demmel.
-    # On a standard machine this is equivalent to `DoublePrecision`.
-    #
-    # Return Positive Machine epsilon
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Actual double precision machine epsilon, the smallest number that can be subtracted from 1, yielding a results different than 1.&lt;br&gt;</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # This is also known as unit roundoff error. According to the definition of Prof. Demmel.</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # On a standard machine this is equivalent to `DoublePrecision`.</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Return Positive Machine epsilon</span>
 
-    set eps 1.0
+    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> eps 1.0
 
-    while {(1.0 - ($eps / 2.0)) &lt; 1.0} {
-        set eps [expr {$eps / 2.0}]
+    while {(1.0 - (<span style="color: rgb(233, 98, 98);">$eps</span> / 2.0)) &lt; 1.0} {
+        <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> eps [expr {<span style="color: rgb(233, 98, 98);">$eps</span> / 2.0}]
     }
 
-    return $eps
+    <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> <span style="color: rgb(233, 98, 98);">$eps</span>
 }</pre></div>
 </div><h3 class='ruffproc'><a name='::tomato::helper::Pi'>Pi</a><span class='ns_scope'> [<a href="tomato-tomato-helper.html#::tomato::helper" title="::tomato::helper" class='ruff_cmd'>::tomato::helper</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
 <div style='clear:both;'></div>
 <p class='ruff'>Defines the value of Pi</p>
 <div class='ruff_synopsis'><span class='ruff_cmd'>Pi</span> </div>
 <h5 class='ruff'>Description</h5><p class='ruff'><strong><em>Obsolete</em></strong> use <code>[expr {Pi()}]</code> instead.</p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_7' href="javascript:toggleSource('7')">Show source</a></p>
-<div id='7' class='ruff_dyn_src'><pre>proc ::tomato::helper::Pi {} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_tomato_helper_Pi' href="javascript:toggleSource('tomato_helper_Pi')">Show source</a></p>
+<div id='tomato_helper_Pi' class='ruff_dyn_src'><pre>proc ::tomato::helper::Pi {} {
 
-    # Defines the value of Pi
-    #
-    # ***Obsolete*** use `[expr {Pi()}]` instead.
-    return [expr {acos(-1)}]
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Defines the value of Pi</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # ***Obsolete*** use `[expr {Pi()}]` instead.</span>
+    <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> [expr {acos(-1)}]
 }</pre></div>
 </div><h3 class='ruffproc'><a name='::tomato::helper::RadiansToDegrees'>RadiansToDegrees</a><span class='ns_scope'> [<a href="tomato-tomato-helper.html#::tomato::helper" title="::tomato::helper" class='ruff_cmd'>::tomato::helper</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
 <div style='clear:both;'></div>
 <p class='ruff'>Convert radians to degrees.</p>
 <div class='ruff_synopsis'><span class='ruff_cmd'>RadiansToDegrees</span> <span class='ruff_arg'>radians</span></div>
 <h5 class='ruff'>Parameters</h5><table class='ruff_deflist'>
-<tr><td><code>radians</code></td><td>An angle in radians.</td></tr>
+<tr><td><nobr><code>radians</code></nobr></td><td>An angle in radians.</td></tr>
 </table>
 <h5 class='ruff'>Return value</h5><p class='ruff'>Returns The angle expressed in degrees.</p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_8' href="javascript:toggleSource('8')">Show source</a></p>
-<div id='8' class='ruff_dyn_src'><pre>proc ::tomato::helper::RadiansToDegrees {radians} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_tomato_helper_RadiansToDegrees' href="javascript:toggleSource('tomato_helper_RadiansToDegrees')">Show source</a></p>
+<div id='tomato_helper_RadiansToDegrees' class='ruff_dyn_src'><pre>proc ::tomato::helper::RadiansToDegrees {radians} {
 
-    # Convert radians to degrees.
-    #
-    # radians - An angle in radians.
-    #
-    # Returns The angle expressed in degrees.
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Convert radians to degrees.</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # radians - An angle in radians.</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Returns The angle expressed in degrees.</span>
 
-    set radToDeg [expr {180.0 / Pi()}]
-    return [expr {$radians * $radToDeg}]
+    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> radToDeg [expr {180.0 / Pi()}]
+    <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> [expr {<span style="color: rgb(233, 98, 98);">$radians</span> * <span style="color: rgb(233, 98, 98);">$radToDeg</span>}]
 }</pre></div>
 </div><h3 class='ruffproc'><a name='::tomato::helper::TypeClass'>TypeClass</a><span class='ns_scope'> [<a href="tomato-tomato-helper.html#::tomato::helper" title="::tomato::helper" class='ruff_cmd'>::tomato::helper</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
 <div style='clear:both;'></div>
 <p class='ruff'>Name of class</p>
 <div class='ruff_synopsis'><span class='ruff_cmd'>TypeClass</span> <span class='ruff_arg'>obj</span></div>
 <h5 class='ruff'>Parameters</h5><table class='ruff_deflist'>
-<tr><td><code>obj</code></td><td>Instance.</td></tr>
+<tr><td><nobr><code>obj</code></nobr></td><td>Instance.</td></tr>
 </table>
 <h5 class='ruff'>Return value</h5><p class='ruff'>Returns name of class or nothing.</p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_9' href="javascript:toggleSource('9')">Show source</a></p>
-<div id='9' class='ruff_dyn_src'><pre>proc ::tomato::helper::TypeClass {obj} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_tomato_helper_TypeClass' href="javascript:toggleSource('tomato_helper_TypeClass')">Show source</a></p>
+<div id='tomato_helper_TypeClass' class='ruff_dyn_src'><pre>proc ::tomato::helper::TypeClass {obj} {
 
-    # Name of class
-    #
-    # obj  - Instance.
-    #
-    # Returns name of class or nothing.
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Name of class</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # obj  - Instance.</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Returns name of class or nothing.</span>
 
-    if {![tomato::helper::IsaObject $obj]} {
-       return {}
+    if {![tomato::helper::IsaObject <span style="color: rgb(233, 98, 98);">$obj</span>]} {
+       <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> {}
     }
 
-    return [info object class $obj]
+    <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> [info object class <span style="color: rgb(233, 98, 98);">$obj</span>]
 }</pre></div>
 </div><h3 class='ruffproc'><a name='::tomato::helper::TypeOf'>TypeOf</a><span class='ns_scope'> [<a href="tomato-tomato-helper.html#::tomato::helper" title="::tomato::helper" class='ruff_cmd'>::tomato::helper</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
 <div style='clear:both;'></div>
 <p class='ruff'>Match type of class</p>
 <div class='ruff_synopsis'><span class='ruff_cmd'>TypeOf</span> <span class='ruff_arg'>obj Isa myclass</span></div>
 <h5 class='ruff'>Parameters</h5><table class='ruff_deflist'>
-<tr><td><code>obj</code></td><td>Instance.</td></tr>
-<tr><td><code>Isa</code></td><td>name (arg Not Used...)</td></tr>
-<tr><td><code>myclass</code></td><td>The name of class.</td></tr>
+<tr><td><nobr><code>obj</code></nobr></td><td>Instance.</td></tr>
+<tr><td><nobr><code>Isa</code></nobr></td><td>name (arg Not Used...)</td></tr>
+<tr><td><nobr><code>myclass</code></nobr></td><td>The name of class.</td></tr>
 </table>
 <h5 class='ruff'>Return value</h5><p class='ruff'>Returns <code>True</code> or <code>False</code>.</p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_10' href="javascript:toggleSource('10')">Show source</a></p>
-<div id='10' class='ruff_dyn_src'><pre>proc ::tomato::helper::TypeOf {obj Isa myclass} {
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_tomato_helper_TypeOf' href="javascript:toggleSource('tomato_helper_TypeOf')">Show source</a></p>
+<div id='tomato_helper_TypeOf' class='ruff_dyn_src'><pre>proc ::tomato::helper::TypeOf {obj Isa myclass} {
 
-    # Match type of class
-    #
-    # obj  - Instance.
-    # Isa  - name (arg Not Used...)
-    # myclass - The name of class.
-    #
-    # Returns `True` or `False`.
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Match type of class</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # obj  - Instance.</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Isa  - name (arg Not Used...)</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # myclass - The name of class.</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Returns `True` or `False`.</span>
 
-    if {![tomato::helper::IsaObject $obj]} {
-       return 0
+    if {![tomato::helper::IsaObject <span style="color: rgb(233, 98, 98);">$obj</span>]} {
+       <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> 0
     }
 
-    return [string match -nocase *$myclass [info object class $obj]]
+    <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> [string match -nocase *<span style="color: rgb(233, 98, 98);">$myclass</span> [info object class <span style="color: rgb(233, 98, 98);">$obj</span>]]
 }</pre></div>
-</div></main><nav class='ruff-nav'><ul ><li class='ruff-toc1'><a style='padding-top:2px;' href='tomato.html'>Start page</a></li>
+</div></main><nav class='ruff-nav'><ul style='position: sticky; top: 0;'><li class='ruff-toc1'><a style='padding-top:2px;' href='tomato.html'>Start page</a></li>
 <li class='ruff-toc1'><a href='tomato-docindex.html' accesskey='i'>Index</a></li>
 <hr>
 <li class='ruff-toc1'><a class='ruff-highlight' href='tomato-tomato-helper.html'>tomato::helper</a></li>
@@ -262,3 +262,4 @@
 </span></li><li class='ruff-toc3 ruff-tip'><a href='tomato-tomato-helper.html#::tomato::helper::TypeOf'>TypeOf</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>TypeOf</span> <span class='ruff_arg'>obj Isa myclass</span></pre>Match type of class
 </span></li></ul></nav><footer class='ruff-layout-footer ruff-ft'><div style='float: right;'>Document generated by <a href='https://ruff.magicsplat.com'>Ruff!</a></div></footer>
 </div></body></html>
+
