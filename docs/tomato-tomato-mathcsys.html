@@ -16,7 +16,392 @@
         </header><main class='ruff-layout-main ruff-bd'><h1 class='ruff'><a name='::tomato::mathcsys'></a>::tomato::mathcsys<span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h1>
 <div style='clear:both;'></div>
 <p class='ruff'>A Class representing a Coordinate System.</p>
-<h2 class='ruff'><a name='::tomato::mathcsys-Classes'></a>Classes<span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h2>
+<h2 class='ruff'><a name='::tomato::mathcsys-Commands'></a>Commands<span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h2>
+<div style='clear:both;'></div>
+<h3 class='ruffproc'><a name='::tomato::mathcsys::CreateMappingCoordinateSystem'>CreateMappingCoordinateSystem</a><span class='ns_scope'> [<a href="tomato-tomato-mathcsys.html#::tomato::mathcsys" title="::tomato::mathcsys" class='ruff_cmd'>::tomato::mathcsys</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
+<div style='clear:both;'></div>
+<p class='ruff'>Creates a coordinate system that maps from the <code>from</code> coordinate system to the <code>to</code> coordinate system.</p>
+<div class='ruff_synopsis'><span class='ruff_cmd'>CreateMappingCoordinateSystem</span> <span class='ruff_arg'>fromCs toCs</span></div>
+<h5 class='ruff'>Parameters</h5><table class='ruff_deflist'>
+<tr><td><nobr><code>fromCs</code></nobr></td><td>The from coordinate system <a href="tomato-tomato-mathcsys.html#::tomato::mathcsys::Csys" title="Csys" class='ruff_cmd'>Csys</a></td></tr>
+<tr><td><nobr><code>toCs</code></nobr></td><td>The to coordinate system <a href="tomato-tomato-mathcsys.html#::tomato::mathcsys::Csys" title="Csys" class='ruff_cmd'>Csys</a></td></tr>
+</table>
+<h5 class='ruff'>Return value</h5><p class='ruff'>Returns A mapping coordinate system <a href="tomato-tomato-mathcsys.html#::tomato::mathcsys::Csys" title="Csys" class='ruff_cmd'>Csys</a></p>
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_tomato_mathcsys_CreateMappingCoordinateSystem' href="javascript:toggleSource('tomato_mathcsys_CreateMappingCoordinateSystem')">Show source</a></p>
+<div id='tomato_mathcsys_CreateMappingCoordinateSystem' class='ruff_dyn_src'><pre>proc ::tomato::mathcsys::CreateMappingCoordinateSystem {fromCs toCs} {
+
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Creates a coordinate system that maps from the `from` coordinate system to the `to` coordinate system.</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # fromCs - The from coordinate system [Csys]</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # toCs   - The to coordinate system [Csys]</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Returns A mapping coordinate system [Csys]</span>
+    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> singular 0
+    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> det -1
+
+    try {
+        <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> det [[<span style="color: rgb(233, 98, 98);">$fromCs</span> BaseClass] Determinant]
+    } trap {singular} {} {
+        <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> singular 1
+    } on <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">error</span> {msg} {
+        <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">error</span> <span style="color: rgb(233, 98, 98);">$msg</span>
+    }
+
+    if {<span style="color: rgb(233, 98, 98);">$singular</span> || (abs(<span style="color: rgb(233, 98, 98);">$det</span>) &lt; <span style="color: rgb(233, 98, 98);">$::tomato::helper::TolEquals</span>)} {
+        <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> mat [[<span style="color: rgb(233, 98, 98);">$toCs</span> BaseClass] Multiply [<span style="color: rgb(233, 98, 98);">$fromCs</span> BaseClass]]
+    } else {
+        <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> mat [[<span style="color: rgb(233, 98, 98);">$toCs</span> BaseClass] Multiply [[<span style="color: rgb(233, 98, 98);">$fromCs</span> BaseClass] Inverse]]
+    }
+
+    <span style="color: rgb(233, 98, 98);">$mat</span> SetCell 3 3 1.0
+
+    <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> [tomato::mathcsys::Csys new <span style="color: rgb(233, 98, 98);">$mat</span>]
+}</pre></div>
+</div><h3 class='ruffproc'><a name='::tomato::mathcsys::Equals'>Equals</a><span class='ns_scope'> [<a href="tomato-tomato-mathcsys.html#::tomato::mathcsys" title="::tomato::mathcsys" class='ruff_cmd'>::tomato::mathcsys</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
+<div style='clear:both;'></div>
+<p class='ruff'>Indicate if this coordinate system is equivalent to a another coordinate system</p>
+<div class='ruff_synopsis'><span class='ruff_cmd'>Equals</span> <span class='ruff_arg'>cs other tolerance</span></div>
+<h5 class='ruff'>Parameters</h5><table class='ruff_deflist'>
+<tr><td><nobr><code>cs</code></nobr></td><td>First input coordinate system  <a href="tomato-tomato-mathcsys.html#::tomato::mathcsys::Csys" title="Csys" class='ruff_cmd'>Csys</a></td></tr>
+<tr><td><nobr><code>other</code></nobr></td><td>Second input coordinate system  <a href="tomato-tomato-mathcsys.html#::tomato::mathcsys::Csys" title="Csys" class='ruff_cmd'>Csys</a></td></tr>
+<tr><td><nobr><code>tolerance</code></nobr></td><td>A tolerance (epsilon) to adjust for floating point error</td></tr>
+</table>
+<h5 class='ruff'>Description</h5><p class='ruff'>See : methods == !=</p>
+<p class='ruff'>An error exception is raised if tolerance (epsilon) &lt; 0.</p>
+<h5 class='ruff'>Return value</h5><p class='ruff'>Returns <code>True</code> if the coordinate system are equal, otherwise false.</p>
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_tomato_mathcsys_Equals' href="javascript:toggleSource('tomato_mathcsys_Equals')">Show source</a></p>
+<div id='tomato_mathcsys_Equals' class='ruff_dyn_src'><pre>proc ::tomato::mathcsys::Equals {cs other tolerance} {
+
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Indicate if this coordinate system is equivalent to a another coordinate system</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # cs - First input coordinate system  [Csys]</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # other - Second input coordinate system  [Csys]</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # tolerance - A tolerance (epsilon) to adjust for floating point error</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Returns `True` if the coordinate system are equal, otherwise false.</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # See : methods == !=</span>
+    if {<span style="color: rgb(233, 98, 98);">$tolerance</span> &lt; 0} {
+        #ruff
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">        # An <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">error</span> exception is raised if tolerance (epsilon) &lt; 0.</span>
+        <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">error</span> <span style="color: hsl(120, 71%, 16%);">&quot;epsilon &lt; 0&quot;</span>
+    }
+    <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> [expr {
+                  [tomato::mathpt3d::Equals  [<span style="color: rgb(233, 98, 98);">$cs</span> Origin] [<span style="color: rgb(233, 98, 98);">$other</span> Origin] <span style="color: rgb(233, 98, 98);">$tolerance</span>] &amp;&amp;
+                  [tomato::mathvec3d::Equals [<span style="color: rgb(233, 98, 98);">$cs</span> XAxis] [<span style="color: rgb(233, 98, 98);">$other</span> XAxis] <span style="color: rgb(233, 98, 98);">$tolerance</span>] &amp;&amp;
+                  [tomato::mathvec3d::Equals [<span style="color: rgb(233, 98, 98);">$cs</span> YAxis] [<span style="color: rgb(233, 98, 98);">$other</span> YAxis] <span style="color: rgb(233, 98, 98);">$tolerance</span>] &amp;&amp;
+                  [tomato::mathvec3d::Equals [<span style="color: rgb(233, 98, 98);">$cs</span> ZAxis] [<span style="color: rgb(233, 98, 98);">$other</span> ZAxis] <span style="color: rgb(233, 98, 98);">$tolerance</span>]
+                }]
+}</pre></div>
+</div><h3 class='ruffproc'><a name='::tomato::mathcsys::GetRotationSubMatrix'>GetRotationSubMatrix</a><span class='ns_scope'> [<a href="tomato-tomato-mathcsys.html#::tomato::mathcsys" title="::tomato::mathcsys" class='ruff_cmd'>::tomato::mathcsys</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
+<div style='clear:both;'></div>
+<p class='ruff'>Gets a rotation submatrix from a coordinate system</p>
+<div class='ruff_synopsis'><span class='ruff_cmd'>GetRotationSubMatrix</span> <span class='ruff_arg'>coordinateSystem</span></div>
+<h5 class='ruff'>Parameters</h5><table class='ruff_deflist'>
+<tr><td><nobr><code>coordinateSystem</code></nobr></td><td><a href="tomato-tomato-mathcsys.html#::tomato::mathcsys::Csys" title="Csys" class='ruff_cmd'>Csys</a></td></tr>
+</table>
+<h5 class='ruff'>Return value</h5><p class='ruff'>Returns A rotation matrix <a href="tomato-tomato-mathmatrix.html#::tomato::mathmatrix::Matrix" title="mathmatrix::Matrix" class='ruff_cmd'>mathmatrix::Matrix</a></p>
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_tomato_mathcsys_GetRotationSubMatrix' href="javascript:toggleSource('tomato_mathcsys_GetRotationSubMatrix')">Show source</a></p>
+<div id='tomato_mathcsys_GetRotationSubMatrix' class='ruff_dyn_src'><pre>proc ::tomato::mathcsys::GetRotationSubMatrix {coordinateSystem} {
+
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Gets a rotation submatrix from a coordinate system</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # coordinateSystem - [Csys]</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Returns A rotation matrix [mathmatrix::Matrix]</span>
+    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> csbase [<span style="color: rgb(233, 98, 98);">$coordinateSystem</span> BaseClass]
+    <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> [<span style="color: rgb(233, 98, 98);">$csbase</span> SubMatrix 0 3 0 3]
+}</pre></div>
+</div><h3 class='ruffproc'><a name='::tomato::mathcsys::Parse'>Parse</a><span class='ns_scope'> [<a href="tomato-tomato-mathcsys.html#::tomato::mathcsys" title="::tomato::mathcsys" class='ruff_cmd'>::tomato::mathcsys</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
+<div style='clear:both;'></div>
+<p class='ruff'>Transform a list to coordinate system</p>
+<div class='ruff_synopsis'><span class='ruff_cmd'>Parse</span> <span class='ruff_arg'>?args?</span></div>
+<h5 class='ruff'>Parameters</h5><table class='ruff_deflist'>
+<tr><td><nobr><code>args</code></nobr></td><td>Options described below.</td></tr>
+</table>
+<h5 class='ruff'>Description</h5><p class='ruff'>The first  value represents the origin [Tcl list]<br> The second value represents the Xaxis [Tcl list]<br> The third  value represents the Yaxis [Tcl list]<br> The fourth value represents the Zaxis [Tcl list]<br></p>
+<h5 class='ruff'>Return value</h5><p class='ruff'>Returns A new coordinate system <a href="tomato-tomato-mathcsys.html#::tomato::mathcsys::Csys" title="Csys" class='ruff_cmd'>Csys</a></p>
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_tomato_mathcsys_Parse' href="javascript:toggleSource('tomato_mathcsys_Parse')">Show source</a></p>
+<div id='tomato_mathcsys_Parse' class='ruff_dyn_src'><pre>proc ::tomato::mathcsys::Parse {args} {
+
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Transform a list to coordinate system</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # args - Options described below.</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # The first  value represents the origin \[Tcl list]&lt;br&gt;</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # The second value represents the Xaxis \[Tcl list]&lt;br&gt;</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # The third  value represents the Yaxis \[Tcl list]&lt;br&gt;</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # The fourth value represents the Zaxis \[Tcl list]&lt;br&gt;</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Returns A new coordinate system [Csys]</span>
+
+    if {[llength <span style="color: rgb(233, 98, 98);">$args</span>] == 1} {
+
+        if {[llength {*}<span style="color: rgb(233, 98, 98);">$args</span>] != 4} {
+            <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">error</span> <span style="color: hsl(120, 71%, 16%);">&quot;must be a list 4 elements...&quot;</span>
+        }
+
+        lassign {*}<span style="color: rgb(233, 98, 98);">$args</span> or vx vy vz
+
+        <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> p  [tomato::mathpt3d::Point3d new <span style="color: rgb(233, 98, 98);">$or</span>]
+        <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> v1 [tomato::mathvec3d::Vector3d new <span style="color: rgb(233, 98, 98);">$vx</span>]
+        <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> v2 [tomato::mathvec3d::Vector3d new <span style="color: rgb(233, 98, 98);">$vy</span>]
+        <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> v3 [tomato::mathvec3d::Vector3d new <span style="color: rgb(233, 98, 98);">$vz</span>]
+
+        <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> [tomato::mathcsys::Csys new <span style="color: rgb(233, 98, 98);">$p</span> <span style="color: rgb(233, 98, 98);">$v1</span> <span style="color: rgb(233, 98, 98);">$v2</span> <span style="color: rgb(233, 98, 98);">$v3</span>]
+
+    } elseif {[llength <span style="color: rgb(233, 98, 98);">$args</span>] == 4} {
+
+        lassign <span style="color: rgb(233, 98, 98);">$args</span> or vx vy vz
+
+        <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> p  [tomato::mathpt3d::Point3d new <span style="color: rgb(233, 98, 98);">$or</span>]
+        <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> v1 [tomato::mathvec3d::Vector3d new <span style="color: rgb(233, 98, 98);">$vx</span>]
+        <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> v2 [tomato::mathvec3d::Vector3d new <span style="color: rgb(233, 98, 98);">$vy</span>]
+        <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> v3 [tomato::mathvec3d::Vector3d new <span style="color: rgb(233, 98, 98);">$vz</span>]
+
+        <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> [tomato::mathcsys::Csys new <span style="color: rgb(233, 98, 98);">$p</span> <span style="color: rgb(233, 98, 98);">$v1</span> <span style="color: rgb(233, 98, 98);">$v2</span> <span style="color: rgb(233, 98, 98);">$v3</span>]
+
+    } else {
+        <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">error</span> <span style="color: hsl(120, 71%, 16%);">&quot;must be a list of 1 with 4 sub lists or 4 elements...&quot;</span>
+    }
+}</pre></div>
+</div><h3 class='ruffproc'><a name='::tomato::mathcsys::Pitch'>Pitch</a><span class='ns_scope'> [<a href="tomato-tomato-mathcsys.html#::tomato::mathcsys" title="::tomato::mathcsys" class='ruff_cmd'>::tomato::mathcsys</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
+<div style='clear:both;'></div>
+<p class='ruff'>Rotates around Y</p>
+<div class='ruff_synopsis'><span class='ruff_cmd'>Pitch</span> <span class='ruff_arg'>av</span></div>
+<h5 class='ruff'>Parameters</h5><table class='ruff_deflist'>
+<tr><td><nobr><code>av</code></nobr></td><td>Angle  in degrees</td></tr>
+</table>
+<h5 class='ruff'>Return value</h5><p class='ruff'>Returns A rotated coordinate system <a href="tomato-tomato-mathcsys.html#::tomato::mathcsys::Csys" title="Csys" class='ruff_cmd'>Csys</a></p>
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_tomato_mathcsys_Pitch' href="javascript:toggleSource('tomato_mathcsys_Pitch')">Show source</a></p>
+<div id='tomato_mathcsys_Pitch' class='ruff_dyn_src'><pre>proc ::tomato::mathcsys::Pitch {av} {
+
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Rotates around Y</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # av - Angle  in degrees</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Returns A rotated coordinate system [Csys]</span>
+    <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> [tomato::mathcsys::RotationAngleVector <span style="color: rgb(233, 98, 98);">$av</span> [tomato::mathvec3d::UnitY]]
+}</pre></div>
+</div><h3 class='ruffproc'><a name='::tomato::mathcsys::Roll'>Roll</a><span class='ns_scope'> [<a href="tomato-tomato-mathcsys.html#::tomato::mathcsys" title="::tomato::mathcsys" class='ruff_cmd'>::tomato::mathcsys</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
+<div style='clear:both;'></div>
+<p class='ruff'>Rotates around X</p>
+<div class='ruff_synopsis'><span class='ruff_cmd'>Roll</span> <span class='ruff_arg'>av</span></div>
+<h5 class='ruff'>Parameters</h5><table class='ruff_deflist'>
+<tr><td><nobr><code>av</code></nobr></td><td>Angle  in degrees</td></tr>
+</table>
+<h5 class='ruff'>Return value</h5><p class='ruff'>Returns A rotated coordinate system <a href="tomato-tomato-mathcsys.html#::tomato::mathcsys::Csys" title="Csys" class='ruff_cmd'>Csys</a></p>
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_tomato_mathcsys_Roll' href="javascript:toggleSource('tomato_mathcsys_Roll')">Show source</a></p>
+<div id='tomato_mathcsys_Roll' class='ruff_dyn_src'><pre>proc ::tomato::mathcsys::Roll {av} {
+
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Rotates around X</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # av - Angle  in degrees</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Returns A rotated coordinate system [Csys]</span>
+    <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> [tomato::mathcsys::RotationAngleVector <span style="color: rgb(233, 98, 98);">$av</span> [tomato::mathvec3d::UnitX]]
+}</pre></div>
+</div><h3 class='ruffproc'><a name='::tomato::mathcsys::RotateTo'>RotateTo</a><span class='ns_scope'> [<a href="tomato-tomato-mathcsys.html#::tomato::mathcsys" title="::tomato::mathcsys" class='ruff_cmd'>::tomato::mathcsys</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
+<div style='clear:both;'></div>
+<p class='ruff'>Sets to the matrix of rotation that aligns the <code>from</code> vector with the <code>to</code> vector.<br> The optional Axis argument may be used when the two vectors are perpendicular and in opposite directions<br> to specify a specific solution, but is otherwise ignored.<br></p>
+<div class='ruff_synopsis'><span class='ruff_cmd'>RotateTo</span> <span class='ruff_arg'>fromVector3D toVector3D ?axis?</span></div>
+<h5 class='ruff'>Parameters</h5><table class='ruff_deflist'>
+<tr><td><nobr><code>fromVector3D</code></nobr></td><td>Input Vector object to align from.</td></tr>
+<tr><td><nobr><code>toVector3D</code></nobr></td><td>Input Vector object to align to.</td></tr>
+<tr><td><nobr><code>axis</code></nobr></td><td>Input Vector object. Optional, default <code>null</code>.</td></tr>
+</table>
+<h5 class='ruff'>Return value</h5><p class='ruff'>Returns A rotated coordinate system <a href="tomato-tomato-mathcsys.html#::tomato::mathcsys::Csys" title="Csys" class='ruff_cmd'>Csys</a></p>
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_tomato_mathcsys_RotateTo' href="javascript:toggleSource('tomato_mathcsys_RotateTo')">Show source</a></p>
+<div id='tomato_mathcsys_RotateTo' class='ruff_dyn_src'><pre>proc ::tomato::mathcsys::RotateTo {fromVector3D toVector3D {axis null}} {
+
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Sets to the matrix of rotation that aligns the `from` vector with the `to` vector.&lt;br&gt;</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # The optional Axis argument may be used when the two vectors are perpendicular and in opposite directions&lt;br&gt;</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # to specify a specific solution, but is otherwise ignored.&lt;br&gt;</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # fromVector3D - Input Vector object to align from.</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # toVector3D   - Input Vector object to align to.</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # axis         - Input Vector object.</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Returns A rotated coordinate system [Csys]</span>
+
+    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> r [tomato::mathmatrix3d::RotationTo <span style="color: rgb(233, 98, 98);">$fromVector3D</span> <span style="color: rgb(233, 98, 98);">$toVector3D</span> <span style="color: rgb(233, 98, 98);">$axis</span>]
+    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> coordinateSystem [tomato::mathcsys::Csys new]
+
+    <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> [tomato::mathcsys::SetRotationSubMatrix <span style="color: rgb(233, 98, 98);">$r</span> <span style="color: rgb(233, 98, 98);">$coordinateSystem</span>]
+}</pre></div>
+</div><h3 class='ruffproc'><a name='::tomato::mathcsys::RotationAngleVector'>RotationAngleVector</a><span class='ns_scope'> [<a href="tomato-tomato-mathcsys.html#::tomato::mathcsys" title="::tomato::mathcsys" class='ruff_cmd'>::tomato::mathcsys</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
+<div style='clear:both;'></div>
+<p class='ruff'>Creates a rotating coordinate system</p>
+<div class='ruff_synopsis'><span class='ruff_cmd'>RotationAngleVector</span> <span class='ruff_arg'>angle v</span></div>
+<h5 class='ruff'>Parameters</h5><table class='ruff_deflist'>
+<tr><td><nobr><code>angle</code></nobr></td><td>Angle to rotate in degrees</td></tr>
+<tr><td><nobr><code>v</code></nobr></td><td>Vector to rotate about <a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d::Vector3d" title="mathvec3d::Vector3d" class='ruff_cmd'>mathvec3d::Vector3d</a></td></tr>
+</table>
+<h5 class='ruff'>Return value</h5><p class='ruff'>Returns A rotating coordinate system <a href="tomato-tomato-mathcsys.html#::tomato::mathcsys::Csys" title="Csys" class='ruff_cmd'>Csys</a></p>
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_tomato_mathcsys_RotationAngleVector' href="javascript:toggleSource('tomato_mathcsys_RotationAngleVector')">Show source</a></p>
+<div id='tomato_mathcsys_RotationAngleVector' class='ruff_dyn_src'><pre>proc ::tomato::mathcsys::RotationAngleVector {angle v} {
+
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Creates a rotating coordinate system</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # angle - Angle to rotate in degrees</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # v   - Vector to rotate about [mathvec3d::Vector3d]</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Returns A rotating coordinate system [Csys]</span>
+
+    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> mat [tomato::mathmatrix::Matrix new 4 4]
+    <span style="color: rgb(233, 98, 98);">$mat</span> SetSubMatrix 0 3 0 3 [tomato::mathmatrix3d::RotationAroundArbitraryVector  [<span style="color: rgb(233, 98, 98);">$v</span> Normalized]  [tomato::helper::DegreesToRadians <span style="color: rgb(233, 98, 98);">$angle</span>]  ]
+
+    <span style="color: rgb(233, 98, 98);">$mat</span> SetCell 3 3 1.0
+
+    <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> [tomato::mathcsys::Csys new <span style="color: rgb(233, 98, 98);">$mat</span>]
+}</pre></div>
+</div><h3 class='ruffproc'><a name='::tomato::mathcsys::RotationByAngles'>RotationByAngles</a><span class='ns_scope'> [<a href="tomato-tomato-mathcsys.html#::tomato::mathcsys" title="::tomato::mathcsys" class='ruff_cmd'>::tomato::mathcsys</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
+<div style='clear:both;'></div>
+<p class='ruff'>Successive intrinsic rotations around Z (yaw) then around Y (pitch) and then around X (roll) Gives an order of magnitude speed improvement. https://en.wikipedia.org/wiki/Rotation_matrix#General_rotations</p>
+<div class='ruff_synopsis'><span class='ruff_cmd'>RotationByAngles</span> <span class='ruff_arg'>yaw pitch roll</span></div>
+<h5 class='ruff'>Parameters</h5><table class='ruff_deflist'>
+<tr><td><nobr><code>yaw</code></nobr></td><td>Rotates around Z (angle in degrees)</td></tr>
+<tr><td><nobr><code>pitch</code></nobr></td><td>Rotates around Y (angle in degrees)</td></tr>
+<tr><td><nobr><code>roll</code></nobr></td><td>Rotates around X (angle in degrees)</td></tr>
+</table>
+<h5 class='ruff'>Return value</h5><p class='ruff'>Returns A rotated coordinate system <a href="tomato-tomato-mathcsys.html#::tomato::mathcsys::Csys" title="Csys" class='ruff_cmd'>Csys</a></p>
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_tomato_mathcsys_RotationByAngles' href="javascript:toggleSource('tomato_mathcsys_RotationByAngles')">Show source</a></p>
+<div id='tomato_mathcsys_RotationByAngles' class='ruff_dyn_src'><pre>proc ::tomato::mathcsys::RotationByAngles {yaw pitch roll} {
+
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Successive intrinsic rotations around Z (yaw) then around Y (pitch) and then around X (roll)</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Gives an order of magnitude speed improvement.</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # https://en.wikipedia.org/wiki/Rotation_matrix#General_rotations</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # yaw   - Rotates around Z (angle in degrees)</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # pitch - Rotates around Y (angle in degrees)</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # roll  - Rotates around X (angle in degrees)</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Returns A rotated coordinate system [Csys]</span>
+
+    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> yR [tomato::helper::DegreesToRadians <span style="color: rgb(233, 98, 98);">$yaw</span>]
+    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> pR [tomato::helper::DegreesToRadians <span style="color: rgb(233, 98, 98);">$pitch</span>]
+    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> rR [tomato::helper::DegreesToRadians <span style="color: rgb(233, 98, 98);">$roll</span>]
+
+    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> cosY [expr {cos(<span style="color: rgb(233, 98, 98);">$yR</span>)}]
+    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> sinY [expr {sin(<span style="color: rgb(233, 98, 98);">$yR</span>)}]
+    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> cosP [expr {cos(<span style="color: rgb(233, 98, 98);">$pR</span>)}]
+    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> sinP [expr {sin(<span style="color: rgb(233, 98, 98);">$pR</span>)}]
+    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> cosR [expr {cos(<span style="color: rgb(233, 98, 98);">$rR</span>)}]
+    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> sinR [expr {sin(<span style="color: rgb(233, 98, 98);">$rR</span>)}]
+
+    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> origin [tomato::mathpt3d::Point3d new]
+
+    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> xAxis  [tomato::mathvec3d::Vector3d new  [expr {<span style="color: rgb(233, 98, 98);">$cosY</span> * <span style="color: rgb(233, 98, 98);">$cosP</span>}]  [expr {<span style="color: rgb(233, 98, 98);">$sinY</span> * <span style="color: rgb(233, 98, 98);">$cosP</span>}]  [expr {Inv(<span style="color: rgb(233, 98, 98);">$sinP</span>)}]  ]
+
+    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> yAxis  [tomato::mathvec3d::Vector3d new  [expr {(<span style="color: rgb(233, 98, 98);">$cosY</span> * <span style="color: rgb(233, 98, 98);">$sinP</span> * <span style="color: rgb(233, 98, 98);">$sinR</span>) - (<span style="color: rgb(233, 98, 98);">$sinY</span> * <span style="color: rgb(233, 98, 98);">$cosR</span>)}]  [expr {(<span style="color: rgb(233, 98, 98);">$sinY</span> * <span style="color: rgb(233, 98, 98);">$sinP</span> * <span style="color: rgb(233, 98, 98);">$sinR</span>) + (<span style="color: rgb(233, 98, 98);">$cosY</span> * <span style="color: rgb(233, 98, 98);">$cosR</span>)}]  [expr {<span style="color: rgb(233, 98, 98);">$cosP</span> * <span style="color: rgb(233, 98, 98);">$sinR</span>}]  ]
+
+    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> zAxis  [tomato::mathvec3d::Vector3d new  [expr {(<span style="color: rgb(233, 98, 98);">$cosY</span> * <span style="color: rgb(233, 98, 98);">$sinP</span> * <span style="color: rgb(233, 98, 98);">$cosR</span>) + (<span style="color: rgb(233, 98, 98);">$sinY</span> * <span style="color: rgb(233, 98, 98);">$sinR</span>)}]  [expr {(<span style="color: rgb(233, 98, 98);">$sinY</span> * <span style="color: rgb(233, 98, 98);">$sinP</span> * <span style="color: rgb(233, 98, 98);">$cosR</span>) - (<span style="color: rgb(233, 98, 98);">$cosY</span> * <span style="color: rgb(233, 98, 98);">$sinR</span>)}]  [expr {<span style="color: rgb(233, 98, 98);">$cosP</span> * <span style="color: rgb(233, 98, 98);">$cosR</span>}]  ]
+
+    <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> [tomato::mathcsys::Csys new <span style="color: rgb(233, 98, 98);">$origin</span> <span style="color: rgb(233, 98, 98);">$xAxis</span> <span style="color: rgb(233, 98, 98);">$yAxis</span> <span style="color: rgb(233, 98, 98);">$zAxis</span>]
+}</pre></div>
+</div><h3 class='ruffproc'><a name='::tomato::mathcsys::SetRotationSubMatrix'>SetRotationSubMatrix</a><span class='ns_scope'> [<a href="tomato-tomato-mathcsys.html#::tomato::mathcsys" title="::tomato::mathcsys" class='ruff_cmd'>::tomato::mathcsys</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
+<div style='clear:both;'></div>
+<p class='ruff'>Creates a rotating coordinate system</p>
+<div class='ruff_synopsis'><span class='ruff_cmd'>SetRotationSubMatrix</span> <span class='ruff_arg'>r coordinateSystem</span></div>
+<h5 class='ruff'>Parameters</h5><table class='ruff_deflist'>
+<tr><td><nobr><code>r</code></nobr></td><td>A 3x3 matrix with the rotation portion <a href="tomato-tomato-mathmatrix.html#::tomato::mathmatrix::Matrix" title="mathmatrix::Matrix" class='ruff_cmd'>mathmatrix::Matrix</a></td></tr>
+<tr><td><nobr><code>coordinateSystem</code></nobr></td><td>A rotated coordinate system <a href="tomato-tomato-mathcsys.html#::tomato::mathcsys::Csys" title="Csys" class='ruff_cmd'>Csys</a></td></tr>
+</table>
+<h5 class='ruff'>Return value</h5><p class='ruff'>Returns A rotating coordinate system <a href="tomato-tomato-mathcsys.html#::tomato::mathcsys::Csys" title="Csys" class='ruff_cmd'>Csys</a></p>
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_tomato_mathcsys_SetRotationSubMatrix' href="javascript:toggleSource('tomato_mathcsys_SetRotationSubMatrix')">Show source</a></p>
+<div id='tomato_mathcsys_SetRotationSubMatrix' class='ruff_dyn_src'><pre>proc ::tomato::mathcsys::SetRotationSubMatrix {r coordinateSystem} {
+
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Creates a rotating coordinate system</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # r                  - A 3x3 matrix with the rotation portion [mathmatrix::Matrix]</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # coordinateSystem   - A rotated coordinate system [Csys]</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Returns A rotating coordinate system [Csys]</span>
+    if {[<span style="color: rgb(233, 98, 98);">$r</span> RowCount] != 3 || [<span style="color: rgb(233, 98, 98);">$r</span> ColumnCount] != 3} {
+        <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">error</span> <span style="color: hsl(120, 71%, 16%);">&quot;[tomato::helper::TypeClass <span style="color: rgb(233, 98, 98);">$r</span>] must be Matrix3x3...&quot;</span>
+    }
+
+    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> cs [tomato::mathcsys::Csys new [<span style="color: rgb(233, 98, 98);">$coordinateSystem</span> Origin]  [<span style="color: rgb(233, 98, 98);">$coordinateSystem</span> XAxis]  [<span style="color: rgb(233, 98, 98);">$coordinateSystem</span> YAxis]  [<span style="color: rgb(233, 98, 98);">$coordinateSystem</span> ZAxis]  ]
+
+    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> csbase [<span style="color: rgb(233, 98, 98);">$cs</span> BaseClass]
+    <span style="color: rgb(233, 98, 98);">$csbase</span> SetSubMatrix 0 [<span style="color: rgb(233, 98, 98);">$r</span> RowCount] 0 [<span style="color: rgb(233, 98, 98);">$r</span> ColumnCount] <span style="color: rgb(233, 98, 98);">$r</span>
+
+    <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> [tomato::mathcsys::Csys new <span style="color: rgb(233, 98, 98);">$csbase</span>]
+}</pre></div>
+</div><h3 class='ruffproc'><a name='::tomato::mathcsys::SetToAlignCoordinateSystems'>SetToAlignCoordinateSystems</a><span class='ns_scope'> [<a href="tomato-tomato-mathcsys.html#::tomato::mathcsys" title="::tomato::mathcsys" class='ruff_cmd'>::tomato::mathcsys</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
+<div style='clear:both;'></div>
+<p class='ruff'>Sets this matrix to be the matrix that maps from the <code>from</code> coordinate system to the <code>to</code> coordinate system.</p>
+<div class='ruff_synopsis'><span class='ruff_cmd'>SetToAlignCoordinateSystems</span> <span class='ruff_arg'>fromOrigin fromXAxis fromYAxis fromZAxis toOrigin toXAxis toYAxis toZAxis</span></div>
+<h5 class='ruff'>Parameters</h5><table class='ruff_deflist'>
+<tr><td><nobr><code>fromOrigin</code></nobr></td><td>Input <a href="tomato-tomato-mathpt3d.html#::tomato::mathpt3d::Point3d" title="mathpt3d::Point3d" class='ruff_cmd'>mathpt3d::Point3d</a>   that defines the origin to map the coordinate system from</td></tr>
+<tr><td><nobr><code>fromXAxis</code></nobr></td><td>Input <a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d::Vector3d" title="mathvec3d::Vector3d" class='ruff_cmd'>mathvec3d::Vector3d</a> that defines the X-axis to map the coordinate system from.</td></tr>
+<tr><td><nobr><code>fromYAxis</code></nobr></td><td>Input <a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d::Vector3d" title="mathvec3d::Vector3d" class='ruff_cmd'>mathvec3d::Vector3d</a> that defines the Y-axis to map the coordinate system from.</td></tr>
+<tr><td><nobr><code>fromZAxis</code></nobr></td><td>Input <a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d::Vector3d" title="mathvec3d::Vector3d" class='ruff_cmd'>mathvec3d::Vector3d</a> that defines the Z-axis to map the coordinate system from.</td></tr>
+<tr><td><nobr><code>toOrigin</code></nobr></td><td>Input <a href="tomato-tomato-mathpt3d.html#::tomato::mathpt3d::Point3d" title="mathpt3d::Point3d" class='ruff_cmd'>mathpt3d::Point3d</a>   that defines the origin to map the coordinate system to.</td></tr>
+<tr><td><nobr><code>toXAxis</code></nobr></td><td>Input <a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d::Vector3d" title="mathvec3d::Vector3d" class='ruff_cmd'>mathvec3d::Vector3d</a> that defines the X-axis to map the coordinate system to.</td></tr>
+<tr><td><nobr><code>toYAxis</code></nobr></td><td>Input <a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d::Vector3d" title="mathvec3d::Vector3d" class='ruff_cmd'>mathvec3d::Vector3d</a> that defines the Y-axis to map the coordinate system to.</td></tr>
+<tr><td><nobr><code>toZAxis</code></nobr></td><td>Input <a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d::Vector3d" title="mathvec3d::Vector3d" class='ruff_cmd'>mathvec3d::Vector3d</a> that defines the Z-axis to map the coordinate system to.</td></tr>
+</table>
+<h5 class='ruff'>Return value</h5><p class='ruff'>Returns A mapping coordinate system <a href="tomato-tomato-mathcsys.html#::tomato::mathcsys::Csys" title="Csys" class='ruff_cmd'>Csys</a></p>
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_tomato_mathcsys_SetToAlignCoordinateSystems' href="javascript:toggleSource('tomato_mathcsys_SetToAlignCoordinateSystems')">Show source</a></p>
+<div id='tomato_mathcsys_SetToAlignCoordinateSystems' class='ruff_dyn_src'><pre>proc ::tomato::mathcsys::SetToAlignCoordinateSystems {fromOrigin fromXAxis fromYAxis fromZAxis toOrigin toXAxis toYAxis toZAxis} {
+
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Sets this matrix to be the matrix that maps from the `from` coordinate system to the `to` coordinate system.</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # fromOrigin - Input [mathpt3d::Point3d]   that defines the origin to map the coordinate system from</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # fromXAxis  - Input [mathvec3d::Vector3d] that defines the X-axis to map the coordinate system from.</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # fromYAxis  - Input [mathvec3d::Vector3d] that defines the Y-axis to map the coordinate system from.</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # fromZAxis  - Input [mathvec3d::Vector3d] that defines the Z-axis to map the coordinate system from.</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # toOrigin   - Input [mathpt3d::Point3d]   that defines the origin to map the coordinate system to.</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # toXAxis    - Input [mathvec3d::Vector3d] that defines the X-axis to map the coordinate system to.</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # toYAxis    - Input [mathvec3d::Vector3d] that defines the Y-axis to map the coordinate system to.</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # toZAxis    - Input [mathvec3d::Vector3d] that defines the Z-axis to map the coordinate system to.</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Returns A mapping coordinate system [Csys]</span>
+
+    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> cs1 [tomato::mathcsys::Csys new <span style="color: rgb(233, 98, 98);">$fromOrigin</span> <span style="color: rgb(233, 98, 98);">$fromXAxis</span> <span style="color: rgb(233, 98, 98);">$fromYAxis</span> <span style="color: rgb(233, 98, 98);">$fromZAxis</span>]
+    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> cs2 [tomato::mathcsys::Csys new <span style="color: rgb(233, 98, 98);">$toOrigin</span> <span style="color: rgb(233, 98, 98);">$toXAxis</span> <span style="color: rgb(233, 98, 98);">$toYAxis</span> <span style="color: rgb(233, 98, 98);">$toZAxis</span>]
+    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> mcs [tomato::mathcsys::CreateMappingCoordinateSystem <span style="color: rgb(233, 98, 98);">$cs1</span> <span style="color: rgb(233, 98, 98);">$cs2</span>]
+
+    <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> <span style="color: rgb(233, 98, 98);">$mcs</span>
+}</pre></div>
+</div><h3 class='ruffproc'><a name='::tomato::mathcsys::Translation'>Translation</a><span class='ns_scope'> [<a href="tomato-tomato-mathcsys.html#::tomato::mathcsys" title="::tomato::mathcsys" class='ruff_cmd'>::tomato::mathcsys</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
+<div style='clear:both;'></div>
+<p class='ruff'>Creates a translation.</p>
+<div class='ruff_synopsis'><span class='ruff_cmd'>Translation</span> <span class='ruff_arg'>translation</span></div>
+<h5 class='ruff'>Parameters</h5><table class='ruff_deflist'>
+<tr><td><nobr><code>translation</code></nobr></td><td>A translation vector <a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d::Vector3d" title="mathvec3d::Vector3d" class='ruff_cmd'>mathvec3d::Vector3d</a></td></tr>
+</table>
+<h5 class='ruff'>Return value</h5><p class='ruff'>Returns A translated coordinate system <a href="tomato-tomato-mathcsys.html#::tomato::mathcsys::Csys" title="Csys" class='ruff_cmd'>Csys</a></p>
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_tomato_mathcsys_Translation' href="javascript:toggleSource('tomato_mathcsys_Translation')">Show source</a></p>
+<div id='tomato_mathcsys_Translation' class='ruff_dyn_src'><pre>proc ::tomato::mathcsys::Translation {translation} {
+
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Creates a translation.</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # translation - A translation vector [mathvec3d::Vector3d]</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Returns A translated coordinate system [Csys]</span>
+    <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> [tomato::mathcsys::Csys new [<span style="color: rgb(233, 98, 98);">$translation</span> ToPoint3D] [tomato::mathvec3d::UnitX] [tomato::mathvec3d::UnitY] [tomato::mathvec3d::UnitZ]]
+}</pre></div>
+</div><h3 class='ruffproc'><a name='::tomato::mathcsys::Yaw'>Yaw</a><span class='ns_scope'> [<a href="tomato-tomato-mathcsys.html#::tomato::mathcsys" title="::tomato::mathcsys" class='ruff_cmd'>::tomato::mathcsys</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
+<div style='clear:both;'></div>
+<p class='ruff'>Rotates around Z</p>
+<div class='ruff_synopsis'><span class='ruff_cmd'>Yaw</span> <span class='ruff_arg'>av</span></div>
+<h5 class='ruff'>Parameters</h5><table class='ruff_deflist'>
+<tr><td><nobr><code>av</code></nobr></td><td>Angle  in degrees</td></tr>
+</table>
+<h5 class='ruff'>Return value</h5><p class='ruff'>Returns A rotated coordinate system <a href="tomato-tomato-mathcsys.html#::tomato::mathcsys::Csys" title="Csys" class='ruff_cmd'>Csys</a></p>
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_tomato_mathcsys_Yaw' href="javascript:toggleSource('tomato_mathcsys_Yaw')">Show source</a></p>
+<div id='tomato_mathcsys_Yaw' class='ruff_dyn_src'><pre>proc ::tomato::mathcsys::Yaw {av} {
+
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Rotates around Z</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # av - Angle  in degrees</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Returns A rotated coordinate system [Csys]</span>
+    <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> [tomato::mathcsys::RotationAngleVector <span style="color: rgb(233, 98, 98);">$av</span> [tomato::mathvec3d::UnitZ]]
+}</pre></div>
+</div><h2 class='ruff'><a name='::tomato::mathcsys-Classes'></a>Classes<span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h2>
 <div style='clear:both;'></div>
 <h3 class='ruffclass'><a name='::tomato::mathcsys::Csys'>Csys</a><span class='ns_scope'> [<a href="tomato-tomato-mathcsys.html#::tomato::mathcsys" title="::tomato::mathcsys" class='ruff_cmd'>::tomato::mathcsys</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
 <div style='clear:both;'></div>
@@ -619,391 +1004,6 @@
 <span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Returns A vector [mathvec3d::Vector3d]</span>
     <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> <span style="color: rgb(233, 98, 98);">$_zaxis</span>
 }</pre></div>
-</div><h2 class='ruff'><a name='::tomato::mathcsys-Commands'></a>Commands<span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h2>
-<div style='clear:both;'></div>
-<h3 class='ruffproc'><a name='::tomato::mathcsys::CreateMappingCoordinateSystem'>CreateMappingCoordinateSystem</a><span class='ns_scope'> [<a href="tomato-tomato-mathcsys.html#::tomato::mathcsys" title="::tomato::mathcsys" class='ruff_cmd'>::tomato::mathcsys</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
-<div style='clear:both;'></div>
-<p class='ruff'>Creates a coordinate system that maps from the <code>from</code> coordinate system to the <code>to</code> coordinate system.</p>
-<div class='ruff_synopsis'><span class='ruff_cmd'>CreateMappingCoordinateSystem</span> <span class='ruff_arg'>fromCs toCs</span></div>
-<h5 class='ruff'>Parameters</h5><table class='ruff_deflist'>
-<tr><td><nobr><code>fromCs</code></nobr></td><td>The from coordinate system <a href="tomato-tomato-mathcsys.html#::tomato::mathcsys::Csys" title="Csys" class='ruff_cmd'>Csys</a></td></tr>
-<tr><td><nobr><code>toCs</code></nobr></td><td>The to coordinate system <a href="tomato-tomato-mathcsys.html#::tomato::mathcsys::Csys" title="Csys" class='ruff_cmd'>Csys</a></td></tr>
-</table>
-<h5 class='ruff'>Return value</h5><p class='ruff'>Returns A mapping coordinate system <a href="tomato-tomato-mathcsys.html#::tomato::mathcsys::Csys" title="Csys" class='ruff_cmd'>Csys</a></p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_tomato_mathcsys_CreateMappingCoordinateSystem' href="javascript:toggleSource('tomato_mathcsys_CreateMappingCoordinateSystem')">Show source</a></p>
-<div id='tomato_mathcsys_CreateMappingCoordinateSystem' class='ruff_dyn_src'><pre>proc ::tomato::mathcsys::CreateMappingCoordinateSystem {fromCs toCs} {
-
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Creates a coordinate system that maps from the `from` coordinate system to the `to` coordinate system.</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # fromCs - The from coordinate system [Csys]</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # toCs   - The to coordinate system [Csys]</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Returns A mapping coordinate system [Csys]</span>
-    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> singular 0
-    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> det -1
-
-    try {
-        <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> det [[<span style="color: rgb(233, 98, 98);">$fromCs</span> BaseClass] Determinant]
-    } trap {singular} {} {
-        <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> singular 1
-    } on <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">error</span> {msg} {
-        <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">error</span> <span style="color: rgb(233, 98, 98);">$msg</span>
-    }
-
-    if {<span style="color: rgb(233, 98, 98);">$singular</span> || (abs(<span style="color: rgb(233, 98, 98);">$det</span>) &lt; <span style="color: rgb(233, 98, 98);">$::tomato::helper::TolEquals</span>)} {
-        <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> mat [[<span style="color: rgb(233, 98, 98);">$toCs</span> BaseClass] Multiply [<span style="color: rgb(233, 98, 98);">$fromCs</span> BaseClass]]
-    } else {
-        <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> mat [[<span style="color: rgb(233, 98, 98);">$toCs</span> BaseClass] Multiply [[<span style="color: rgb(233, 98, 98);">$fromCs</span> BaseClass] Inverse]]
-    }
-
-    <span style="color: rgb(233, 98, 98);">$mat</span> SetCell 3 3 1.0
-
-    <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> [tomato::mathcsys::Csys new <span style="color: rgb(233, 98, 98);">$mat</span>]
-}</pre></div>
-</div><h3 class='ruffproc'><a name='::tomato::mathcsys::Equals'>Equals</a><span class='ns_scope'> [<a href="tomato-tomato-mathcsys.html#::tomato::mathcsys" title="::tomato::mathcsys" class='ruff_cmd'>::tomato::mathcsys</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
-<div style='clear:both;'></div>
-<p class='ruff'>Indicate if this coordinate system is equivalent to a another coordinate system</p>
-<div class='ruff_synopsis'><span class='ruff_cmd'>Equals</span> <span class='ruff_arg'>cs other tolerance</span></div>
-<h5 class='ruff'>Parameters</h5><table class='ruff_deflist'>
-<tr><td><nobr><code>cs</code></nobr></td><td>First input coordinate system  <a href="tomato-tomato-mathcsys.html#::tomato::mathcsys::Csys" title="Csys" class='ruff_cmd'>Csys</a></td></tr>
-<tr><td><nobr><code>other</code></nobr></td><td>Second input coordinate system  <a href="tomato-tomato-mathcsys.html#::tomato::mathcsys::Csys" title="Csys" class='ruff_cmd'>Csys</a></td></tr>
-<tr><td><nobr><code>tolerance</code></nobr></td><td>A tolerance (epsilon) to adjust for floating point error</td></tr>
-</table>
-<h5 class='ruff'>Description</h5><p class='ruff'>See : methods == !=</p>
-<p class='ruff'>An error exception is raised if tolerance (epsilon) &lt; 0.</p>
-<h5 class='ruff'>Return value</h5><p class='ruff'>Returns <code>True</code> if the coordinate system are equal, otherwise false.</p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_tomato_mathcsys_Equals' href="javascript:toggleSource('tomato_mathcsys_Equals')">Show source</a></p>
-<div id='tomato_mathcsys_Equals' class='ruff_dyn_src'><pre>proc ::tomato::mathcsys::Equals {cs other tolerance} {
-
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Indicate if this coordinate system is equivalent to a another coordinate system</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # cs - First input coordinate system  [Csys]</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # other - Second input coordinate system  [Csys]</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # tolerance - A tolerance (epsilon) to adjust for floating point error</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Returns `True` if the coordinate system are equal, otherwise false.</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # See : methods == !=</span>
-    if {<span style="color: rgb(233, 98, 98);">$tolerance</span> &lt; 0} {
-        #ruff
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">        # An <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">error</span> exception is raised if tolerance (epsilon) &lt; 0.</span>
-        <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">error</span> <span style="color: hsl(120, 71%, 16%);">&quot;epsilon &lt; 0&quot;</span>
-    }
-    <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> [expr {
-                  [tomato::mathpt3d::Equals  [<span style="color: rgb(233, 98, 98);">$cs</span> Origin] [<span style="color: rgb(233, 98, 98);">$other</span> Origin] <span style="color: rgb(233, 98, 98);">$tolerance</span>] &amp;&amp;
-                  [tomato::mathvec3d::Equals [<span style="color: rgb(233, 98, 98);">$cs</span> XAxis] [<span style="color: rgb(233, 98, 98);">$other</span> XAxis] <span style="color: rgb(233, 98, 98);">$tolerance</span>] &amp;&amp;
-                  [tomato::mathvec3d::Equals [<span style="color: rgb(233, 98, 98);">$cs</span> YAxis] [<span style="color: rgb(233, 98, 98);">$other</span> YAxis] <span style="color: rgb(233, 98, 98);">$tolerance</span>] &amp;&amp;
-                  [tomato::mathvec3d::Equals [<span style="color: rgb(233, 98, 98);">$cs</span> ZAxis] [<span style="color: rgb(233, 98, 98);">$other</span> ZAxis] <span style="color: rgb(233, 98, 98);">$tolerance</span>]
-                }]
-}</pre></div>
-</div><h3 class='ruffproc'><a name='::tomato::mathcsys::GetRotationSubMatrix'>GetRotationSubMatrix</a><span class='ns_scope'> [<a href="tomato-tomato-mathcsys.html#::tomato::mathcsys" title="::tomato::mathcsys" class='ruff_cmd'>::tomato::mathcsys</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
-<div style='clear:both;'></div>
-<p class='ruff'>Gets a rotation submatrix from a coordinate system</p>
-<div class='ruff_synopsis'><span class='ruff_cmd'>GetRotationSubMatrix</span> <span class='ruff_arg'>coordinateSystem</span></div>
-<h5 class='ruff'>Parameters</h5><table class='ruff_deflist'>
-<tr><td><nobr><code>coordinateSystem</code></nobr></td><td><a href="tomato-tomato-mathcsys.html#::tomato::mathcsys::Csys" title="Csys" class='ruff_cmd'>Csys</a></td></tr>
-</table>
-<h5 class='ruff'>Return value</h5><p class='ruff'>Returns A rotation matrix <a href="tomato-tomato-mathmatrix.html#::tomato::mathmatrix::Matrix" title="mathmatrix::Matrix" class='ruff_cmd'>mathmatrix::Matrix</a></p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_tomato_mathcsys_GetRotationSubMatrix' href="javascript:toggleSource('tomato_mathcsys_GetRotationSubMatrix')">Show source</a></p>
-<div id='tomato_mathcsys_GetRotationSubMatrix' class='ruff_dyn_src'><pre>proc ::tomato::mathcsys::GetRotationSubMatrix {coordinateSystem} {
-
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Gets a rotation submatrix from a coordinate system</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # coordinateSystem - [Csys]</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Returns A rotation matrix [mathmatrix::Matrix]</span>
-    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> csbase [<span style="color: rgb(233, 98, 98);">$coordinateSystem</span> BaseClass]
-    <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> [<span style="color: rgb(233, 98, 98);">$csbase</span> SubMatrix 0 3 0 3]
-}</pre></div>
-</div><h3 class='ruffproc'><a name='::tomato::mathcsys::Parse'>Parse</a><span class='ns_scope'> [<a href="tomato-tomato-mathcsys.html#::tomato::mathcsys" title="::tomato::mathcsys" class='ruff_cmd'>::tomato::mathcsys</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
-<div style='clear:both;'></div>
-<p class='ruff'>Transform a list to coordinate system</p>
-<div class='ruff_synopsis'><span class='ruff_cmd'>Parse</span> <span class='ruff_arg'>?args?</span></div>
-<h5 class='ruff'>Parameters</h5><table class='ruff_deflist'>
-<tr><td><nobr><code>args</code></nobr></td><td>Options described below.</td></tr>
-</table>
-<h5 class='ruff'>Description</h5><p class='ruff'>The first  value represents the origin [Tcl list]<br> The second value represents the Xaxis [Tcl list]<br> The third  value represents the Yaxis [Tcl list]<br> The fourth value represents the Zaxis [Tcl list]<br></p>
-<h5 class='ruff'>Return value</h5><p class='ruff'>Returns A new coordinate system <a href="tomato-tomato-mathcsys.html#::tomato::mathcsys::Csys" title="Csys" class='ruff_cmd'>Csys</a></p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_tomato_mathcsys_Parse' href="javascript:toggleSource('tomato_mathcsys_Parse')">Show source</a></p>
-<div id='tomato_mathcsys_Parse' class='ruff_dyn_src'><pre>proc ::tomato::mathcsys::Parse {args} {
-
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Transform a list to coordinate system</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # args - Options described below.</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # The first  value represents the origin \[Tcl list]&lt;br&gt;</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # The second value represents the Xaxis \[Tcl list]&lt;br&gt;</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # The third  value represents the Yaxis \[Tcl list]&lt;br&gt;</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # The fourth value represents the Zaxis \[Tcl list]&lt;br&gt;</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Returns A new coordinate system [Csys]</span>
-
-    if {[llength <span style="color: rgb(233, 98, 98);">$args</span>] == 1} {
-
-        if {[llength {*}<span style="color: rgb(233, 98, 98);">$args</span>] != 4} {
-            <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">error</span> <span style="color: hsl(120, 71%, 16%);">&quot;must be a list 4 elements...&quot;</span>
-        }
-
-        lassign {*}<span style="color: rgb(233, 98, 98);">$args</span> or vx vy vz
-
-        <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> p  [tomato::mathpt3d::Point3d new <span style="color: rgb(233, 98, 98);">$or</span>]
-        <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> v1 [tomato::mathvec3d::Vector3d new <span style="color: rgb(233, 98, 98);">$vx</span>]
-        <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> v2 [tomato::mathvec3d::Vector3d new <span style="color: rgb(233, 98, 98);">$vy</span>]
-        <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> v3 [tomato::mathvec3d::Vector3d new <span style="color: rgb(233, 98, 98);">$vz</span>]
-
-        <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> [tomato::mathcsys::Csys new <span style="color: rgb(233, 98, 98);">$p</span> <span style="color: rgb(233, 98, 98);">$v1</span> <span style="color: rgb(233, 98, 98);">$v2</span> <span style="color: rgb(233, 98, 98);">$v3</span>]
-
-    } elseif {[llength <span style="color: rgb(233, 98, 98);">$args</span>] == 4} {
-
-        lassign <span style="color: rgb(233, 98, 98);">$args</span> or vx vy vz
-
-        <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> p  [tomato::mathpt3d::Point3d new <span style="color: rgb(233, 98, 98);">$or</span>]
-        <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> v1 [tomato::mathvec3d::Vector3d new <span style="color: rgb(233, 98, 98);">$vx</span>]
-        <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> v2 [tomato::mathvec3d::Vector3d new <span style="color: rgb(233, 98, 98);">$vy</span>]
-        <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> v3 [tomato::mathvec3d::Vector3d new <span style="color: rgb(233, 98, 98);">$vz</span>]
-
-        <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> [tomato::mathcsys::Csys new <span style="color: rgb(233, 98, 98);">$p</span> <span style="color: rgb(233, 98, 98);">$v1</span> <span style="color: rgb(233, 98, 98);">$v2</span> <span style="color: rgb(233, 98, 98);">$v3</span>]
-
-    } else {
-        <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">error</span> <span style="color: hsl(120, 71%, 16%);">&quot;must be a list of 1 with 4 sub lists or 4 elements...&quot;</span>
-    }
-}</pre></div>
-</div><h3 class='ruffproc'><a name='::tomato::mathcsys::Pitch'>Pitch</a><span class='ns_scope'> [<a href="tomato-tomato-mathcsys.html#::tomato::mathcsys" title="::tomato::mathcsys" class='ruff_cmd'>::tomato::mathcsys</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
-<div style='clear:both;'></div>
-<p class='ruff'>Rotates around Y</p>
-<div class='ruff_synopsis'><span class='ruff_cmd'>Pitch</span> <span class='ruff_arg'>av</span></div>
-<h5 class='ruff'>Parameters</h5><table class='ruff_deflist'>
-<tr><td><nobr><code>av</code></nobr></td><td>Angle  in degrees</td></tr>
-</table>
-<h5 class='ruff'>Return value</h5><p class='ruff'>Returns A rotated coordinate system <a href="tomato-tomato-mathcsys.html#::tomato::mathcsys::Csys" title="Csys" class='ruff_cmd'>Csys</a></p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_tomato_mathcsys_Pitch' href="javascript:toggleSource('tomato_mathcsys_Pitch')">Show source</a></p>
-<div id='tomato_mathcsys_Pitch' class='ruff_dyn_src'><pre>proc ::tomato::mathcsys::Pitch {av} {
-
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Rotates around Y</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # av - Angle  in degrees</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Returns A rotated coordinate system [Csys]</span>
-    <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> [tomato::mathcsys::RotationAngleVector <span style="color: rgb(233, 98, 98);">$av</span> [tomato::mathvec3d::UnitY]]
-}</pre></div>
-</div><h3 class='ruffproc'><a name='::tomato::mathcsys::Roll'>Roll</a><span class='ns_scope'> [<a href="tomato-tomato-mathcsys.html#::tomato::mathcsys" title="::tomato::mathcsys" class='ruff_cmd'>::tomato::mathcsys</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
-<div style='clear:both;'></div>
-<p class='ruff'>Rotates around X</p>
-<div class='ruff_synopsis'><span class='ruff_cmd'>Roll</span> <span class='ruff_arg'>av</span></div>
-<h5 class='ruff'>Parameters</h5><table class='ruff_deflist'>
-<tr><td><nobr><code>av</code></nobr></td><td>Angle  in degrees</td></tr>
-</table>
-<h5 class='ruff'>Return value</h5><p class='ruff'>Returns A rotated coordinate system <a href="tomato-tomato-mathcsys.html#::tomato::mathcsys::Csys" title="Csys" class='ruff_cmd'>Csys</a></p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_tomato_mathcsys_Roll' href="javascript:toggleSource('tomato_mathcsys_Roll')">Show source</a></p>
-<div id='tomato_mathcsys_Roll' class='ruff_dyn_src'><pre>proc ::tomato::mathcsys::Roll {av} {
-
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Rotates around X</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # av - Angle  in degrees</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Returns A rotated coordinate system [Csys]</span>
-    <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> [tomato::mathcsys::RotationAngleVector <span style="color: rgb(233, 98, 98);">$av</span> [tomato::mathvec3d::UnitX]]
-}</pre></div>
-</div><h3 class='ruffproc'><a name='::tomato::mathcsys::RotateTo'>RotateTo</a><span class='ns_scope'> [<a href="tomato-tomato-mathcsys.html#::tomato::mathcsys" title="::tomato::mathcsys" class='ruff_cmd'>::tomato::mathcsys</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
-<div style='clear:both;'></div>
-<p class='ruff'>Sets to the matrix of rotation that aligns the <code>from</code> vector with the <code>to</code> vector.<br> The optional Axis argument may be used when the two vectors are perpendicular and in opposite directions<br> to specify a specific solution, but is otherwise ignored.<br></p>
-<div class='ruff_synopsis'><span class='ruff_cmd'>RotateTo</span> <span class='ruff_arg'>fromVector3D toVector3D ?axis?</span></div>
-<h5 class='ruff'>Parameters</h5><table class='ruff_deflist'>
-<tr><td><nobr><code>fromVector3D</code></nobr></td><td>Input Vector object to align from.</td></tr>
-<tr><td><nobr><code>toVector3D</code></nobr></td><td>Input Vector object to align to.</td></tr>
-<tr><td><nobr><code>axis</code></nobr></td><td>Input Vector object. Optional, default <code>null</code>.</td></tr>
-</table>
-<h5 class='ruff'>Return value</h5><p class='ruff'>Returns A rotated coordinate system <a href="tomato-tomato-mathcsys.html#::tomato::mathcsys::Csys" title="Csys" class='ruff_cmd'>Csys</a></p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_tomato_mathcsys_RotateTo' href="javascript:toggleSource('tomato_mathcsys_RotateTo')">Show source</a></p>
-<div id='tomato_mathcsys_RotateTo' class='ruff_dyn_src'><pre>proc ::tomato::mathcsys::RotateTo {fromVector3D toVector3D {axis null}} {
-
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Sets to the matrix of rotation that aligns the `from` vector with the `to` vector.&lt;br&gt;</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # The optional Axis argument may be used when the two vectors are perpendicular and in opposite directions&lt;br&gt;</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # to specify a specific solution, but is otherwise ignored.&lt;br&gt;</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # fromVector3D - Input Vector object to align from.</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # toVector3D   - Input Vector object to align to.</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # axis         - Input Vector object.</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Returns A rotated coordinate system [Csys]</span>
-
-    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> r [tomato::mathmatrix3d::RotationTo <span style="color: rgb(233, 98, 98);">$fromVector3D</span> <span style="color: rgb(233, 98, 98);">$toVector3D</span> <span style="color: rgb(233, 98, 98);">$axis</span>]
-    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> coordinateSystem [tomato::mathcsys::Csys new]
-
-    <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> [tomato::mathcsys::SetRotationSubMatrix <span style="color: rgb(233, 98, 98);">$r</span> <span style="color: rgb(233, 98, 98);">$coordinateSystem</span>]
-}</pre></div>
-</div><h3 class='ruffproc'><a name='::tomato::mathcsys::RotationAngleVector'>RotationAngleVector</a><span class='ns_scope'> [<a href="tomato-tomato-mathcsys.html#::tomato::mathcsys" title="::tomato::mathcsys" class='ruff_cmd'>::tomato::mathcsys</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
-<div style='clear:both;'></div>
-<p class='ruff'>Creates a rotating coordinate system</p>
-<div class='ruff_synopsis'><span class='ruff_cmd'>RotationAngleVector</span> <span class='ruff_arg'>angle v</span></div>
-<h5 class='ruff'>Parameters</h5><table class='ruff_deflist'>
-<tr><td><nobr><code>angle</code></nobr></td><td>Angle to rotate in degrees</td></tr>
-<tr><td><nobr><code>v</code></nobr></td><td>Vector to rotate about <a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d::Vector3d" title="mathvec3d::Vector3d" class='ruff_cmd'>mathvec3d::Vector3d</a></td></tr>
-</table>
-<h5 class='ruff'>Return value</h5><p class='ruff'>Returns A rotating coordinate system <a href="tomato-tomato-mathcsys.html#::tomato::mathcsys::Csys" title="Csys" class='ruff_cmd'>Csys</a></p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_tomato_mathcsys_RotationAngleVector' href="javascript:toggleSource('tomato_mathcsys_RotationAngleVector')">Show source</a></p>
-<div id='tomato_mathcsys_RotationAngleVector' class='ruff_dyn_src'><pre>proc ::tomato::mathcsys::RotationAngleVector {angle v} {
-
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Creates a rotating coordinate system</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # angle - Angle to rotate in degrees</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # v   - Vector to rotate about [mathvec3d::Vector3d]</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Returns A rotating coordinate system [Csys]</span>
-
-    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> mat [tomato::mathmatrix::Matrix new 4 4]
-    <span style="color: rgb(233, 98, 98);">$mat</span> SetSubMatrix 0 3 0 3 [tomato::mathmatrix3d::RotationAroundArbitraryVector  [<span style="color: rgb(233, 98, 98);">$v</span> Normalized]  [tomato::helper::DegreesToRadians <span style="color: rgb(233, 98, 98);">$angle</span>]  ]
-
-    <span style="color: rgb(233, 98, 98);">$mat</span> SetCell 3 3 1.0
-
-    <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> [tomato::mathcsys::Csys new <span style="color: rgb(233, 98, 98);">$mat</span>]
-}</pre></div>
-</div><h3 class='ruffproc'><a name='::tomato::mathcsys::RotationByAngles'>RotationByAngles</a><span class='ns_scope'> [<a href="tomato-tomato-mathcsys.html#::tomato::mathcsys" title="::tomato::mathcsys" class='ruff_cmd'>::tomato::mathcsys</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
-<div style='clear:both;'></div>
-<p class='ruff'>Successive intrinsic rotations around Z (yaw) then around Y (pitch) and then around X (roll) Gives an order of magnitude speed improvement. https://en.wikipedia.org/wiki/Rotation_matrix#General_rotations</p>
-<div class='ruff_synopsis'><span class='ruff_cmd'>RotationByAngles</span> <span class='ruff_arg'>yaw pitch roll</span></div>
-<h5 class='ruff'>Parameters</h5><table class='ruff_deflist'>
-<tr><td><nobr><code>yaw</code></nobr></td><td>Rotates around Z (angle in degrees)</td></tr>
-<tr><td><nobr><code>pitch</code></nobr></td><td>Rotates around Y (angle in degrees)</td></tr>
-<tr><td><nobr><code>roll</code></nobr></td><td>Rotates around X (angle in degrees)</td></tr>
-</table>
-<h5 class='ruff'>Return value</h5><p class='ruff'>Returns A rotated coordinate system <a href="tomato-tomato-mathcsys.html#::tomato::mathcsys::Csys" title="Csys" class='ruff_cmd'>Csys</a></p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_tomato_mathcsys_RotationByAngles' href="javascript:toggleSource('tomato_mathcsys_RotationByAngles')">Show source</a></p>
-<div id='tomato_mathcsys_RotationByAngles' class='ruff_dyn_src'><pre>proc ::tomato::mathcsys::RotationByAngles {yaw pitch roll} {
-
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Successive intrinsic rotations around Z (yaw) then around Y (pitch) and then around X (roll)</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Gives an order of magnitude speed improvement.</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # https://en.wikipedia.org/wiki/Rotation_matrix#General_rotations</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # yaw   - Rotates around Z (angle in degrees)</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # pitch - Rotates around Y (angle in degrees)</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # roll  - Rotates around X (angle in degrees)</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Returns A rotated coordinate system [Csys]</span>
-
-    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> yR [tomato::helper::DegreesToRadians <span style="color: rgb(233, 98, 98);">$yaw</span>]
-    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> pR [tomato::helper::DegreesToRadians <span style="color: rgb(233, 98, 98);">$pitch</span>]
-    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> rR [tomato::helper::DegreesToRadians <span style="color: rgb(233, 98, 98);">$roll</span>]
-
-    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> cosY [expr {cos(<span style="color: rgb(233, 98, 98);">$yR</span>)}]
-    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> sinY [expr {sin(<span style="color: rgb(233, 98, 98);">$yR</span>)}]
-    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> cosP [expr {cos(<span style="color: rgb(233, 98, 98);">$pR</span>)}]
-    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> sinP [expr {sin(<span style="color: rgb(233, 98, 98);">$pR</span>)}]
-    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> cosR [expr {cos(<span style="color: rgb(233, 98, 98);">$rR</span>)}]
-    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> sinR [expr {sin(<span style="color: rgb(233, 98, 98);">$rR</span>)}]
-
-    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> origin [tomato::mathpt3d::Point3d new]
-
-    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> xAxis  [tomato::mathvec3d::Vector3d new  [expr {<span style="color: rgb(233, 98, 98);">$cosY</span> * <span style="color: rgb(233, 98, 98);">$cosP</span>}]  [expr {<span style="color: rgb(233, 98, 98);">$sinY</span> * <span style="color: rgb(233, 98, 98);">$cosP</span>}]  [expr {Inv(<span style="color: rgb(233, 98, 98);">$sinP</span>)}]  ]
-
-    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> yAxis  [tomato::mathvec3d::Vector3d new  [expr {(<span style="color: rgb(233, 98, 98);">$cosY</span> * <span style="color: rgb(233, 98, 98);">$sinP</span> * <span style="color: rgb(233, 98, 98);">$sinR</span>) - (<span style="color: rgb(233, 98, 98);">$sinY</span> * <span style="color: rgb(233, 98, 98);">$cosR</span>)}]  [expr {(<span style="color: rgb(233, 98, 98);">$sinY</span> * <span style="color: rgb(233, 98, 98);">$sinP</span> * <span style="color: rgb(233, 98, 98);">$sinR</span>) + (<span style="color: rgb(233, 98, 98);">$cosY</span> * <span style="color: rgb(233, 98, 98);">$cosR</span>)}]  [expr {<span style="color: rgb(233, 98, 98);">$cosP</span> * <span style="color: rgb(233, 98, 98);">$sinR</span>}]  ]
-
-    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> zAxis  [tomato::mathvec3d::Vector3d new  [expr {(<span style="color: rgb(233, 98, 98);">$cosY</span> * <span style="color: rgb(233, 98, 98);">$sinP</span> * <span style="color: rgb(233, 98, 98);">$cosR</span>) + (<span style="color: rgb(233, 98, 98);">$sinY</span> * <span style="color: rgb(233, 98, 98);">$sinR</span>)}]  [expr {(<span style="color: rgb(233, 98, 98);">$sinY</span> * <span style="color: rgb(233, 98, 98);">$sinP</span> * <span style="color: rgb(233, 98, 98);">$cosR</span>) - (<span style="color: rgb(233, 98, 98);">$cosY</span> * <span style="color: rgb(233, 98, 98);">$sinR</span>)}]  [expr {<span style="color: rgb(233, 98, 98);">$cosP</span> * <span style="color: rgb(233, 98, 98);">$cosR</span>}]  ]
-
-    <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> [tomato::mathcsys::Csys new <span style="color: rgb(233, 98, 98);">$origin</span> <span style="color: rgb(233, 98, 98);">$xAxis</span> <span style="color: rgb(233, 98, 98);">$yAxis</span> <span style="color: rgb(233, 98, 98);">$zAxis</span>]
-}</pre></div>
-</div><h3 class='ruffproc'><a name='::tomato::mathcsys::SetRotationSubMatrix'>SetRotationSubMatrix</a><span class='ns_scope'> [<a href="tomato-tomato-mathcsys.html#::tomato::mathcsys" title="::tomato::mathcsys" class='ruff_cmd'>::tomato::mathcsys</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
-<div style='clear:both;'></div>
-<p class='ruff'>Creates a rotating coordinate system</p>
-<div class='ruff_synopsis'><span class='ruff_cmd'>SetRotationSubMatrix</span> <span class='ruff_arg'>r coordinateSystem</span></div>
-<h5 class='ruff'>Parameters</h5><table class='ruff_deflist'>
-<tr><td><nobr><code>r</code></nobr></td><td>A 3x3 matrix with the rotation portion <a href="tomato-tomato-mathmatrix.html#::tomato::mathmatrix::Matrix" title="mathmatrix::Matrix" class='ruff_cmd'>mathmatrix::Matrix</a></td></tr>
-<tr><td><nobr><code>coordinateSystem</code></nobr></td><td>A rotated coordinate system <a href="tomato-tomato-mathcsys.html#::tomato::mathcsys::Csys" title="Csys" class='ruff_cmd'>Csys</a></td></tr>
-</table>
-<h5 class='ruff'>Return value</h5><p class='ruff'>Returns A rotating coordinate system <a href="tomato-tomato-mathcsys.html#::tomato::mathcsys::Csys" title="Csys" class='ruff_cmd'>Csys</a></p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_tomato_mathcsys_SetRotationSubMatrix' href="javascript:toggleSource('tomato_mathcsys_SetRotationSubMatrix')">Show source</a></p>
-<div id='tomato_mathcsys_SetRotationSubMatrix' class='ruff_dyn_src'><pre>proc ::tomato::mathcsys::SetRotationSubMatrix {r coordinateSystem} {
-
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Creates a rotating coordinate system</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # r                  - A 3x3 matrix with the rotation portion [mathmatrix::Matrix]</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # coordinateSystem   - A rotated coordinate system [Csys]</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Returns A rotating coordinate system [Csys]</span>
-    if {[<span style="color: rgb(233, 98, 98);">$r</span> RowCount] != 3 || [<span style="color: rgb(233, 98, 98);">$r</span> ColumnCount] != 3} {
-        <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">error</span> <span style="color: hsl(120, 71%, 16%);">&quot;[tomato::helper::TypeClass <span style="color: rgb(233, 98, 98);">$r</span>] must be Matrix3x3...&quot;</span>
-    }
-
-    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> cs [tomato::mathcsys::Csys new [<span style="color: rgb(233, 98, 98);">$coordinateSystem</span> Origin]  [<span style="color: rgb(233, 98, 98);">$coordinateSystem</span> XAxis]  [<span style="color: rgb(233, 98, 98);">$coordinateSystem</span> YAxis]  [<span style="color: rgb(233, 98, 98);">$coordinateSystem</span> ZAxis]  ]
-
-    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> csbase [<span style="color: rgb(233, 98, 98);">$cs</span> BaseClass]
-    <span style="color: rgb(233, 98, 98);">$csbase</span> SetSubMatrix 0 [<span style="color: rgb(233, 98, 98);">$r</span> RowCount] 0 [<span style="color: rgb(233, 98, 98);">$r</span> ColumnCount] <span style="color: rgb(233, 98, 98);">$r</span>
-
-    <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> [tomato::mathcsys::Csys new <span style="color: rgb(233, 98, 98);">$csbase</span>]
-}</pre></div>
-</div><h3 class='ruffproc'><a name='::tomato::mathcsys::SetToAlignCoordinateSystems'>SetToAlignCoordinateSystems</a><span class='ns_scope'> [<a href="tomato-tomato-mathcsys.html#::tomato::mathcsys" title="::tomato::mathcsys" class='ruff_cmd'>::tomato::mathcsys</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
-<div style='clear:both;'></div>
-<p class='ruff'>Sets this matrix to be the matrix that maps from the <code>from</code> coordinate system to the <code>to</code> coordinate system.</p>
-<div class='ruff_synopsis'><span class='ruff_cmd'>SetToAlignCoordinateSystems</span> <span class='ruff_arg'>fromOrigin fromXAxis fromYAxis fromZAxis toOrigin toXAxis toYAxis toZAxis</span></div>
-<h5 class='ruff'>Parameters</h5><table class='ruff_deflist'>
-<tr><td><nobr><code>fromOrigin</code></nobr></td><td>Input <a href="tomato-tomato-mathpt3d.html#::tomato::mathpt3d::Point3d" title="mathpt3d::Point3d" class='ruff_cmd'>mathpt3d::Point3d</a>   that defines the origin to map the coordinate system from</td></tr>
-<tr><td><nobr><code>fromXAxis</code></nobr></td><td>Input <a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d::Vector3d" title="mathvec3d::Vector3d" class='ruff_cmd'>mathvec3d::Vector3d</a> that defines the X-axis to map the coordinate system from.</td></tr>
-<tr><td><nobr><code>fromYAxis</code></nobr></td><td>Input <a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d::Vector3d" title="mathvec3d::Vector3d" class='ruff_cmd'>mathvec3d::Vector3d</a> that defines the Y-axis to map the coordinate system from.</td></tr>
-<tr><td><nobr><code>fromZAxis</code></nobr></td><td>Input <a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d::Vector3d" title="mathvec3d::Vector3d" class='ruff_cmd'>mathvec3d::Vector3d</a> that defines the Z-axis to map the coordinate system from.</td></tr>
-<tr><td><nobr><code>toOrigin</code></nobr></td><td>Input <a href="tomato-tomato-mathpt3d.html#::tomato::mathpt3d::Point3d" title="mathpt3d::Point3d" class='ruff_cmd'>mathpt3d::Point3d</a>   that defines the origin to map the coordinate system to.</td></tr>
-<tr><td><nobr><code>toXAxis</code></nobr></td><td>Input <a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d::Vector3d" title="mathvec3d::Vector3d" class='ruff_cmd'>mathvec3d::Vector3d</a> that defines the X-axis to map the coordinate system to.</td></tr>
-<tr><td><nobr><code>toYAxis</code></nobr></td><td>Input <a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d::Vector3d" title="mathvec3d::Vector3d" class='ruff_cmd'>mathvec3d::Vector3d</a> that defines the Y-axis to map the coordinate system to.</td></tr>
-<tr><td><nobr><code>toZAxis</code></nobr></td><td>Input <a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d::Vector3d" title="mathvec3d::Vector3d" class='ruff_cmd'>mathvec3d::Vector3d</a> that defines the Z-axis to map the coordinate system to.</td></tr>
-</table>
-<h5 class='ruff'>Return value</h5><p class='ruff'>Returns A mapping coordinate system <a href="tomato-tomato-mathcsys.html#::tomato::mathcsys::Csys" title="Csys" class='ruff_cmd'>Csys</a></p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_tomato_mathcsys_SetToAlignCoordinateSystems' href="javascript:toggleSource('tomato_mathcsys_SetToAlignCoordinateSystems')">Show source</a></p>
-<div id='tomato_mathcsys_SetToAlignCoordinateSystems' class='ruff_dyn_src'><pre>proc ::tomato::mathcsys::SetToAlignCoordinateSystems {fromOrigin fromXAxis fromYAxis fromZAxis toOrigin toXAxis toYAxis toZAxis} {
-
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Sets this matrix to be the matrix that maps from the `from` coordinate system to the `to` coordinate system.</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # fromOrigin - Input [mathpt3d::Point3d]   that defines the origin to map the coordinate system from</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # fromXAxis  - Input [mathvec3d::Vector3d] that defines the X-axis to map the coordinate system from.</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # fromYAxis  - Input [mathvec3d::Vector3d] that defines the Y-axis to map the coordinate system from.</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # fromZAxis  - Input [mathvec3d::Vector3d] that defines the Z-axis to map the coordinate system from.</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # toOrigin   - Input [mathpt3d::Point3d]   that defines the origin to map the coordinate system to.</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # toXAxis    - Input [mathvec3d::Vector3d] that defines the X-axis to map the coordinate system to.</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # toYAxis    - Input [mathvec3d::Vector3d] that defines the Y-axis to map the coordinate system to.</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # toZAxis    - Input [mathvec3d::Vector3d] that defines the Z-axis to map the coordinate system to.</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Returns A mapping coordinate system [Csys]</span>
-
-    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> cs1 [tomato::mathcsys::Csys new <span style="color: rgb(233, 98, 98);">$fromOrigin</span> <span style="color: rgb(233, 98, 98);">$fromXAxis</span> <span style="color: rgb(233, 98, 98);">$fromYAxis</span> <span style="color: rgb(233, 98, 98);">$fromZAxis</span>]
-    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> cs2 [tomato::mathcsys::Csys new <span style="color: rgb(233, 98, 98);">$toOrigin</span> <span style="color: rgb(233, 98, 98);">$toXAxis</span> <span style="color: rgb(233, 98, 98);">$toYAxis</span> <span style="color: rgb(233, 98, 98);">$toZAxis</span>]
-    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> mcs [tomato::mathcsys::CreateMappingCoordinateSystem <span style="color: rgb(233, 98, 98);">$cs1</span> <span style="color: rgb(233, 98, 98);">$cs2</span>]
-
-    <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> <span style="color: rgb(233, 98, 98);">$mcs</span>
-}</pre></div>
-</div><h3 class='ruffproc'><a name='::tomato::mathcsys::Translation'>Translation</a><span class='ns_scope'> [<a href="tomato-tomato-mathcsys.html#::tomato::mathcsys" title="::tomato::mathcsys" class='ruff_cmd'>::tomato::mathcsys</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
-<div style='clear:both;'></div>
-<p class='ruff'>Creates a translation.</p>
-<div class='ruff_synopsis'><span class='ruff_cmd'>Translation</span> <span class='ruff_arg'>translation</span></div>
-<h5 class='ruff'>Parameters</h5><table class='ruff_deflist'>
-<tr><td><nobr><code>translation</code></nobr></td><td>A translation vector <a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d::Vector3d" title="mathvec3d::Vector3d" class='ruff_cmd'>mathvec3d::Vector3d</a></td></tr>
-</table>
-<h5 class='ruff'>Return value</h5><p class='ruff'>Returns A translated coordinate system <a href="tomato-tomato-mathcsys.html#::tomato::mathcsys::Csys" title="Csys" class='ruff_cmd'>Csys</a></p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_tomato_mathcsys_Translation' href="javascript:toggleSource('tomato_mathcsys_Translation')">Show source</a></p>
-<div id='tomato_mathcsys_Translation' class='ruff_dyn_src'><pre>proc ::tomato::mathcsys::Translation {translation} {
-
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Creates a translation.</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # translation - A translation vector [mathvec3d::Vector3d]</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Returns A translated coordinate system [Csys]</span>
-    <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> [tomato::mathcsys::Csys new [<span style="color: rgb(233, 98, 98);">$translation</span> ToPoint3D] [tomato::mathvec3d::UnitX] [tomato::mathvec3d::UnitY] [tomato::mathvec3d::UnitZ]]
-}</pre></div>
-</div><h3 class='ruffproc'><a name='::tomato::mathcsys::Yaw'>Yaw</a><span class='ns_scope'> [<a href="tomato-tomato-mathcsys.html#::tomato::mathcsys" title="::tomato::mathcsys" class='ruff_cmd'>::tomato::mathcsys</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
-<div style='clear:both;'></div>
-<p class='ruff'>Rotates around Z</p>
-<div class='ruff_synopsis'><span class='ruff_cmd'>Yaw</span> <span class='ruff_arg'>av</span></div>
-<h5 class='ruff'>Parameters</h5><table class='ruff_deflist'>
-<tr><td><nobr><code>av</code></nobr></td><td>Angle  in degrees</td></tr>
-</table>
-<h5 class='ruff'>Return value</h5><p class='ruff'>Returns A rotated coordinate system <a href="tomato-tomato-mathcsys.html#::tomato::mathcsys::Csys" title="Csys" class='ruff_cmd'>Csys</a></p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_tomato_mathcsys_Yaw' href="javascript:toggleSource('tomato_mathcsys_Yaw')">Show source</a></p>
-<div id='tomato_mathcsys_Yaw' class='ruff_dyn_src'><pre>proc ::tomato::mathcsys::Yaw {av} {
-
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Rotates around Z</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # av - Angle  in degrees</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Returns A rotated coordinate system [Csys]</span>
-    <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> [tomato::mathcsys::RotationAngleVector <span style="color: rgb(233, 98, 98);">$av</span> [tomato::mathvec3d::UnitZ]]
-}</pre></div>
 </div></main><nav class='ruff-nav'><ul style='position: sticky; top: 0;'><li class='ruff-toc1'><a style='padding-top:2px;' href='tomato.html'>Start page</a></li>
 <li class='ruff-toc1'><a href='tomato-docindex.html' accesskey='i'>Index</a></li>
 <hr>
@@ -1018,7 +1018,20 @@
 <li class='ruff-toc1'><a href='tomato-tomato-mathmatrix3d.html'>tomato::mathmatrix3d</a></li>
 <li class='ruff-toc1'><a href='tomato-tomato-mathvec3d.html'>tomato::mathvec3d</a></li>
 <li class='ruff-toc1'><a href='tomato-tomato-mathmatrix.html'>tomato::mathmatrix</a></li>
-<hr><li class='ruff-toc2'><a href='#::tomato::mathcsys-Classes'>Classes</a></li><li class='ruff-toc3'><a href='tomato-tomato-mathcsys.html#::tomato::mathcsys::Csys'>Csys</a></li><li class='ruff-toc4 ruff-tip'><a href='tomato-tomato-mathcsys.html#::tomato::mathcsys::Csys::constructor'>constructor</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>Csys create OBJNAME</span> <span class='ruff_arg'>?args?</span>
+<hr><li class='ruff-toc2'><a href='#::tomato::mathcsys-Commands'>Commands</a></li><li class='ruff-toc3 ruff-tip'><a href='tomato-tomato-mathcsys.html#::tomato::mathcsys::CreateMappingCoordinateSystem'>CreateMappingCoordinateSystem</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>CreateMappingCoordinateSystem</span> <span class='ruff_arg'>fromCs toCs</span></pre>Creates a coordinate system that maps from the <code>from</code> coordinate system to the <code>to</code> coordinate system.
+</span></li><li class='ruff-toc3 ruff-tip'><a href='tomato-tomato-mathcsys.html#::tomato::mathcsys::Equals'>Equals</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>Equals</span> <span class='ruff_arg'>cs other tolerance</span></pre>Indicate if this coordinate system is equivalent to a another coordinate system
+</span></li><li class='ruff-toc3 ruff-tip'><a href='tomato-tomato-mathcsys.html#::tomato::mathcsys::GetRotationSubMatrix'>GetRotationSubMatrix</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>GetRotationSubMatrix</span> <span class='ruff_arg'>coordinateSystem</span></pre>Gets a rotation submatrix from a coordinate system
+</span></li><li class='ruff-toc3 ruff-tip'><a href='tomato-tomato-mathcsys.html#::tomato::mathcsys::Parse'>Parse</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>Parse</span> <span class='ruff_arg'>?args?</span></pre>Transform a list to coordinate system
+</span></li><li class='ruff-toc3 ruff-tip'><a href='tomato-tomato-mathcsys.html#::tomato::mathcsys::Pitch'>Pitch</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>Pitch</span> <span class='ruff_arg'>av</span></pre>Rotates around Y
+</span></li><li class='ruff-toc3 ruff-tip'><a href='tomato-tomato-mathcsys.html#::tomato::mathcsys::Roll'>Roll</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>Roll</span> <span class='ruff_arg'>av</span></pre>Rotates around X
+</span></li><li class='ruff-toc3 ruff-tip'><a href='tomato-tomato-mathcsys.html#::tomato::mathcsys::RotateTo'>RotateTo</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>RotateTo</span> <span class='ruff_arg'>fromVector3D toVector3D ?axis?</span></pre>Sets to the matrix of rotation that aligns the <code>from</code> vector with the <code>to</code> vector.<br> The optional Axis argument may be used when the two vectors are perpendicular and in opposite directions<br> to specify a specific solution, but is otherwise ignored.<br>
+</span></li><li class='ruff-toc3 ruff-tip'><a href='tomato-tomato-mathcsys.html#::tomato::mathcsys::RotationAngleVector'>RotationAngleVector</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>RotationAngleVector</span> <span class='ruff_arg'>angle v</span></pre>Creates a rotating coordinate system
+</span></li><li class='ruff-toc3 ruff-tip'><a href='tomato-tomato-mathcsys.html#::tomato::mathcsys::RotationByAngles'>RotationByAngles</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>RotationByAngles</span> <span class='ruff_arg'>yaw pitch roll</span></pre>Successive intrinsic rotations around Z (yaw) then around Y (pitch) and then around X (roll) Gives an order of magnitude speed improvement. https://en.wikipedia.org/wiki/Rotation_matrix#General_rotations
+</span></li><li class='ruff-toc3 ruff-tip'><a href='tomato-tomato-mathcsys.html#::tomato::mathcsys::SetRotationSubMatrix'>SetRotationSubMatrix</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>SetRotationSubMatrix</span> <span class='ruff_arg'>r coordinateSystem</span></pre>Creates a rotating coordinate system
+</span></li><li class='ruff-toc3 ruff-tip'><a href='tomato-tomato-mathcsys.html#::tomato::mathcsys::SetToAlignCoordinateSystems'>SetToAlignCoordinateSystems</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>SetToAlignCoordinateSystems</span> <span class='ruff_arg'>fromOrigin fromXAxis fromYAxis fromZAxis toOrigin toXAxis toYAxis toZAxis</span></pre>Sets this matrix to be the matrix that maps from the <code>from</code> coordinate system to the <code>to</code> coordinate system.
+</span></li><li class='ruff-toc3 ruff-tip'><a href='tomato-tomato-mathcsys.html#::tomato::mathcsys::Translation'>Translation</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>Translation</span> <span class='ruff_arg'>translation</span></pre>Creates a translation.
+</span></li><li class='ruff-toc3 ruff-tip'><a href='tomato-tomato-mathcsys.html#::tomato::mathcsys::Yaw'>Yaw</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>Yaw</span> <span class='ruff_arg'>av</span></pre>Rotates around Z
+</span></li><li class='ruff-toc2'><a href='#::tomato::mathcsys-Classes'>Classes</a></li><li class='ruff-toc3'><a href='tomato-tomato-mathcsys.html#::tomato::mathcsys::Csys'>Csys</a></li><li class='ruff-toc4 ruff-tip'><a href='tomato-tomato-mathcsys.html#::tomato::mathcsys::Csys::constructor'>constructor</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>Csys create OBJNAME</span> <span class='ruff_arg'>?args?</span>
 <span class='ruff_cmd'>Csys new</span> <span class='ruff_arg'>?args?</span></pre>Initializes a new Coordinate System Class.
 </span></li><li class='ruff-toc4 ruff-tip'><a href='tomato-tomato-mathcsys.html#::tomato::mathcsys::Csys::!='>!=</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>CSYSOBJ !=</span> <span class='ruff_arg'>other ?tolerance?</span></pre>Gets value that indicates whether any pair of elements in two specified coordinate system is not equal.
 </span></li><li class='ruff-toc4 ruff-tip'><a href='tomato-tomato-mathcsys.html#::tomato::mathcsys::Csys::=='>==</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>CSYSOBJ ==</span> <span class='ruff_arg'>other ?tolerance?</span></pre>Gets value that indicates whether each pair of elements in two specified coordinate system is equal.
@@ -1042,19 +1055,6 @@
 </span></li><li class='ruff-toc4 ruff-tip'><a href='tomato-tomato-mathcsys.html#::tomato::mathcsys::Csys::XAxis'>XAxis</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>CSYSOBJ XAxis</span> </pre>Gets the X Axis
 </span></li><li class='ruff-toc4 ruff-tip'><a href='tomato-tomato-mathcsys.html#::tomato::mathcsys::Csys::YAxis'>YAxis</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>CSYSOBJ YAxis</span> </pre>Gets the Y Axis
 </span></li><li class='ruff-toc4 ruff-tip'><a href='tomato-tomato-mathcsys.html#::tomato::mathcsys::Csys::ZAxis'>ZAxis</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>CSYSOBJ ZAxis</span> </pre>Gets the Z Axis
-</span></li><li class='ruff-toc2'><a href='#::tomato::mathcsys-Commands'>Commands</a></li><li class='ruff-toc3 ruff-tip'><a href='tomato-tomato-mathcsys.html#::tomato::mathcsys::CreateMappingCoordinateSystem'>CreateMappingCoordinateSystem</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>CreateMappingCoordinateSystem</span> <span class='ruff_arg'>fromCs toCs</span></pre>Creates a coordinate system that maps from the <code>from</code> coordinate system to the <code>to</code> coordinate system.
-</span></li><li class='ruff-toc3 ruff-tip'><a href='tomato-tomato-mathcsys.html#::tomato::mathcsys::Equals'>Equals</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>Equals</span> <span class='ruff_arg'>cs other tolerance</span></pre>Indicate if this coordinate system is equivalent to a another coordinate system
-</span></li><li class='ruff-toc3 ruff-tip'><a href='tomato-tomato-mathcsys.html#::tomato::mathcsys::GetRotationSubMatrix'>GetRotationSubMatrix</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>GetRotationSubMatrix</span> <span class='ruff_arg'>coordinateSystem</span></pre>Gets a rotation submatrix from a coordinate system
-</span></li><li class='ruff-toc3 ruff-tip'><a href='tomato-tomato-mathcsys.html#::tomato::mathcsys::Parse'>Parse</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>Parse</span> <span class='ruff_arg'>?args?</span></pre>Transform a list to coordinate system
-</span></li><li class='ruff-toc3 ruff-tip'><a href='tomato-tomato-mathcsys.html#::tomato::mathcsys::Pitch'>Pitch</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>Pitch</span> <span class='ruff_arg'>av</span></pre>Rotates around Y
-</span></li><li class='ruff-toc3 ruff-tip'><a href='tomato-tomato-mathcsys.html#::tomato::mathcsys::Roll'>Roll</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>Roll</span> <span class='ruff_arg'>av</span></pre>Rotates around X
-</span></li><li class='ruff-toc3 ruff-tip'><a href='tomato-tomato-mathcsys.html#::tomato::mathcsys::RotateTo'>RotateTo</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>RotateTo</span> <span class='ruff_arg'>fromVector3D toVector3D ?axis?</span></pre>Sets to the matrix of rotation that aligns the <code>from</code> vector with the <code>to</code> vector.<br> The optional Axis argument may be used when the two vectors are perpendicular and in opposite directions<br> to specify a specific solution, but is otherwise ignored.<br>
-</span></li><li class='ruff-toc3 ruff-tip'><a href='tomato-tomato-mathcsys.html#::tomato::mathcsys::RotationAngleVector'>RotationAngleVector</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>RotationAngleVector</span> <span class='ruff_arg'>angle v</span></pre>Creates a rotating coordinate system
-</span></li><li class='ruff-toc3 ruff-tip'><a href='tomato-tomato-mathcsys.html#::tomato::mathcsys::RotationByAngles'>RotationByAngles</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>RotationByAngles</span> <span class='ruff_arg'>yaw pitch roll</span></pre>Successive intrinsic rotations around Z (yaw) then around Y (pitch) and then around X (roll) Gives an order of magnitude speed improvement. https://en.wikipedia.org/wiki/Rotation_matrix#General_rotations
-</span></li><li class='ruff-toc3 ruff-tip'><a href='tomato-tomato-mathcsys.html#::tomato::mathcsys::SetRotationSubMatrix'>SetRotationSubMatrix</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>SetRotationSubMatrix</span> <span class='ruff_arg'>r coordinateSystem</span></pre>Creates a rotating coordinate system
-</span></li><li class='ruff-toc3 ruff-tip'><a href='tomato-tomato-mathcsys.html#::tomato::mathcsys::SetToAlignCoordinateSystems'>SetToAlignCoordinateSystems</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>SetToAlignCoordinateSystems</span> <span class='ruff_arg'>fromOrigin fromXAxis fromYAxis fromZAxis toOrigin toXAxis toYAxis toZAxis</span></pre>Sets this matrix to be the matrix that maps from the <code>from</code> coordinate system to the <code>to</code> coordinate system.
-</span></li><li class='ruff-toc3 ruff-tip'><a href='tomato-tomato-mathcsys.html#::tomato::mathcsys::Translation'>Translation</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>Translation</span> <span class='ruff_arg'>translation</span></pre>Creates a translation.
-</span></li><li class='ruff-toc3 ruff-tip'><a href='tomato-tomato-mathcsys.html#::tomato::mathcsys::Yaw'>Yaw</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>Yaw</span> <span class='ruff_arg'>av</span></pre>Rotates around Z
 </span></li></ul></nav><footer class='ruff-layout-footer ruff-ft'><div style='float: right;'>Document generated by <a href='https://ruff.magicsplat.com'>Ruff!</a></div></footer>
 </div></body></html>
 

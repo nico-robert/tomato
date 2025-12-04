@@ -16,7 +16,190 @@
         </header><main class='ruff-layout-main ruff-bd'><h1 class='ruff'><a name='::tomato::mathpt3d'></a>::tomato::mathpt3d<span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h1>
 <div style='clear:both;'></div>
 <p class='ruff'>A Class representing a Point in 3D space</p>
-<h2 class='ruff'><a name='::tomato::mathpt3d-Classes'></a>Classes<span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h2>
+<h2 class='ruff'><a name='::tomato::mathpt3d-Commands'></a>Commands<span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h2>
+<div style='clear:both;'></div>
+<h3 class='ruffproc'><a name='::tomato::mathpt3d::Average'>Average</a><span class='ns_scope'> [<a href="tomato-tomato-mathpt3d.html#::tomato::mathpt3d" title="::tomato::mathpt3d" class='ruff_cmd'>::tomato::mathpt3d</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
+<div style='clear:both;'></div>
+<p class='ruff'>Gets the average value of list</p>
+<div class='ruff_synopsis'><span class='ruff_cmd'>Average</span> <span class='ruff_arg'>listaxisPt</span></div>
+<h5 class='ruff'>Parameters</h5><table class='ruff_deflist'>
+<tr><td><nobr><code>listaxisPt</code></nobr></td><td>list in the form of a Tcl list</td></tr>
+</table>
+<h5 class='ruff'>Return value</h5><p class='ruff'>Returns The average value</p>
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_tomato_mathpt3d_Average' href="javascript:toggleSource('tomato_mathpt3d_Average')">Show source</a></p>
+<div id='tomato_mathpt3d_Average' class='ruff_dyn_src'><pre>proc ::tomato::mathpt3d::Average {listaxisPt} {
+
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Gets the average value of list</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # listaxisPt - list in the form of a Tcl list</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Returns The average value</span>
+    <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> [expr {[tcl::mathop::+ {*}<span style="color: rgb(233, 98, 98);">$listaxisPt</span> 0.0] / max(1, [llength <span style="color: rgb(233, 98, 98);">$listaxisPt</span>])}]
+}</pre></div>
+</div><h3 class='ruffproc'><a name='::tomato::mathpt3d::Centroid'>Centroid</a><span class='ns_scope'> [<a href="tomato-tomato-mathpt3d.html#::tomato::mathpt3d" title="::tomato::mathpt3d" class='ruff_cmd'>::tomato::mathpt3d</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
+<div style='clear:both;'></div>
+<p class='ruff'>Gets the centroid of an arbitrary collection of points</p>
+<div class='ruff_synopsis'><span class='ruff_cmd'>Centroid</span> <span class='ruff_arg'>listPts</span></div>
+<h5 class='ruff'>Parameters</h5><table class='ruff_deflist'>
+<tr><td><nobr><code>listPts</code></nobr></td><td>The list of points <a href="tomato-tomato-mathpt3d.html#::tomato::mathpt3d::Point3d" title="Point3d" class='ruff_cmd'>Point3d</a></td></tr>
+</table>
+<h5 class='ruff'>Return value</h5><p class='ruff'>Returns The centroid of the points <a href="tomato-tomato-mathpt3d.html#::tomato::mathpt3d::Point3d" title="Point3d" class='ruff_cmd'>Point3d</a></p>
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_tomato_mathpt3d_Centroid' href="javascript:toggleSource('tomato_mathpt3d_Centroid')">Show source</a></p>
+<div id='tomato_mathpt3d_Centroid' class='ruff_dyn_src'><pre>proc ::tomato::mathpt3d::Centroid {listPts} {
+
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Gets the centroid of an arbitrary collection of points</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # listPts - The list of points [Point3d]</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Returns The centroid of the points [Point3d]</span>
+    if {![llength <span style="color: rgb(233, 98, 98);">$listPts</span>]} {
+        <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">error</span> <span style="color: hsl(120, 71%, 16%);">&quot;list points must be &gt; 0&quot;</span>
+    }
+
+    foreach points <span style="color: rgb(233, 98, 98);">$listPts</span> {
+        lassign [<span style="color: rgb(233, 98, 98);">$points</span> Get] x y z
+        lappend ptx <span style="color: rgb(233, 98, 98);">$x</span>
+        lappend pty <span style="color: rgb(233, 98, 98);">$y</span>
+        lappend ptz <span style="color: rgb(233, 98, 98);">$z</span>
+    }
+
+    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> centx [tomato::mathpt3d::Average <span style="color: rgb(233, 98, 98);">$ptx</span>]
+    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> centy [tomato::mathpt3d::Average <span style="color: rgb(233, 98, 98);">$pty</span>]
+    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> centz [tomato::mathpt3d::Average <span style="color: rgb(233, 98, 98);">$ptz</span>]
+
+    <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> [tomato::mathpt3d::Point3d new <span style="color: rgb(233, 98, 98);">$centx</span> <span style="color: rgb(233, 98, 98);">$centy</span> <span style="color: rgb(233, 98, 98);">$centz</span>]
+}</pre></div>
+</div><h3 class='ruffproc'><a name='::tomato::mathpt3d::Equals'>Equals</a><span class='ns_scope'> [<a href="tomato-tomato-mathpt3d.html#::tomato::mathpt3d" title="::tomato::mathpt3d" class='ruff_cmd'>::tomato::mathpt3d</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
+<div style='clear:both;'></div>
+<p class='ruff'>Gets a value to indicate if a pair of points are equal</p>
+<div class='ruff_synopsis'><span class='ruff_cmd'>Equals</span> <span class='ruff_arg'>pt other tolerance</span></div>
+<h5 class='ruff'>Parameters</h5><table class='ruff_deflist'>
+<tr><td><nobr><code>pt</code></nobr></td><td>First input point <a href="tomato-tomato-mathpt3d.html#::tomato::mathpt3d::Point3d" title="Point3d" class='ruff_cmd'>Point3d</a></td></tr>
+<tr><td><nobr><code>other</code></nobr></td><td>Second input point <a href="tomato-tomato-mathpt3d.html#::tomato::mathpt3d::Point3d" title="Point3d" class='ruff_cmd'>Point3d</a></td></tr>
+<tr><td><nobr><code>tolerance</code></nobr></td><td>A tolerance (epsilon) to adjust for floating point error</td></tr>
+</table>
+<h5 class='ruff'>Description</h5><p class='ruff'>See : methods == !=</p>
+<p class='ruff'>An error exception is raised if tolerance (epsilon) &lt; 0.</p>
+<h5 class='ruff'>Return value</h5><p class='ruff'>Returns <code>True</code> if the points are equal, otherwise false.</p>
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_tomato_mathpt3d_Equals' href="javascript:toggleSource('tomato_mathpt3d_Equals')">Show source</a></p>
+<div id='tomato_mathpt3d_Equals' class='ruff_dyn_src'><pre>proc ::tomato::mathpt3d::Equals {pt other tolerance} {
+
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Gets a value to indicate if a pair of points are equal</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # pt - First input point [Point3d]</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # other - Second input point [Point3d]</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # tolerance - A tolerance (epsilon) to adjust for floating point error</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Returns `True` if the points are equal, otherwise false.</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # See : methods == !=</span>
+    if {<span style="color: rgb(233, 98, 98);">$tolerance</span> &lt; 0} {
+        #ruff
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">        # An <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">error</span> exception is raised if tolerance (epsilon) &lt; 0.</span>
+        <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">error</span> <span style="color: hsl(120, 71%, 16%);">&quot;epsilon &lt; 0&quot;</span>
+    }
+
+    <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> [expr {
+                  (abs([<span style="color: rgb(233, 98, 98);">$other</span> X] - [<span style="color: rgb(233, 98, 98);">$pt</span> X]) &lt; <span style="color: rgb(233, 98, 98);">$tolerance</span>) &amp;&amp;
+                  (abs([<span style="color: rgb(233, 98, 98);">$other</span> Y] - [<span style="color: rgb(233, 98, 98);">$pt</span> Y]) &lt; <span style="color: rgb(233, 98, 98);">$tolerance</span>) &amp;&amp;
+                  (abs([<span style="color: rgb(233, 98, 98);">$other</span> Z] - [<span style="color: rgb(233, 98, 98);">$pt</span> Z]) &lt; <span style="color: rgb(233, 98, 98);">$tolerance</span>)
+                }]
+}</pre></div>
+</div><h3 class='ruffproc'><a name='::tomato::mathpt3d::IntersectionOf3Planes'>IntersectionOf3Planes</a><span class='ns_scope'> [<a href="tomato-tomato-mathpt3d.html#::tomato::mathpt3d" title="::tomato::mathpt3d" class='ruff_cmd'>::tomato::mathpt3d</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
+<div style='clear:both;'></div>
+<p class='ruff'>Gets the point at which three planes intersect</p>
+<div class='ruff_synopsis'><span class='ruff_cmd'>IntersectionOf3Planes</span> <span class='ruff_arg'>plane1 plane2 plane3</span></div>
+<h5 class='ruff'>Parameters</h5><table class='ruff_deflist'>
+<tr><td><nobr><code>plane1</code></nobr></td><td><a href="tomato-tomato-mathplane.html#::tomato::mathplane::Plane" title="mathplane::Plane" class='ruff_cmd'>mathplane::Plane</a></td></tr>
+<tr><td><nobr><code>plane2</code></nobr></td><td><a href="tomato-tomato-mathplane.html#::tomato::mathplane::Plane" title="mathplane::Plane" class='ruff_cmd'>mathplane::Plane</a></td></tr>
+<tr><td><nobr><code>plane3</code></nobr></td><td><a href="tomato-tomato-mathplane.html#::tomato::mathplane::Plane" title="mathplane::Plane" class='ruff_cmd'>mathplane::Plane</a></td></tr>
+</table>
+<h5 class='ruff'>Return value</h5><p class='ruff'>Returns The point of intersection <a href="tomato-tomato-mathpt3d.html#::tomato::mathpt3d::Point3d" title="Point3d" class='ruff_cmd'>Point3d</a></p>
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_tomato_mathpt3d_IntersectionOf3Planes' href="javascript:toggleSource('tomato_mathpt3d_IntersectionOf3Planes')">Show source</a></p>
+<div id='tomato_mathpt3d_IntersectionOf3Planes' class='ruff_dyn_src'><pre>proc ::tomato::mathpt3d::IntersectionOf3Planes {plane1 plane2 plane3} {
+
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Gets the point at which three planes intersect</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # plane1 - [mathplane::Plane]</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # plane2 - [mathplane::Plane]</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # plane3 - [mathplane::Plane]</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Returns The point of intersection [Point3d]</span>
+    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> ray [<span style="color: rgb(233, 98, 98);">$plane1</span> IntersectionWith <span style="color: rgb(233, 98, 98);">$plane2</span>]
+    <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span>  [<span style="color: rgb(233, 98, 98);">$plane3</span> IntersectionWith <span style="color: rgb(233, 98, 98);">$ray</span>]
+}</pre></div>
+</div><h3 class='ruffproc'><a name='::tomato::mathpt3d::IntersectionOfPlaneRay'>IntersectionOfPlaneRay</a><span class='ns_scope'> [<a href="tomato-tomato-mathpt3d.html#::tomato::mathpt3d" title="::tomato::mathpt3d" class='ruff_cmd'>::tomato::mathpt3d</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
+<div style='clear:both;'></div>
+<p class='ruff'>Gets the point of intersection between a plane and a ray</p>
+<div class='ruff_synopsis'><span class='ruff_cmd'>IntersectionOfPlaneRay</span> <span class='ruff_arg'>plane ray</span></div>
+<h5 class='ruff'>Parameters</h5><table class='ruff_deflist'>
+<tr><td><nobr><code>plane</code></nobr></td><td><a href="tomato-tomato-mathplane.html#::tomato::mathplane::Plane" title="mathplane::Plane" class='ruff_cmd'>mathplane::Plane</a></td></tr>
+<tr><td><nobr><code>ray</code></nobr></td><td><a href="tomato-tomato-mathray3d.html#::tomato::mathray3d::Ray3d" title="mathray3d::Ray3d" class='ruff_cmd'>mathray3d::Ray3d</a></td></tr>
+</table>
+<h5 class='ruff'>Return value</h5><p class='ruff'>Returns The point of intersection <a href="tomato-tomato-mathpt3d.html#::tomato::mathpt3d::Point3d" title="Point3d" class='ruff_cmd'>Point3d</a></p>
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_tomato_mathpt3d_IntersectionOfPlaneRay' href="javascript:toggleSource('tomato_mathpt3d_IntersectionOfPlaneRay')">Show source</a></p>
+<div id='tomato_mathpt3d_IntersectionOfPlaneRay' class='ruff_dyn_src'><pre>proc ::tomato::mathpt3d::IntersectionOfPlaneRay {plane ray} {
+
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Gets the point of intersection between a plane and a ray</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # plane - [mathplane::Plane]</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # ray   - [mathray3d::Ray3d]</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Returns The point of intersection [Point3d]</span>
+    <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> [<span style="color: rgb(233, 98, 98);">$plane</span> IntersectionWith <span style="color: rgb(233, 98, 98);">$ray</span>]
+}</pre></div>
+</div><h3 class='ruffproc'><a name='::tomato::mathpt3d::IsCollinearPoints'>IsCollinearPoints</a><span class='ns_scope'> [<a href="tomato-tomato-mathpt3d.html#::tomato::mathpt3d" title="::tomato::mathpt3d" class='ruff_cmd'>::tomato::mathpt3d</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
+<div style='clear:both;'></div>
+<p class='ruff'>Check if three points are collinear</p>
+<div class='ruff_synopsis'><span class='ruff_cmd'>IsCollinearPoints</span> <span class='ruff_arg'>p1 p2 p3 ?tolerance?</span></div>
+<h5 class='ruff'>Parameters</h5><table class='ruff_deflist'>
+<tr><td><nobr><code>p1</code></nobr></td><td><a href="tomato-tomato-mathpt3d.html#::tomato::mathpt3d::Point3d" title="Point3d" class='ruff_cmd'>Point3d</a></td></tr>
+<tr><td><nobr><code>p2</code></nobr></td><td><a href="tomato-tomato-mathpt3d.html#::tomato::mathpt3d::Point3d" title="Point3d" class='ruff_cmd'>Point3d</a></td></tr>
+<tr><td><nobr><code>p3</code></nobr></td><td><a href="tomato-tomato-mathpt3d.html#::tomato::mathpt3d::Point3d" title="Point3d" class='ruff_cmd'>Point3d</a></td></tr>
+<tr><td><nobr><code>tolerance</code></nobr></td><td>A tolerance (epsilon) for collinear points verification. Optional, default <code>$::tomato::helper::TolGeom</code>.</td></tr>
+</table>
+<h5 class='ruff'>Return value</h5><p class='ruff'>Returns <code>True</code> if the points are collinear, otherwise false.</p>
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_tomato_mathpt3d_IsCollinearPoints' href="javascript:toggleSource('tomato_mathpt3d_IsCollinearPoints')">Show source</a></p>
+<div id='tomato_mathpt3d_IsCollinearPoints' class='ruff_dyn_src'><pre>proc ::tomato::mathpt3d::IsCollinearPoints {p1 p2 p3 {tolerance {<span style="color: rgb(233, 98, 98);">$::tomato::helper::TolGeom</span>}}} {
+
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Check if three points are collinear</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # p1 - [Point3d]</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # p2 - [Point3d]</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # p3 - [Point3d]</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # tolerance - A tolerance (epsilon) for collinear points verification.</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Returns `True` if the points are collinear, otherwise false.</span>
+    if {[llength [info level 0]] &lt; 5} {
+        <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> tolerance <span style="color: rgb(233, 98, 98);">$::tomato::helper::TolGeom</span>
+    }
+
+    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> v1 [<span style="color: rgb(233, 98, 98);">$p1</span> VectorTo <span style="color: rgb(233, 98, 98);">$p2</span>]
+    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> v2 [<span style="color: rgb(233, 98, 98);">$p1</span> VectorTo <span style="color: rgb(233, 98, 98);">$p3</span>]
+
+    <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> [expr {[[<span style="color: rgb(233, 98, 98);">$v1</span> CrossProduct <span style="color: rgb(233, 98, 98);">$v2</span>] Length] &lt; <span style="color: rgb(233, 98, 98);">$tolerance</span>}]
+}</pre></div>
+</div><h3 class='ruffproc'><a name='::tomato::mathpt3d::MidPoint'>MidPoint</a><span class='ns_scope'> [<a href="tomato-tomato-mathpt3d.html#::tomato::mathpt3d" title="::tomato::mathpt3d" class='ruff_cmd'>::tomato::mathpt3d</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
+<div style='clear:both;'></div>
+<p class='ruff'>Gets the midpoint of two points</p>
+<div class='ruff_synopsis'><span class='ruff_cmd'>MidPoint</span> <span class='ruff_arg'>pt1 pt2</span></div>
+<h5 class='ruff'>Parameters</h5><table class='ruff_deflist'>
+<tr><td><nobr><code>pt1</code></nobr></td><td>The first point <a href="tomato-tomato-mathpt3d.html#::tomato::mathpt3d::Point3d" title="Point3d" class='ruff_cmd'>Point3d</a></td></tr>
+<tr><td><nobr><code>pt2</code></nobr></td><td>The second point <a href="tomato-tomato-mathpt3d.html#::tomato::mathpt3d::Point3d" title="Point3d" class='ruff_cmd'>Point3d</a></td></tr>
+</table>
+<h5 class='ruff'>Return value</h5><p class='ruff'>Returns The midpoint of the points <a href="tomato-tomato-mathpt3d.html#::tomato::mathpt3d::Point3d" title="Point3d" class='ruff_cmd'>Point3d</a></p>
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_tomato_mathpt3d_MidPoint' href="javascript:toggleSource('tomato_mathpt3d_MidPoint')">Show source</a></p>
+<div id='tomato_mathpt3d_MidPoint' class='ruff_dyn_src'><pre>proc ::tomato::mathpt3d::MidPoint {pt1 pt2} {
+
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Gets the midpoint of two points</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # pt1 - The first point [Point3d]</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # pt2 - The second point [Point3d]</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Returns The midpoint of the points [Point3d]</span>
+    <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> [tomato::mathpt3d::Centroid [list <span style="color: rgb(233, 98, 98);">$pt1</span> <span style="color: rgb(233, 98, 98);">$pt2</span>]]
+}</pre></div>
+</div><h2 class='ruff'><a name='::tomato::mathpt3d-Classes'></a>Classes<span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h2>
 <div style='clear:both;'></div>
 <h3 class='ruffclass'><a name='::tomato::mathpt3d::Point3d'>Point3d</a><span class='ns_scope'> [<a href="tomato-tomato-mathpt3d.html#::tomato::mathpt3d" title="::tomato::mathpt3d" class='ruff_cmd'>::tomato::mathpt3d</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
 <div style='clear:both;'></div>
@@ -453,189 +636,6 @@
 <span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Gets The z component.</span>
     <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> <span style="color: rgb(233, 98, 98);">$_z</span>
 }</pre></div>
-</div><h2 class='ruff'><a name='::tomato::mathpt3d-Commands'></a>Commands<span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h2>
-<div style='clear:both;'></div>
-<h3 class='ruffproc'><a name='::tomato::mathpt3d::Average'>Average</a><span class='ns_scope'> [<a href="tomato-tomato-mathpt3d.html#::tomato::mathpt3d" title="::tomato::mathpt3d" class='ruff_cmd'>::tomato::mathpt3d</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
-<div style='clear:both;'></div>
-<p class='ruff'>Gets the average value of list</p>
-<div class='ruff_synopsis'><span class='ruff_cmd'>Average</span> <span class='ruff_arg'>listaxisPt</span></div>
-<h5 class='ruff'>Parameters</h5><table class='ruff_deflist'>
-<tr><td><nobr><code>listaxisPt</code></nobr></td><td>list in the form of a Tcl list</td></tr>
-</table>
-<h5 class='ruff'>Return value</h5><p class='ruff'>Returns The average value</p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_tomato_mathpt3d_Average' href="javascript:toggleSource('tomato_mathpt3d_Average')">Show source</a></p>
-<div id='tomato_mathpt3d_Average' class='ruff_dyn_src'><pre>proc ::tomato::mathpt3d::Average {listaxisPt} {
-
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Gets the average value of list</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # listaxisPt - list in the form of a Tcl list</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Returns The average value</span>
-    <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> [expr {[tcl::mathop::+ {*}<span style="color: rgb(233, 98, 98);">$listaxisPt</span> 0.0] / max(1, [llength <span style="color: rgb(233, 98, 98);">$listaxisPt</span>])}]
-}</pre></div>
-</div><h3 class='ruffproc'><a name='::tomato::mathpt3d::Centroid'>Centroid</a><span class='ns_scope'> [<a href="tomato-tomato-mathpt3d.html#::tomato::mathpt3d" title="::tomato::mathpt3d" class='ruff_cmd'>::tomato::mathpt3d</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
-<div style='clear:both;'></div>
-<p class='ruff'>Gets the centroid of an arbitrary collection of points</p>
-<div class='ruff_synopsis'><span class='ruff_cmd'>Centroid</span> <span class='ruff_arg'>listPts</span></div>
-<h5 class='ruff'>Parameters</h5><table class='ruff_deflist'>
-<tr><td><nobr><code>listPts</code></nobr></td><td>The list of points <a href="tomato-tomato-mathpt3d.html#::tomato::mathpt3d::Point3d" title="Point3d" class='ruff_cmd'>Point3d</a></td></tr>
-</table>
-<h5 class='ruff'>Return value</h5><p class='ruff'>Returns The centroid of the points <a href="tomato-tomato-mathpt3d.html#::tomato::mathpt3d::Point3d" title="Point3d" class='ruff_cmd'>Point3d</a></p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_tomato_mathpt3d_Centroid' href="javascript:toggleSource('tomato_mathpt3d_Centroid')">Show source</a></p>
-<div id='tomato_mathpt3d_Centroid' class='ruff_dyn_src'><pre>proc ::tomato::mathpt3d::Centroid {listPts} {
-
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Gets the centroid of an arbitrary collection of points</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # listPts - The list of points [Point3d]</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Returns The centroid of the points [Point3d]</span>
-    if {![llength <span style="color: rgb(233, 98, 98);">$listPts</span>]} {
-        <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">error</span> <span style="color: hsl(120, 71%, 16%);">&quot;list points must be &gt; 0&quot;</span>
-    }
-
-    foreach points <span style="color: rgb(233, 98, 98);">$listPts</span> {
-        lassign [<span style="color: rgb(233, 98, 98);">$points</span> Get] x y z
-        lappend ptx <span style="color: rgb(233, 98, 98);">$x</span>
-        lappend pty <span style="color: rgb(233, 98, 98);">$y</span>
-        lappend ptz <span style="color: rgb(233, 98, 98);">$z</span>
-    }
-
-    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> centx [tomato::mathpt3d::Average <span style="color: rgb(233, 98, 98);">$ptx</span>]
-    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> centy [tomato::mathpt3d::Average <span style="color: rgb(233, 98, 98);">$pty</span>]
-    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> centz [tomato::mathpt3d::Average <span style="color: rgb(233, 98, 98);">$ptz</span>]
-
-    <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> [tomato::mathpt3d::Point3d new <span style="color: rgb(233, 98, 98);">$centx</span> <span style="color: rgb(233, 98, 98);">$centy</span> <span style="color: rgb(233, 98, 98);">$centz</span>]
-}</pre></div>
-</div><h3 class='ruffproc'><a name='::tomato::mathpt3d::Equals'>Equals</a><span class='ns_scope'> [<a href="tomato-tomato-mathpt3d.html#::tomato::mathpt3d" title="::tomato::mathpt3d" class='ruff_cmd'>::tomato::mathpt3d</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
-<div style='clear:both;'></div>
-<p class='ruff'>Gets a value to indicate if a pair of points are equal</p>
-<div class='ruff_synopsis'><span class='ruff_cmd'>Equals</span> <span class='ruff_arg'>pt other tolerance</span></div>
-<h5 class='ruff'>Parameters</h5><table class='ruff_deflist'>
-<tr><td><nobr><code>pt</code></nobr></td><td>First input point <a href="tomato-tomato-mathpt3d.html#::tomato::mathpt3d::Point3d" title="Point3d" class='ruff_cmd'>Point3d</a></td></tr>
-<tr><td><nobr><code>other</code></nobr></td><td>Second input point <a href="tomato-tomato-mathpt3d.html#::tomato::mathpt3d::Point3d" title="Point3d" class='ruff_cmd'>Point3d</a></td></tr>
-<tr><td><nobr><code>tolerance</code></nobr></td><td>A tolerance (epsilon) to adjust for floating point error</td></tr>
-</table>
-<h5 class='ruff'>Description</h5><p class='ruff'>See : methods == !=</p>
-<p class='ruff'>An error exception is raised if tolerance (epsilon) &lt; 0.</p>
-<h5 class='ruff'>Return value</h5><p class='ruff'>Returns <code>True</code> if the points are equal, otherwise false.</p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_tomato_mathpt3d_Equals' href="javascript:toggleSource('tomato_mathpt3d_Equals')">Show source</a></p>
-<div id='tomato_mathpt3d_Equals' class='ruff_dyn_src'><pre>proc ::tomato::mathpt3d::Equals {pt other tolerance} {
-
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Gets a value to indicate if a pair of points are equal</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # pt - First input point [Point3d]</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # other - Second input point [Point3d]</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # tolerance - A tolerance (epsilon) to adjust for floating point error</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Returns `True` if the points are equal, otherwise false.</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # See : methods == !=</span>
-    if {<span style="color: rgb(233, 98, 98);">$tolerance</span> &lt; 0} {
-        #ruff
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">        # An <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">error</span> exception is raised if tolerance (epsilon) &lt; 0.</span>
-        <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">error</span> <span style="color: hsl(120, 71%, 16%);">&quot;epsilon &lt; 0&quot;</span>
-    }
-
-    <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> [expr {
-                  (abs([<span style="color: rgb(233, 98, 98);">$other</span> X] - [<span style="color: rgb(233, 98, 98);">$pt</span> X]) &lt; <span style="color: rgb(233, 98, 98);">$tolerance</span>) &amp;&amp;
-                  (abs([<span style="color: rgb(233, 98, 98);">$other</span> Y] - [<span style="color: rgb(233, 98, 98);">$pt</span> Y]) &lt; <span style="color: rgb(233, 98, 98);">$tolerance</span>) &amp;&amp;
-                  (abs([<span style="color: rgb(233, 98, 98);">$other</span> Z] - [<span style="color: rgb(233, 98, 98);">$pt</span> Z]) &lt; <span style="color: rgb(233, 98, 98);">$tolerance</span>)
-                }]
-}</pre></div>
-</div><h3 class='ruffproc'><a name='::tomato::mathpt3d::IntersectionOf3Planes'>IntersectionOf3Planes</a><span class='ns_scope'> [<a href="tomato-tomato-mathpt3d.html#::tomato::mathpt3d" title="::tomato::mathpt3d" class='ruff_cmd'>::tomato::mathpt3d</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
-<div style='clear:both;'></div>
-<p class='ruff'>Gets the point at which three planes intersect</p>
-<div class='ruff_synopsis'><span class='ruff_cmd'>IntersectionOf3Planes</span> <span class='ruff_arg'>plane1 plane2 plane3</span></div>
-<h5 class='ruff'>Parameters</h5><table class='ruff_deflist'>
-<tr><td><nobr><code>plane1</code></nobr></td><td><a href="tomato-tomato-mathplane.html#::tomato::mathplane::Plane" title="mathplane::Plane" class='ruff_cmd'>mathplane::Plane</a></td></tr>
-<tr><td><nobr><code>plane2</code></nobr></td><td><a href="tomato-tomato-mathplane.html#::tomato::mathplane::Plane" title="mathplane::Plane" class='ruff_cmd'>mathplane::Plane</a></td></tr>
-<tr><td><nobr><code>plane3</code></nobr></td><td><a href="tomato-tomato-mathplane.html#::tomato::mathplane::Plane" title="mathplane::Plane" class='ruff_cmd'>mathplane::Plane</a></td></tr>
-</table>
-<h5 class='ruff'>Return value</h5><p class='ruff'>Returns The point of intersection <a href="tomato-tomato-mathpt3d.html#::tomato::mathpt3d::Point3d" title="Point3d" class='ruff_cmd'>Point3d</a></p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_tomato_mathpt3d_IntersectionOf3Planes' href="javascript:toggleSource('tomato_mathpt3d_IntersectionOf3Planes')">Show source</a></p>
-<div id='tomato_mathpt3d_IntersectionOf3Planes' class='ruff_dyn_src'><pre>proc ::tomato::mathpt3d::IntersectionOf3Planes {plane1 plane2 plane3} {
-
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Gets the point at which three planes intersect</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # plane1 - [mathplane::Plane]</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # plane2 - [mathplane::Plane]</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # plane3 - [mathplane::Plane]</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Returns The point of intersection [Point3d]</span>
-    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> ray [<span style="color: rgb(233, 98, 98);">$plane1</span> IntersectionWith <span style="color: rgb(233, 98, 98);">$plane2</span>]
-    <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span>  [<span style="color: rgb(233, 98, 98);">$plane3</span> IntersectionWith <span style="color: rgb(233, 98, 98);">$ray</span>]
-}</pre></div>
-</div><h3 class='ruffproc'><a name='::tomato::mathpt3d::IntersectionOfPlaneRay'>IntersectionOfPlaneRay</a><span class='ns_scope'> [<a href="tomato-tomato-mathpt3d.html#::tomato::mathpt3d" title="::tomato::mathpt3d" class='ruff_cmd'>::tomato::mathpt3d</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
-<div style='clear:both;'></div>
-<p class='ruff'>Gets the point of intersection between a plane and a ray</p>
-<div class='ruff_synopsis'><span class='ruff_cmd'>IntersectionOfPlaneRay</span> <span class='ruff_arg'>plane ray</span></div>
-<h5 class='ruff'>Parameters</h5><table class='ruff_deflist'>
-<tr><td><nobr><code>plane</code></nobr></td><td><a href="tomato-tomato-mathplane.html#::tomato::mathplane::Plane" title="mathplane::Plane" class='ruff_cmd'>mathplane::Plane</a></td></tr>
-<tr><td><nobr><code>ray</code></nobr></td><td><a href="tomato-tomato-mathray3d.html#::tomato::mathray3d::Ray3d" title="mathray3d::Ray3d" class='ruff_cmd'>mathray3d::Ray3d</a></td></tr>
-</table>
-<h5 class='ruff'>Return value</h5><p class='ruff'>Returns The point of intersection <a href="tomato-tomato-mathpt3d.html#::tomato::mathpt3d::Point3d" title="Point3d" class='ruff_cmd'>Point3d</a></p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_tomato_mathpt3d_IntersectionOfPlaneRay' href="javascript:toggleSource('tomato_mathpt3d_IntersectionOfPlaneRay')">Show source</a></p>
-<div id='tomato_mathpt3d_IntersectionOfPlaneRay' class='ruff_dyn_src'><pre>proc ::tomato::mathpt3d::IntersectionOfPlaneRay {plane ray} {
-
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Gets the point of intersection between a plane and a ray</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # plane - [mathplane::Plane]</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # ray   - [mathray3d::Ray3d]</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Returns The point of intersection [Point3d]</span>
-    <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> [<span style="color: rgb(233, 98, 98);">$plane</span> IntersectionWith <span style="color: rgb(233, 98, 98);">$ray</span>]
-}</pre></div>
-</div><h3 class='ruffproc'><a name='::tomato::mathpt3d::IsCollinearPoints'>IsCollinearPoints</a><span class='ns_scope'> [<a href="tomato-tomato-mathpt3d.html#::tomato::mathpt3d" title="::tomato::mathpt3d" class='ruff_cmd'>::tomato::mathpt3d</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
-<div style='clear:both;'></div>
-<p class='ruff'>Check if three points are collinear</p>
-<div class='ruff_synopsis'><span class='ruff_cmd'>IsCollinearPoints</span> <span class='ruff_arg'>p1 p2 p3 ?tolerance?</span></div>
-<h5 class='ruff'>Parameters</h5><table class='ruff_deflist'>
-<tr><td><nobr><code>p1</code></nobr></td><td><a href="tomato-tomato-mathpt3d.html#::tomato::mathpt3d::Point3d" title="Point3d" class='ruff_cmd'>Point3d</a></td></tr>
-<tr><td><nobr><code>p2</code></nobr></td><td><a href="tomato-tomato-mathpt3d.html#::tomato::mathpt3d::Point3d" title="Point3d" class='ruff_cmd'>Point3d</a></td></tr>
-<tr><td><nobr><code>p3</code></nobr></td><td><a href="tomato-tomato-mathpt3d.html#::tomato::mathpt3d::Point3d" title="Point3d" class='ruff_cmd'>Point3d</a></td></tr>
-<tr><td><nobr><code>tolerance</code></nobr></td><td>A tolerance (epsilon) for collinear points verification. Optional, default <code>$::tomato::helper::TolGeom</code>.</td></tr>
-</table>
-<h5 class='ruff'>Return value</h5><p class='ruff'>Returns <code>True</code> if the points are collinear, otherwise false.</p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_tomato_mathpt3d_IsCollinearPoints' href="javascript:toggleSource('tomato_mathpt3d_IsCollinearPoints')">Show source</a></p>
-<div id='tomato_mathpt3d_IsCollinearPoints' class='ruff_dyn_src'><pre>proc ::tomato::mathpt3d::IsCollinearPoints {p1 p2 p3 {tolerance {<span style="color: rgb(233, 98, 98);">$::tomato::helper::TolGeom</span>}}} {
-
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Check if three points are collinear</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # p1 - [Point3d]</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # p2 - [Point3d]</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # p3 - [Point3d]</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # tolerance - A tolerance (epsilon) for collinear points verification.</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Returns `True` if the points are collinear, otherwise false.</span>
-    if {[llength [info level 0]] &lt; 5} {
-        <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> tolerance <span style="color: rgb(233, 98, 98);">$::tomato::helper::TolGeom</span>
-    }
-
-    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> v1 [<span style="color: rgb(233, 98, 98);">$p1</span> VectorTo <span style="color: rgb(233, 98, 98);">$p2</span>]
-    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> v2 [<span style="color: rgb(233, 98, 98);">$p1</span> VectorTo <span style="color: rgb(233, 98, 98);">$p3</span>]
-
-    <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> [expr {[[<span style="color: rgb(233, 98, 98);">$v1</span> CrossProduct <span style="color: rgb(233, 98, 98);">$v2</span>] Length] &lt; <span style="color: rgb(233, 98, 98);">$tolerance</span>}]
-}</pre></div>
-</div><h3 class='ruffproc'><a name='::tomato::mathpt3d::MidPoint'>MidPoint</a><span class='ns_scope'> [<a href="tomato-tomato-mathpt3d.html#::tomato::mathpt3d" title="::tomato::mathpt3d" class='ruff_cmd'>::tomato::mathpt3d</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
-<div style='clear:both;'></div>
-<p class='ruff'>Gets the midpoint of two points</p>
-<div class='ruff_synopsis'><span class='ruff_cmd'>MidPoint</span> <span class='ruff_arg'>pt1 pt2</span></div>
-<h5 class='ruff'>Parameters</h5><table class='ruff_deflist'>
-<tr><td><nobr><code>pt1</code></nobr></td><td>The first point <a href="tomato-tomato-mathpt3d.html#::tomato::mathpt3d::Point3d" title="Point3d" class='ruff_cmd'>Point3d</a></td></tr>
-<tr><td><nobr><code>pt2</code></nobr></td><td>The second point <a href="tomato-tomato-mathpt3d.html#::tomato::mathpt3d::Point3d" title="Point3d" class='ruff_cmd'>Point3d</a></td></tr>
-</table>
-<h5 class='ruff'>Return value</h5><p class='ruff'>Returns The midpoint of the points <a href="tomato-tomato-mathpt3d.html#::tomato::mathpt3d::Point3d" title="Point3d" class='ruff_cmd'>Point3d</a></p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_tomato_mathpt3d_MidPoint' href="javascript:toggleSource('tomato_mathpt3d_MidPoint')">Show source</a></p>
-<div id='tomato_mathpt3d_MidPoint' class='ruff_dyn_src'><pre>proc ::tomato::mathpt3d::MidPoint {pt1 pt2} {
-
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Gets the midpoint of two points</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # pt1 - The first point [Point3d]</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # pt2 - The second point [Point3d]</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Returns The midpoint of the points [Point3d]</span>
-    <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> [tomato::mathpt3d::Centroid [list <span style="color: rgb(233, 98, 98);">$pt1</span> <span style="color: rgb(233, 98, 98);">$pt2</span>]]
-}</pre></div>
 </div></main><nav class='ruff-nav'><ul style='position: sticky; top: 0;'><li class='ruff-toc1'><a style='padding-top:2px;' href='tomato.html'>Start page</a></li>
 <li class='ruff-toc1'><a href='tomato-docindex.html' accesskey='i'>Index</a></li>
 <hr>
@@ -650,7 +650,14 @@
 <li class='ruff-toc1'><a href='tomato-tomato-mathmatrix3d.html'>tomato::mathmatrix3d</a></li>
 <li class='ruff-toc1'><a href='tomato-tomato-mathvec3d.html'>tomato::mathvec3d</a></li>
 <li class='ruff-toc1'><a href='tomato-tomato-mathmatrix.html'>tomato::mathmatrix</a></li>
-<hr><li class='ruff-toc2'><a href='#::tomato::mathpt3d-Classes'>Classes</a></li><li class='ruff-toc3'><a href='tomato-tomato-mathpt3d.html#::tomato::mathpt3d::Point3d'>Point3d</a></li><li class='ruff-toc4 ruff-tip'><a href='tomato-tomato-mathpt3d.html#::tomato::mathpt3d::Point3d::constructor'>constructor</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>Point3d create OBJNAME</span> <span class='ruff_arg'>?args?</span>
+<hr><li class='ruff-toc2'><a href='#::tomato::mathpt3d-Commands'>Commands</a></li><li class='ruff-toc3 ruff-tip'><a href='tomato-tomato-mathpt3d.html#::tomato::mathpt3d::Average'>Average</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>Average</span> <span class='ruff_arg'>listaxisPt</span></pre>Gets the average value of list
+</span></li><li class='ruff-toc3 ruff-tip'><a href='tomato-tomato-mathpt3d.html#::tomato::mathpt3d::Centroid'>Centroid</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>Centroid</span> <span class='ruff_arg'>listPts</span></pre>Gets the centroid of an arbitrary collection of points
+</span></li><li class='ruff-toc3 ruff-tip'><a href='tomato-tomato-mathpt3d.html#::tomato::mathpt3d::Equals'>Equals</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>Equals</span> <span class='ruff_arg'>pt other tolerance</span></pre>Gets a value to indicate if a pair of points are equal
+</span></li><li class='ruff-toc3 ruff-tip'><a href='tomato-tomato-mathpt3d.html#::tomato::mathpt3d::IntersectionOf3Planes'>IntersectionOf3Planes</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>IntersectionOf3Planes</span> <span class='ruff_arg'>plane1 plane2 plane3</span></pre>Gets the point at which three planes intersect
+</span></li><li class='ruff-toc3 ruff-tip'><a href='tomato-tomato-mathpt3d.html#::tomato::mathpt3d::IntersectionOfPlaneRay'>IntersectionOfPlaneRay</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>IntersectionOfPlaneRay</span> <span class='ruff_arg'>plane ray</span></pre>Gets the point of intersection between a plane and a ray
+</span></li><li class='ruff-toc3 ruff-tip'><a href='tomato-tomato-mathpt3d.html#::tomato::mathpt3d::IsCollinearPoints'>IsCollinearPoints</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>IsCollinearPoints</span> <span class='ruff_arg'>p1 p2 p3 ?tolerance?</span></pre>Check if three points are collinear
+</span></li><li class='ruff-toc3 ruff-tip'><a href='tomato-tomato-mathpt3d.html#::tomato::mathpt3d::MidPoint'>MidPoint</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>MidPoint</span> <span class='ruff_arg'>pt1 pt2</span></pre>Gets the midpoint of two points
+</span></li><li class='ruff-toc2'><a href='#::tomato::mathpt3d-Classes'>Classes</a></li><li class='ruff-toc3'><a href='tomato-tomato-mathpt3d.html#::tomato::mathpt3d::Point3d'>Point3d</a></li><li class='ruff-toc4 ruff-tip'><a href='tomato-tomato-mathpt3d.html#::tomato::mathpt3d::Point3d::constructor'>constructor</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>Point3d create OBJNAME</span> <span class='ruff_arg'>?args?</span>
 <span class='ruff_cmd'>Point3d new</span> <span class='ruff_arg'>?args?</span></pre>Initializes a new Point3d Class.
 </span></li><li class='ruff-toc4 ruff-tip'><a href='tomato-tomato-mathpt3d.html#::tomato::mathpt3d::Point3d::!='>!=</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>POINT3DOBJ !=</span> <span class='ruff_arg'>other ?tolerance?</span></pre>Gets value that indicates whether any pair of elements in two specified points is not equal.
 </span></li><li class='ruff-toc4 ruff-tip'><a href='tomato-tomato-mathpt3d.html#::tomato::mathpt3d::Point3d::+'>+</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>POINT3DOBJ +</span> <span class='ruff_arg'>other</span></pre>Adds a point and a vector together
@@ -672,13 +679,6 @@
 </span></li><li class='ruff-toc4 ruff-tip'><a href='tomato-tomato-mathpt3d.html#::tomato::mathpt3d::Point3d::X'>X</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>POINT3DOBJ X</span> </pre>Gets The x component.
 </span></li><li class='ruff-toc4 ruff-tip'><a href='tomato-tomato-mathpt3d.html#::tomato::mathpt3d::Point3d::Y'>Y</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>POINT3DOBJ Y</span> </pre>Gets The y component.
 </span></li><li class='ruff-toc4 ruff-tip'><a href='tomato-tomato-mathpt3d.html#::tomato::mathpt3d::Point3d::Z'>Z</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>POINT3DOBJ Z</span> </pre>Gets The z component.
-</span></li><li class='ruff-toc2'><a href='#::tomato::mathpt3d-Commands'>Commands</a></li><li class='ruff-toc3 ruff-tip'><a href='tomato-tomato-mathpt3d.html#::tomato::mathpt3d::Average'>Average</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>Average</span> <span class='ruff_arg'>listaxisPt</span></pre>Gets the average value of list
-</span></li><li class='ruff-toc3 ruff-tip'><a href='tomato-tomato-mathpt3d.html#::tomato::mathpt3d::Centroid'>Centroid</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>Centroid</span> <span class='ruff_arg'>listPts</span></pre>Gets the centroid of an arbitrary collection of points
-</span></li><li class='ruff-toc3 ruff-tip'><a href='tomato-tomato-mathpt3d.html#::tomato::mathpt3d::Equals'>Equals</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>Equals</span> <span class='ruff_arg'>pt other tolerance</span></pre>Gets a value to indicate if a pair of points are equal
-</span></li><li class='ruff-toc3 ruff-tip'><a href='tomato-tomato-mathpt3d.html#::tomato::mathpt3d::IntersectionOf3Planes'>IntersectionOf3Planes</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>IntersectionOf3Planes</span> <span class='ruff_arg'>plane1 plane2 plane3</span></pre>Gets the point at which three planes intersect
-</span></li><li class='ruff-toc3 ruff-tip'><a href='tomato-tomato-mathpt3d.html#::tomato::mathpt3d::IntersectionOfPlaneRay'>IntersectionOfPlaneRay</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>IntersectionOfPlaneRay</span> <span class='ruff_arg'>plane ray</span></pre>Gets the point of intersection between a plane and a ray
-</span></li><li class='ruff-toc3 ruff-tip'><a href='tomato-tomato-mathpt3d.html#::tomato::mathpt3d::IsCollinearPoints'>IsCollinearPoints</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>IsCollinearPoints</span> <span class='ruff_arg'>p1 p2 p3 ?tolerance?</span></pre>Check if three points are collinear
-</span></li><li class='ruff-toc3 ruff-tip'><a href='tomato-tomato-mathpt3d.html#::tomato::mathpt3d::MidPoint'>MidPoint</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>MidPoint</span> <span class='ruff_arg'>pt1 pt2</span></pre>Gets the midpoint of two points
 </span></li></ul></nav><footer class='ruff-layout-footer ruff-ft'><div style='float: right;'>Document generated by <a href='https://ruff.magicsplat.com'>Ruff!</a></div></footer>
 </div></body></html>
 

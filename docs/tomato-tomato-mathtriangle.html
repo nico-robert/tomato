@@ -16,7 +16,43 @@
         </header><main class='ruff-layout-main ruff-bd'><h1 class='ruff'><a name='::tomato::mathtriangle'></a>::tomato::mathtriangle<span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h1>
 <div style='clear:both;'></div>
 <p class='ruff'>A Class representing a Triangle in 3D space</p>
-<h2 class='ruff'><a name='::tomato::mathtriangle-Classes'></a>Classes<span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h2>
+<h2 class='ruff'><a name='::tomato::mathtriangle-Commands'></a>Commands<span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h2>
+<div style='clear:both;'></div>
+<h3 class='ruffproc'><a name='::tomato::mathtriangle::Equals'>Equals</a><span class='ns_scope'> [<a href="tomato-tomato-mathtriangle.html#::tomato::mathtriangle" title="::tomato::mathtriangle" class='ruff_cmd'>::tomato::mathtriangle</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
+<div style='clear:both;'></div>
+<p class='ruff'>Gets a value to indicate if a pair of triangles are equal</p>
+<div class='ruff_synopsis'><span class='ruff_cmd'>Equals</span> <span class='ruff_arg'>triangle other tolerance</span></div>
+<h5 class='ruff'>Parameters</h5><table class='ruff_deflist'>
+<tr><td><nobr><code>triangle</code></nobr></td><td>First input triangle <a href="tomato-tomato-mathtriangle.html#::tomato::mathtriangle::Triangle" title="Triangle" class='ruff_cmd'>Triangle</a></td></tr>
+<tr><td><nobr><code>other</code></nobr></td><td>Second input triangle <a href="tomato-tomato-mathtriangle.html#::tomato::mathtriangle::Triangle" title="Triangle" class='ruff_cmd'>Triangle</a></td></tr>
+<tr><td><nobr><code>tolerance</code></nobr></td><td>A tolerance (epsilon) to adjust for floating point error</td></tr>
+</table>
+<h5 class='ruff'>Description</h5><p class='ruff'>See : methods == !=</p>
+<p class='ruff'>An error exception is raised if tolerance (epsilon) &lt; 0.</p>
+<h5 class='ruff'>Return value</h5><p class='ruff'>Returns <code>True</code> if the triangles are equal, otherwise false.</p>
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_tomato_mathtriangle_Equals' href="javascript:toggleSource('tomato_mathtriangle_Equals')">Show source</a></p>
+<div id='tomato_mathtriangle_Equals' class='ruff_dyn_src'><pre>proc ::tomato::mathtriangle::Equals {triangle other tolerance} {
+
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Gets a value to indicate if a pair of triangles are equal</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # triangle  - First input triangle [Triangle]</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # other     - Second input triangle [Triangle]</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # tolerance - A tolerance (epsilon) to adjust for floating point error</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Returns `True` if the triangles are equal, otherwise false.</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # See : methods == !=</span>
+    if {<span style="color: rgb(233, 98, 98);">$tolerance</span> &lt; 0} {
+        #ruff
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">        # An <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">error</span> exception is raised if tolerance (epsilon) &lt; 0.</span>
+        <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">error</span> <span style="color: hsl(120, 71%, 16%);">&quot;epsilon &lt; 0&quot;</span>
+    }
+
+    <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> [expr {[[<span style="color: rgb(233, 98, 98);">$triangle</span> Centroid] == [<span style="color: rgb(233, 98, 98);">$other</span> Centroid] <span style="color: rgb(233, 98, 98);">$tolerance</span>] &amp;&amp;
+                  (([<span style="color: rgb(233, 98, 98);">$triangle</span> Aera] - [<span style="color: rgb(233, 98, 98);">$other</span> Aera]) &lt; <span style="color: rgb(233, 98, 98);">$tolerance</span>)
+                  }]
+}</pre></div>
+</div><h2 class='ruff'><a name='::tomato::mathtriangle-Classes'></a>Classes<span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h2>
 <div style='clear:both;'></div>
 <h3 class='ruffclass'><a name='::tomato::mathtriangle::Triangle'>Triangle</a><span class='ns_scope'> [<a href="tomato-tomato-mathtriangle.html#::tomato::mathtriangle" title="::tomato::mathtriangle" class='ruff_cmd'>::tomato::mathtriangle</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
 <div style='clear:both;'></div>
@@ -443,42 +479,6 @@
 <span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Convert triangle to plane object [mathplane::Plane].</span>
     <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> [tomato::mathplane::Plane new <span style="color: rgb(233, 98, 98);">$_a</span> [my Normal]]
 }</pre></div>
-</div><h2 class='ruff'><a name='::tomato::mathtriangle-Commands'></a>Commands<span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h2>
-<div style='clear:both;'></div>
-<h3 class='ruffproc'><a name='::tomato::mathtriangle::Equals'>Equals</a><span class='ns_scope'> [<a href="tomato-tomato-mathtriangle.html#::tomato::mathtriangle" title="::tomato::mathtriangle" class='ruff_cmd'>::tomato::mathtriangle</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
-<div style='clear:both;'></div>
-<p class='ruff'>Gets a value to indicate if a pair of triangles are equal</p>
-<div class='ruff_synopsis'><span class='ruff_cmd'>Equals</span> <span class='ruff_arg'>triangle other tolerance</span></div>
-<h5 class='ruff'>Parameters</h5><table class='ruff_deflist'>
-<tr><td><nobr><code>triangle</code></nobr></td><td>First input triangle <a href="tomato-tomato-mathtriangle.html#::tomato::mathtriangle::Triangle" title="Triangle" class='ruff_cmd'>Triangle</a></td></tr>
-<tr><td><nobr><code>other</code></nobr></td><td>Second input triangle <a href="tomato-tomato-mathtriangle.html#::tomato::mathtriangle::Triangle" title="Triangle" class='ruff_cmd'>Triangle</a></td></tr>
-<tr><td><nobr><code>tolerance</code></nobr></td><td>A tolerance (epsilon) to adjust for floating point error</td></tr>
-</table>
-<h5 class='ruff'>Description</h5><p class='ruff'>See : methods == !=</p>
-<p class='ruff'>An error exception is raised if tolerance (epsilon) &lt; 0.</p>
-<h5 class='ruff'>Return value</h5><p class='ruff'>Returns <code>True</code> if the triangles are equal, otherwise false.</p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_tomato_mathtriangle_Equals' href="javascript:toggleSource('tomato_mathtriangle_Equals')">Show source</a></p>
-<div id='tomato_mathtriangle_Equals' class='ruff_dyn_src'><pre>proc ::tomato::mathtriangle::Equals {triangle other tolerance} {
-
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Gets a value to indicate if a pair of triangles are equal</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # triangle  - First input triangle [Triangle]</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # other     - Second input triangle [Triangle]</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # tolerance - A tolerance (epsilon) to adjust for floating point error</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Returns `True` if the triangles are equal, otherwise false.</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # See : methods == !=</span>
-    if {<span style="color: rgb(233, 98, 98);">$tolerance</span> &lt; 0} {
-        #ruff
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">        # An <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">error</span> exception is raised if tolerance (epsilon) &lt; 0.</span>
-        <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">error</span> <span style="color: hsl(120, 71%, 16%);">&quot;epsilon &lt; 0&quot;</span>
-    }
-
-    <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> [expr {[[<span style="color: rgb(233, 98, 98);">$triangle</span> Centroid] == [<span style="color: rgb(233, 98, 98);">$other</span> Centroid] <span style="color: rgb(233, 98, 98);">$tolerance</span>] &amp;&amp;
-                  (([<span style="color: rgb(233, 98, 98);">$triangle</span> Aera] - [<span style="color: rgb(233, 98, 98);">$other</span> Aera]) &lt; <span style="color: rgb(233, 98, 98);">$tolerance</span>)
-                  }]
-}</pre></div>
 </div></main><nav class='ruff-nav'><ul style='position: sticky; top: 0;'><li class='ruff-toc1'><a style='padding-top:2px;' href='tomato.html'>Start page</a></li>
 <li class='ruff-toc1'><a href='tomato-docindex.html' accesskey='i'>Index</a></li>
 <hr>
@@ -493,7 +493,8 @@
 <li class='ruff-toc1'><a href='tomato-tomato-mathmatrix3d.html'>tomato::mathmatrix3d</a></li>
 <li class='ruff-toc1'><a href='tomato-tomato-mathvec3d.html'>tomato::mathvec3d</a></li>
 <li class='ruff-toc1'><a href='tomato-tomato-mathmatrix.html'>tomato::mathmatrix</a></li>
-<hr><li class='ruff-toc2'><a href='#::tomato::mathtriangle-Classes'>Classes</a></li><li class='ruff-toc3'><a href='tomato-tomato-mathtriangle.html#::tomato::mathtriangle::Triangle'>Triangle</a></li><li class='ruff-toc4 ruff-tip'><a href='tomato-tomato-mathtriangle.html#::tomato::mathtriangle::Triangle::constructor'>constructor</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>Triangle create OBJNAME</span> <span class='ruff_arg'>?args?</span>
+<hr><li class='ruff-toc2'><a href='#::tomato::mathtriangle-Commands'>Commands</a></li><li class='ruff-toc3 ruff-tip'><a href='tomato-tomato-mathtriangle.html#::tomato::mathtriangle::Equals'>Equals</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>Equals</span> <span class='ruff_arg'>triangle other tolerance</span></pre>Gets a value to indicate if a pair of triangles are equal
+</span></li><li class='ruff-toc2'><a href='#::tomato::mathtriangle-Classes'>Classes</a></li><li class='ruff-toc3'><a href='tomato-tomato-mathtriangle.html#::tomato::mathtriangle::Triangle'>Triangle</a></li><li class='ruff-toc4 ruff-tip'><a href='tomato-tomato-mathtriangle.html#::tomato::mathtriangle::Triangle::constructor'>constructor</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>Triangle create OBJNAME</span> <span class='ruff_arg'>?args?</span>
 <span class='ruff_cmd'>Triangle new</span> <span class='ruff_arg'>?args?</span></pre>Initializes a new Triangle Class.
 </span></li><li class='ruff-toc4 ruff-tip'><a href='tomato-tomato-mathtriangle.html#::tomato::mathtriangle::Triangle::!='>!=</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>TRIANGLEOBJ !=</span> <span class='ruff_arg'>other ?tolerance?</span></pre>Gets value that indicates whether any pair of elements in two specified points is not equal.
 </span></li><li class='ruff-toc4 ruff-tip'><a href='tomato-tomato-mathtriangle.html#::tomato::mathtriangle::Triangle::=='>==</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>TRIANGLEOBJ ==</span> <span class='ruff_arg'>other ?tolerance?</span></pre>Gets value that indicates whether each pair of elements in two specified points is equal.
@@ -516,7 +517,6 @@
 </span></li><li class='ruff-toc4 ruff-tip'><a href='tomato-tomato-mathtriangle.html#::tomato::mathtriangle::Triangle::Normal'>Normal</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>TRIANGLEOBJ Normal</span> </pre>Gets Normal of the triangle <a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d::Vector3d" title="mathvec3d::Vector3d" class='ruff_cmd'>mathvec3d::Vector3d</a>.
 </span></li><li class='ruff-toc4 ruff-tip'><a href='tomato-tomato-mathtriangle.html#::tomato::mathtriangle::Triangle::Perimeter'>Perimeter</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>TRIANGLEOBJ Perimeter</span> </pre>Gets Perimeter of the triangle.
 </span></li><li class='ruff-toc4 ruff-tip'><a href='tomato-tomato-mathtriangle.html#::tomato::mathtriangle::Triangle::ToPlane'>ToPlane</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>TRIANGLEOBJ ToPlane</span> </pre>Convert triangle to plane object <a href="tomato-tomato-mathplane.html#::tomato::mathplane::Plane" title="mathplane::Plane" class='ruff_cmd'>mathplane::Plane</a>.
-</span></li><li class='ruff-toc2'><a href='#::tomato::mathtriangle-Commands'>Commands</a></li><li class='ruff-toc3 ruff-tip'><a href='tomato-tomato-mathtriangle.html#::tomato::mathtriangle::Equals'>Equals</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>Equals</span> <span class='ruff_arg'>triangle other tolerance</span></pre>Gets a value to indicate if a pair of triangles are equal
 </span></li></ul></nav><footer class='ruff-layout-footer ruff-ft'><div style='float: right;'>Document generated by <a href='https://ruff.magicsplat.com'>Ruff!</a></div></footer>
 </div></body></html>
 

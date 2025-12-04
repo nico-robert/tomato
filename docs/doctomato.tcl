@@ -3,11 +3,8 @@
 
 lappend auto_path [file dirname [file dirname [file dirname [info script]]]]
 
-package require ruff 2.5
+package require ruff 2.7
 package require tomato
-
-# Note : modification 'ruff! package' 
-#        file : formatter.tcl (switch the order of class and command [line file :991 >= 999])
 
 ::ruff::document [namespace children ::tomato] \
                  -title "tomato $::tomato::version Reference Manual" \

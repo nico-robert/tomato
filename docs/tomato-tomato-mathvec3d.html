@@ -16,7 +16,268 @@
         </header><main class='ruff-layout-main ruff-bd'><h1 class='ruff'><a name='::tomato::mathvec3d'></a>::tomato::mathvec3d<span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h1>
 <div style='clear:both;'></div>
 <p class='ruff'>A Class representing a Vector in 3D space</p>
-<h2 class='ruff'><a name='::tomato::mathvec3d-Classes'></a>Classes<span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h2>
+<h2 class='ruff'><a name='::tomato::mathvec3d-Commands'></a>Commands<span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h2>
+<div style='clear:both;'></div>
+<h3 class='ruffproc'><a name='::tomato::mathvec3d::Clamp'>Clamp</a><span class='ns_scope'> [<a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d" title="::tomato::mathvec3d" class='ruff_cmd'>::tomato::mathvec3d</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
+<div style='clear:both;'></div>
+<p class='ruff'>Clamp a vector to the given minimum and maximum vectors.</p>
+<div class='ruff_synopsis'><span class='ruff_cmd'>Clamp</span> <span class='ruff_arg'>vec min max</span></div>
+<h5 class='ruff'>Parameters</h5><table class='ruff_deflist'>
+<tr><td><nobr><code>vec</code></nobr></td><td>Input vector   <a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d::Vector3d" title="Vector3d" class='ruff_cmd'>Vector3d</a></td></tr>
+<tr><td><nobr><code>min</code></nobr></td><td>Minimum vector <a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d::Vector3d" title="Vector3d" class='ruff_cmd'>Vector3d</a></td></tr>
+<tr><td><nobr><code>max</code></nobr></td><td>Maximum vector <a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d::Vector3d" title="Vector3d" class='ruff_cmd'>Vector3d</a></td></tr>
+</table>
+<h5 class='ruff'>Return value</h5><p class='ruff'>Returns a new clamped vector <a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d::Vector3d" title="Vector3d" class='ruff_cmd'>Vector3d</a>.</p>
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_tomato_mathvec3d_Clamp' href="javascript:toggleSource('tomato_mathvec3d_Clamp')">Show source</a></p>
+<div id='tomato_mathvec3d_Clamp' class='ruff_dyn_src'><pre>proc ::tomato::mathvec3d::Clamp {vec min max} {
+
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Clamp a vector to the given minimum and maximum vectors.</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # vec - Input vector   [Vector3d]</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # min - Minimum vector [Vector3d]</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # max - Maximum vector [Vector3d]</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Returns a new clamped vector [Vector3d].</span>
+    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> vx [expr {[<span style="color: rgb(233, 98, 98);">$vec</span> X] &lt; [<span style="color: rgb(233, 98, 98);">$min</span> X] ? [<span style="color: rgb(233, 98, 98);">$min</span> X] : [<span style="color: rgb(233, 98, 98);">$vec</span> X] &gt; [<span style="color: rgb(233, 98, 98);">$max</span> X] ? [<span style="color: rgb(233, 98, 98);">$max</span> X] : [<span style="color: rgb(233, 98, 98);">$vec</span> X]}]
+    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> vy [expr {[<span style="color: rgb(233, 98, 98);">$vec</span> Y] &lt; [<span style="color: rgb(233, 98, 98);">$min</span> Y] ? [<span style="color: rgb(233, 98, 98);">$min</span> Y] : [<span style="color: rgb(233, 98, 98);">$vec</span> Y] &gt; [<span style="color: rgb(233, 98, 98);">$max</span> Y] ? [<span style="color: rgb(233, 98, 98);">$max</span> Y] : [<span style="color: rgb(233, 98, 98);">$vec</span> Y]}]
+    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> vz [expr {[<span style="color: rgb(233, 98, 98);">$vec</span> Z] &lt; [<span style="color: rgb(233, 98, 98);">$min</span> Z] ? [<span style="color: rgb(233, 98, 98);">$min</span> Z] : [<span style="color: rgb(233, 98, 98);">$vec</span> Z] &gt; [<span style="color: rgb(233, 98, 98);">$max</span> Z] ? [<span style="color: rgb(233, 98, 98);">$max</span> Z] : [<span style="color: rgb(233, 98, 98);">$vec</span> Z]}]
+
+    <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> [tomato::mathvec3d::Vector3d new <span style="color: rgb(233, 98, 98);">$vx</span> <span style="color: rgb(233, 98, 98);">$vy</span> <span style="color: rgb(233, 98, 98);">$vz</span>]
+}</pre></div>
+</div><h3 class='ruffproc'><a name='::tomato::mathvec3d::ComponentMax'>ComponentMax</a><span class='ns_scope'> [<a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d" title="::tomato::mathvec3d" class='ruff_cmd'>::tomato::mathvec3d</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
+<div style='clear:both;'></div>
+<p class='ruff'>A vector created from the largest of the corresponding components of the given vectors.</p>
+<div class='ruff_synopsis'><span class='ruff_cmd'>ComponentMax</span> <span class='ruff_arg'>v1 v2</span></div>
+<h5 class='ruff'>Parameters</h5><table class='ruff_deflist'>
+<tr><td><nobr><code>v1</code></nobr></td><td><a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d::Vector3d" title="Vector3d" class='ruff_cmd'>Vector3d</a></td></tr>
+<tr><td><nobr><code>v2</code></nobr></td><td><a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d::Vector3d" title="Vector3d" class='ruff_cmd'>Vector3d</a></td></tr>
+</table>
+<h5 class='ruff'>Return value</h5><p class='ruff'>Returns a new vector <a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d::Vector3d" title="Vector3d" class='ruff_cmd'>Vector3d</a> component-wise maximum.</p>
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_tomato_mathvec3d_ComponentMax' href="javascript:toggleSource('tomato_mathvec3d_ComponentMax')">Show source</a></p>
+<div id='tomato_mathvec3d_ComponentMax' class='ruff_dyn_src'><pre>proc ::tomato::mathvec3d::ComponentMax {v1 v2} {
+
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # A vector created from the largest of the corresponding components of the given vectors.</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # v1 - [Vector3d]</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # v2 - [Vector3d]</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Returns a new vector [Vector3d] component-wise maximum.</span>
+    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> vx [expr {[<span style="color: rgb(233, 98, 98);">$v1</span> X] &gt; [<span style="color: rgb(233, 98, 98);">$v2</span> X] ? [<span style="color: rgb(233, 98, 98);">$v1</span> X] : [<span style="color: rgb(233, 98, 98);">$v2</span> X]}]
+    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> vy [expr {[<span style="color: rgb(233, 98, 98);">$v1</span> Y] &gt; [<span style="color: rgb(233, 98, 98);">$v2</span> Y] ? [<span style="color: rgb(233, 98, 98);">$v1</span> Y] : [<span style="color: rgb(233, 98, 98);">$v2</span> Y]}]
+    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> vz [expr {[<span style="color: rgb(233, 98, 98);">$v1</span> Z] &gt; [<span style="color: rgb(233, 98, 98);">$v2</span> Z] ? [<span style="color: rgb(233, 98, 98);">$v1</span> Z] : [<span style="color: rgb(233, 98, 98);">$v2</span> Z]}]
+
+    <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> [tomato::mathvec3d::Vector3d new <span style="color: rgb(233, 98, 98);">$vx</span> <span style="color: rgb(233, 98, 98);">$vy</span> <span style="color: rgb(233, 98, 98);">$vz</span>]
+}</pre></div>
+</div><h3 class='ruffproc'><a name='::tomato::mathvec3d::ComponentMin'>ComponentMin</a><span class='ns_scope'> [<a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d" title="::tomato::mathvec3d" class='ruff_cmd'>::tomato::mathvec3d</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
+<div style='clear:both;'></div>
+<p class='ruff'>A vector created from the smallest of the corresponding components of the given vectors.</p>
+<div class='ruff_synopsis'><span class='ruff_cmd'>ComponentMin</span> <span class='ruff_arg'>v1 v2</span></div>
+<h5 class='ruff'>Parameters</h5><table class='ruff_deflist'>
+<tr><td><nobr><code>v1</code></nobr></td><td><a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d::Vector3d" title="Vector3d" class='ruff_cmd'>Vector3d</a></td></tr>
+<tr><td><nobr><code>v2</code></nobr></td><td><a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d::Vector3d" title="Vector3d" class='ruff_cmd'>Vector3d</a></td></tr>
+</table>
+<h5 class='ruff'>Return value</h5><p class='ruff'>Returns a new vector <a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d::Vector3d" title="Vector3d" class='ruff_cmd'>Vector3d</a> component-wise minimum.</p>
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_tomato_mathvec3d_ComponentMin' href="javascript:toggleSource('tomato_mathvec3d_ComponentMin')">Show source</a></p>
+<div id='tomato_mathvec3d_ComponentMin' class='ruff_dyn_src'><pre>proc ::tomato::mathvec3d::ComponentMin {v1 v2} {
+
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # A vector created from the smallest of the corresponding components of the given vectors.</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # v1 - [Vector3d]</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # v2 - [Vector3d]</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Returns a new vector [Vector3d] component-wise minimum.</span>
+    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> vx [expr {[<span style="color: rgb(233, 98, 98);">$v1</span> X] &lt; [<span style="color: rgb(233, 98, 98);">$v2</span> X] ? [<span style="color: rgb(233, 98, 98);">$v1</span> X] : [<span style="color: rgb(233, 98, 98);">$v2</span> X]}]
+    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> vy [expr {[<span style="color: rgb(233, 98, 98);">$v1</span> Y] &lt; [<span style="color: rgb(233, 98, 98);">$v2</span> Y] ? [<span style="color: rgb(233, 98, 98);">$v1</span> Y] : [<span style="color: rgb(233, 98, 98);">$v2</span> Y]}]
+    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> vz [expr {[<span style="color: rgb(233, 98, 98);">$v1</span> Z] &lt; [<span style="color: rgb(233, 98, 98);">$v2</span> Z] ? [<span style="color: rgb(233, 98, 98);">$v1</span> Z] : [<span style="color: rgb(233, 98, 98);">$v2</span> Z]}]
+
+    <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> [tomato::mathvec3d::Vector3d new <span style="color: rgb(233, 98, 98);">$vx</span> <span style="color: rgb(233, 98, 98);">$vy</span> <span style="color: rgb(233, 98, 98);">$vz</span>]
+}</pre></div>
+</div><h3 class='ruffproc'><a name='::tomato::mathvec3d::Cross'>Cross</a><span class='ns_scope'> [<a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d" title="::tomato::mathvec3d" class='ruff_cmd'>::tomato::mathvec3d</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
+<div style='clear:both;'></div>
+<p class='ruff'>Compute the cross product of 2 vectors</p>
+<div class='ruff_synopsis'><span class='ruff_cmd'>Cross</span> <span class='ruff_arg'>v1 v2</span></div>
+<h5 class='ruff'>Parameters</h5><table class='ruff_deflist'>
+<tr><td><nobr><code>v1</code></nobr></td><td><a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d::Vector3d" title="Vector3d" class='ruff_cmd'>Vector3d</a></td></tr>
+<tr><td><nobr><code>v2</code></nobr></td><td><a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d::Vector3d" title="Vector3d" class='ruff_cmd'>Vector3d</a></td></tr>
+</table>
+<h5 class='ruff'>Description</h5><p class='ruff'>See : method CrossProduct</p>
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_tomato_mathvec3d_Cross' href="javascript:toggleSource('tomato_mathvec3d_Cross')">Show source</a></p>
+<div id='tomato_mathvec3d_Cross' class='ruff_dyn_src'><pre>proc ::tomato::mathvec3d::Cross {v1 v2} {
+
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Compute the cross product of 2 vectors</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # v1 - [Vector3d]</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # v2 - [Vector3d]</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # See : method CrossProduct</span>
+    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> vx [expr {([<span style="color: rgb(233, 98, 98);">$v1</span> Y] * [<span style="color: rgb(233, 98, 98);">$v2</span> Z]) - ([<span style="color: rgb(233, 98, 98);">$v1</span> Z] * [<span style="color: rgb(233, 98, 98);">$v2</span> Y])}]
+    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> vy [expr {([<span style="color: rgb(233, 98, 98);">$v1</span> Z] * [<span style="color: rgb(233, 98, 98);">$v2</span> X]) - ([<span style="color: rgb(233, 98, 98);">$v1</span> X] * [<span style="color: rgb(233, 98, 98);">$v2</span> Z])}]
+    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> vz [expr {([<span style="color: rgb(233, 98, 98);">$v1</span> X] * [<span style="color: rgb(233, 98, 98);">$v2</span> Y]) - ([<span style="color: rgb(233, 98, 98);">$v1</span> Y] * [<span style="color: rgb(233, 98, 98);">$v2</span> X])}]
+
+    <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> [tomato::mathvec3d::Vector3d new <span style="color: rgb(233, 98, 98);">$vx</span> <span style="color: rgb(233, 98, 98);">$vy</span> <span style="color: rgb(233, 98, 98);">$vz</span>]
+}</pre></div>
+</div><h3 class='ruffproc'><a name='::tomato::mathvec3d::Dot'>Dot</a><span class='ns_scope'> [<a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d" title="::tomato::mathvec3d" class='ruff_cmd'>::tomato::mathvec3d</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
+<div style='clear:both;'></div>
+<p class='ruff'>Compute the dot product of 2 vectors</p>
+<div class='ruff_synopsis'><span class='ruff_cmd'>Dot</span> <span class='ruff_arg'>v1 v2</span></div>
+<h5 class='ruff'>Parameters</h5><table class='ruff_deflist'>
+<tr><td><nobr><code>v1</code></nobr></td><td><a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d::Vector3d" title="Vector3d" class='ruff_cmd'>Vector3d</a></td></tr>
+<tr><td><nobr><code>v2</code></nobr></td><td><a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d::Vector3d" title="Vector3d" class='ruff_cmd'>Vector3d</a></td></tr>
+</table>
+<h5 class='ruff'>Description</h5><p class='ruff'>See : method DotProduct</p>
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_tomato_mathvec3d_Dot' href="javascript:toggleSource('tomato_mathvec3d_Dot')">Show source</a></p>
+<div id='tomato_mathvec3d_Dot' class='ruff_dyn_src'><pre>proc ::tomato::mathvec3d::Dot {v1 v2} {
+
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Compute the dot product of 2 vectors</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # v1 - [Vector3d]</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # v2 - [Vector3d]</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # See : method DotProduct</span>
+    <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> [expr {([<span style="color: rgb(233, 98, 98);">$v1</span> X] * [<span style="color: rgb(233, 98, 98);">$v2</span> X]) + ([<span style="color: rgb(233, 98, 98);">$v1</span> Y] * [<span style="color: rgb(233, 98, 98);">$v2</span> Y]) + ([<span style="color: rgb(233, 98, 98);">$v1</span> Z] * [<span style="color: rgb(233, 98, 98);">$v2</span> Z])}]
+}</pre></div>
+</div><h3 class='ruffproc'><a name='::tomato::mathvec3d::Equals'>Equals</a><span class='ns_scope'> [<a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d" title="::tomato::mathvec3d" class='ruff_cmd'>::tomato::mathvec3d</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
+<div style='clear:both;'></div>
+<p class='ruff'>Indicate if this vector is equivalent to a given unit vector</p>
+<div class='ruff_synopsis'><span class='ruff_cmd'>Equals</span> <span class='ruff_arg'>vector other tolerance</span></div>
+<h5 class='ruff'>Parameters</h5><table class='ruff_deflist'>
+<tr><td><nobr><code>vector</code></nobr></td><td>First input vector <a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d::Vector3d" title="Vector3d" class='ruff_cmd'>Vector3d</a></td></tr>
+<tr><td><nobr><code>other</code></nobr></td><td>Second input vector <a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d::Vector3d" title="Vector3d" class='ruff_cmd'>Vector3d</a></td></tr>
+<tr><td><nobr><code>tolerance</code></nobr></td><td>A tolerance (epsilon) to adjust for floating point error</td></tr>
+</table>
+<h5 class='ruff'>Description</h5><p class='ruff'>See : methods == !=</p>
+<p class='ruff'>An error exception is raised if tolerance (epsilon) &lt; 0.</p>
+<h5 class='ruff'>Return value</h5><p class='ruff'>Returns <code>True</code> if the vectors are equal, otherwise false.</p>
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_tomato_mathvec3d_Equals' href="javascript:toggleSource('tomato_mathvec3d_Equals')">Show source</a></p>
+<div id='tomato_mathvec3d_Equals' class='ruff_dyn_src'><pre>proc ::tomato::mathvec3d::Equals {vector other tolerance} {
+
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Indicate if this vector is equivalent to a given unit vector</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # vector - First input vector [Vector3d]</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # other - Second input vector [Vector3d]</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # tolerance - A tolerance (epsilon) to adjust for floating point error</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Returns `True` if the vectors are equal, otherwise false.</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # See : methods == !=</span>
+    if {<span style="color: rgb(233, 98, 98);">$tolerance</span> &lt; 0} {
+        #ruff
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">        # An <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">error</span> exception is raised if tolerance (epsilon) &lt; 0.</span>
+        <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">error</span> <span style="color: hsl(120, 71%, 16%);">&quot;epsilon &lt; 0&quot;</span>
+    }
+
+    <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> [expr {
+                  (abs([<span style="color: rgb(233, 98, 98);">$other</span> X] - [<span style="color: rgb(233, 98, 98);">$vector</span> X]) &lt; <span style="color: rgb(233, 98, 98);">$tolerance</span>) &amp;&amp;
+                  (abs([<span style="color: rgb(233, 98, 98);">$other</span> Y] - [<span style="color: rgb(233, 98, 98);">$vector</span> Y]) &lt; <span style="color: rgb(233, 98, 98);">$tolerance</span>) &amp;&amp;
+                  (abs([<span style="color: rgb(233, 98, 98);">$other</span> Z] - [<span style="color: rgb(233, 98, 98);">$vector</span> Z]) &lt; <span style="color: rgb(233, 98, 98);">$tolerance</span>)
+                }]
+}</pre></div>
+</div><h3 class='ruffproc'><a name='::tomato::mathvec3d::Lerp'>Lerp</a><span class='ns_scope'> [<a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d" title="::tomato::mathvec3d" class='ruff_cmd'>::tomato::mathvec3d</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
+<div style='clear:both;'></div>
+<p class='ruff'>Lerp a new Vector that is the linear blend of the 2 given Vectors.</p>
+<div class='ruff_synopsis'><span class='ruff_cmd'>Lerp</span> <span class='ruff_arg'>v1 v2 blend</span></div>
+<h5 class='ruff'>Parameters</h5><table class='ruff_deflist'>
+<tr><td><nobr><code>v1</code></nobr></td><td><a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d::Vector3d" title="Vector3d" class='ruff_cmd'>Vector3d</a></td></tr>
+<tr><td><nobr><code>v2</code></nobr></td><td><a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d::Vector3d" title="Vector3d" class='ruff_cmd'>Vector3d</a></td></tr>
+<tr><td><nobr><code>blend</code></nobr></td><td>The blend factor. v1 when <code>blend=0</code>, v2 when <code>blend=1</code>.</td></tr>
+</table>
+<h5 class='ruff'>Return value</h5><p class='ruff'>Returns v1 when <code>blend=0</code>, v2 when <code>blend=1</code>, and a linear combination otherwise.</p>
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_tomato_mathvec3d_Lerp' href="javascript:toggleSource('tomato_mathvec3d_Lerp')">Show source</a></p>
+<div id='tomato_mathvec3d_Lerp' class='ruff_dyn_src'><pre>proc ::tomato::mathvec3d::Lerp {v1 v2 blend} {
+
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Lerp a new Vector that is the linear blend of the 2 given Vectors.</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # v1 - [Vector3d]</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # v2 - [Vector3d]</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # blend - The blend factor. v1 when `blend=0`, v2 when `blend=1`.</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Returns v1 when `blend=0`, v2 when `blend=1`, and a linear combination otherwise.</span>
+    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> vx [expr {<span style="color: rgb(233, 98, 98);">$blend</span> * ([<span style="color: rgb(233, 98, 98);">$v2</span> X] - [<span style="color: rgb(233, 98, 98);">$v1</span> X]) + [<span style="color: rgb(233, 98, 98);">$v1</span> X]}]
+    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> vy [expr {<span style="color: rgb(233, 98, 98);">$blend</span> * ([<span style="color: rgb(233, 98, 98);">$v2</span> Y] - [<span style="color: rgb(233, 98, 98);">$v1</span> Y]) + [<span style="color: rgb(233, 98, 98);">$v1</span> Y]}]
+    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> vz [expr {<span style="color: rgb(233, 98, 98);">$blend</span> * ([<span style="color: rgb(233, 98, 98);">$v2</span> Z] - [<span style="color: rgb(233, 98, 98);">$v1</span> Z]) + [<span style="color: rgb(233, 98, 98);">$v1</span> Z]}]
+
+    <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> [tomato::mathvec3d::Vector3d new <span style="color: rgb(233, 98, 98);">$vx</span> <span style="color: rgb(233, 98, 98);">$vy</span> <span style="color: rgb(233, 98, 98);">$vz</span>]
+}</pre></div>
+</div><h3 class='ruffproc'><a name='::tomato::mathvec3d::MagnitudeMax'>MagnitudeMax</a><span class='ns_scope'> [<a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d" title="::tomato::mathvec3d" class='ruff_cmd'>::tomato::mathvec3d</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
+<div style='clear:both;'></div>
+<p class='ruff'>A vector with the maximum magnitude.</p>
+<div class='ruff_synopsis'><span class='ruff_cmd'>MagnitudeMax</span> <span class='ruff_arg'>left right</span></div>
+<h5 class='ruff'>Parameters</h5><table class='ruff_deflist'>
+<tr><td><nobr><code>left</code></nobr></td><td><a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d::Vector3d" title="Vector3d" class='ruff_cmd'>Vector3d</a></td></tr>
+<tr><td><nobr><code>right</code></nobr></td><td><a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d::Vector3d" title="Vector3d" class='ruff_cmd'>Vector3d</a></td></tr>
+</table>
+<h5 class='ruff'>Return value</h5><p class='ruff'>Returns Vector <a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d::Vector3d" title="Vector3d" class='ruff_cmd'>Vector3d</a> magnitude-wise maximum.</p>
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_tomato_mathvec3d_MagnitudeMax' href="javascript:toggleSource('tomato_mathvec3d_MagnitudeMax')">Show source</a></p>
+<div id='tomato_mathvec3d_MagnitudeMax' class='ruff_dyn_src'><pre>proc ::tomato::mathvec3d::MagnitudeMax {left right} {
+
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # A vector with the maximum magnitude.</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # left  - [Vector3d]</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # right - [Vector3d]</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Returns Vector [Vector3d] magnitude-wise maximum.</span>
+    <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> [expr {[<span style="color: rgb(233, 98, 98);">$left</span> Length] &gt;= [<span style="color: rgb(233, 98, 98);">$right</span> Length] ? <span style="color: rgb(233, 98, 98);">$left</span> : <span style="color: rgb(233, 98, 98);">$right</span>}]
+}</pre></div>
+</div><h3 class='ruffproc'><a name='::tomato::mathvec3d::MagnitudeMin'>MagnitudeMin</a><span class='ns_scope'> [<a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d" title="::tomato::mathvec3d" class='ruff_cmd'>::tomato::mathvec3d</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
+<div style='clear:both;'></div>
+<p class='ruff'>A vector with the minimum magnitude</p>
+<div class='ruff_synopsis'><span class='ruff_cmd'>MagnitudeMin</span> <span class='ruff_arg'>left right</span></div>
+<h5 class='ruff'>Parameters</h5><table class='ruff_deflist'>
+<tr><td><nobr><code>left</code></nobr></td><td><a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d::Vector3d" title="Vector3d" class='ruff_cmd'>Vector3d</a></td></tr>
+<tr><td><nobr><code>right</code></nobr></td><td><a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d::Vector3d" title="Vector3d" class='ruff_cmd'>Vector3d</a></td></tr>
+</table>
+<h5 class='ruff'>Return value</h5><p class='ruff'>Returns Vector <a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d::Vector3d" title="Vector3d" class='ruff_cmd'>Vector3d</a> magnitude-wise minimum.</p>
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_tomato_mathvec3d_MagnitudeMin' href="javascript:toggleSource('tomato_mathvec3d_MagnitudeMin')">Show source</a></p>
+<div id='tomato_mathvec3d_MagnitudeMin' class='ruff_dyn_src'><pre>proc ::tomato::mathvec3d::MagnitudeMin {left right} {
+
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # A vector with the minimum magnitude</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # left  - [Vector3d]</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # right - [Vector3d]</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Returns Vector [Vector3d] magnitude-wise minimum.</span>
+    <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> [expr {[<span style="color: rgb(233, 98, 98);">$left</span> Length] &lt; [<span style="color: rgb(233, 98, 98);">$right</span> Length] ? <span style="color: rgb(233, 98, 98);">$left</span> : <span style="color: rgb(233, 98, 98);">$right</span>}]
+}</pre></div>
+</div><h3 class='ruffproc'><a name='::tomato::mathvec3d::UnitX'>UnitX</a><span class='ns_scope'> [<a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d" title="::tomato::mathvec3d" class='ruff_cmd'>::tomato::mathvec3d</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
+<div style='clear:both;'></div>
+<p class='ruff'>A unit length Vector X-axis</p>
+<div class='ruff_synopsis'><span class='ruff_cmd'>UnitX</span> </div>
+<h5 class='ruff'>Return value</h5><p class='ruff'>Returns a unit length vector <a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d::Vector3d" title="Vector3d" class='ruff_cmd'>Vector3d</a> that points towards the X-axis</p>
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_tomato_mathvec3d_UnitX' href="javascript:toggleSource('tomato_mathvec3d_UnitX')">Show source</a></p>
+<div id='tomato_mathvec3d_UnitX' class='ruff_dyn_src'><pre>proc ::tomato::mathvec3d::UnitX {} {
+
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # A unit length Vector X-axis</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Returns a unit length vector [Vector3d] that points towards the X-axis</span>
+    <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> [tomato::mathvec3d::Vector3d new 1.0 0.0 0.0]
+}</pre></div>
+</div><h3 class='ruffproc'><a name='::tomato::mathvec3d::UnitY'>UnitY</a><span class='ns_scope'> [<a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d" title="::tomato::mathvec3d" class='ruff_cmd'>::tomato::mathvec3d</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
+<div style='clear:both;'></div>
+<p class='ruff'>A unit length Vector Y-axis</p>
+<div class='ruff_synopsis'><span class='ruff_cmd'>UnitY</span> </div>
+<h5 class='ruff'>Return value</h5><p class='ruff'>Returns a unit length vector <a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d::Vector3d" title="Vector3d" class='ruff_cmd'>Vector3d</a> that points towards the Y-axis</p>
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_tomato_mathvec3d_UnitY' href="javascript:toggleSource('tomato_mathvec3d_UnitY')">Show source</a></p>
+<div id='tomato_mathvec3d_UnitY' class='ruff_dyn_src'><pre>proc ::tomato::mathvec3d::UnitY {} {
+
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # A unit length Vector Y-axis</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Returns a unit length vector [Vector3d] that points towards the Y-axis</span>
+    <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> [tomato::mathvec3d::Vector3d new 0.0 1.0 0.0]
+}</pre></div>
+</div><h3 class='ruffproc'><a name='::tomato::mathvec3d::UnitZ'>UnitZ</a><span class='ns_scope'> [<a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d" title="::tomato::mathvec3d" class='ruff_cmd'>::tomato::mathvec3d</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
+<div style='clear:both;'></div>
+<p class='ruff'>A unit length Vector Z-axis</p>
+<div class='ruff_synopsis'><span class='ruff_cmd'>UnitZ</span> </div>
+<h5 class='ruff'>Return value</h5><p class='ruff'>Returns a unit length vector <a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d::Vector3d" title="Vector3d" class='ruff_cmd'>Vector3d</a> that points towards the Z-axis</p>
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_tomato_mathvec3d_UnitZ' href="javascript:toggleSource('tomato_mathvec3d_UnitZ')">Show source</a></p>
+<div id='tomato_mathvec3d_UnitZ' class='ruff_dyn_src'><pre>proc ::tomato::mathvec3d::UnitZ {} {
+
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # A unit length Vector Z-axis</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Returns a unit length vector [Vector3d] that points towards the Z-axis</span>
+    <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> [tomato::mathvec3d::Vector3d new 0.0 0.0 1.0]
+}</pre></div>
+</div><h2 class='ruff'><a name='::tomato::mathvec3d-Classes'></a>Classes<span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h2>
 <div style='clear:both;'></div>
 <h3 class='ruffclass'><a name='::tomato::mathvec3d::Vector3d'>Vector3d</a><span class='ns_scope'> [<a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d" title="::tomato::mathvec3d" class='ruff_cmd'>::tomato::mathvec3d</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
 <div style='clear:both;'></div>
@@ -871,267 +1132,6 @@
 <span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Returns The z component.</span>
     <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> <span style="color: rgb(233, 98, 98);">$_z</span>
 }</pre></div>
-</div><h2 class='ruff'><a name='::tomato::mathvec3d-Commands'></a>Commands<span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h2>
-<div style='clear:both;'></div>
-<h3 class='ruffproc'><a name='::tomato::mathvec3d::Clamp'>Clamp</a><span class='ns_scope'> [<a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d" title="::tomato::mathvec3d" class='ruff_cmd'>::tomato::mathvec3d</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
-<div style='clear:both;'></div>
-<p class='ruff'>Clamp a vector to the given minimum and maximum vectors.</p>
-<div class='ruff_synopsis'><span class='ruff_cmd'>Clamp</span> <span class='ruff_arg'>vec min max</span></div>
-<h5 class='ruff'>Parameters</h5><table class='ruff_deflist'>
-<tr><td><nobr><code>vec</code></nobr></td><td>Input vector   <a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d::Vector3d" title="Vector3d" class='ruff_cmd'>Vector3d</a></td></tr>
-<tr><td><nobr><code>min</code></nobr></td><td>Minimum vector <a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d::Vector3d" title="Vector3d" class='ruff_cmd'>Vector3d</a></td></tr>
-<tr><td><nobr><code>max</code></nobr></td><td>Maximum vector <a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d::Vector3d" title="Vector3d" class='ruff_cmd'>Vector3d</a></td></tr>
-</table>
-<h5 class='ruff'>Return value</h5><p class='ruff'>Returns a new clamped vector <a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d::Vector3d" title="Vector3d" class='ruff_cmd'>Vector3d</a>.</p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_tomato_mathvec3d_Clamp' href="javascript:toggleSource('tomato_mathvec3d_Clamp')">Show source</a></p>
-<div id='tomato_mathvec3d_Clamp' class='ruff_dyn_src'><pre>proc ::tomato::mathvec3d::Clamp {vec min max} {
-
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Clamp a vector to the given minimum and maximum vectors.</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # vec - Input vector   [Vector3d]</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # min - Minimum vector [Vector3d]</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # max - Maximum vector [Vector3d]</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Returns a new clamped vector [Vector3d].</span>
-    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> vx [expr {[<span style="color: rgb(233, 98, 98);">$vec</span> X] &lt; [<span style="color: rgb(233, 98, 98);">$min</span> X] ? [<span style="color: rgb(233, 98, 98);">$min</span> X] : [<span style="color: rgb(233, 98, 98);">$vec</span> X] &gt; [<span style="color: rgb(233, 98, 98);">$max</span> X] ? [<span style="color: rgb(233, 98, 98);">$max</span> X] : [<span style="color: rgb(233, 98, 98);">$vec</span> X]}]
-    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> vy [expr {[<span style="color: rgb(233, 98, 98);">$vec</span> Y] &lt; [<span style="color: rgb(233, 98, 98);">$min</span> Y] ? [<span style="color: rgb(233, 98, 98);">$min</span> Y] : [<span style="color: rgb(233, 98, 98);">$vec</span> Y] &gt; [<span style="color: rgb(233, 98, 98);">$max</span> Y] ? [<span style="color: rgb(233, 98, 98);">$max</span> Y] : [<span style="color: rgb(233, 98, 98);">$vec</span> Y]}]
-    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> vz [expr {[<span style="color: rgb(233, 98, 98);">$vec</span> Z] &lt; [<span style="color: rgb(233, 98, 98);">$min</span> Z] ? [<span style="color: rgb(233, 98, 98);">$min</span> Z] : [<span style="color: rgb(233, 98, 98);">$vec</span> Z] &gt; [<span style="color: rgb(233, 98, 98);">$max</span> Z] ? [<span style="color: rgb(233, 98, 98);">$max</span> Z] : [<span style="color: rgb(233, 98, 98);">$vec</span> Z]}]
-
-    <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> [tomato::mathvec3d::Vector3d new <span style="color: rgb(233, 98, 98);">$vx</span> <span style="color: rgb(233, 98, 98);">$vy</span> <span style="color: rgb(233, 98, 98);">$vz</span>]
-}</pre></div>
-</div><h3 class='ruffproc'><a name='::tomato::mathvec3d::ComponentMax'>ComponentMax</a><span class='ns_scope'> [<a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d" title="::tomato::mathvec3d" class='ruff_cmd'>::tomato::mathvec3d</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
-<div style='clear:both;'></div>
-<p class='ruff'>A vector created from the largest of the corresponding components of the given vectors.</p>
-<div class='ruff_synopsis'><span class='ruff_cmd'>ComponentMax</span> <span class='ruff_arg'>v1 v2</span></div>
-<h5 class='ruff'>Parameters</h5><table class='ruff_deflist'>
-<tr><td><nobr><code>v1</code></nobr></td><td><a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d::Vector3d" title="Vector3d" class='ruff_cmd'>Vector3d</a></td></tr>
-<tr><td><nobr><code>v2</code></nobr></td><td><a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d::Vector3d" title="Vector3d" class='ruff_cmd'>Vector3d</a></td></tr>
-</table>
-<h5 class='ruff'>Return value</h5><p class='ruff'>Returns a new vector <a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d::Vector3d" title="Vector3d" class='ruff_cmd'>Vector3d</a> component-wise maximum.</p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_tomato_mathvec3d_ComponentMax' href="javascript:toggleSource('tomato_mathvec3d_ComponentMax')">Show source</a></p>
-<div id='tomato_mathvec3d_ComponentMax' class='ruff_dyn_src'><pre>proc ::tomato::mathvec3d::ComponentMax {v1 v2} {
-
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # A vector created from the largest of the corresponding components of the given vectors.</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # v1 - [Vector3d]</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # v2 - [Vector3d]</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Returns a new vector [Vector3d] component-wise maximum.</span>
-    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> vx [expr {[<span style="color: rgb(233, 98, 98);">$v1</span> X] &gt; [<span style="color: rgb(233, 98, 98);">$v2</span> X] ? [<span style="color: rgb(233, 98, 98);">$v1</span> X] : [<span style="color: rgb(233, 98, 98);">$v2</span> X]}]
-    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> vy [expr {[<span style="color: rgb(233, 98, 98);">$v1</span> Y] &gt; [<span style="color: rgb(233, 98, 98);">$v2</span> Y] ? [<span style="color: rgb(233, 98, 98);">$v1</span> Y] : [<span style="color: rgb(233, 98, 98);">$v2</span> Y]}]
-    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> vz [expr {[<span style="color: rgb(233, 98, 98);">$v1</span> Z] &gt; [<span style="color: rgb(233, 98, 98);">$v2</span> Z] ? [<span style="color: rgb(233, 98, 98);">$v1</span> Z] : [<span style="color: rgb(233, 98, 98);">$v2</span> Z]}]
-
-    <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> [tomato::mathvec3d::Vector3d new <span style="color: rgb(233, 98, 98);">$vx</span> <span style="color: rgb(233, 98, 98);">$vy</span> <span style="color: rgb(233, 98, 98);">$vz</span>]
-}</pre></div>
-</div><h3 class='ruffproc'><a name='::tomato::mathvec3d::ComponentMin'>ComponentMin</a><span class='ns_scope'> [<a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d" title="::tomato::mathvec3d" class='ruff_cmd'>::tomato::mathvec3d</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
-<div style='clear:both;'></div>
-<p class='ruff'>A vector created from the smallest of the corresponding components of the given vectors.</p>
-<div class='ruff_synopsis'><span class='ruff_cmd'>ComponentMin</span> <span class='ruff_arg'>v1 v2</span></div>
-<h5 class='ruff'>Parameters</h5><table class='ruff_deflist'>
-<tr><td><nobr><code>v1</code></nobr></td><td><a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d::Vector3d" title="Vector3d" class='ruff_cmd'>Vector3d</a></td></tr>
-<tr><td><nobr><code>v2</code></nobr></td><td><a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d::Vector3d" title="Vector3d" class='ruff_cmd'>Vector3d</a></td></tr>
-</table>
-<h5 class='ruff'>Return value</h5><p class='ruff'>Returns a new vector <a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d::Vector3d" title="Vector3d" class='ruff_cmd'>Vector3d</a> component-wise minimum.</p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_tomato_mathvec3d_ComponentMin' href="javascript:toggleSource('tomato_mathvec3d_ComponentMin')">Show source</a></p>
-<div id='tomato_mathvec3d_ComponentMin' class='ruff_dyn_src'><pre>proc ::tomato::mathvec3d::ComponentMin {v1 v2} {
-
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # A vector created from the smallest of the corresponding components of the given vectors.</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # v1 - [Vector3d]</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # v2 - [Vector3d]</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Returns a new vector [Vector3d] component-wise minimum.</span>
-    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> vx [expr {[<span style="color: rgb(233, 98, 98);">$v1</span> X] &lt; [<span style="color: rgb(233, 98, 98);">$v2</span> X] ? [<span style="color: rgb(233, 98, 98);">$v1</span> X] : [<span style="color: rgb(233, 98, 98);">$v2</span> X]}]
-    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> vy [expr {[<span style="color: rgb(233, 98, 98);">$v1</span> Y] &lt; [<span style="color: rgb(233, 98, 98);">$v2</span> Y] ? [<span style="color: rgb(233, 98, 98);">$v1</span> Y] : [<span style="color: rgb(233, 98, 98);">$v2</span> Y]}]
-    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> vz [expr {[<span style="color: rgb(233, 98, 98);">$v1</span> Z] &lt; [<span style="color: rgb(233, 98, 98);">$v2</span> Z] ? [<span style="color: rgb(233, 98, 98);">$v1</span> Z] : [<span style="color: rgb(233, 98, 98);">$v2</span> Z]}]
-
-    <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> [tomato::mathvec3d::Vector3d new <span style="color: rgb(233, 98, 98);">$vx</span> <span style="color: rgb(233, 98, 98);">$vy</span> <span style="color: rgb(233, 98, 98);">$vz</span>]
-}</pre></div>
-</div><h3 class='ruffproc'><a name='::tomato::mathvec3d::Cross'>Cross</a><span class='ns_scope'> [<a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d" title="::tomato::mathvec3d" class='ruff_cmd'>::tomato::mathvec3d</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
-<div style='clear:both;'></div>
-<p class='ruff'>Compute the cross product of 2 vectors</p>
-<div class='ruff_synopsis'><span class='ruff_cmd'>Cross</span> <span class='ruff_arg'>v1 v2</span></div>
-<h5 class='ruff'>Parameters</h5><table class='ruff_deflist'>
-<tr><td><nobr><code>v1</code></nobr></td><td><a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d::Vector3d" title="Vector3d" class='ruff_cmd'>Vector3d</a></td></tr>
-<tr><td><nobr><code>v2</code></nobr></td><td><a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d::Vector3d" title="Vector3d" class='ruff_cmd'>Vector3d</a></td></tr>
-</table>
-<h5 class='ruff'>Description</h5><p class='ruff'>See : method CrossProduct</p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_tomato_mathvec3d_Cross' href="javascript:toggleSource('tomato_mathvec3d_Cross')">Show source</a></p>
-<div id='tomato_mathvec3d_Cross' class='ruff_dyn_src'><pre>proc ::tomato::mathvec3d::Cross {v1 v2} {
-
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Compute the cross product of 2 vectors</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # v1 - [Vector3d]</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # v2 - [Vector3d]</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # See : method CrossProduct</span>
-    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> vx [expr {([<span style="color: rgb(233, 98, 98);">$v1</span> Y] * [<span style="color: rgb(233, 98, 98);">$v2</span> Z]) - ([<span style="color: rgb(233, 98, 98);">$v1</span> Z] * [<span style="color: rgb(233, 98, 98);">$v2</span> Y])}]
-    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> vy [expr {([<span style="color: rgb(233, 98, 98);">$v1</span> Z] * [<span style="color: rgb(233, 98, 98);">$v2</span> X]) - ([<span style="color: rgb(233, 98, 98);">$v1</span> X] * [<span style="color: rgb(233, 98, 98);">$v2</span> Z])}]
-    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> vz [expr {([<span style="color: rgb(233, 98, 98);">$v1</span> X] * [<span style="color: rgb(233, 98, 98);">$v2</span> Y]) - ([<span style="color: rgb(233, 98, 98);">$v1</span> Y] * [<span style="color: rgb(233, 98, 98);">$v2</span> X])}]
-
-    <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> [tomato::mathvec3d::Vector3d new <span style="color: rgb(233, 98, 98);">$vx</span> <span style="color: rgb(233, 98, 98);">$vy</span> <span style="color: rgb(233, 98, 98);">$vz</span>]
-}</pre></div>
-</div><h3 class='ruffproc'><a name='::tomato::mathvec3d::Dot'>Dot</a><span class='ns_scope'> [<a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d" title="::tomato::mathvec3d" class='ruff_cmd'>::tomato::mathvec3d</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
-<div style='clear:both;'></div>
-<p class='ruff'>Compute the dot product of 2 vectors</p>
-<div class='ruff_synopsis'><span class='ruff_cmd'>Dot</span> <span class='ruff_arg'>v1 v2</span></div>
-<h5 class='ruff'>Parameters</h5><table class='ruff_deflist'>
-<tr><td><nobr><code>v1</code></nobr></td><td><a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d::Vector3d" title="Vector3d" class='ruff_cmd'>Vector3d</a></td></tr>
-<tr><td><nobr><code>v2</code></nobr></td><td><a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d::Vector3d" title="Vector3d" class='ruff_cmd'>Vector3d</a></td></tr>
-</table>
-<h5 class='ruff'>Description</h5><p class='ruff'>See : method DotProduct</p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_tomato_mathvec3d_Dot' href="javascript:toggleSource('tomato_mathvec3d_Dot')">Show source</a></p>
-<div id='tomato_mathvec3d_Dot' class='ruff_dyn_src'><pre>proc ::tomato::mathvec3d::Dot {v1 v2} {
-
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Compute the dot product of 2 vectors</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # v1 - [Vector3d]</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # v2 - [Vector3d]</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # See : method DotProduct</span>
-    <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> [expr {([<span style="color: rgb(233, 98, 98);">$v1</span> X] * [<span style="color: rgb(233, 98, 98);">$v2</span> X]) + ([<span style="color: rgb(233, 98, 98);">$v1</span> Y] * [<span style="color: rgb(233, 98, 98);">$v2</span> Y]) + ([<span style="color: rgb(233, 98, 98);">$v1</span> Z] * [<span style="color: rgb(233, 98, 98);">$v2</span> Z])}]
-}</pre></div>
-</div><h3 class='ruffproc'><a name='::tomato::mathvec3d::Equals'>Equals</a><span class='ns_scope'> [<a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d" title="::tomato::mathvec3d" class='ruff_cmd'>::tomato::mathvec3d</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
-<div style='clear:both;'></div>
-<p class='ruff'>Indicate if this vector is equivalent to a given unit vector</p>
-<div class='ruff_synopsis'><span class='ruff_cmd'>Equals</span> <span class='ruff_arg'>vector other tolerance</span></div>
-<h5 class='ruff'>Parameters</h5><table class='ruff_deflist'>
-<tr><td><nobr><code>vector</code></nobr></td><td>First input vector <a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d::Vector3d" title="Vector3d" class='ruff_cmd'>Vector3d</a></td></tr>
-<tr><td><nobr><code>other</code></nobr></td><td>Second input vector <a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d::Vector3d" title="Vector3d" class='ruff_cmd'>Vector3d</a></td></tr>
-<tr><td><nobr><code>tolerance</code></nobr></td><td>A tolerance (epsilon) to adjust for floating point error</td></tr>
-</table>
-<h5 class='ruff'>Description</h5><p class='ruff'>See : methods == !=</p>
-<p class='ruff'>An error exception is raised if tolerance (epsilon) &lt; 0.</p>
-<h5 class='ruff'>Return value</h5><p class='ruff'>Returns <code>True</code> if the vectors are equal, otherwise false.</p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_tomato_mathvec3d_Equals' href="javascript:toggleSource('tomato_mathvec3d_Equals')">Show source</a></p>
-<div id='tomato_mathvec3d_Equals' class='ruff_dyn_src'><pre>proc ::tomato::mathvec3d::Equals {vector other tolerance} {
-
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Indicate if this vector is equivalent to a given unit vector</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # vector - First input vector [Vector3d]</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # other - Second input vector [Vector3d]</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # tolerance - A tolerance (epsilon) to adjust for floating point error</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Returns `True` if the vectors are equal, otherwise false.</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # See : methods == !=</span>
-    if {<span style="color: rgb(233, 98, 98);">$tolerance</span> &lt; 0} {
-        #ruff
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">        # An <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">error</span> exception is raised if tolerance (epsilon) &lt; 0.</span>
-        <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">error</span> <span style="color: hsl(120, 71%, 16%);">&quot;epsilon &lt; 0&quot;</span>
-    }
-
-    <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> [expr {
-                  (abs([<span style="color: rgb(233, 98, 98);">$other</span> X] - [<span style="color: rgb(233, 98, 98);">$vector</span> X]) &lt; <span style="color: rgb(233, 98, 98);">$tolerance</span>) &amp;&amp;
-                  (abs([<span style="color: rgb(233, 98, 98);">$other</span> Y] - [<span style="color: rgb(233, 98, 98);">$vector</span> Y]) &lt; <span style="color: rgb(233, 98, 98);">$tolerance</span>) &amp;&amp;
-                  (abs([<span style="color: rgb(233, 98, 98);">$other</span> Z] - [<span style="color: rgb(233, 98, 98);">$vector</span> Z]) &lt; <span style="color: rgb(233, 98, 98);">$tolerance</span>)
-                }]
-}</pre></div>
-</div><h3 class='ruffproc'><a name='::tomato::mathvec3d::Lerp'>Lerp</a><span class='ns_scope'> [<a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d" title="::tomato::mathvec3d" class='ruff_cmd'>::tomato::mathvec3d</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
-<div style='clear:both;'></div>
-<p class='ruff'>Lerp a new Vector that is the linear blend of the 2 given Vectors.</p>
-<div class='ruff_synopsis'><span class='ruff_cmd'>Lerp</span> <span class='ruff_arg'>v1 v2 blend</span></div>
-<h5 class='ruff'>Parameters</h5><table class='ruff_deflist'>
-<tr><td><nobr><code>v1</code></nobr></td><td><a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d::Vector3d" title="Vector3d" class='ruff_cmd'>Vector3d</a></td></tr>
-<tr><td><nobr><code>v2</code></nobr></td><td><a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d::Vector3d" title="Vector3d" class='ruff_cmd'>Vector3d</a></td></tr>
-<tr><td><nobr><code>blend</code></nobr></td><td>The blend factor. v1 when <code>blend=0</code>, v2 when <code>blend=1</code>.</td></tr>
-</table>
-<h5 class='ruff'>Return value</h5><p class='ruff'>Returns v1 when <code>blend=0</code>, v2 when <code>blend=1</code>, and a linear combination otherwise.</p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_tomato_mathvec3d_Lerp' href="javascript:toggleSource('tomato_mathvec3d_Lerp')">Show source</a></p>
-<div id='tomato_mathvec3d_Lerp' class='ruff_dyn_src'><pre>proc ::tomato::mathvec3d::Lerp {v1 v2 blend} {
-
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Lerp a new Vector that is the linear blend of the 2 given Vectors.</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # v1 - [Vector3d]</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # v2 - [Vector3d]</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # blend - The blend factor. v1 when `blend=0`, v2 when `blend=1`.</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Returns v1 when `blend=0`, v2 when `blend=1`, and a linear combination otherwise.</span>
-    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> vx [expr {<span style="color: rgb(233, 98, 98);">$blend</span> * ([<span style="color: rgb(233, 98, 98);">$v2</span> X] - [<span style="color: rgb(233, 98, 98);">$v1</span> X]) + [<span style="color: rgb(233, 98, 98);">$v1</span> X]}]
-    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> vy [expr {<span style="color: rgb(233, 98, 98);">$blend</span> * ([<span style="color: rgb(233, 98, 98);">$v2</span> Y] - [<span style="color: rgb(233, 98, 98);">$v1</span> Y]) + [<span style="color: rgb(233, 98, 98);">$v1</span> Y]}]
-    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> vz [expr {<span style="color: rgb(233, 98, 98);">$blend</span> * ([<span style="color: rgb(233, 98, 98);">$v2</span> Z] - [<span style="color: rgb(233, 98, 98);">$v1</span> Z]) + [<span style="color: rgb(233, 98, 98);">$v1</span> Z]}]
-
-    <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> [tomato::mathvec3d::Vector3d new <span style="color: rgb(233, 98, 98);">$vx</span> <span style="color: rgb(233, 98, 98);">$vy</span> <span style="color: rgb(233, 98, 98);">$vz</span>]
-}</pre></div>
-</div><h3 class='ruffproc'><a name='::tomato::mathvec3d::MagnitudeMax'>MagnitudeMax</a><span class='ns_scope'> [<a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d" title="::tomato::mathvec3d" class='ruff_cmd'>::tomato::mathvec3d</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
-<div style='clear:both;'></div>
-<p class='ruff'>A vector with the maximum magnitude.</p>
-<div class='ruff_synopsis'><span class='ruff_cmd'>MagnitudeMax</span> <span class='ruff_arg'>left right</span></div>
-<h5 class='ruff'>Parameters</h5><table class='ruff_deflist'>
-<tr><td><nobr><code>left</code></nobr></td><td><a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d::Vector3d" title="Vector3d" class='ruff_cmd'>Vector3d</a></td></tr>
-<tr><td><nobr><code>right</code></nobr></td><td><a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d::Vector3d" title="Vector3d" class='ruff_cmd'>Vector3d</a></td></tr>
-</table>
-<h5 class='ruff'>Return value</h5><p class='ruff'>Returns Vector <a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d::Vector3d" title="Vector3d" class='ruff_cmd'>Vector3d</a> magnitude-wise maximum.</p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_tomato_mathvec3d_MagnitudeMax' href="javascript:toggleSource('tomato_mathvec3d_MagnitudeMax')">Show source</a></p>
-<div id='tomato_mathvec3d_MagnitudeMax' class='ruff_dyn_src'><pre>proc ::tomato::mathvec3d::MagnitudeMax {left right} {
-
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # A vector with the maximum magnitude.</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # left  - [Vector3d]</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # right - [Vector3d]</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Returns Vector [Vector3d] magnitude-wise maximum.</span>
-    <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> [expr {[<span style="color: rgb(233, 98, 98);">$left</span> Length] &gt;= [<span style="color: rgb(233, 98, 98);">$right</span> Length] ? <span style="color: rgb(233, 98, 98);">$left</span> : <span style="color: rgb(233, 98, 98);">$right</span>}]
-}</pre></div>
-</div><h3 class='ruffproc'><a name='::tomato::mathvec3d::MagnitudeMin'>MagnitudeMin</a><span class='ns_scope'> [<a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d" title="::tomato::mathvec3d" class='ruff_cmd'>::tomato::mathvec3d</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
-<div style='clear:both;'></div>
-<p class='ruff'>A vector with the minimum magnitude</p>
-<div class='ruff_synopsis'><span class='ruff_cmd'>MagnitudeMin</span> <span class='ruff_arg'>left right</span></div>
-<h5 class='ruff'>Parameters</h5><table class='ruff_deflist'>
-<tr><td><nobr><code>left</code></nobr></td><td><a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d::Vector3d" title="Vector3d" class='ruff_cmd'>Vector3d</a></td></tr>
-<tr><td><nobr><code>right</code></nobr></td><td><a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d::Vector3d" title="Vector3d" class='ruff_cmd'>Vector3d</a></td></tr>
-</table>
-<h5 class='ruff'>Return value</h5><p class='ruff'>Returns Vector <a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d::Vector3d" title="Vector3d" class='ruff_cmd'>Vector3d</a> magnitude-wise minimum.</p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_tomato_mathvec3d_MagnitudeMin' href="javascript:toggleSource('tomato_mathvec3d_MagnitudeMin')">Show source</a></p>
-<div id='tomato_mathvec3d_MagnitudeMin' class='ruff_dyn_src'><pre>proc ::tomato::mathvec3d::MagnitudeMin {left right} {
-
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # A vector with the minimum magnitude</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # left  - [Vector3d]</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # right - [Vector3d]</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Returns Vector [Vector3d] magnitude-wise minimum.</span>
-    <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> [expr {[<span style="color: rgb(233, 98, 98);">$left</span> Length] &lt; [<span style="color: rgb(233, 98, 98);">$right</span> Length] ? <span style="color: rgb(233, 98, 98);">$left</span> : <span style="color: rgb(233, 98, 98);">$right</span>}]
-}</pre></div>
-</div><h3 class='ruffproc'><a name='::tomato::mathvec3d::UnitX'>UnitX</a><span class='ns_scope'> [<a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d" title="::tomato::mathvec3d" class='ruff_cmd'>::tomato::mathvec3d</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
-<div style='clear:both;'></div>
-<p class='ruff'>A unit length Vector X-axis</p>
-<div class='ruff_synopsis'><span class='ruff_cmd'>UnitX</span> </div>
-<h5 class='ruff'>Return value</h5><p class='ruff'>Returns a unit length vector <a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d::Vector3d" title="Vector3d" class='ruff_cmd'>Vector3d</a> that points towards the X-axis</p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_tomato_mathvec3d_UnitX' href="javascript:toggleSource('tomato_mathvec3d_UnitX')">Show source</a></p>
-<div id='tomato_mathvec3d_UnitX' class='ruff_dyn_src'><pre>proc ::tomato::mathvec3d::UnitX {} {
-
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # A unit length Vector X-axis</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Returns a unit length vector [Vector3d] that points towards the X-axis</span>
-    <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> [tomato::mathvec3d::Vector3d new 1.0 0.0 0.0]
-}</pre></div>
-</div><h3 class='ruffproc'><a name='::tomato::mathvec3d::UnitY'>UnitY</a><span class='ns_scope'> [<a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d" title="::tomato::mathvec3d" class='ruff_cmd'>::tomato::mathvec3d</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
-<div style='clear:both;'></div>
-<p class='ruff'>A unit length Vector Y-axis</p>
-<div class='ruff_synopsis'><span class='ruff_cmd'>UnitY</span> </div>
-<h5 class='ruff'>Return value</h5><p class='ruff'>Returns a unit length vector <a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d::Vector3d" title="Vector3d" class='ruff_cmd'>Vector3d</a> that points towards the Y-axis</p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_tomato_mathvec3d_UnitY' href="javascript:toggleSource('tomato_mathvec3d_UnitY')">Show source</a></p>
-<div id='tomato_mathvec3d_UnitY' class='ruff_dyn_src'><pre>proc ::tomato::mathvec3d::UnitY {} {
-
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # A unit length Vector Y-axis</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Returns a unit length vector [Vector3d] that points towards the Y-axis</span>
-    <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> [tomato::mathvec3d::Vector3d new 0.0 1.0 0.0]
-}</pre></div>
-</div><h3 class='ruffproc'><a name='::tomato::mathvec3d::UnitZ'>UnitZ</a><span class='ns_scope'> [<a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d" title="::tomato::mathvec3d" class='ruff_cmd'>::tomato::mathvec3d</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
-<div style='clear:both;'></div>
-<p class='ruff'>A unit length Vector Z-axis</p>
-<div class='ruff_synopsis'><span class='ruff_cmd'>UnitZ</span> </div>
-<h5 class='ruff'>Return value</h5><p class='ruff'>Returns a unit length vector <a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d::Vector3d" title="Vector3d" class='ruff_cmd'>Vector3d</a> that points towards the Z-axis</p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_tomato_mathvec3d_UnitZ' href="javascript:toggleSource('tomato_mathvec3d_UnitZ')">Show source</a></p>
-<div id='tomato_mathvec3d_UnitZ' class='ruff_dyn_src'><pre>proc ::tomato::mathvec3d::UnitZ {} {
-
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # A unit length Vector Z-axis</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Returns a unit length vector [Vector3d] that points towards the Z-axis</span>
-    <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> [tomato::mathvec3d::Vector3d new 0.0 0.0 1.0]
-}</pre></div>
 </div></main><nav class='ruff-nav'><ul style='position: sticky; top: 0;'><li class='ruff-toc1'><a style='padding-top:2px;' href='tomato.html'>Start page</a></li>
 <li class='ruff-toc1'><a href='tomato-docindex.html' accesskey='i'>Index</a></li>
 <hr>
@@ -1146,7 +1146,19 @@
 <li class='ruff-toc1'><a href='tomato-tomato-mathmatrix3d.html'>tomato::mathmatrix3d</a></li>
 <li class='ruff-toc1'><a class='ruff-highlight' href='tomato-tomato-mathvec3d.html'>tomato::mathvec3d</a></li>
 <li class='ruff-toc1'><a href='tomato-tomato-mathmatrix.html'>tomato::mathmatrix</a></li>
-<hr><li class='ruff-toc2'><a href='#::tomato::mathvec3d-Classes'>Classes</a></li><li class='ruff-toc3'><a href='tomato-tomato-mathvec3d.html#::tomato::mathvec3d::Vector3d'>Vector3d</a></li><li class='ruff-toc4 ruff-tip'><a href='tomato-tomato-mathvec3d.html#::tomato::mathvec3d::Vector3d::constructor'>constructor</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>Vector3d create OBJNAME</span> <span class='ruff_arg'>?args?</span>
+<hr><li class='ruff-toc2'><a href='#::tomato::mathvec3d-Commands'>Commands</a></li><li class='ruff-toc3 ruff-tip'><a href='tomato-tomato-mathvec3d.html#::tomato::mathvec3d::Clamp'>Clamp</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>Clamp</span> <span class='ruff_arg'>vec min max</span></pre>Clamp a vector to the given minimum and maximum vectors.
+</span></li><li class='ruff-toc3 ruff-tip'><a href='tomato-tomato-mathvec3d.html#::tomato::mathvec3d::ComponentMax'>ComponentMax</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>ComponentMax</span> <span class='ruff_arg'>v1 v2</span></pre>A vector created from the largest of the corresponding components of the given vectors.
+</span></li><li class='ruff-toc3 ruff-tip'><a href='tomato-tomato-mathvec3d.html#::tomato::mathvec3d::ComponentMin'>ComponentMin</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>ComponentMin</span> <span class='ruff_arg'>v1 v2</span></pre>A vector created from the smallest of the corresponding components of the given vectors.
+</span></li><li class='ruff-toc3 ruff-tip'><a href='tomato-tomato-mathvec3d.html#::tomato::mathvec3d::Cross'>Cross</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>Cross</span> <span class='ruff_arg'>v1 v2</span></pre>Compute the cross product of 2 vectors
+</span></li><li class='ruff-toc3 ruff-tip'><a href='tomato-tomato-mathvec3d.html#::tomato::mathvec3d::Dot'>Dot</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>Dot</span> <span class='ruff_arg'>v1 v2</span></pre>Compute the dot product of 2 vectors
+</span></li><li class='ruff-toc3 ruff-tip'><a href='tomato-tomato-mathvec3d.html#::tomato::mathvec3d::Equals'>Equals</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>Equals</span> <span class='ruff_arg'>vector other tolerance</span></pre>Indicate if this vector is equivalent to a given unit vector
+</span></li><li class='ruff-toc3 ruff-tip'><a href='tomato-tomato-mathvec3d.html#::tomato::mathvec3d::Lerp'>Lerp</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>Lerp</span> <span class='ruff_arg'>v1 v2 blend</span></pre>Lerp a new Vector that is the linear blend of the 2 given Vectors.
+</span></li><li class='ruff-toc3 ruff-tip'><a href='tomato-tomato-mathvec3d.html#::tomato::mathvec3d::MagnitudeMax'>MagnitudeMax</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>MagnitudeMax</span> <span class='ruff_arg'>left right</span></pre>A vector with the maximum magnitude.
+</span></li><li class='ruff-toc3 ruff-tip'><a href='tomato-tomato-mathvec3d.html#::tomato::mathvec3d::MagnitudeMin'>MagnitudeMin</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>MagnitudeMin</span> <span class='ruff_arg'>left right</span></pre>A vector with the minimum magnitude
+</span></li><li class='ruff-toc3 ruff-tip'><a href='tomato-tomato-mathvec3d.html#::tomato::mathvec3d::UnitX'>UnitX</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>UnitX</span> </pre>A unit length Vector X-axis
+</span></li><li class='ruff-toc3 ruff-tip'><a href='tomato-tomato-mathvec3d.html#::tomato::mathvec3d::UnitY'>UnitY</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>UnitY</span> </pre>A unit length Vector Y-axis
+</span></li><li class='ruff-toc3 ruff-tip'><a href='tomato-tomato-mathvec3d.html#::tomato::mathvec3d::UnitZ'>UnitZ</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>UnitZ</span> </pre>A unit length Vector Z-axis
+</span></li><li class='ruff-toc2'><a href='#::tomato::mathvec3d-Classes'>Classes</a></li><li class='ruff-toc3'><a href='tomato-tomato-mathvec3d.html#::tomato::mathvec3d::Vector3d'>Vector3d</a></li><li class='ruff-toc4 ruff-tip'><a href='tomato-tomato-mathvec3d.html#::tomato::mathvec3d::Vector3d::constructor'>constructor</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>Vector3d create OBJNAME</span> <span class='ruff_arg'>?args?</span>
 <span class='ruff_cmd'>Vector3d new</span> <span class='ruff_arg'>?args?</span></pre>Initializes a new Vector3d Class.
 </span></li><li class='ruff-toc4 ruff-tip'><a href='tomato-tomato-mathvec3d.html#::tomato::mathvec3d::Vector3d::!='>!=</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>VECTOR3DOBJ !=</span> <span class='ruff_arg'>other ?tolerance?</span></pre>Gets value that indicates whether any pair of elements in two specified vectors is not equal.
 </span></li><li class='ruff-toc4 ruff-tip'><a href='tomato-tomato-mathvec3d.html#::tomato::mathvec3d::Vector3d::*'>*</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>VECTOR3DOBJ *</span> <span class='ruff_arg'>type</span></pre>Multiplies a vector by a scalar if <code>$type</code> is a scale or Compute the Dot product if <code>$type</code> is an object.
@@ -1182,18 +1194,6 @@
 </span></li><li class='ruff-toc4 ruff-tip'><a href='tomato-tomato-mathvec3d.html#::tomato::mathvec3d::Vector3d::X'>X</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>VECTOR3DOBJ X</span> </pre>Returns The x component.
 </span></li><li class='ruff-toc4 ruff-tip'><a href='tomato-tomato-mathvec3d.html#::tomato::mathvec3d::Vector3d::Y'>Y</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>VECTOR3DOBJ Y</span> </pre>Returns The y component.
 </span></li><li class='ruff-toc4 ruff-tip'><a href='tomato-tomato-mathvec3d.html#::tomato::mathvec3d::Vector3d::Z'>Z</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>VECTOR3DOBJ Z</span> </pre>Returns The z component.
-</span></li><li class='ruff-toc2'><a href='#::tomato::mathvec3d-Commands'>Commands</a></li><li class='ruff-toc3 ruff-tip'><a href='tomato-tomato-mathvec3d.html#::tomato::mathvec3d::Clamp'>Clamp</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>Clamp</span> <span class='ruff_arg'>vec min max</span></pre>Clamp a vector to the given minimum and maximum vectors.
-</span></li><li class='ruff-toc3 ruff-tip'><a href='tomato-tomato-mathvec3d.html#::tomato::mathvec3d::ComponentMax'>ComponentMax</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>ComponentMax</span> <span class='ruff_arg'>v1 v2</span></pre>A vector created from the largest of the corresponding components of the given vectors.
-</span></li><li class='ruff-toc3 ruff-tip'><a href='tomato-tomato-mathvec3d.html#::tomato::mathvec3d::ComponentMin'>ComponentMin</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>ComponentMin</span> <span class='ruff_arg'>v1 v2</span></pre>A vector created from the smallest of the corresponding components of the given vectors.
-</span></li><li class='ruff-toc3 ruff-tip'><a href='tomato-tomato-mathvec3d.html#::tomato::mathvec3d::Cross'>Cross</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>Cross</span> <span class='ruff_arg'>v1 v2</span></pre>Compute the cross product of 2 vectors
-</span></li><li class='ruff-toc3 ruff-tip'><a href='tomato-tomato-mathvec3d.html#::tomato::mathvec3d::Dot'>Dot</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>Dot</span> <span class='ruff_arg'>v1 v2</span></pre>Compute the dot product of 2 vectors
-</span></li><li class='ruff-toc3 ruff-tip'><a href='tomato-tomato-mathvec3d.html#::tomato::mathvec3d::Equals'>Equals</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>Equals</span> <span class='ruff_arg'>vector other tolerance</span></pre>Indicate if this vector is equivalent to a given unit vector
-</span></li><li class='ruff-toc3 ruff-tip'><a href='tomato-tomato-mathvec3d.html#::tomato::mathvec3d::Lerp'>Lerp</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>Lerp</span> <span class='ruff_arg'>v1 v2 blend</span></pre>Lerp a new Vector that is the linear blend of the 2 given Vectors.
-</span></li><li class='ruff-toc3 ruff-tip'><a href='tomato-tomato-mathvec3d.html#::tomato::mathvec3d::MagnitudeMax'>MagnitudeMax</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>MagnitudeMax</span> <span class='ruff_arg'>left right</span></pre>A vector with the maximum magnitude.
-</span></li><li class='ruff-toc3 ruff-tip'><a href='tomato-tomato-mathvec3d.html#::tomato::mathvec3d::MagnitudeMin'>MagnitudeMin</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>MagnitudeMin</span> <span class='ruff_arg'>left right</span></pre>A vector with the minimum magnitude
-</span></li><li class='ruff-toc3 ruff-tip'><a href='tomato-tomato-mathvec3d.html#::tomato::mathvec3d::UnitX'>UnitX</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>UnitX</span> </pre>A unit length Vector X-axis
-</span></li><li class='ruff-toc3 ruff-tip'><a href='tomato-tomato-mathvec3d.html#::tomato::mathvec3d::UnitY'>UnitY</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>UnitY</span> </pre>A unit length Vector Y-axis
-</span></li><li class='ruff-toc3 ruff-tip'><a href='tomato-tomato-mathvec3d.html#::tomato::mathvec3d::UnitZ'>UnitZ</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>UnitZ</span> </pre>A unit length Vector Z-axis
 </span></li></ul></nav><footer class='ruff-layout-footer ruff-ft'><div style='float: right;'>Document generated by <a href='https://ruff.magicsplat.com'>Ruff!</a></div></footer>
 </div></body></html>
 

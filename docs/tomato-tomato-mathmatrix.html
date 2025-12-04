@@ -16,7 +16,456 @@
         </header><main class='ruff-layout-main ruff-bd'><h1 class='ruff'><a name='::tomato::mathmatrix'></a>::tomato::mathmatrix<span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h1>
 <div style='clear:both;'></div>
 <p class='ruff'>Defines the base class for Matrix classes.</p>
-<h2 class='ruff'><a name='::tomato::mathmatrix-Classes'></a>Classes<span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h2>
+<h2 class='ruff'><a name='::tomato::mathmatrix-Commands'></a>Commands<span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h2>
+<div style='clear:both;'></div>
+<h3 class='ruffproc'><a name='::tomato::mathmatrix::CopySubMatrixTo'>CopySubMatrixTo</a><span class='ns_scope'> [<a href="tomato-tomato-mathmatrix.html#::tomato::mathmatrix" title="::tomato::mathmatrix" class='ruff_cmd'>::tomato::mathmatrix</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
+<div style='clear:both;'></div>
+<p class='ruff'>Copies the values of a given matrix into a region in this matrix.</p>
+<div class='ruff_synopsis'><span class='ruff_cmd'>CopySubMatrixTo</span> <span class='ruff_arg'>target storage sourceRowIndex targetRowIndex rowCount sourceColumnIndex targetColumnIndex columnCount</span></div>
+<h5 class='ruff'>Parameters</h5><table class='ruff_deflist'>
+<tr><td><nobr><code>target</code></nobr></td><td>The matrix <a href="tomato-tomato-mathmatrix.html#::tomato::mathmatrix::Matrix" title="Matrix" class='ruff_cmd'>Matrix</a> to copy values into.</td></tr>
+<tr><td><nobr><code>storage</code></nobr></td><td>The base matrix <a href="tomato-tomato-mathmatrix.html#::tomato::mathmatrix::Matrix" title="Matrix" class='ruff_cmd'>Matrix</a>.</td></tr>
+<tr><td><nobr><code>sourceRowIndex</code></nobr></td><td>The row index of source</td></tr>
+<tr><td><nobr><code>targetRowIndex</code></nobr></td><td>The row index of target</td></tr>
+<tr><td><nobr><code>rowCount</code></nobr></td><td>The number of rows to copy</td></tr>
+<tr><td><nobr><code>sourceColumnIndex</code></nobr></td><td>The column index of source</td></tr>
+<tr><td><nobr><code>targetColumnIndex</code></nobr></td><td>The column index of source</td></tr>
+<tr><td><nobr><code>columnCount</code></nobr></td><td>The number of columns to copy</td></tr>
+</table>
+<h5 class='ruff'>Return value</h5><p class='ruff'>Returns matrix copy <a href="tomato-tomato-mathmatrix.html#::tomato::mathmatrix::Matrix" title="Matrix" class='ruff_cmd'>Matrix</a></p>
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_tomato_mathmatrix_CopySubMatrixTo' href="javascript:toggleSource('tomato_mathmatrix_CopySubMatrixTo')">Show source</a></p>
+<div id='tomato_mathmatrix_CopySubMatrixTo' class='ruff_dyn_src'><pre>proc ::tomato::mathmatrix::CopySubMatrixTo {target storage sourceRowIndex targetRowIndex rowCount sourceColumnIndex targetColumnIndex columnCount} {
+
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Copies the values of a given matrix into a region in this matrix.</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # target             - The matrix [Matrix] to copy values into.</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # storage            - The base matrix [Matrix].</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # sourceRowIndex     - The row index of source</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # targetRowIndex     - The row index of target</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # rowCount           - The number of rows to copy</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # sourceColumnIndex  - The column index of source</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # targetColumnIndex  - The column index of source</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # columnCount        - The number of columns to copy</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Returns matrix copy [Matrix]</span>
+
+    if {<span style="color: rgb(233, 98, 98);">$rowCount</span> == 0 || <span style="color: rgb(233, 98, 98);">$columnCount</span> == 0} {
+        <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> <span style="color: rgb(233, 98, 98);">$target</span>
+    }
+
+    if {(<span style="color: rgb(233, 98, 98);">$sourceRowIndex</span> == 0) &amp;&amp; (<span style="color: rgb(233, 98, 98);">$targetRowIndex</span> == 0 )
+        &amp;&amp; (<span style="color: rgb(233, 98, 98);">$rowCount</span> == [<span style="color: rgb(233, 98, 98);">$storage</span> RowCount]) &amp;&amp; (<span style="color: rgb(233, 98, 98);">$rowCount</span> == [<span style="color: rgb(233, 98, 98);">$target</span> RowCount])
+        &amp;&amp; (<span style="color: rgb(233, 98, 98);">$sourceColumnIndex</span> == 0) &amp;&amp; (<span style="color: rgb(233, 98, 98);">$targetColumnIndex</span> == 0)
+        &amp;&amp; (<span style="color: rgb(233, 98, 98);">$columnCount</span> == [<span style="color: rgb(233, 98, 98);">$storage</span> ColumnCount]) &amp;&amp; (<span style="color: rgb(233, 98, 98);">$columnCount</span> == [<span style="color: rgb(233, 98, 98);">$target</span> ColumnCount])} {
+
+        <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> [tomato::mathmatrix::CopyTo <span style="color: rgb(233, 98, 98);">$target</span> <span style="color: rgb(233, 98, 98);">$storage</span>]
+    }
+
+    for {set j <span style="color: rgb(233, 98, 98);">$sourceColumnIndex</span> ; <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> jj <span style="color: rgb(233, 98, 98);">$targetColumnIndex</span>} {<span style="color: rgb(233, 98, 98);">$j</span> &lt; [expr {<span style="color: rgb(233, 98, 98);">$sourceColumnIndex</span> + <span style="color: rgb(233, 98, 98);">$columnCount</span>}]} {incr j ; incr jj} {
+        for {set i <span style="color: rgb(233, 98, 98);">$sourceRowIndex</span> ; <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> ii <span style="color: rgb(233, 98, 98);">$targetRowIndex</span>} {<span style="color: rgb(233, 98, 98);">$i</span> &lt; [expr {<span style="color: rgb(233, 98, 98);">$sourceRowIndex</span> + <span style="color: rgb(233, 98, 98);">$rowCount</span>}]} {incr i ; incr ii} {
+            <span style="color: rgb(233, 98, 98);">$target</span> SetCell <span style="color: rgb(233, 98, 98);">$ii</span> <span style="color: rgb(233, 98, 98);">$jj</span> [<span style="color: rgb(233, 98, 98);">$storage</span> GetCell <span style="color: rgb(233, 98, 98);">$i</span> <span style="color: rgb(233, 98, 98);">$j</span>]
+        }
+    }
+
+    <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> <span style="color: rgb(233, 98, 98);">$target</span>
+}</pre></div>
+</div><h3 class='ruffproc'><a name='::tomato::mathmatrix::CopyTo'>CopyTo</a><span class='ns_scope'> [<a href="tomato-tomato-mathmatrix.html#::tomato::mathmatrix" title="::tomato::mathmatrix" class='ruff_cmd'>::tomato::mathmatrix</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
+<div style='clear:both;'></div>
+<p class='ruff'>Copies the elements of this matrix to the given matrix.</p>
+<div class='ruff_synopsis'><span class='ruff_cmd'>CopyTo</span> <span class='ruff_arg'>target storage</span></div>
+<h5 class='ruff'>Parameters</h5><table class='ruff_deflist'>
+<tr><td><nobr><code>target</code></nobr></td><td>The matrix <a href="tomato-tomato-mathmatrix.html#::tomato::mathmatrix::Matrix" title="Matrix" class='ruff_cmd'>Matrix</a> to copy values into.</td></tr>
+<tr><td><nobr><code>storage</code></nobr></td><td>The base matrix <a href="tomato-tomato-mathmatrix.html#::tomato::mathmatrix::Matrix" title="Matrix" class='ruff_cmd'>Matrix</a>.</td></tr>
+</table>
+<h5 class='ruff'>Return value</h5><p class='ruff'>Returns matrix <a href="tomato-tomato-mathmatrix.html#::tomato::mathmatrix::Matrix" title="Matrix" class='ruff_cmd'>Matrix</a></p>
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_tomato_mathmatrix_CopyTo' href="javascript:toggleSource('tomato_mathmatrix_CopyTo')">Show source</a></p>
+<div id='tomato_mathmatrix_CopyTo' class='ruff_dyn_src'><pre>proc ::tomato::mathmatrix::CopyTo {target storage} {
+
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Copies the elements of this matrix to the given matrix.</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # target - The matrix [Matrix] to copy values into.</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # storage - The base matrix [Matrix].</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Returns matrix [Matrix]</span>
+
+    if {[<span style="color: rgb(233, 98, 98);">$storage</span> RowCount] != [<span style="color: rgb(233, 98, 98);">$target</span> RowCount] || [<span style="color: rgb(233, 98, 98);">$storage</span> ColumnCount] != [<span style="color: rgb(233, 98, 98);">$target</span> ColumnCount]} {
+        <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">error</span> <span style="color: hsl(120, 71%, 16%);">&quot;Matrix dimensions must agree: op1 is [<span style="color: rgb(233, 98, 98);">$storage</span> GetSize], op2 is [<span style="color: rgb(233, 98, 98);">$target</span> GetSize].&quot;</span>
+    }
+
+    for {set j 0} {<span style="color: rgb(233, 98, 98);">$j</span> &lt; [<span style="color: rgb(233, 98, 98);">$storage</span> ColumnCount] } {incr j} {
+        for {set i 0} {<span style="color: rgb(233, 98, 98);">$i</span> &lt; [<span style="color: rgb(233, 98, 98);">$storage</span> RowCount]} {incr i} {
+            <span style="color: rgb(233, 98, 98);">$target</span> SetCell <span style="color: rgb(233, 98, 98);">$i</span> <span style="color: rgb(233, 98, 98);">$j</span> [<span style="color: rgb(233, 98, 98);">$storage</span> GetCell <span style="color: rgb(233, 98, 98);">$i</span> <span style="color: rgb(233, 98, 98);">$j</span>]
+        }
+    }
+
+    <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> <span style="color: rgb(233, 98, 98);">$target</span>
+}</pre></div>
+</div><h3 class='ruffproc'><a name='::tomato::mathmatrix::CreateIdentity'>CreateIdentity</a><span class='ns_scope'> [<a href="tomato-tomato-mathmatrix.html#::tomato::mathmatrix" title="::tomato::mathmatrix" class='ruff_cmd'>::tomato::mathmatrix</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
+<div style='clear:both;'></div>
+<p class='ruff'>Create a new identity matrix where each diagonal value is set to One.<br> From package tcllib <a href="https://core.tcl-lang.org/tcllib/doc/trunk/embedded/md/tcllib/files/modules/math/linalg.md" >math::linearalgebra</a> <em>(Modify according to my needs)</em>.</p>
+<div class='ruff_synopsis'><span class='ruff_cmd'>CreateIdentity</span> <span class='ruff_arg'>size</span></div>
+<h5 class='ruff'>Parameters</h5><table class='ruff_deflist'>
+<tr><td><nobr><code>size</code></nobr></td><td>dimension of matrix</td></tr>
+</table>
+<h5 class='ruff'>Return value</h5><p class='ruff'>Returns a new base matrix identity <a href="tomato-tomato-mathmatrix.html#::tomato::mathmatrix::Matrix" title="Matrix" class='ruff_cmd'>Matrix</a></p>
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_tomato_mathmatrix_CreateIdentity' href="javascript:toggleSource('tomato_mathmatrix_CreateIdentity')">Show source</a></p>
+<div id='tomato_mathmatrix_CreateIdentity' class='ruff_dyn_src'><pre>proc ::tomato::mathmatrix::CreateIdentity {size} {
+
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Create a new identity matrix where each diagonal value is <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> to One.&lt;br&gt;</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # From package tcllib [math::linearalgebra](https://core.tcl-lang.org/tcllib/doc/trunk/embedded/md/tcllib/files/modules/math/linalg.md)</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # *(Modify according to my needs)*.</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # size - dimension of matrix</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Returns a new base matrix identity [Matrix]</span>
+    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> mat [tomato::mathmatrix::Matrix new <span style="color: rgb(233, 98, 98);">$size</span> <span style="color: rgb(233, 98, 98);">$size</span>]
+
+    while { <span style="color: rgb(233, 98, 98);">$size</span> &gt; 0 } {
+        incr size -1
+        <span style="color: rgb(233, 98, 98);">$mat</span> SetCell <span style="color: rgb(233, 98, 98);">$size</span> <span style="color: rgb(233, 98, 98);">$size</span> 1.0
+    }
+
+    <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> <span style="color: rgb(233, 98, 98);">$mat</span>
+}</pre></div>
+</div><h3 class='ruffproc'><a name='::tomato::mathmatrix::Equals'>Equals</a><span class='ns_scope'> [<a href="tomato-tomato-mathmatrix.html#::tomato::mathmatrix" title="::tomato::mathmatrix" class='ruff_cmd'>::tomato::mathmatrix</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
+<div style='clear:both;'></div>
+<p class='ruff'>Indicate if this matrix is equivalent to a another matrix</p>
+<div class='ruff_synopsis'><span class='ruff_cmd'>Equals</span> <span class='ruff_arg'>mat other tolerance</span></div>
+<h5 class='ruff'>Parameters</h5><table class='ruff_deflist'>
+<tr><td><nobr><code>mat</code></nobr></td><td>First input matrix  <a href="tomato-tomato-mathmatrix.html#::tomato::mathmatrix::Matrix" title="Matrix" class='ruff_cmd'>Matrix</a></td></tr>
+<tr><td><nobr><code>other</code></nobr></td><td>Second input matrix <a href="tomato-tomato-mathmatrix.html#::tomato::mathmatrix::Matrix" title="Matrix" class='ruff_cmd'>Matrix</a></td></tr>
+<tr><td><nobr><code>tolerance</code></nobr></td><td>A tolerance (epsilon) to adjust for floating point error</td></tr>
+</table>
+<h5 class='ruff'>Description</h5><p class='ruff'>See : methods == !=</p>
+<p class='ruff'>An error exception is raised if tolerance (epsilon) &lt; 0.</p>
+<h5 class='ruff'>Return value</h5><p class='ruff'>Returns <code>True</code> if matrixes are equal, otherwise false.</p>
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_tomato_mathmatrix_Equals' href="javascript:toggleSource('tomato_mathmatrix_Equals')">Show source</a></p>
+<div id='tomato_mathmatrix_Equals' class='ruff_dyn_src'><pre>proc ::tomato::mathmatrix::Equals {mat other tolerance} {
+
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Indicate if this matrix is equivalent to a another matrix</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # mat   - First input matrix  [Matrix]</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # other - Second input matrix [Matrix]</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # tolerance - A tolerance (epsilon) to adjust for floating point error</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Returns `True` if matrixes are equal, otherwise false.</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # See : methods == !=</span>
+    if {<span style="color: rgb(233, 98, 98);">$tolerance</span> &lt; 0} {
+        #ruff
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">        # An <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">error</span> exception is raised if tolerance (epsilon) &lt; 0.</span>
+        <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">error</span> <span style="color: hsl(120, 71%, 16%);">&quot;epsilon &lt; 0&quot;</span>
+    }
+
+    if {([<span style="color: rgb(233, 98, 98);">$mat</span> RowCount] != [<span style="color: rgb(233, 98, 98);">$other</span> RowCount]) || ([<span style="color: rgb(233, 98, 98);">$mat</span> ColumnCount] != [<span style="color: rgb(233, 98, 98);">$other</span> ColumnCount])} {
+        <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> 0
+    }
+
+    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> len [<span style="color: rgb(233, 98, 98);">$mat</span> RowCount]
+
+    for {set row 0} {<span style="color: rgb(233, 98, 98);">$row</span> &lt; <span style="color: rgb(233, 98, 98);">$len</span>} {incr row} {
+        foreach cellmat [<span style="color: rgb(233, 98, 98);">$mat</span> GetRow <span style="color: rgb(233, 98, 98);">$row</span>] cellother [<span style="color: rgb(233, 98, 98);">$other</span> GetRow <span style="color: rgb(233, 98, 98);">$row</span>] {
+            if {abs(<span style="color: rgb(233, 98, 98);">$cellmat</span> - <span style="color: rgb(233, 98, 98);">$cellother</span>) &gt; <span style="color: rgb(233, 98, 98);">$tolerance</span>} {
+                <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> 0
+            }
+        }
+    }
+
+    <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> 1
+}</pre></div>
+</div><h3 class='ruffproc'><a name='::tomato::mathmatrix::MatrixDecompose'>MatrixDecompose</a><span class='ns_scope'> [<a href="tomato-tomato-mathmatrix.html#::tomato::mathmatrix" title="::tomato::mathmatrix" class='ruff_cmd'>::tomato::mathmatrix</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
+<div style='clear:both;'></div>
+<p class='ruff'><code>Crout's LU</code> decomposition for matrix determinant and inverse <a href="https://docs.microsoft.com/fr-fr/archive/msdn-magazine/2016/july/test-run-matrix-inversion-using-csharp" >docs.microsoft.com</a></p>
+<div class='ruff_synopsis'><span class='ruff_cmd'>MatrixDecompose</span> <span class='ruff_arg'>storage</span></div>
+<h5 class='ruff'>Parameters</h5><table class='ruff_deflist'>
+<tr><td><nobr><code>storage</code></nobr></td><td><a href="tomato-tomato-mathmatrix.html#::tomato::mathmatrix::Matrix" title="Matrix" class='ruff_cmd'>Matrix</a></td></tr>
+</table>
+<h5 class='ruff'>Description</h5><pre class='ruff'>
+                combined lower &amp; upper in lummat [Matrix] &amp; row permutations into permmat [Matrix].
+</pre>
+<h5 class='ruff'>Return value</h5><p class='ruff'>Returns list with : +1 or -1 according to even or odd number of row permutations,<br></p>
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_tomato_mathmatrix_MatrixDecompose' href="javascript:toggleSource('tomato_mathmatrix_MatrixDecompose')">Show source</a></p>
+<div id='tomato_mathmatrix_MatrixDecompose' class='ruff_dyn_src'><pre>proc ::tomato::mathmatrix::MatrixDecompose {storage} {
+
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # `Crout's LU` decomposition for matrix determinant and inverse</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # [docs.microsoft.com](https://docs.microsoft.com/fr-fr/archive/msdn-magazine/2016/july/test-run-matrix-inversion-using-csharp)</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # storage - [Matrix]</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Returns list with : +1 or -1 according to even or odd number of row permutations,&lt;br&gt;</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #                     combined lower &amp; upper in lummat [Matrix] &amp; row permutations into permmat [Matrix].</span>
+
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> toggle 1 ; # even (+1) or odd (-1) row permutations</span>
+    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> n [<span style="color: rgb(233, 98, 98);">$storage</span> RowCount]
+
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # make a copy of storage into lummat</span>
+    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> lummat [tomato::mathmatrix::Matrix new <span style="color: rgb(233, 98, 98);">$n</span> <span style="color: rgb(233, 98, 98);">$n</span>]
+    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> lummat [tomato::mathmatrix::CopyTo <span style="color: rgb(233, 98, 98);">$lummat</span> <span style="color: rgb(233, 98, 98);">$storage</span>]
+
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # make permmat</span>
+    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> permmat [tomato::mathmatrix::Matrix new 1 <span style="color: rgb(233, 98, 98);">$n</span>]
+    for {set i 0} {<span style="color: rgb(233, 98, 98);">$i</span> &lt; <span style="color: rgb(233, 98, 98);">$n</span>} {incr i} {
+        <span style="color: rgb(233, 98, 98);">$permmat</span> SetCell 0 <span style="color: rgb(233, 98, 98);">$i</span> [expr {double(<span style="color: rgb(233, 98, 98);">$i</span>)}]
+    }
+
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    for {set j 0} {<span style="color: rgb(233, 98, 98);">$j</span> &lt; [expr {<span style="color: rgb(233, 98, 98);">$n</span> - 1}]} {incr j} { ; # process by column. note n-1</span>
+
+        <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> max [expr {abs([<span style="color: rgb(233, 98, 98);">$lummat</span> GetCell <span style="color: rgb(233, 98, 98);">$j</span> <span style="color: rgb(233, 98, 98);">$j</span>])}]
+        <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> piv <span style="color: rgb(233, 98, 98);">$j</span>
+
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">        for {set i [expr {<span style="color: rgb(233, 98, 98);">$j</span> + 1}]} {<span style="color: rgb(233, 98, 98);">$i</span> &lt; <span style="color: rgb(233, 98, 98);">$n</span>} {incr i} { ; # find pivot index</span>
+            <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> xij [expr {abs([<span style="color: rgb(233, 98, 98);">$lummat</span> GetCell <span style="color: rgb(233, 98, 98);">$i</span> <span style="color: rgb(233, 98, 98);">$j</span>])}]
+            if {<span style="color: rgb(233, 98, 98);">$xij</span> &gt; <span style="color: rgb(233, 98, 98);">$max</span>} {
+                <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> max <span style="color: rgb(233, 98, 98);">$xij</span>
+                <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> piv <span style="color: rgb(233, 98, 98);">$i</span>
+            }
+        }
+
+        if {<span style="color: rgb(233, 98, 98);">$piv</span> != <span style="color: rgb(233, 98, 98);">$j</span>} {
+
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">            <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> tmp [<span style="color: rgb(233, 98, 98);">$lummat</span> GetRow <span style="color: rgb(233, 98, 98);">$piv</span>] ; # swap rows j, piv</span>
+            <span style="color: rgb(233, 98, 98);">$lummat</span> SetRow <span style="color: rgb(233, 98, 98);">$piv</span> [<span style="color: rgb(233, 98, 98);">$lummat</span> GetRow <span style="color: rgb(233, 98, 98);">$j</span>]
+            <span style="color: rgb(233, 98, 98);">$lummat</span> SetRow <span style="color: rgb(233, 98, 98);">$j</span> <span style="color: rgb(233, 98, 98);">$tmp</span>
+
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">            <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> t [<span style="color: rgb(233, 98, 98);">$permmat</span> GetCell 0 <span style="color: rgb(233, 98, 98);">$piv</span>] ; # swap perm elements</span>
+            <span style="color: rgb(233, 98, 98);">$permmat</span> SetCell 0 <span style="color: rgb(233, 98, 98);">$piv</span> [<span style="color: rgb(233, 98, 98);">$permmat</span> GetCell 0 <span style="color: rgb(233, 98, 98);">$j</span>]
+            <span style="color: rgb(233, 98, 98);">$permmat</span> SetCell 0 <span style="color: rgb(233, 98, 98);">$j</span> <span style="color: rgb(233, 98, 98);">$t</span>
+
+            <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> toggle [expr {Inv(<span style="color: rgb(233, 98, 98);">$toggle</span>)}]
+
+        }
+
+        <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> xjj [<span style="color: rgb(233, 98, 98);">$lummat</span> GetCell <span style="color: rgb(233, 98, 98);">$j</span> <span style="color: rgb(233, 98, 98);">$j</span>]
+
+        if {<span style="color: rgb(233, 98, 98);">$xjj</span> != 0.0} {
+
+            for {set i [expr {<span style="color: rgb(233, 98, 98);">$j</span> + 1}]} {<span style="color: rgb(233, 98, 98);">$i</span> &lt; <span style="color: rgb(233, 98, 98);">$n</span>} {incr i} {
+                <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> xij [expr {[<span style="color: rgb(233, 98, 98);">$lummat</span> GetCell <span style="color: rgb(233, 98, 98);">$i</span> <span style="color: rgb(233, 98, 98);">$j</span>] / double(<span style="color: rgb(233, 98, 98);">$xjj</span>)}]
+                <span style="color: rgb(233, 98, 98);">$lummat</span> SetCell <span style="color: rgb(233, 98, 98);">$i</span> <span style="color: rgb(233, 98, 98);">$j</span> <span style="color: rgb(233, 98, 98);">$xij</span>
+
+                for {set k [expr {<span style="color: rgb(233, 98, 98);">$j</span> + 1}]} {<span style="color: rgb(233, 98, 98);">$k</span> &lt; <span style="color: rgb(233, 98, 98);">$n</span>} {incr k} {
+                    <span style="color: rgb(233, 98, 98);">$lummat</span> SetCell <span style="color: rgb(233, 98, 98);">$i</span> <span style="color: rgb(233, 98, 98);">$k</span> [expr {[<span style="color: rgb(233, 98, 98);">$lummat</span> GetCell <span style="color: rgb(233, 98, 98);">$i</span> <span style="color: rgb(233, 98, 98);">$k</span>] - (<span style="color: rgb(233, 98, 98);">$xij</span> * [<span style="color: rgb(233, 98, 98);">$lummat</span> GetCell <span style="color: rgb(233, 98, 98);">$j</span> <span style="color: rgb(233, 98, 98);">$k</span>])}]
+
+                }
+            }
+        }
+    }
+
+    <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> [list <span style="color: rgb(233, 98, 98);">$toggle</span> <span style="color: rgb(233, 98, 98);">$lummat</span> <span style="color: rgb(233, 98, 98);">$permmat</span>]
+}</pre></div>
+</div><h3 class='ruffproc'><a name='::tomato::mathmatrix::MatrixInverse'>MatrixInverse</a><span class='ns_scope'> [<a href="tomato-tomato-mathmatrix.html#::tomato::mathmatrix" title="::tomato::mathmatrix" class='ruff_cmd'>::tomato::mathmatrix</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
+<div style='clear:both;'></div>
+<p class='ruff'><code>Crout's LU</code> decomposition for matrix inverse.</p>
+<div class='ruff_synopsis'><span class='ruff_cmd'>MatrixInverse</span> <span class='ruff_arg'>storage</span></div>
+<h5 class='ruff'>Parameters</h5><table class='ruff_deflist'>
+<tr><td><nobr><code>storage</code></nobr></td><td>A Matrix <a href="tomato-tomato-mathmatrix.html#::tomato::mathmatrix::Matrix" title="Matrix" class='ruff_cmd'>Matrix</a></td></tr>
+</table>
+<h5 class='ruff'>Return value</h5><p class='ruff'>Returns A Matrix Inverse</p>
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_tomato_mathmatrix_MatrixInverse' href="javascript:toggleSource('tomato_mathmatrix_MatrixInverse')">Show source</a></p>
+<div id='tomato_mathmatrix_MatrixInverse' class='ruff_dyn_src'><pre>proc ::tomato::mathmatrix::MatrixInverse {storage} {
+
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # `Crout's LU` decomposition for matrix inverse.</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # storage - A Matrix [Matrix]</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Returns A Matrix Inverse</span>
+
+    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> n [<span style="color: rgb(233, 98, 98);">$storage</span> RowCount]
+    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> result [tomato::mathmatrix::Matrix new <span style="color: rgb(233, 98, 98);">$n</span> <span style="color: rgb(233, 98, 98);">$n</span>]
+    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> result [tomato::mathmatrix::CopyTo <span style="color: rgb(233, 98, 98);">$result</span> <span style="color: rgb(233, 98, 98);">$storage</span>]
+
+    lassign [<span style="color: rgb(233, 98, 98);">$storage</span> Decompose] toggle lum perm
+
+    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> b [tomato::mathmatrix::Matrix new 1 <span style="color: rgb(233, 98, 98);">$n</span>]
+
+    for {set i 0} {<span style="color: rgb(233, 98, 98);">$i</span> &lt; <span style="color: rgb(233, 98, 98);">$n</span>} {incr i} {
+        for {set j 0} {<span style="color: rgb(233, 98, 98);">$j</span> &lt; <span style="color: rgb(233, 98, 98);">$n</span>} {incr j} {
+            if {<span style="color: rgb(233, 98, 98);">$i</span> == [<span style="color: rgb(233, 98, 98);">$perm</span> GetCell 0 <span style="color: rgb(233, 98, 98);">$j</span>]} {
+                <span style="color: rgb(233, 98, 98);">$b</span> SetCell 0 <span style="color: rgb(233, 98, 98);">$j</span> 1.0
+            } else {
+                <span style="color: rgb(233, 98, 98);">$b</span> SetCell 0 <span style="color: rgb(233, 98, 98);">$j</span> 0.0
+            }
+        }
+
+        <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> x [tomato::mathmatrix::_MatrixHelper <span style="color: rgb(233, 98, 98);">$lum</span> <span style="color: rgb(233, 98, 98);">$b</span>]
+        for {set j 0} {<span style="color: rgb(233, 98, 98);">$j</span> &lt; <span style="color: rgb(233, 98, 98);">$n</span>} {incr j} {
+            <span style="color: rgb(233, 98, 98);">$result</span> SetCell <span style="color: rgb(233, 98, 98);">$j</span> <span style="color: rgb(233, 98, 98);">$i</span> [<span style="color: rgb(233, 98, 98);">$x</span> GetCell 0 <span style="color: rgb(233, 98, 98);">$j</span>]
+        }
+    }
+
+    <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> <span style="color: rgb(233, 98, 98);">$result</span>
+}</pre></div>
+</div><h3 class='ruffproc'><a name='::tomato::mathmatrix::MatrixMulByDouble'>MatrixMulByDouble</a><span class='ns_scope'> [<a href="tomato-tomato-mathmatrix.html#::tomato::mathmatrix" title="::tomato::mathmatrix" class='ruff_cmd'>::tomato::mathmatrix</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
+<div style='clear:both;'></div>
+<p class='ruff'>Multiply matrix by double value</p>
+<div class='ruff_synopsis'><span class='ruff_cmd'>MatrixMulByDouble</span> <span class='ruff_arg'>mat other</span></div>
+<h5 class='ruff'>Parameters</h5><table class='ruff_deflist'>
+<tr><td><nobr><code>mat</code></nobr></td><td><a href="tomato-tomato-mathmatrix.html#::tomato::mathmatrix::Matrix" title="Matrix" class='ruff_cmd'>Matrix</a></td></tr>
+<tr><td><nobr><code>other</code></nobr></td><td>double value</td></tr>
+</table>
+<h5 class='ruff'>Return value</h5><p class='ruff'>Returns mul matrix <a href="tomato-tomato-mathmatrix.html#::tomato::mathmatrix::Matrix" title="Matrix" class='ruff_cmd'>Matrix</a></p>
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_tomato_mathmatrix_MatrixMulByDouble' href="javascript:toggleSource('tomato_mathmatrix_MatrixMulByDouble')">Show source</a></p>
+<div id='tomato_mathmatrix_MatrixMulByDouble' class='ruff_dyn_src'><pre>proc ::tomato::mathmatrix::MatrixMulByDouble {mat other} {
+
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Multiply matrix by double value</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # mat   - [Matrix]</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # other - double value</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Returns mul matrix [Matrix]</span>
+    for {set row 0} {<span style="color: rgb(233, 98, 98);">$row</span> &lt; [<span style="color: rgb(233, 98, 98);">$mat</span> RowCount]} {incr row} {
+        for {set col 0} {<span style="color: rgb(233, 98, 98);">$col</span> &lt; [<span style="color: rgb(233, 98, 98);">$mat</span> ColumnCount]} {incr col} {
+            <span style="color: rgb(233, 98, 98);">$mat</span> SetCell <span style="color: rgb(233, 98, 98);">$row</span> <span style="color: rgb(233, 98, 98);">$col</span> [expr {[<span style="color: rgb(233, 98, 98);">$mat</span> GetCell <span style="color: rgb(233, 98, 98);">$row</span> <span style="color: rgb(233, 98, 98);">$col</span>] * <span style="color: rgb(233, 98, 98);">$other</span>}]
+        }
+    }
+
+    <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> <span style="color: rgb(233, 98, 98);">$mat</span>
+}</pre></div>
+</div><h3 class='ruffproc'><a name='::tomato::mathmatrix::MatrixMulColumnVector'>MatrixMulColumnVector</a><span class='ns_scope'> [<a href="tomato-tomato-mathmatrix.html#::tomato::mathmatrix" title="::tomato::mathmatrix" class='ruff_cmd'>::tomato::mathmatrix</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
+<div style='clear:both;'></div>
+<p class='ruff'>Multiply matrix by column vector.<br> From package tcllib <a href="https://core.tcl-lang.org/tcllib/doc/trunk/embedded/md/tcllib/files/modules/math/linalg.md" >math::linearalgebra</a> <em>(Modify according to my needs)</em>.</p>
+<div class='ruff_synopsis'><span class='ruff_cmd'>MatrixMulColumnVector</span> <span class='ruff_arg'>mat other</span></div>
+<h5 class='ruff'>Parameters</h5><table class='ruff_deflist'>
+<tr><td><nobr><code>mat</code></nobr></td><td><a href="tomato-tomato-mathmatrix.html#::tomato::mathmatrix::Matrix" title="Matrix" class='ruff_cmd'>Matrix</a></td></tr>
+<tr><td><nobr><code>other</code></nobr></td><td><a href="tomato-tomato-mathmatrix.html#::tomato::mathmatrix::Matrix" title="Matrix" class='ruff_cmd'>Matrix</a></td></tr>
+</table>
+<h5 class='ruff'>Return value</h5><p class='ruff'>Returns Tcl list (mul matrix)</p>
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_tomato_mathmatrix_MatrixMulColumnVector' href="javascript:toggleSource('tomato_mathmatrix_MatrixMulColumnVector')">Show source</a></p>
+<div id='tomato_mathmatrix_MatrixMulColumnVector' class='ruff_dyn_src'><pre>proc ::tomato::mathmatrix::MatrixMulColumnVector {mat other} {
+
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Multiply matrix by column vector.&lt;br&gt;</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # From package tcllib [math::linearalgebra](https://core.tcl-lang.org/tcllib/doc/trunk/embedded/md/tcllib/files/modules/math/linalg.md)</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # *(Modify according to my needs)*.</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # mat   - [Matrix]</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # other - [Matrix]</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Returns Tcl list (mul matrix)</span>
+    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> newvect {}
+
+    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> mat1 [<span style="color: rgb(233, 98, 98);">$mat</span> Values]
+    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> vec1 {*}[<span style="color: rgb(233, 98, 98);">$other</span> Values]
+
+    foreach row <span style="color: rgb(233, 98, 98);">$mat1</span> {
+        <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> sum 0.0
+        foreach v <span style="color: rgb(233, 98, 98);">$vec1</span> c <span style="color: rgb(233, 98, 98);">$row</span> {
+            <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> sum [expr {<span style="color: rgb(233, 98, 98);">$sum</span> + <span style="color: rgb(233, 98, 98);">$v</span> * <span style="color: rgb(233, 98, 98);">$c</span>}]
+        }
+
+        lappend newvect <span style="color: rgb(233, 98, 98);">$sum</span>
+
+    }
+
+    <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> <span style="color: rgb(233, 98, 98);">$newvect</span>
+}</pre></div>
+</div><h3 class='ruffproc'><a name='::tomato::mathmatrix::MatrixMulMatrix'>MatrixMulMatrix</a><span class='ns_scope'> [<a href="tomato-tomato-mathmatrix.html#::tomato::mathmatrix" title="::tomato::mathmatrix" class='ruff_cmd'>::tomato::mathmatrix</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
+<div style='clear:both;'></div>
+<p class='ruff'>Multiply matrix by matrix.<br> From package tcllib <a href="https://core.tcl-lang.org/tcllib/doc/trunk/embedded/md/tcllib/files/modules/math/linalg.md" >math::linearalgebra</a> <em>(Modify according to my needs)</em>.</p>
+<div class='ruff_synopsis'><span class='ruff_cmd'>MatrixMulMatrix</span> <span class='ruff_arg'>mat other</span></div>
+<h5 class='ruff'>Parameters</h5><table class='ruff_deflist'>
+<tr><td><nobr><code>mat</code></nobr></td><td>base matrix <a href="tomato-tomato-mathmatrix.html#::tomato::mathmatrix::Matrix" title="Matrix" class='ruff_cmd'>Matrix</a></td></tr>
+<tr><td><nobr><code>other</code></nobr></td><td>Second matrix <a href="tomato-tomato-mathmatrix.html#::tomato::mathmatrix::Matrix" title="Matrix" class='ruff_cmd'>Matrix</a></td></tr>
+</table>
+<h5 class='ruff'>Return value</h5><p class='ruff'>Returns mul matrix <a href="tomato-tomato-mathmatrix.html#::tomato::mathmatrix::Matrix" title="Matrix" class='ruff_cmd'>Matrix</a></p>
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_tomato_mathmatrix_MatrixMulMatrix' href="javascript:toggleSource('tomato_mathmatrix_MatrixMulMatrix')">Show source</a></p>
+<div id='tomato_mathmatrix_MatrixMulMatrix' class='ruff_dyn_src'><pre>proc ::tomato::mathmatrix::MatrixMulMatrix {mat other} {
+
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Multiply matrix by matrix.&lt;br&gt;</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # From package tcllib [math::linearalgebra](https://core.tcl-lang.org/tcllib/doc/trunk/embedded/md/tcllib/files/modules/math/linalg.md)</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # *(Modify according to my needs)*.</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # mat   - base matrix [Matrix]</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # other - Second matrix [Matrix]</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Returns mul matrix [Matrix]</span>
+
+    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> tmat [[<span style="color: rgb(233, 98, 98);">$other</span> Transpose] Values]
+    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> mat1 [<span style="color: rgb(233, 98, 98);">$mat</span> Values]
+    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> r 0
+
+    foreach row1 <span style="color: rgb(233, 98, 98);">$mat1</span> {
+        <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> newrow {}
+        foreach row2 <span style="color: rgb(233, 98, 98);">$tmat</span> {
+            <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> sum 0.0
+            foreach c1 <span style="color: rgb(233, 98, 98);">$row1</span> c2 <span style="color: rgb(233, 98, 98);">$row2</span> {
+                <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> sum [expr {<span style="color: rgb(233, 98, 98);">$sum</span> + (<span style="color: rgb(233, 98, 98);">$c1</span> * <span style="color: rgb(233, 98, 98);">$c2</span>)}]
+            }
+            lappend newrow <span style="color: rgb(233, 98, 98);">$sum</span>
+        }
+
+        <span style="color: rgb(233, 98, 98);">$mat</span> SetRow <span style="color: rgb(233, 98, 98);">$r</span> <span style="color: rgb(233, 98, 98);">$newrow</span>
+        incr r
+    }
+
+    <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> <span style="color: rgb(233, 98, 98);">$mat</span>
+}</pre></div>
+</div><h3 class='ruffproc'><a name='::tomato::mathmatrix::MatrixMulVector'>MatrixMulVector</a><span class='ns_scope'> [<a href="tomato-tomato-mathmatrix.html#::tomato::mathmatrix" title="::tomato::mathmatrix" class='ruff_cmd'>::tomato::mathmatrix</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
+<div style='clear:both;'></div>
+<p class='ruff'>Multiply matrix by vector.<br> From package tcllib <a href="https://core.tcl-lang.org/tcllib/doc/trunk/embedded/md/tcllib/files/modules/math/linalg.md" >math::linearalgebra</a> <em>(Modify according to my needs)</em>.</p>
+<div class='ruff_synopsis'><span class='ruff_cmd'>MatrixMulVector</span> <span class='ruff_arg'>mat other</span></div>
+<h5 class='ruff'>Parameters</h5><table class='ruff_deflist'>
+<tr><td><nobr><code>mat</code></nobr></td><td>base matrix <a href="tomato-tomato-mathmatrix.html#::tomato::mathmatrix::Matrix" title="Matrix" class='ruff_cmd'>Matrix</a></td></tr>
+<tr><td><nobr><code>other</code></nobr></td><td>vector <a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d::Vector3d" title="mathvec3d::Vector3d" class='ruff_cmd'>mathvec3d::Vector3d</a></td></tr>
+</table>
+<h5 class='ruff'>Return value</h5><p class='ruff'>Returns Tcl list (mul matrix)</p>
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_tomato_mathmatrix_MatrixMulVector' href="javascript:toggleSource('tomato_mathmatrix_MatrixMulVector')">Show source</a></p>
+<div id='tomato_mathmatrix_MatrixMulVector' class='ruff_dyn_src'><pre>proc ::tomato::mathmatrix::MatrixMulVector {mat other} {
+
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Multiply matrix by vector.&lt;br&gt;</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # From package tcllib [math::linearalgebra](https://core.tcl-lang.org/tcllib/doc/trunk/embedded/md/tcllib/files/modules/math/linalg.md)</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # *(Modify according to my needs)*.</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # mat   - base matrix [Matrix]</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # other - vector [mathvec3d::Vector3d]</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Returns Tcl list (mul matrix)</span>
+    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> newvect {}
+    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> mat1 [<span style="color: rgb(233, 98, 98);">$mat</span> Values]
+    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> vec1 [<span style="color: rgb(233, 98, 98);">$other</span> Get]
+
+    foreach row <span style="color: rgb(233, 98, 98);">$mat1</span> {
+        <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> sum 0.0
+        foreach v <span style="color: rgb(233, 98, 98);">$vec1</span> c <span style="color: rgb(233, 98, 98);">$row</span> {
+            <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> sum [expr {<span style="color: rgb(233, 98, 98);">$sum</span> + <span style="color: rgb(233, 98, 98);">$v</span> * <span style="color: rgb(233, 98, 98);">$c</span>}]
+        }
+        lappend newvect <span style="color: rgb(233, 98, 98);">$sum</span>
+
+    }
+
+    <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> <span style="color: rgb(233, 98, 98);">$newvect</span>
+}</pre></div>
+</div><h3 class='ruffproc'><a name='::tomato::mathmatrix::SetNewDataListMatrix'>SetNewDataListMatrix</a><span class='ns_scope'> [<a href="tomato-tomato-mathmatrix.html#::tomato::mathmatrix" title="::tomato::mathmatrix" class='ruff_cmd'>::tomato::mathmatrix</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
+<div style='clear:both;'></div>
+<p class='ruff'>Create a new base matrix <a href="tomato-tomato-mathmatrix.html#::tomato::mathmatrix::Matrix" title="Matrix" class='ruff_cmd'>Matrix</a> based on a list</p>
+<div class='ruff_synopsis'><span class='ruff_cmd'>SetNewDataListMatrix</span> <span class='ruff_arg'>data</span></div>
+<h5 class='ruff'>Parameters</h5><table class='ruff_deflist'>
+<tr><td><nobr><code>data</code></nobr></td><td>list</td></tr>
+</table>
+<h5 class='ruff'>Return value</h5><p class='ruff'>Returns A new <a href="tomato-tomato-mathmatrix.html#::tomato::mathmatrix::Matrix" title="Matrix" class='ruff_cmd'>Matrix</a></p>
+<div class='ruff_source'><p class='ruff_source_link'><a id='l_tomato_mathmatrix_SetNewDataListMatrix' href="javascript:toggleSource('tomato_mathmatrix_SetNewDataListMatrix')">Show source</a></p>
+<div id='tomato_mathmatrix_SetNewDataListMatrix' class='ruff_dyn_src'><pre>proc ::tomato::mathmatrix::SetNewDataListMatrix {data} {
+
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Create a new base matrix [Matrix] based on a list</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # data - list</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
+<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Returns A new [Matrix]</span>
+
+    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> row    [llength <span style="color: rgb(233, 98, 98);">$data</span>]
+    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> column [llength [lindex <span style="color: rgb(233, 98, 98);">$data</span> 0]]
+
+    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> mat [tomato::mathmatrix::Matrix new <span style="color: rgb(233, 98, 98);">$row</span> <span style="color: rgb(233, 98, 98);">$column</span>]
+    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> r 0
+
+    foreach row <span style="color: rgb(233, 98, 98);">$data</span> {
+        <span style="color: rgb(233, 98, 98);">$mat</span> SetRow <span style="color: rgb(233, 98, 98);">$r</span> <span style="color: rgb(233, 98, 98);">$row</span>
+        incr r
+    }
+
+    <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> <span style="color: rgb(233, 98, 98);">$mat</span>
+}</pre></div>
+</div><h2 class='ruff'><a name='::tomato::mathmatrix-Classes'></a>Classes<span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h2>
 <div style='clear:both;'></div>
 <h3 class='ruffclass'><a name='::tomato::mathmatrix::Matrix'>Matrix</a><span class='ns_scope'> [<a href="tomato-tomato-mathmatrix.html#::tomato::mathmatrix" title="::tomato::mathmatrix" class='ruff_cmd'>::tomato::mathmatrix</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
 <div style='clear:both;'></div>
@@ -635,455 +1084,6 @@
 <span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Gets the matrix's data.</span>
     <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> <span style="color: rgb(233, 98, 98);">$_values</span>
 }</pre></div>
-</div><h2 class='ruff'><a name='::tomato::mathmatrix-Commands'></a>Commands<span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h2>
-<div style='clear:both;'></div>
-<h3 class='ruffproc'><a name='::tomato::mathmatrix::CopySubMatrixTo'>CopySubMatrixTo</a><span class='ns_scope'> [<a href="tomato-tomato-mathmatrix.html#::tomato::mathmatrix" title="::tomato::mathmatrix" class='ruff_cmd'>::tomato::mathmatrix</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
-<div style='clear:both;'></div>
-<p class='ruff'>Copies the values of a given matrix into a region in this matrix.</p>
-<div class='ruff_synopsis'><span class='ruff_cmd'>CopySubMatrixTo</span> <span class='ruff_arg'>target storage sourceRowIndex targetRowIndex rowCount sourceColumnIndex targetColumnIndex columnCount</span></div>
-<h5 class='ruff'>Parameters</h5><table class='ruff_deflist'>
-<tr><td><nobr><code>target</code></nobr></td><td>The matrix <a href="tomato-tomato-mathmatrix.html#::tomato::mathmatrix::Matrix" title="Matrix" class='ruff_cmd'>Matrix</a> to copy values into.</td></tr>
-<tr><td><nobr><code>storage</code></nobr></td><td>The base matrix <a href="tomato-tomato-mathmatrix.html#::tomato::mathmatrix::Matrix" title="Matrix" class='ruff_cmd'>Matrix</a>.</td></tr>
-<tr><td><nobr><code>sourceRowIndex</code></nobr></td><td>The row index of source</td></tr>
-<tr><td><nobr><code>targetRowIndex</code></nobr></td><td>The row index of target</td></tr>
-<tr><td><nobr><code>rowCount</code></nobr></td><td>The number of rows to copy</td></tr>
-<tr><td><nobr><code>sourceColumnIndex</code></nobr></td><td>The column index of source</td></tr>
-<tr><td><nobr><code>targetColumnIndex</code></nobr></td><td>The column index of source</td></tr>
-<tr><td><nobr><code>columnCount</code></nobr></td><td>The number of columns to copy</td></tr>
-</table>
-<h5 class='ruff'>Return value</h5><p class='ruff'>Returns matrix copy <a href="tomato-tomato-mathmatrix.html#::tomato::mathmatrix::Matrix" title="Matrix" class='ruff_cmd'>Matrix</a></p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_tomato_mathmatrix_CopySubMatrixTo' href="javascript:toggleSource('tomato_mathmatrix_CopySubMatrixTo')">Show source</a></p>
-<div id='tomato_mathmatrix_CopySubMatrixTo' class='ruff_dyn_src'><pre>proc ::tomato::mathmatrix::CopySubMatrixTo {target storage sourceRowIndex targetRowIndex rowCount sourceColumnIndex targetColumnIndex columnCount} {
-
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Copies the values of a given matrix into a region in this matrix.</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # target             - The matrix [Matrix] to copy values into.</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # storage            - The base matrix [Matrix].</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # sourceRowIndex     - The row index of source</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # targetRowIndex     - The row index of target</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # rowCount           - The number of rows to copy</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # sourceColumnIndex  - The column index of source</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # targetColumnIndex  - The column index of source</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # columnCount        - The number of columns to copy</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Returns matrix copy [Matrix]</span>
-
-    if {<span style="color: rgb(233, 98, 98);">$rowCount</span> == 0 || <span style="color: rgb(233, 98, 98);">$columnCount</span> == 0} {
-        <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> <span style="color: rgb(233, 98, 98);">$target</span>
-    }
-
-    if {(<span style="color: rgb(233, 98, 98);">$sourceRowIndex</span> == 0) &amp;&amp; (<span style="color: rgb(233, 98, 98);">$targetRowIndex</span> == 0 )
-        &amp;&amp; (<span style="color: rgb(233, 98, 98);">$rowCount</span> == [<span style="color: rgb(233, 98, 98);">$storage</span> RowCount]) &amp;&amp; (<span style="color: rgb(233, 98, 98);">$rowCount</span> == [<span style="color: rgb(233, 98, 98);">$target</span> RowCount])
-        &amp;&amp; (<span style="color: rgb(233, 98, 98);">$sourceColumnIndex</span> == 0) &amp;&amp; (<span style="color: rgb(233, 98, 98);">$targetColumnIndex</span> == 0)
-        &amp;&amp; (<span style="color: rgb(233, 98, 98);">$columnCount</span> == [<span style="color: rgb(233, 98, 98);">$storage</span> ColumnCount]) &amp;&amp; (<span style="color: rgb(233, 98, 98);">$columnCount</span> == [<span style="color: rgb(233, 98, 98);">$target</span> ColumnCount])} {
-
-        <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> [tomato::mathmatrix::CopyTo <span style="color: rgb(233, 98, 98);">$target</span> <span style="color: rgb(233, 98, 98);">$storage</span>]
-    }
-
-    for {set j <span style="color: rgb(233, 98, 98);">$sourceColumnIndex</span> ; <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> jj <span style="color: rgb(233, 98, 98);">$targetColumnIndex</span>} {<span style="color: rgb(233, 98, 98);">$j</span> &lt; [expr {<span style="color: rgb(233, 98, 98);">$sourceColumnIndex</span> + <span style="color: rgb(233, 98, 98);">$columnCount</span>}]} {incr j ; incr jj} {
-        for {set i <span style="color: rgb(233, 98, 98);">$sourceRowIndex</span> ; <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> ii <span style="color: rgb(233, 98, 98);">$targetRowIndex</span>} {<span style="color: rgb(233, 98, 98);">$i</span> &lt; [expr {<span style="color: rgb(233, 98, 98);">$sourceRowIndex</span> + <span style="color: rgb(233, 98, 98);">$rowCount</span>}]} {incr i ; incr ii} {
-            <span style="color: rgb(233, 98, 98);">$target</span> SetCell <span style="color: rgb(233, 98, 98);">$ii</span> <span style="color: rgb(233, 98, 98);">$jj</span> [<span style="color: rgb(233, 98, 98);">$storage</span> GetCell <span style="color: rgb(233, 98, 98);">$i</span> <span style="color: rgb(233, 98, 98);">$j</span>]
-        }
-    }
-
-    <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> <span style="color: rgb(233, 98, 98);">$target</span>
-}</pre></div>
-</div><h3 class='ruffproc'><a name='::tomato::mathmatrix::CopyTo'>CopyTo</a><span class='ns_scope'> [<a href="tomato-tomato-mathmatrix.html#::tomato::mathmatrix" title="::tomato::mathmatrix" class='ruff_cmd'>::tomato::mathmatrix</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
-<div style='clear:both;'></div>
-<p class='ruff'>Copies the elements of this matrix to the given matrix.</p>
-<div class='ruff_synopsis'><span class='ruff_cmd'>CopyTo</span> <span class='ruff_arg'>target storage</span></div>
-<h5 class='ruff'>Parameters</h5><table class='ruff_deflist'>
-<tr><td><nobr><code>target</code></nobr></td><td>The matrix <a href="tomato-tomato-mathmatrix.html#::tomato::mathmatrix::Matrix" title="Matrix" class='ruff_cmd'>Matrix</a> to copy values into.</td></tr>
-<tr><td><nobr><code>storage</code></nobr></td><td>The base matrix <a href="tomato-tomato-mathmatrix.html#::tomato::mathmatrix::Matrix" title="Matrix" class='ruff_cmd'>Matrix</a>.</td></tr>
-</table>
-<h5 class='ruff'>Return value</h5><p class='ruff'>Returns matrix <a href="tomato-tomato-mathmatrix.html#::tomato::mathmatrix::Matrix" title="Matrix" class='ruff_cmd'>Matrix</a></p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_tomato_mathmatrix_CopyTo' href="javascript:toggleSource('tomato_mathmatrix_CopyTo')">Show source</a></p>
-<div id='tomato_mathmatrix_CopyTo' class='ruff_dyn_src'><pre>proc ::tomato::mathmatrix::CopyTo {target storage} {
-
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Copies the elements of this matrix to the given matrix.</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # target - The matrix [Matrix] to copy values into.</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # storage - The base matrix [Matrix].</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Returns matrix [Matrix]</span>
-
-    if {[<span style="color: rgb(233, 98, 98);">$storage</span> RowCount] != [<span style="color: rgb(233, 98, 98);">$target</span> RowCount] || [<span style="color: rgb(233, 98, 98);">$storage</span> ColumnCount] != [<span style="color: rgb(233, 98, 98);">$target</span> ColumnCount]} {
-        <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">error</span> <span style="color: hsl(120, 71%, 16%);">&quot;Matrix dimensions must agree: op1 is [<span style="color: rgb(233, 98, 98);">$storage</span> GetSize], op2 is [<span style="color: rgb(233, 98, 98);">$target</span> GetSize].&quot;</span>
-    }
-
-    for {set j 0} {<span style="color: rgb(233, 98, 98);">$j</span> &lt; [<span style="color: rgb(233, 98, 98);">$storage</span> ColumnCount] } {incr j} {
-        for {set i 0} {<span style="color: rgb(233, 98, 98);">$i</span> &lt; [<span style="color: rgb(233, 98, 98);">$storage</span> RowCount]} {incr i} {
-            <span style="color: rgb(233, 98, 98);">$target</span> SetCell <span style="color: rgb(233, 98, 98);">$i</span> <span style="color: rgb(233, 98, 98);">$j</span> [<span style="color: rgb(233, 98, 98);">$storage</span> GetCell <span style="color: rgb(233, 98, 98);">$i</span> <span style="color: rgb(233, 98, 98);">$j</span>]
-        }
-    }
-
-    <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> <span style="color: rgb(233, 98, 98);">$target</span>
-}</pre></div>
-</div><h3 class='ruffproc'><a name='::tomato::mathmatrix::CreateIdentity'>CreateIdentity</a><span class='ns_scope'> [<a href="tomato-tomato-mathmatrix.html#::tomato::mathmatrix" title="::tomato::mathmatrix" class='ruff_cmd'>::tomato::mathmatrix</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
-<div style='clear:both;'></div>
-<p class='ruff'>Create a new identity matrix where each diagonal value is set to One.<br> From package tcllib <a href="https://core.tcl-lang.org/tcllib/doc/trunk/embedded/md/tcllib/files/modules/math/linalg.md" >math::linearalgebra</a> <em>(Modify according to my needs)</em>.</p>
-<div class='ruff_synopsis'><span class='ruff_cmd'>CreateIdentity</span> <span class='ruff_arg'>size</span></div>
-<h5 class='ruff'>Parameters</h5><table class='ruff_deflist'>
-<tr><td><nobr><code>size</code></nobr></td><td>dimension of matrix</td></tr>
-</table>
-<h5 class='ruff'>Return value</h5><p class='ruff'>Returns a new base matrix identity <a href="tomato-tomato-mathmatrix.html#::tomato::mathmatrix::Matrix" title="Matrix" class='ruff_cmd'>Matrix</a></p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_tomato_mathmatrix_CreateIdentity' href="javascript:toggleSource('tomato_mathmatrix_CreateIdentity')">Show source</a></p>
-<div id='tomato_mathmatrix_CreateIdentity' class='ruff_dyn_src'><pre>proc ::tomato::mathmatrix::CreateIdentity {size} {
-
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Create a new identity matrix where each diagonal value is <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> to One.&lt;br&gt;</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # From package tcllib [math::linearalgebra](https://core.tcl-lang.org/tcllib/doc/trunk/embedded/md/tcllib/files/modules/math/linalg.md)</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # *(Modify according to my needs)*.</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # size - dimension of matrix</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Returns a new base matrix identity [Matrix]</span>
-    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> mat [tomato::mathmatrix::Matrix new <span style="color: rgb(233, 98, 98);">$size</span> <span style="color: rgb(233, 98, 98);">$size</span>]
-
-    while { <span style="color: rgb(233, 98, 98);">$size</span> &gt; 0 } {
-        incr size -1
-        <span style="color: rgb(233, 98, 98);">$mat</span> SetCell <span style="color: rgb(233, 98, 98);">$size</span> <span style="color: rgb(233, 98, 98);">$size</span> 1.0
-    }
-
-    <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> <span style="color: rgb(233, 98, 98);">$mat</span>
-}</pre></div>
-</div><h3 class='ruffproc'><a name='::tomato::mathmatrix::Equals'>Equals</a><span class='ns_scope'> [<a href="tomato-tomato-mathmatrix.html#::tomato::mathmatrix" title="::tomato::mathmatrix" class='ruff_cmd'>::tomato::mathmatrix</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
-<div style='clear:both;'></div>
-<p class='ruff'>Indicate if this matrix is equivalent to a another matrix</p>
-<div class='ruff_synopsis'><span class='ruff_cmd'>Equals</span> <span class='ruff_arg'>mat other tolerance</span></div>
-<h5 class='ruff'>Parameters</h5><table class='ruff_deflist'>
-<tr><td><nobr><code>mat</code></nobr></td><td>First input matrix  <a href="tomato-tomato-mathmatrix.html#::tomato::mathmatrix::Matrix" title="Matrix" class='ruff_cmd'>Matrix</a></td></tr>
-<tr><td><nobr><code>other</code></nobr></td><td>Second input matrix <a href="tomato-tomato-mathmatrix.html#::tomato::mathmatrix::Matrix" title="Matrix" class='ruff_cmd'>Matrix</a></td></tr>
-<tr><td><nobr><code>tolerance</code></nobr></td><td>A tolerance (epsilon) to adjust for floating point error</td></tr>
-</table>
-<h5 class='ruff'>Description</h5><p class='ruff'>See : methods == !=</p>
-<p class='ruff'>An error exception is raised if tolerance (epsilon) &lt; 0.</p>
-<h5 class='ruff'>Return value</h5><p class='ruff'>Returns <code>True</code> if matrixes are equal, otherwise false.</p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_tomato_mathmatrix_Equals' href="javascript:toggleSource('tomato_mathmatrix_Equals')">Show source</a></p>
-<div id='tomato_mathmatrix_Equals' class='ruff_dyn_src'><pre>proc ::tomato::mathmatrix::Equals {mat other tolerance} {
-
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Indicate if this matrix is equivalent to a another matrix</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # mat   - First input matrix  [Matrix]</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # other - Second input matrix [Matrix]</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # tolerance - A tolerance (epsilon) to adjust for floating point error</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Returns `True` if matrixes are equal, otherwise false.</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # See : methods == !=</span>
-    if {<span style="color: rgb(233, 98, 98);">$tolerance</span> &lt; 0} {
-        #ruff
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">        # An <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">error</span> exception is raised if tolerance (epsilon) &lt; 0.</span>
-        <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">error</span> <span style="color: hsl(120, 71%, 16%);">&quot;epsilon &lt; 0&quot;</span>
-    }
-
-    if {([<span style="color: rgb(233, 98, 98);">$mat</span> RowCount] != [<span style="color: rgb(233, 98, 98);">$other</span> RowCount]) || ([<span style="color: rgb(233, 98, 98);">$mat</span> ColumnCount] != [<span style="color: rgb(233, 98, 98);">$other</span> ColumnCount])} {
-        <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> 0
-    }
-
-    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> len [<span style="color: rgb(233, 98, 98);">$mat</span> RowCount]
-
-    for {set row 0} {<span style="color: rgb(233, 98, 98);">$row</span> &lt; <span style="color: rgb(233, 98, 98);">$len</span>} {incr row} {
-        foreach cellmat [<span style="color: rgb(233, 98, 98);">$mat</span> GetRow <span style="color: rgb(233, 98, 98);">$row</span>] cellother [<span style="color: rgb(233, 98, 98);">$other</span> GetRow <span style="color: rgb(233, 98, 98);">$row</span>] {
-            if {abs(<span style="color: rgb(233, 98, 98);">$cellmat</span> - <span style="color: rgb(233, 98, 98);">$cellother</span>) &gt; <span style="color: rgb(233, 98, 98);">$tolerance</span>} {
-                <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> 0
-            }
-        }
-    }
-
-    <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> 1
-}</pre></div>
-</div><h3 class='ruffproc'><a name='::tomato::mathmatrix::MatrixDecompose'>MatrixDecompose</a><span class='ns_scope'> [<a href="tomato-tomato-mathmatrix.html#::tomato::mathmatrix" title="::tomato::mathmatrix" class='ruff_cmd'>::tomato::mathmatrix</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
-<div style='clear:both;'></div>
-<p class='ruff'><code>Crout's LU</code> decomposition for matrix determinant and inverse <a href="https://docs.microsoft.com/fr-fr/archive/msdn-magazine/2016/july/test-run-matrix-inversion-using-csharp" >docs.microsoft.com</a></p>
-<div class='ruff_synopsis'><span class='ruff_cmd'>MatrixDecompose</span> <span class='ruff_arg'>storage</span></div>
-<h5 class='ruff'>Parameters</h5><table class='ruff_deflist'>
-<tr><td><nobr><code>storage</code></nobr></td><td><a href="tomato-tomato-mathmatrix.html#::tomato::mathmatrix::Matrix" title="Matrix" class='ruff_cmd'>Matrix</a></td></tr>
-</table>
-<h5 class='ruff'>Description</h5><pre class='ruff'>
-                combined lower &amp; upper in lummat [Matrix] &amp; row permutations into permmat [Matrix].
-</pre>
-<h5 class='ruff'>Return value</h5><p class='ruff'>Returns list with : +1 or -1 according to even or odd number of row permutations,<br></p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_tomato_mathmatrix_MatrixDecompose' href="javascript:toggleSource('tomato_mathmatrix_MatrixDecompose')">Show source</a></p>
-<div id='tomato_mathmatrix_MatrixDecompose' class='ruff_dyn_src'><pre>proc ::tomato::mathmatrix::MatrixDecompose {storage} {
-
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # `Crout's LU` decomposition for matrix determinant and inverse</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # [docs.microsoft.com](https://docs.microsoft.com/fr-fr/archive/msdn-magazine/2016/july/test-run-matrix-inversion-using-csharp)</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # storage - [Matrix]</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Returns list with : +1 or -1 according to even or odd number of row permutations,&lt;br&gt;</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #                     combined lower &amp; upper in lummat [Matrix] &amp; row permutations into permmat [Matrix].</span>
-
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> toggle 1 ; # even (+1) or odd (-1) row permutations</span>
-    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> n [<span style="color: rgb(233, 98, 98);">$storage</span> RowCount]
-
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # make a copy of storage into lummat</span>
-    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> lummat [tomato::mathmatrix::Matrix new <span style="color: rgb(233, 98, 98);">$n</span> <span style="color: rgb(233, 98, 98);">$n</span>]
-    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> lummat [tomato::mathmatrix::CopyTo <span style="color: rgb(233, 98, 98);">$lummat</span> <span style="color: rgb(233, 98, 98);">$storage</span>]
-
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # make permmat</span>
-    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> permmat [tomato::mathmatrix::Matrix new 1 <span style="color: rgb(233, 98, 98);">$n</span>]
-    for {set i 0} {<span style="color: rgb(233, 98, 98);">$i</span> &lt; <span style="color: rgb(233, 98, 98);">$n</span>} {incr i} {
-        <span style="color: rgb(233, 98, 98);">$permmat</span> SetCell 0 <span style="color: rgb(233, 98, 98);">$i</span> [expr {double(<span style="color: rgb(233, 98, 98);">$i</span>)}]
-    }
-
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    for {set j 0} {<span style="color: rgb(233, 98, 98);">$j</span> &lt; [expr {<span style="color: rgb(233, 98, 98);">$n</span> - 1}]} {incr j} { ; # process by column. note n-1</span>
-
-        <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> max [expr {abs([<span style="color: rgb(233, 98, 98);">$lummat</span> GetCell <span style="color: rgb(233, 98, 98);">$j</span> <span style="color: rgb(233, 98, 98);">$j</span>])}]
-        <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> piv <span style="color: rgb(233, 98, 98);">$j</span>
-
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">        for {set i [expr {<span style="color: rgb(233, 98, 98);">$j</span> + 1}]} {<span style="color: rgb(233, 98, 98);">$i</span> &lt; <span style="color: rgb(233, 98, 98);">$n</span>} {incr i} { ; # find pivot index</span>
-            <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> xij [expr {abs([<span style="color: rgb(233, 98, 98);">$lummat</span> GetCell <span style="color: rgb(233, 98, 98);">$i</span> <span style="color: rgb(233, 98, 98);">$j</span>])}]
-            if {<span style="color: rgb(233, 98, 98);">$xij</span> &gt; <span style="color: rgb(233, 98, 98);">$max</span>} {
-                <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> max <span style="color: rgb(233, 98, 98);">$xij</span>
-                <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> piv <span style="color: rgb(233, 98, 98);">$i</span>
-            }
-        }
-
-        if {<span style="color: rgb(233, 98, 98);">$piv</span> != <span style="color: rgb(233, 98, 98);">$j</span>} {
-
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">            <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> tmp [<span style="color: rgb(233, 98, 98);">$lummat</span> GetRow <span style="color: rgb(233, 98, 98);">$piv</span>] ; # swap rows j, piv</span>
-            <span style="color: rgb(233, 98, 98);">$lummat</span> SetRow <span style="color: rgb(233, 98, 98);">$piv</span> [<span style="color: rgb(233, 98, 98);">$lummat</span> GetRow <span style="color: rgb(233, 98, 98);">$j</span>]
-            <span style="color: rgb(233, 98, 98);">$lummat</span> SetRow <span style="color: rgb(233, 98, 98);">$j</span> <span style="color: rgb(233, 98, 98);">$tmp</span>
-
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">            <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> t [<span style="color: rgb(233, 98, 98);">$permmat</span> GetCell 0 <span style="color: rgb(233, 98, 98);">$piv</span>] ; # swap perm elements</span>
-            <span style="color: rgb(233, 98, 98);">$permmat</span> SetCell 0 <span style="color: rgb(233, 98, 98);">$piv</span> [<span style="color: rgb(233, 98, 98);">$permmat</span> GetCell 0 <span style="color: rgb(233, 98, 98);">$j</span>]
-            <span style="color: rgb(233, 98, 98);">$permmat</span> SetCell 0 <span style="color: rgb(233, 98, 98);">$j</span> <span style="color: rgb(233, 98, 98);">$t</span>
-
-            <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> toggle [expr {Inv(<span style="color: rgb(233, 98, 98);">$toggle</span>)}]
-
-        }
-
-        <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> xjj [<span style="color: rgb(233, 98, 98);">$lummat</span> GetCell <span style="color: rgb(233, 98, 98);">$j</span> <span style="color: rgb(233, 98, 98);">$j</span>]
-
-        if {<span style="color: rgb(233, 98, 98);">$xjj</span> != 0.0} {
-
-            for {set i [expr {<span style="color: rgb(233, 98, 98);">$j</span> + 1}]} {<span style="color: rgb(233, 98, 98);">$i</span> &lt; <span style="color: rgb(233, 98, 98);">$n</span>} {incr i} {
-                <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> xij [expr {[<span style="color: rgb(233, 98, 98);">$lummat</span> GetCell <span style="color: rgb(233, 98, 98);">$i</span> <span style="color: rgb(233, 98, 98);">$j</span>] / double(<span style="color: rgb(233, 98, 98);">$xjj</span>)}]
-                <span style="color: rgb(233, 98, 98);">$lummat</span> SetCell <span style="color: rgb(233, 98, 98);">$i</span> <span style="color: rgb(233, 98, 98);">$j</span> <span style="color: rgb(233, 98, 98);">$xij</span>
-
-                for {set k [expr {<span style="color: rgb(233, 98, 98);">$j</span> + 1}]} {<span style="color: rgb(233, 98, 98);">$k</span> &lt; <span style="color: rgb(233, 98, 98);">$n</span>} {incr k} {
-                    <span style="color: rgb(233, 98, 98);">$lummat</span> SetCell <span style="color: rgb(233, 98, 98);">$i</span> <span style="color: rgb(233, 98, 98);">$k</span> [expr {[<span style="color: rgb(233, 98, 98);">$lummat</span> GetCell <span style="color: rgb(233, 98, 98);">$i</span> <span style="color: rgb(233, 98, 98);">$k</span>] - (<span style="color: rgb(233, 98, 98);">$xij</span> * [<span style="color: rgb(233, 98, 98);">$lummat</span> GetCell <span style="color: rgb(233, 98, 98);">$j</span> <span style="color: rgb(233, 98, 98);">$k</span>])}]
-
-                }
-            }
-        }
-    }
-
-    <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> [list <span style="color: rgb(233, 98, 98);">$toggle</span> <span style="color: rgb(233, 98, 98);">$lummat</span> <span style="color: rgb(233, 98, 98);">$permmat</span>]
-}</pre></div>
-</div><h3 class='ruffproc'><a name='::tomato::mathmatrix::MatrixInverse'>MatrixInverse</a><span class='ns_scope'> [<a href="tomato-tomato-mathmatrix.html#::tomato::mathmatrix" title="::tomato::mathmatrix" class='ruff_cmd'>::tomato::mathmatrix</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
-<div style='clear:both;'></div>
-<p class='ruff'><code>Crout's LU</code> decomposition for matrix inverse.</p>
-<div class='ruff_synopsis'><span class='ruff_cmd'>MatrixInverse</span> <span class='ruff_arg'>storage</span></div>
-<h5 class='ruff'>Parameters</h5><table class='ruff_deflist'>
-<tr><td><nobr><code>storage</code></nobr></td><td>A Matrix <a href="tomato-tomato-mathmatrix.html#::tomato::mathmatrix::Matrix" title="Matrix" class='ruff_cmd'>Matrix</a></td></tr>
-</table>
-<h5 class='ruff'>Return value</h5><p class='ruff'>Returns A Matrix Inverse</p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_tomato_mathmatrix_MatrixInverse' href="javascript:toggleSource('tomato_mathmatrix_MatrixInverse')">Show source</a></p>
-<div id='tomato_mathmatrix_MatrixInverse' class='ruff_dyn_src'><pre>proc ::tomato::mathmatrix::MatrixInverse {storage} {
-
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # `Crout's LU` decomposition for matrix inverse.</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # storage - A Matrix [Matrix]</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Returns A Matrix Inverse</span>
-
-    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> n [<span style="color: rgb(233, 98, 98);">$storage</span> RowCount]
-    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> result [tomato::mathmatrix::Matrix new <span style="color: rgb(233, 98, 98);">$n</span> <span style="color: rgb(233, 98, 98);">$n</span>]
-    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> result [tomato::mathmatrix::CopyTo <span style="color: rgb(233, 98, 98);">$result</span> <span style="color: rgb(233, 98, 98);">$storage</span>]
-
-    lassign [<span style="color: rgb(233, 98, 98);">$storage</span> Decompose] toggle lum perm
-
-    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> b [tomato::mathmatrix::Matrix new 1 <span style="color: rgb(233, 98, 98);">$n</span>]
-
-    for {set i 0} {<span style="color: rgb(233, 98, 98);">$i</span> &lt; <span style="color: rgb(233, 98, 98);">$n</span>} {incr i} {
-        for {set j 0} {<span style="color: rgb(233, 98, 98);">$j</span> &lt; <span style="color: rgb(233, 98, 98);">$n</span>} {incr j} {
-            if {<span style="color: rgb(233, 98, 98);">$i</span> == [<span style="color: rgb(233, 98, 98);">$perm</span> GetCell 0 <span style="color: rgb(233, 98, 98);">$j</span>]} {
-                <span style="color: rgb(233, 98, 98);">$b</span> SetCell 0 <span style="color: rgb(233, 98, 98);">$j</span> 1.0
-            } else {
-                <span style="color: rgb(233, 98, 98);">$b</span> SetCell 0 <span style="color: rgb(233, 98, 98);">$j</span> 0.0
-            }
-        }
-
-        <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> x [tomato::mathmatrix::_MatrixHelper <span style="color: rgb(233, 98, 98);">$lum</span> <span style="color: rgb(233, 98, 98);">$b</span>]
-        for {set j 0} {<span style="color: rgb(233, 98, 98);">$j</span> &lt; <span style="color: rgb(233, 98, 98);">$n</span>} {incr j} {
-            <span style="color: rgb(233, 98, 98);">$result</span> SetCell <span style="color: rgb(233, 98, 98);">$j</span> <span style="color: rgb(233, 98, 98);">$i</span> [<span style="color: rgb(233, 98, 98);">$x</span> GetCell 0 <span style="color: rgb(233, 98, 98);">$j</span>]
-        }
-    }
-
-    <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> <span style="color: rgb(233, 98, 98);">$result</span>
-}</pre></div>
-</div><h3 class='ruffproc'><a name='::tomato::mathmatrix::MatrixMulByDouble'>MatrixMulByDouble</a><span class='ns_scope'> [<a href="tomato-tomato-mathmatrix.html#::tomato::mathmatrix" title="::tomato::mathmatrix" class='ruff_cmd'>::tomato::mathmatrix</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
-<div style='clear:both;'></div>
-<p class='ruff'>Multiply matrix by double value</p>
-<div class='ruff_synopsis'><span class='ruff_cmd'>MatrixMulByDouble</span> <span class='ruff_arg'>mat other</span></div>
-<h5 class='ruff'>Parameters</h5><table class='ruff_deflist'>
-<tr><td><nobr><code>mat</code></nobr></td><td><a href="tomato-tomato-mathmatrix.html#::tomato::mathmatrix::Matrix" title="Matrix" class='ruff_cmd'>Matrix</a></td></tr>
-<tr><td><nobr><code>other</code></nobr></td><td>double value</td></tr>
-</table>
-<h5 class='ruff'>Return value</h5><p class='ruff'>Returns mul matrix <a href="tomato-tomato-mathmatrix.html#::tomato::mathmatrix::Matrix" title="Matrix" class='ruff_cmd'>Matrix</a></p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_tomato_mathmatrix_MatrixMulByDouble' href="javascript:toggleSource('tomato_mathmatrix_MatrixMulByDouble')">Show source</a></p>
-<div id='tomato_mathmatrix_MatrixMulByDouble' class='ruff_dyn_src'><pre>proc ::tomato::mathmatrix::MatrixMulByDouble {mat other} {
-
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Multiply matrix by double value</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # mat   - [Matrix]</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # other - double value</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Returns mul matrix [Matrix]</span>
-    for {set row 0} {<span style="color: rgb(233, 98, 98);">$row</span> &lt; [<span style="color: rgb(233, 98, 98);">$mat</span> RowCount]} {incr row} {
-        for {set col 0} {<span style="color: rgb(233, 98, 98);">$col</span> &lt; [<span style="color: rgb(233, 98, 98);">$mat</span> ColumnCount]} {incr col} {
-            <span style="color: rgb(233, 98, 98);">$mat</span> SetCell <span style="color: rgb(233, 98, 98);">$row</span> <span style="color: rgb(233, 98, 98);">$col</span> [expr {[<span style="color: rgb(233, 98, 98);">$mat</span> GetCell <span style="color: rgb(233, 98, 98);">$row</span> <span style="color: rgb(233, 98, 98);">$col</span>] * <span style="color: rgb(233, 98, 98);">$other</span>}]
-        }
-    }
-
-    <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> <span style="color: rgb(233, 98, 98);">$mat</span>
-}</pre></div>
-</div><h3 class='ruffproc'><a name='::tomato::mathmatrix::MatrixMulColumnVector'>MatrixMulColumnVector</a><span class='ns_scope'> [<a href="tomato-tomato-mathmatrix.html#::tomato::mathmatrix" title="::tomato::mathmatrix" class='ruff_cmd'>::tomato::mathmatrix</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
-<div style='clear:both;'></div>
-<p class='ruff'>Multiply matrix by column vector.<br> From package tcllib <a href="https://core.tcl-lang.org/tcllib/doc/trunk/embedded/md/tcllib/files/modules/math/linalg.md" >math::linearalgebra</a> <em>(Modify according to my needs)</em>.</p>
-<div class='ruff_synopsis'><span class='ruff_cmd'>MatrixMulColumnVector</span> <span class='ruff_arg'>mat other</span></div>
-<h5 class='ruff'>Parameters</h5><table class='ruff_deflist'>
-<tr><td><nobr><code>mat</code></nobr></td><td><a href="tomato-tomato-mathmatrix.html#::tomato::mathmatrix::Matrix" title="Matrix" class='ruff_cmd'>Matrix</a></td></tr>
-<tr><td><nobr><code>other</code></nobr></td><td><a href="tomato-tomato-mathmatrix.html#::tomato::mathmatrix::Matrix" title="Matrix" class='ruff_cmd'>Matrix</a></td></tr>
-</table>
-<h5 class='ruff'>Return value</h5><p class='ruff'>Returns Tcl list (mul matrix)</p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_tomato_mathmatrix_MatrixMulColumnVector' href="javascript:toggleSource('tomato_mathmatrix_MatrixMulColumnVector')">Show source</a></p>
-<div id='tomato_mathmatrix_MatrixMulColumnVector' class='ruff_dyn_src'><pre>proc ::tomato::mathmatrix::MatrixMulColumnVector {mat other} {
-
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Multiply matrix by column vector.&lt;br&gt;</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # From package tcllib [math::linearalgebra](https://core.tcl-lang.org/tcllib/doc/trunk/embedded/md/tcllib/files/modules/math/linalg.md)</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # *(Modify according to my needs)*.</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # mat   - [Matrix]</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # other - [Matrix]</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Returns Tcl list (mul matrix)</span>
-    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> newvect {}
-
-    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> mat1 [<span style="color: rgb(233, 98, 98);">$mat</span> Values]
-    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> vec1 {*}[<span style="color: rgb(233, 98, 98);">$other</span> Values]
-
-    foreach row <span style="color: rgb(233, 98, 98);">$mat1</span> {
-        <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> sum 0.0
-        foreach v <span style="color: rgb(233, 98, 98);">$vec1</span> c <span style="color: rgb(233, 98, 98);">$row</span> {
-            <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> sum [expr {<span style="color: rgb(233, 98, 98);">$sum</span> + <span style="color: rgb(233, 98, 98);">$v</span> * <span style="color: rgb(233, 98, 98);">$c</span>}]
-        }
-
-        lappend newvect <span style="color: rgb(233, 98, 98);">$sum</span>
-
-    }
-
-    <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> <span style="color: rgb(233, 98, 98);">$newvect</span>
-}</pre></div>
-</div><h3 class='ruffproc'><a name='::tomato::mathmatrix::MatrixMulMatrix'>MatrixMulMatrix</a><span class='ns_scope'> [<a href="tomato-tomato-mathmatrix.html#::tomato::mathmatrix" title="::tomato::mathmatrix" class='ruff_cmd'>::tomato::mathmatrix</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
-<div style='clear:both;'></div>
-<p class='ruff'>Multiply matrix by matrix.<br> From package tcllib <a href="https://core.tcl-lang.org/tcllib/doc/trunk/embedded/md/tcllib/files/modules/math/linalg.md" >math::linearalgebra</a> <em>(Modify according to my needs)</em>.</p>
-<div class='ruff_synopsis'><span class='ruff_cmd'>MatrixMulMatrix</span> <span class='ruff_arg'>mat other</span></div>
-<h5 class='ruff'>Parameters</h5><table class='ruff_deflist'>
-<tr><td><nobr><code>mat</code></nobr></td><td>base matrix <a href="tomato-tomato-mathmatrix.html#::tomato::mathmatrix::Matrix" title="Matrix" class='ruff_cmd'>Matrix</a></td></tr>
-<tr><td><nobr><code>other</code></nobr></td><td>Second matrix <a href="tomato-tomato-mathmatrix.html#::tomato::mathmatrix::Matrix" title="Matrix" class='ruff_cmd'>Matrix</a></td></tr>
-</table>
-<h5 class='ruff'>Return value</h5><p class='ruff'>Returns mul matrix <a href="tomato-tomato-mathmatrix.html#::tomato::mathmatrix::Matrix" title="Matrix" class='ruff_cmd'>Matrix</a></p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_tomato_mathmatrix_MatrixMulMatrix' href="javascript:toggleSource('tomato_mathmatrix_MatrixMulMatrix')">Show source</a></p>
-<div id='tomato_mathmatrix_MatrixMulMatrix' class='ruff_dyn_src'><pre>proc ::tomato::mathmatrix::MatrixMulMatrix {mat other} {
-
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Multiply matrix by matrix.&lt;br&gt;</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # From package tcllib [math::linearalgebra](https://core.tcl-lang.org/tcllib/doc/trunk/embedded/md/tcllib/files/modules/math/linalg.md)</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # *(Modify according to my needs)*.</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # mat   - base matrix [Matrix]</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # other - Second matrix [Matrix]</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Returns mul matrix [Matrix]</span>
-
-    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> tmat [[<span style="color: rgb(233, 98, 98);">$other</span> Transpose] Values]
-    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> mat1 [<span style="color: rgb(233, 98, 98);">$mat</span> Values]
-    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> r 0
-
-    foreach row1 <span style="color: rgb(233, 98, 98);">$mat1</span> {
-        <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> newrow {}
-        foreach row2 <span style="color: rgb(233, 98, 98);">$tmat</span> {
-            <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> sum 0.0
-            foreach c1 <span style="color: rgb(233, 98, 98);">$row1</span> c2 <span style="color: rgb(233, 98, 98);">$row2</span> {
-                <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> sum [expr {<span style="color: rgb(233, 98, 98);">$sum</span> + (<span style="color: rgb(233, 98, 98);">$c1</span> * <span style="color: rgb(233, 98, 98);">$c2</span>)}]
-            }
-            lappend newrow <span style="color: rgb(233, 98, 98);">$sum</span>
-        }
-
-        <span style="color: rgb(233, 98, 98);">$mat</span> SetRow <span style="color: rgb(233, 98, 98);">$r</span> <span style="color: rgb(233, 98, 98);">$newrow</span>
-        incr r
-    }
-
-    <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> <span style="color: rgb(233, 98, 98);">$mat</span>
-}</pre></div>
-</div><h3 class='ruffproc'><a name='::tomato::mathmatrix::MatrixMulVector'>MatrixMulVector</a><span class='ns_scope'> [<a href="tomato-tomato-mathmatrix.html#::tomato::mathmatrix" title="::tomato::mathmatrix" class='ruff_cmd'>::tomato::mathmatrix</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
-<div style='clear:both;'></div>
-<p class='ruff'>Multiply matrix by vector.<br> From package tcllib <a href="https://core.tcl-lang.org/tcllib/doc/trunk/embedded/md/tcllib/files/modules/math/linalg.md" >math::linearalgebra</a> <em>(Modify according to my needs)</em>.</p>
-<div class='ruff_synopsis'><span class='ruff_cmd'>MatrixMulVector</span> <span class='ruff_arg'>mat other</span></div>
-<h5 class='ruff'>Parameters</h5><table class='ruff_deflist'>
-<tr><td><nobr><code>mat</code></nobr></td><td>base matrix <a href="tomato-tomato-mathmatrix.html#::tomato::mathmatrix::Matrix" title="Matrix" class='ruff_cmd'>Matrix</a></td></tr>
-<tr><td><nobr><code>other</code></nobr></td><td>vector <a href="tomato-tomato-mathvec3d.html#::tomato::mathvec3d::Vector3d" title="mathvec3d::Vector3d" class='ruff_cmd'>mathvec3d::Vector3d</a></td></tr>
-</table>
-<h5 class='ruff'>Return value</h5><p class='ruff'>Returns Tcl list (mul matrix)</p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_tomato_mathmatrix_MatrixMulVector' href="javascript:toggleSource('tomato_mathmatrix_MatrixMulVector')">Show source</a></p>
-<div id='tomato_mathmatrix_MatrixMulVector' class='ruff_dyn_src'><pre>proc ::tomato::mathmatrix::MatrixMulVector {mat other} {
-
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Multiply matrix by vector.&lt;br&gt;</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # From package tcllib [math::linearalgebra](https://core.tcl-lang.org/tcllib/doc/trunk/embedded/md/tcllib/files/modules/math/linalg.md)</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # *(Modify according to my needs)*.</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # mat   - base matrix [Matrix]</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # other - vector [mathvec3d::Vector3d]</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Returns Tcl list (mul matrix)</span>
-    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> newvect {}
-    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> mat1 [<span style="color: rgb(233, 98, 98);">$mat</span> Values]
-    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> vec1 [<span style="color: rgb(233, 98, 98);">$other</span> Get]
-
-    foreach row <span style="color: rgb(233, 98, 98);">$mat1</span> {
-        <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> sum 0.0
-        foreach v <span style="color: rgb(233, 98, 98);">$vec1</span> c <span style="color: rgb(233, 98, 98);">$row</span> {
-            <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> sum [expr {<span style="color: rgb(233, 98, 98);">$sum</span> + <span style="color: rgb(233, 98, 98);">$v</span> * <span style="color: rgb(233, 98, 98);">$c</span>}]
-        }
-        lappend newvect <span style="color: rgb(233, 98, 98);">$sum</span>
-
-    }
-
-    <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> <span style="color: rgb(233, 98, 98);">$newvect</span>
-}</pre></div>
-</div><h3 class='ruffproc'><a name='::tomato::mathmatrix::SetNewDataListMatrix'>SetNewDataListMatrix</a><span class='ns_scope'> [<a href="tomato-tomato-mathmatrix.html#::tomato::mathmatrix" title="::tomato::mathmatrix" class='ruff_cmd'>::tomato::mathmatrix</a>]</span><span class='ruff-uplink'><a href='#top'>Top</a>, <a href='tomato.html'>Main</a>, <a href='tomato-docindex.html#'>Index</a></span></h3>
-<div style='clear:both;'></div>
-<p class='ruff'>Create a new base matrix <a href="tomato-tomato-mathmatrix.html#::tomato::mathmatrix::Matrix" title="Matrix" class='ruff_cmd'>Matrix</a> based on a list</p>
-<div class='ruff_synopsis'><span class='ruff_cmd'>SetNewDataListMatrix</span> <span class='ruff_arg'>data</span></div>
-<h5 class='ruff'>Parameters</h5><table class='ruff_deflist'>
-<tr><td><nobr><code>data</code></nobr></td><td>list</td></tr>
-</table>
-<h5 class='ruff'>Return value</h5><p class='ruff'>Returns A new <a href="tomato-tomato-mathmatrix.html#::tomato::mathmatrix::Matrix" title="Matrix" class='ruff_cmd'>Matrix</a></p>
-<div class='ruff_source'><p class='ruff_source_link'><a id='l_tomato_mathmatrix_SetNewDataListMatrix' href="javascript:toggleSource('tomato_mathmatrix_SetNewDataListMatrix')">Show source</a></p>
-<div id='tomato_mathmatrix_SetNewDataListMatrix' class='ruff_dyn_src'><pre>proc ::tomato::mathmatrix::SetNewDataListMatrix {data} {
-
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Create a new base matrix [Matrix] based on a list</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # data - list</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    #</span>
-<span style="color: hsl(218, 8%, 43.5%);font-weight: 500;">    # Returns A new [Matrix]</span>
-
-    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> row    [llength <span style="color: rgb(233, 98, 98);">$data</span>]
-    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> column [llength [lindex <span style="color: rgb(233, 98, 98);">$data</span> 0]]
-
-    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> mat [tomato::mathmatrix::Matrix new <span style="color: rgb(233, 98, 98);">$row</span> <span style="color: rgb(233, 98, 98);">$column</span>]
-    <span style="color: hsl(206, 98.02%, 29.04%);font-weight: 550;">set</span> r 0
-
-    foreach row <span style="color: rgb(233, 98, 98);">$data</span> {
-        <span style="color: rgb(233, 98, 98);">$mat</span> SetRow <span style="color: rgb(233, 98, 98);">$r</span> <span style="color: rgb(233, 98, 98);">$row</span>
-        incr r
-    }
-
-    <span style="color: rgba(8, 23, 241, 1);font-weight: 550;">return</span> <span style="color: rgb(233, 98, 98);">$mat</span>
-}</pre></div>
 </div></main><nav class='ruff-nav'><ul style='position: sticky; top: 0;'><li class='ruff-toc1'><a style='padding-top:2px;' href='tomato.html'>Start page</a></li>
 <li class='ruff-toc1'><a href='tomato-docindex.html' accesskey='i'>Index</a></li>
 <hr>
@@ -1098,7 +1098,18 @@
 <li class='ruff-toc1'><a href='tomato-tomato-mathmatrix3d.html'>tomato::mathmatrix3d</a></li>
 <li class='ruff-toc1'><a href='tomato-tomato-mathvec3d.html'>tomato::mathvec3d</a></li>
 <li class='ruff-toc1'><a class='ruff-highlight' href='tomato-tomato-mathmatrix.html'>tomato::mathmatrix</a></li>
-<hr><li class='ruff-toc2'><a href='#::tomato::mathmatrix-Classes'>Classes</a></li><li class='ruff-toc3'><a href='tomato-tomato-mathmatrix.html#::tomato::mathmatrix::Matrix'>Matrix</a></li><li class='ruff-toc4 ruff-tip'><a href='tomato-tomato-mathmatrix.html#::tomato::mathmatrix::Matrix::constructor'>constructor</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>Matrix create OBJNAME</span> <span class='ruff_arg'>row col ?value?</span>
+<hr><li class='ruff-toc2'><a href='#::tomato::mathmatrix-Commands'>Commands</a></li><li class='ruff-toc3 ruff-tip'><a href='tomato-tomato-mathmatrix.html#::tomato::mathmatrix::CopySubMatrixTo'>CopySubMatrixTo</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>CopySubMatrixTo</span> <span class='ruff_arg'>target storage sourceRowIndex targetRowIndex rowCount sourceColumnIndex targetColumnIndex columnCount</span></pre>Copies the values of a given matrix into a region in this matrix.
+</span></li><li class='ruff-toc3 ruff-tip'><a href='tomato-tomato-mathmatrix.html#::tomato::mathmatrix::CopyTo'>CopyTo</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>CopyTo</span> <span class='ruff_arg'>target storage</span></pre>Copies the elements of this matrix to the given matrix.
+</span></li><li class='ruff-toc3 ruff-tip'><a href='tomato-tomato-mathmatrix.html#::tomato::mathmatrix::CreateIdentity'>CreateIdentity</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>CreateIdentity</span> <span class='ruff_arg'>size</span></pre>Create a new identity matrix where each diagonal value is set to One.<br> From package tcllib <a href="https://core.tcl-lang.org/tcllib/doc/trunk/embedded/md/tcllib/files/modules/math/linalg.md" >math::linearalgebra</a> <em>(Modify according to my needs)</em>.
+</span></li><li class='ruff-toc3 ruff-tip'><a href='tomato-tomato-mathmatrix.html#::tomato::mathmatrix::Equals'>Equals</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>Equals</span> <span class='ruff_arg'>mat other tolerance</span></pre>Indicate if this matrix is equivalent to a another matrix
+</span></li><li class='ruff-toc3 ruff-tip'><a href='tomato-tomato-mathmatrix.html#::tomato::mathmatrix::MatrixDecompose'>MatrixDecompose</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>MatrixDecompose</span> <span class='ruff_arg'>storage</span></pre><code>Crout's LU</code> decomposition for matrix determinant and inverse <a href="https://docs.microsoft.com/fr-fr/archive/msdn-magazine/2016/july/test-run-matrix-inversion-using-csharp" >docs.microsoft.com</a>
+</span></li><li class='ruff-toc3 ruff-tip'><a href='tomato-tomato-mathmatrix.html#::tomato::mathmatrix::MatrixInverse'>MatrixInverse</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>MatrixInverse</span> <span class='ruff_arg'>storage</span></pre><code>Crout's LU</code> decomposition for matrix inverse.
+</span></li><li class='ruff-toc3 ruff-tip'><a href='tomato-tomato-mathmatrix.html#::tomato::mathmatrix::MatrixMulByDouble'>MatrixMulByDouble</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>MatrixMulByDouble</span> <span class='ruff_arg'>mat other</span></pre>Multiply matrix by double value
+</span></li><li class='ruff-toc3 ruff-tip'><a href='tomato-tomato-mathmatrix.html#::tomato::mathmatrix::MatrixMulColumnVector'>MatrixMulColumnVector</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>MatrixMulColumnVector</span> <span class='ruff_arg'>mat other</span></pre>Multiply matrix by column vector.<br> From package tcllib <a href="https://core.tcl-lang.org/tcllib/doc/trunk/embedded/md/tcllib/files/modules/math/linalg.md" >math::linearalgebra</a> <em>(Modify according to my needs)</em>.
+</span></li><li class='ruff-toc3 ruff-tip'><a href='tomato-tomato-mathmatrix.html#::tomato::mathmatrix::MatrixMulMatrix'>MatrixMulMatrix</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>MatrixMulMatrix</span> <span class='ruff_arg'>mat other</span></pre>Multiply matrix by matrix.<br> From package tcllib <a href="https://core.tcl-lang.org/tcllib/doc/trunk/embedded/md/tcllib/files/modules/math/linalg.md" >math::linearalgebra</a> <em>(Modify according to my needs)</em>.
+</span></li><li class='ruff-toc3 ruff-tip'><a href='tomato-tomato-mathmatrix.html#::tomato::mathmatrix::MatrixMulVector'>MatrixMulVector</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>MatrixMulVector</span> <span class='ruff_arg'>mat other</span></pre>Multiply matrix by vector.<br> From package tcllib <a href="https://core.tcl-lang.org/tcllib/doc/trunk/embedded/md/tcllib/files/modules/math/linalg.md" >math::linearalgebra</a> <em>(Modify according to my needs)</em>.
+</span></li><li class='ruff-toc3 ruff-tip'><a href='tomato-tomato-mathmatrix.html#::tomato::mathmatrix::SetNewDataListMatrix'>SetNewDataListMatrix</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>SetNewDataListMatrix</span> <span class='ruff_arg'>data</span></pre>Create a new base matrix <a href="tomato-tomato-mathmatrix.html#::tomato::mathmatrix::Matrix" title="Matrix" class='ruff_cmd'>Matrix</a> based on a list
+</span></li><li class='ruff-toc2'><a href='#::tomato::mathmatrix-Classes'>Classes</a></li><li class='ruff-toc3'><a href='tomato-tomato-mathmatrix.html#::tomato::mathmatrix::Matrix'>Matrix</a></li><li class='ruff-toc4 ruff-tip'><a href='tomato-tomato-mathmatrix.html#::tomato::mathmatrix::Matrix::constructor'>constructor</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>Matrix create OBJNAME</span> <span class='ruff_arg'>row col ?value?</span>
 <span class='ruff_cmd'>Matrix new</span> <span class='ruff_arg'>row col ?value?</span></pre>Initializes a new base class for Matrix Class.
 </span></li><li class='ruff-toc4 ruff-tip'><a href='tomato-tomato-mathmatrix.html#::tomato::mathmatrix::Matrix::!='>!=</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>MATRIXOBJ !=</span> <span class='ruff_arg'>other ?tolerance?</span></pre>Gets value that indicates whether any pair of elements in two specified matrixes is not equal.
 </span></li><li class='ruff-toc4 ruff-tip'><a href='tomato-tomato-mathmatrix.html#::tomato::mathmatrix::Matrix::=='>==</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>MATRIXOBJ ==</span> <span class='ruff_arg'>other ?tolerance?</span></pre>Gets value that indicates whether each pair of elements in two specified matrixes is equal.
@@ -1124,17 +1135,6 @@
 </span></li><li class='ruff-toc4 ruff-tip'><a href='tomato-tomato-mathmatrix.html#::tomato::mathmatrix::Matrix::ToMatrixString'>ToMatrixString</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>MATRIXOBJ ToMatrixString</span> </pre>Returns a string representation of this object.
 </span></li><li class='ruff-toc4 ruff-tip'><a href='tomato-tomato-mathmatrix.html#::tomato::mathmatrix::Matrix::Transpose'>Transpose</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>MATRIXOBJ Transpose</span> </pre>Transpose a matrix. <a href="http://reference.wolfram.com/mathematica/ref/Transpose.html" >mathematica Transpose</a>
 </span></li><li class='ruff-toc4 ruff-tip'><a href='tomato-tomato-mathmatrix.html#::tomato::mathmatrix::Matrix::Values'>Values</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>MATRIXOBJ Values</span> </pre>Gets the matrix's data.
-</span></li><li class='ruff-toc2'><a href='#::tomato::mathmatrix-Commands'>Commands</a></li><li class='ruff-toc3 ruff-tip'><a href='tomato-tomato-mathmatrix.html#::tomato::mathmatrix::CopySubMatrixTo'>CopySubMatrixTo</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>CopySubMatrixTo</span> <span class='ruff_arg'>target storage sourceRowIndex targetRowIndex rowCount sourceColumnIndex targetColumnIndex columnCount</span></pre>Copies the values of a given matrix into a region in this matrix.
-</span></li><li class='ruff-toc3 ruff-tip'><a href='tomato-tomato-mathmatrix.html#::tomato::mathmatrix::CopyTo'>CopyTo</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>CopyTo</span> <span class='ruff_arg'>target storage</span></pre>Copies the elements of this matrix to the given matrix.
-</span></li><li class='ruff-toc3 ruff-tip'><a href='tomato-tomato-mathmatrix.html#::tomato::mathmatrix::CreateIdentity'>CreateIdentity</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>CreateIdentity</span> <span class='ruff_arg'>size</span></pre>Create a new identity matrix where each diagonal value is set to One.<br> From package tcllib <a href="https://core.tcl-lang.org/tcllib/doc/trunk/embedded/md/tcllib/files/modules/math/linalg.md" >math::linearalgebra</a> <em>(Modify according to my needs)</em>.
-</span></li><li class='ruff-toc3 ruff-tip'><a href='tomato-tomato-mathmatrix.html#::tomato::mathmatrix::Equals'>Equals</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>Equals</span> <span class='ruff_arg'>mat other tolerance</span></pre>Indicate if this matrix is equivalent to a another matrix
-</span></li><li class='ruff-toc3 ruff-tip'><a href='tomato-tomato-mathmatrix.html#::tomato::mathmatrix::MatrixDecompose'>MatrixDecompose</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>MatrixDecompose</span> <span class='ruff_arg'>storage</span></pre><code>Crout's LU</code> decomposition for matrix determinant and inverse <a href="https://docs.microsoft.com/fr-fr/archive/msdn-magazine/2016/july/test-run-matrix-inversion-using-csharp" >docs.microsoft.com</a>
-</span></li><li class='ruff-toc3 ruff-tip'><a href='tomato-tomato-mathmatrix.html#::tomato::mathmatrix::MatrixInverse'>MatrixInverse</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>MatrixInverse</span> <span class='ruff_arg'>storage</span></pre><code>Crout's LU</code> decomposition for matrix inverse.
-</span></li><li class='ruff-toc3 ruff-tip'><a href='tomato-tomato-mathmatrix.html#::tomato::mathmatrix::MatrixMulByDouble'>MatrixMulByDouble</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>MatrixMulByDouble</span> <span class='ruff_arg'>mat other</span></pre>Multiply matrix by double value
-</span></li><li class='ruff-toc3 ruff-tip'><a href='tomato-tomato-mathmatrix.html#::tomato::mathmatrix::MatrixMulColumnVector'>MatrixMulColumnVector</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>MatrixMulColumnVector</span> <span class='ruff_arg'>mat other</span></pre>Multiply matrix by column vector.<br> From package tcllib <a href="https://core.tcl-lang.org/tcllib/doc/trunk/embedded/md/tcllib/files/modules/math/linalg.md" >math::linearalgebra</a> <em>(Modify according to my needs)</em>.
-</span></li><li class='ruff-toc3 ruff-tip'><a href='tomato-tomato-mathmatrix.html#::tomato::mathmatrix::MatrixMulMatrix'>MatrixMulMatrix</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>MatrixMulMatrix</span> <span class='ruff_arg'>mat other</span></pre>Multiply matrix by matrix.<br> From package tcllib <a href="https://core.tcl-lang.org/tcllib/doc/trunk/embedded/md/tcllib/files/modules/math/linalg.md" >math::linearalgebra</a> <em>(Modify according to my needs)</em>.
-</span></li><li class='ruff-toc3 ruff-tip'><a href='tomato-tomato-mathmatrix.html#::tomato::mathmatrix::MatrixMulVector'>MatrixMulVector</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>MatrixMulVector</span> <span class='ruff_arg'>mat other</span></pre>Multiply matrix by vector.<br> From package tcllib <a href="https://core.tcl-lang.org/tcllib/doc/trunk/embedded/md/tcllib/files/modules/math/linalg.md" >math::linearalgebra</a> <em>(Modify according to my needs)</em>.
-</span></li><li class='ruff-toc3 ruff-tip'><a href='tomato-tomato-mathmatrix.html#::tomato::mathmatrix::SetNewDataListMatrix'>SetNewDataListMatrix</a><span class='ruff-tiptext'><pre><span class='ruff_cmd'>SetNewDataListMatrix</span> <span class='ruff_arg'>data</span></pre>Create a new base matrix <a href="tomato-tomato-mathmatrix.html#::tomato::mathmatrix::Matrix" title="Matrix" class='ruff_cmd'>Matrix</a> based on a list
 </span></li></ul></nav><footer class='ruff-layout-footer ruff-ft'><div style='float: right;'>Document generated by <a href='https://ruff.magicsplat.com'>Ruff!</a></div></footer>
 </div></body></html>
 
